@@ -1,14 +1,17 @@
 # THE ZOO CIRT PROJECT
 - Create a website for the CIRT Organization
+
+## Important Links
+- https://docs.google.com/document/d/1mZb6neBytob7zKYHTqvUWqZxjLNS2G3Xk6GKrJPKVVI/edit?usp=sharing
 ## Team Member Contributions
 - Below are the main contributions each team member made to this project!
 
-### Luigi
+### Luigi - Front End
 
-### Chris
+### Chris - Back End
 
-### Hien
+### Hien - Front End
 
-### Hanna
+### Hanna - Front End/Documentation
 
-### Michelle
+### Michelle - Back End
