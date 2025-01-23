@@ -2,7 +2,9 @@
 - Create a website for the CIRT Organization
 
 ## Important Links
-- [Google Docs](https://docs.google.com/document/d/1mZb6neBytob7zKYHTqvUWqZxjLNS2G3Xk6GKrJPKVVI/edit?usp=sharing)
+- [Google Doc](https://docs.google.com/document/d/1mZb6neBytob7zKYHTqvUWqZxjLNS2G3Xk6GKrJPKVVI/edit?usp=sharing)
+- [DropBox](https://www.dropbox.com/scl/fo/xvikjrl9ob1ukagjmxs43/AKxChc2clfhdJ03SJDHrACo?rlkey=j2s4ux0se4konjxcrfzqdkd1o&st=7gfhzz2k&dl=0)
+
 ## Team Member Contributions
 - Below are the main contributions each team member made to this project!
 
