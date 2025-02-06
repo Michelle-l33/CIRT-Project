@@ -37,52 +37,65 @@ import styles from './Login.module.css';
 // ]
 
 
-const loginPage=() => {
+const loginPage = () => {
+
+    const handleLoginSubmit = (event) => {
+        event.preventDefault();
+        // Add login logic here
+        console.log("Login submitted");
+    };
+
+    const handleRegisterSubmit = (event) => {
+        event.preventDefault();
+        // Add registration logic here
+        console.log("Registration submitted");
+    };
 
     return (
         <div className={styles.container}>
-            {/* <div className={styles.loginNavBar}>
-                <NavBar isLoggedIn = {true}/>
-                <DropDownBar dropDownList = {dropDownList}/>
-            </div> */}
             <div className={styles.accounts}>
+                
+                {/* Login Form */}
                 <div className={styles.login}>
                     <h2>Login</h2>
-                    <ul>
-                        <li>Enter your Username or Email:</li>
-                        <li><input type="text" placeholder=" Username"/></li>
-                        <li>Enter your Password:</li>
-                        <li><input type="password" placeholder=" Password"/></li>
-                        <li><button id="loginButton" type="button">Log In</button></li>
-                    </ul>
-                    
+                    <form onSubmit={handleLoginSubmit}>
+                        <label htmlFor="login-username">Enter your Username or Email:</label>
+                        <input type="text" id="login-username" name="username" placeholder="Username" required />
+                        
+                        <label htmlFor="login-password">Enter your Password:</label>
+                        <input type="password" id="login-password" name="password" placeholder="Password" required />
+                        
+                        <button id="loginButton" type="submit">Log In</button>
+                    </form>
                 </div>
 
                 <div id="divider"></div>
 
-                <div className= {styles.register}>
+                {/* Register Form */}
+                <div className={styles.register}>
                     <h2>Register</h2>
-                    <ul>
-                        <li>Enter your Username:</li>
-                        <li><input type="text" placeholder=" Username"/></li>
-                        <li>Enter your Email:</li>
-                        <li><input type="text" placeholder=" deez@nuts.com"/></li>
-                        <li>Account type:</li>
-                        <li>
-                            <select name="account_type" id="">
-                                <option value="reviewer">Reviewer</option>
-                                <option value="editor">Editor</option>
-                                <option value="author">Author</option>
-                            </select>
-                        </li>
-                        <li>Enter your Password:</li>
-                        <li><input type="password" placeholder=" Password"/></li>
-                        <li><button id="registerButton" type="button">Create Account</button></li>
-                    </ul>
+                    <form onSubmit={handleRegisterSubmit}>
+                        <label htmlFor="register-username">Enter your Username:</label>
+                        <input type="text" id="register-username" name="username" placeholder="Username" required />
+                        
+                        <label htmlFor="register-email">Enter your Email:</label>
+                        <input type="email" id="register-email" name="email" placeholder="you@example.com" required />
+                        
+                        <label htmlFor="account-type">Account Type:</label>
+                        <select name="account_type" id="account-type" required>
+                            <option value="reviewer">Reviewer</option>
+                            <option value="editor">Editor</option>
+                            <option value="author">Author</option>
+                        </select>
+                        
+                        <label htmlFor="register-password">Enter your Password:</label>
+                        <input type="password" id="register-password" name="password" placeholder="Password" required />
+                        
+                        <button id="registerButton" type="submit">Create Account</button>
+                    </form>
                 </div>
             </div>
-            
-    </div>
+        </div>
     );
 };
 
