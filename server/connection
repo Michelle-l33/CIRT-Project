@@ -10,7 +10,7 @@ const connectDB = async () => { //connects db
     await mongoose.connect(db, {
       useNewUrlParser: true,
       useUnifiedTopology:true,
-      dbName: 'test'
+      dbName: 'CIRT'
     });
 
     console.log('MongoDB is Connected...');
