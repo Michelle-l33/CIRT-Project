@@ -7,12 +7,17 @@ const router = express.Router();
 // Register User
 router.post("/register", async (req, res) => {
   try {
-    const { email, password, isAuthor, isEditor, isReviewer } = req.body;
+    const { name, email, password, isAuthor, isEditor, isReviewer } = req.body;
+    
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email is already registered." });
+    }
 
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ email, password: hashedPassword, isAuthor, isEditor, isReviewer });
+    const newUser = new User({ name, email, password: hashedPassword, isAuthor, isEditor, isReviewer });
     await newUser.save();
     
     res.status(201).json({ message: "User registered successfully!" });
@@ -20,6 +25,35 @@ router.post("/register", async (req, res) => {
     res.status(400).json({ error: error.message });
   }
 });
+
+router.post('/login', async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      // Find user by email
+      const user = await User.findOne({ email: email });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found.' });
+      }
+      console.log(user.password)
+      console.log(password)
+      const isMatch = await bcrypt.compare(password, user.password);
+      
+      if (!isMatch) {
+        console.log("fe")
+        res.status(401).json({ message: 'Incorrect password.' });
+      } else{
+  res.status(200).json(user);
+      }
+  
+      
+    } catch (err) {
+      res.status(400).json({ 
+        message: 'Error during login', 
+        error: err.message 
+      });
+    }
+  });
 
 // Get All Users
 router.get("/", async (req, res) => {
