@@ -20,6 +20,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # misc
+.env
 .DS_Store
 .env.local
 .env.development.local
