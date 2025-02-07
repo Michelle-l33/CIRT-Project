@@ -1,0 +1,41 @@
+.navBar {
+    display: flex;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    padding: 2%;
+    gap: 30%;
+    background-color: black;
+    align-items: center;
+    -webkit-box-shadow: 4px 10px 5px 0px rgba(240,24,24,1);
+    -moz-box-shadow: 4px 10px 5px 0px rgba(240,24,24,1);
+    box-shadow: 4px 10px 5px 0px rgba(240,24,24,1); 
+    width: auto;
+    height: 110px
+}
+
+
+.navLeft img{
+    margin-left: 40%;
+    object-fit: cover;
+    height: 115px;
+}
+
+.navRight {
+    width: 30%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.navRight a {
+    display: inline-block;
+    background-color: aliceblue;
+    padding: 7%;
+    border-radius: 20px;
+    border: 5px solid pink;
+}
+
+.navRight a:hover {
+    background-color: aquamarine;
+}

@@ -1,0 +1,66 @@
+.bigDropDownContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 20px;
+    -webkit-box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
+    -moz-box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
+    box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
+    
+}
+
+.dropDownContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+    min-height: 20px;
+
+}
+
+.dropDownContainer:hover {
+    background-color: #EEF4F8;
+}
+
+.dropDownContainer label {
+    /* border: 1px solid black; */
+    padding: 20px;
+    font-family: Impact
+}
+
+.dropDownContainer label:hover {
+    border-bottom: 5px solid #D0012B;
+    padding: 20px;
+    font-family: Impact;
+    color: #D0012B;
+}
+
+.theDropDown {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    background-color: #d9dee2;
+    padding: 10px;
+    left: 0;
+}
+
+.theDropDown > a{
+    display: block;
+    width: 100%;
+    padding: 5px;
+    text-align: center;
+    color: black;
+    font-family: Impact;
+}
+
+.theDropDown > a:hover {
+    border-bottom: 5px solid #D0012B;
+    padding: 5px;
+    font-family: Impact;
+    color: #D0012B;
+    text-align: center;
+}

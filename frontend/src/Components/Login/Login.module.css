@@ -1,4 +1,4 @@
-.loginNavBar {
+/* .loginNavBar {
     width: 100vw;
     height: 100px;
     position: fix;
@@ -7,7 +7,7 @@
     background-color: black;
     z-index: 1000;
     display: flex;
-}
+} */
 
 /* body {
     margin: 0; 
@@ -67,12 +67,12 @@
 }
 
 
-input, li {
+.login input, .login li {
     margin-top: 5px;
     margin-bottom: 5px;
 }
 
-input, select {
+.login input, .register select {
     border-radius: 5px;
     border-color: gray;
     border-style: solid;
@@ -82,14 +82,14 @@ input, select {
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-input:focus, select:focus {
+.login input:focus, .register select:focus {
     outline: none;
     border-color: black;
     border-width: 2px;
 }
 
 
-li {
+.loginContainer li {
     font-family: 'Rubik';
     font-size: 16px;
     font-weight: 300;
@@ -99,7 +99,7 @@ li {
     width: 100%;
 }
 
-h2 {
+.loginContainer h2 {
     font-family: 'Rubik';
     font-size: 24px;
     font-weight: 700;

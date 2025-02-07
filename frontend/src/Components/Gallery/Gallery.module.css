@@ -1,0 +1,109 @@
+
+/* Nice article about overflow clip: https://kilianvalkhof.com/2022/css-html/do-you-know-about-overflow-clip/ */
+
+.bigPictureContainer {
+    padding: 10px;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    border: 1px solid black;
+    width: 100%;
+    min-height: fit-content;
+    overflow: clip;
+    overflow-clip-margin: 50px;
+}
+
+
+.description {
+    position: absolute;
+    padding: 5px;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid black;
+    background-color: aliceblue;
+    border: 1px solid blue;
+    z-index: 5;
+    opacity: 0;
+    transition: opacity 0.3s ease, width 0.3s ease;;
+    height: 0;
+    width: 0
+}
+
+.description.show {
+    opacity: 1;
+    top: 0;
+    right: 10%;
+    width: 50%;
+    height: 100%;
+    transition: opacity 0.3s ease, width 0.3s ease;
+}
+
+.imgContainer {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    border: 1px solid pink;
+    height: auto;
+}
+
+/* Darken background copy from https://stackoverflow.com/questions/17481660/darken-background-image-on-hover */
+
+.imgContainer > img {
+    position: relative;
+    object-fit: cover;
+    cursor: pointer;
+    -webkit-filter: brightness(100%);
+    border: 1px solid lime;
+    width: 30vw;
+    transition: all 1s ease;
+    will-change: transform;
+}
+
+.imgContainer > img:hover {
+    -webkit-filter: brightness(70%);
+    -webkit-transition: all 1s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 1s ease;
+    -ms-transition: all 1s ease;
+    transition: all 1s ease;
+}
+
+.imgContainer > img.currImgWithDes {
+    -webkit-filter: brightness(100%);
+    cursor: auto;
+    transform: scale(1.1) translateX(-35%);
+    position: absolute;
+    left: 0;
+}
+
+.imgContainer img:nth-child(2){
+    z-index: 3;
+}
+
+
+.imgContainer img:first-child {
+    z-index: 2;
+    left: 20%;
+    opacity: 0.5;
+}
+
+.imgContainer img:last-child {
+    z-index: 2;
+    right: 20%;
+    opacity: 0.5;
+}
+
+.button {
+    position: relative;
+    z-index: 999;
+}
+
+.closeButton {
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    display: block;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+}

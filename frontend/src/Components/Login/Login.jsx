@@ -4,38 +4,6 @@
 import React, { useState } from "react";
 import styles from './Login.module.css';
 
-// const dropDownList = [
-//     {
-//         label: "Overall",
-//         listOfDropDown: [
-
-//         { label: "Option 1", url: "/option1" },
-//         { label: "Option 2", url: "/option2" }
-
-//         ]
-//     },
-
-//     {
-//         label: "Gallery",
-//         listOfDropDown: [
-
-//         { label: "Option 1", url: "/option1" },
-//         { label: "Option 2", url: "/option2" }
-        
-//         ]
-//     },
-
-//     {
-//         label: "Document",
-//         listOfDropDown: [
-
-//             { label: "Option 1", url: "/option1" },
-//             { label: "Option 2", url: "/option2" }
-            
-//             ]
-//     }, 
-// ]
-
 
 const LoginPage = () => {
     // State to manage form data
@@ -130,7 +98,8 @@ const LoginPage = () => {
       };
 
     return (
-        <div className={styles.container}>
+        <div className={styles.loginContainer}>
+        <div className={styles.loginContainer}>
             <div className={styles.accounts}>
                 
                 {/* Login Form */}
@@ -177,6 +146,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
+    </div>
     );
 };
 
