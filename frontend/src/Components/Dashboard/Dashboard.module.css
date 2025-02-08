@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+.dashBoardContainer.dark{
+    --light: #181a1e;
+    --grey: #25252c;
+    --dark: #c0c0c0;
+}
+
+.dashBoardContainer{
+    background: var(--grey);
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.dashBoardContainer * {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.dashBoardContainer li {
+    list-style: none;
+}
+
+.dashBoardContainer a {
+    text-decoration: none;
+}

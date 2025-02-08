@@ -1,3 +1,26 @@
+:root {
+  --light: #f6f6f9;
+  --primary: #d0012b;
+  --light-primary: #F5A3A8;
+  --grey: #eee;
+  --dark-grey: #AAAAAA;
+  --dark: #363949;
+  --danger: #6F42C1;
+  --light-danger: #BFA2E6;
+  --warning: #FBC02D;
+  --light-warning: #FFF2C6;
+  --success: #388E3C;
+  --light-success: #BBF7D0;
+  --blue: #1976D2;
+  --light-blue: #CFE8FF;
+  --orange: #FD7E14;
+  --light-orange: #FFB570;
+}
+
+a:-webkit-any-link {
+  color: var(--dark);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

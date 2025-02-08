@@ -1,0 +1,191 @@
+.mainContent {
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.mainContent main {
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.mainContent main .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    grid-gap: 16px;
+    flex-wrap: wrap;
+}
+
+.mainContent main .header .left h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--dark);
+}
+
+.mainContent main .header .left .smallStuff {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+}
+
+.mainContent main .header .left .smallStuff li{
+    color: var(--primary);
+}
+
+.mainContent main .header .left .smallStuff li svg {
+    color: var(--dark-grey);
+}
+
+.mainContent main .header .left .smallStuff li svg.active {
+    color: var(--primary);
+    pointer-events: none;
+}
+
+.mainContent main .header .report {
+    height: 36px;
+    padding: 0 16px;
+    border-radius: 36px;
+    background: var(--primary);
+    color: var(--light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 10px;
+    font-weight: 500;
+}
+
+.mainContent main .insights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+    color: var(--dark);
+}
+
+.mainContent main .insights li {
+    padding: 24px;
+    background: var(--light);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    cursor: pointer;
+}
+
+.mainContent main .insights li svg {
+    padding: 23px;
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent main .insights li:nth-child(1) svg{
+    background: var(--light-blue);
+    color: var(--blue);
+}
+
+.mainContent main .insights li:nth-child(2) svg{
+    background: var(--light-danger);
+    color: var(--danger);
+}
+
+.mainContent main .insights li:nth-child(3) svg{
+    background: var(--light-success);
+    color: var(--success);
+}
+
+.mainContent main .insights li:nth-child(4) svg{
+    background: var(--light-warning);
+    color: var(--warning);
+}
+
+.mainContent main .bottomData {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 24px;
+    margin-top: 24px;
+    width: 100%;
+    color: var(--dark);
+}
+
+.mainContent main .bottomData > div {
+    border-radius: 20px;
+    background: var(--light);
+    padding: 24px;
+    overflow-x: auto;
+}
+
+.mainContent main .bottomData .header {
+    display: flex;
+    align-items: center;
+    grid-gap: 16px;
+    margin-bottom: 24px;
+}
+
+.mainContent main .bottomData h3 {
+    margin-right: auto;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.mainContent main .bottomData .header svg{
+    cursor: pointer;
+}
+
+.mainContent main .bottomData .trachBarContainer {
+    flex-grow: 1;
+    flex-basis: 500px;
+} 
+
+.mainContent main .bottomData .reminders{
+    flex-grow: 1;
+    flex-basis: 300px;
+}
+
+.mainContent main .bottomData .reminders .taskList{
+    width: 100%;
+}
+
+.mainContent main .bottomData .reminders .taskList li{
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--grey);
+    padding: 14px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.mainContent main .bottomData .reminders .taskList li .taskTitle{
+    display: flex;
+    align-items: center;
+    width: 35%;
+}
+
+.mainContent main .bottomData .reminders .taskList li .taskTitle p{
+    margin-left: 6px;
+    font-weight: 500;
+}
+
+.mainContent main .bottomData .reminders .taskList li svg{
+  cursor: pointer;
+  width: 25px;
+  height: 25px;  
+}
+
+.mainContent main .bottomData .reminders .taskList li .taskTitle + p {
+    color: rgba(60, 60, 83, 0.693);
+}
+
+.mainContent.close{
+    width: calc(100% - 60px);
+    left: 60px;
+}

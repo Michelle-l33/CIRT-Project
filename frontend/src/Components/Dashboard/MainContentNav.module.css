@@ -1,0 +1,106 @@
+.mainContent {
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.mainContent nav {
+    height: 56px;
+    background: var(--light);
+    padding: 0 24px 0 0;
+    display: flex;
+    align-items: center;
+    grid-gap: 24px;
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.mainContent nav::before {
+    content: "";
+    position: absolute;
+    width: 48px;
+    height: 40px;
+    bottom: -40px;
+    left: 0;
+    border-radius: 50%;
+    box-shadow: -20px -20px 0 var(--light);
+}
+
+.mainContent nav a {
+    color: var(--dark);
+}
+
+.mainContent nav svg{
+    cursor: pointer;
+    font-size: 20px;
+    color: var(--dark);
+    margin-right: auto;
+}
+
+.mainContent nav .notif {
+    font-size: 25px;
+    position: relative;
+    align-self: flex-end;
+    top: -5px;
+}
+
+.mainContent nav .notif .count {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    width: 20px;
+    height: 20px;
+    background: var(--danger);
+    border-radius: 50%;
+    color: var(--light);
+    border: 2px solid var(--light);
+    font-weight: 700;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent nav .profile img {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    align-self:flex-end
+}
+
+.mainContent nav .themeToggle {
+    display: block;
+    min-width: 50px;
+    height: 25px;
+    background: var(--grey);
+    cursor: pointer;
+    position: relative;
+    border-radius: 20px;
+}
+
+.mainContent nav .themeToggle::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    width: calc(25px - 4px);
+    background: var(--primary);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.mainContent.close{
+    width: calc(100% - 60px);
+    left: 60px;
+}
+
+
+/* https://stackoverflow.com/questions/69872313/input-checkbox-didnt-work-what-i-expected */
+input[type="checkbox"]:checked + .themeToggle::before{
+    left: calc(100% - (25px - 4px) - 2px); 
+}
