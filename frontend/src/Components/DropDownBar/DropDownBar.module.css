@@ -3,9 +3,9 @@
     align-items: center;
     justify-content: space-around;
     padding: 20px;
-    -webkit-box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
-    -moz-box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
-    box-shadow: 3px 16px 11px 7px rgba(209,80,209,1);
+    -webkit-box-shadow: 3px 13px 7px 1px var(--primary);
+    -moz-box-shadow: 3px 13px 7px 1px var(--primary);
+    box-shadow: 3px 13px 7px 1px var(--primary);
     
 }
 
@@ -29,10 +29,10 @@
 }
 
 .dropDownContainer label:hover {
-    border-bottom: 5px solid #D0012B;
+    border-bottom: 5px solid var(--primary);
     padding: 20px;
     font-family: Impact;
-    color: #D0012B;
+    color: var(--primary);
 }
 
 .theDropDown {
@@ -58,9 +58,9 @@
 }
 
 .theDropDown > a:hover {
-    border-bottom: 5px solid #D0012B;
+    border-bottom: 5px solid var(--primary);
     padding: 5px;
     font-family: Impact;
-    color: #D0012B;
+    color: var(--primary);
     text-align: center;
 }

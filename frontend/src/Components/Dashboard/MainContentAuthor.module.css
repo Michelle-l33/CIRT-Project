@@ -173,16 +173,18 @@
 .mainContent main .bottomData .reminders .taskList li .taskTitle p{
     margin-left: 6px;
     font-weight: 500;
+    color: var(--dark);
 }
 
 .mainContent main .bottomData .reminders .taskList li svg{
   cursor: pointer;
   width: 25px;
-  height: 25px;  
+  height: 25px;
+  color: #D2122E;
 }
 
 .mainContent main .bottomData .reminders .taskList li .taskTitle + p {
-    color: rgba(60, 60, 83, 0.693);
+    color: var(--dark-grey);
 }
 
 .mainContent.close{

@@ -5,9 +5,9 @@ import PropTypes from 'prop-types';
 
 const Gallery = ( {listOfPictureInfos} ) => { 
 
-    //this is for controlling the button
+    //this is for controlling the button to pick the index for the pictures
     //copy and modify code from https://react.dev/learn/state-a-components-memory
-    const [index, setIndex] = useState(0);
+    const [currIndex, setIndex] = useState(0);
     function handleNextClick() {
         setIndex((prev_i) => (prev_i + 1) % listOfPictureInfos.length);
 
@@ -22,17 +22,17 @@ const Gallery = ( {listOfPictureInfos} ) => {
             handleMouseClick(prevIndex)
         }
     }
-    const currPic = listOfPictureInfos[index];
+    const currPic = listOfPictureInfos[currIndex];
 
-    let prevIndex = index === 0 ? listOfPictureInfos.length - 1 : index - 1
+    let prevIndex = currIndex === 0 ? listOfPictureInfos.length - 1 : currIndex - 1
     const prevPic = listOfPictureInfos[prevIndex];
-    let nextIndex = (index + 1) % listOfPictureInfos.length;
+    let nextIndex = (currIndex + 1) % listOfPictureInfos.length;
     const nextPic = listOfPictureInfos[nextIndex];
 
     //this is for handling the visibility of the description
     const [visibleIndex, setVisibleIndex] = useState(null);
-    const handleMouseClick = (index) => {
-        setVisibleIndex((prev) => (prev === index ? null : index));
+    const handleMouseClick = (currIndex) => {
+        setVisibleIndex((prev) => (prev === currIndex ? null : currIndex));
         };
     const handleMouseClose = () => {
         setVisibleIndex(null);
@@ -59,8 +59,8 @@ const Gallery = ( {listOfPictureInfos} ) => {
                 <img
                     src = {currPic.url} 
                     alt = {currPic.title}
-                    onClick = {() => handleMouseClick(index)}
-                    className = {visibleIndex === index ? styles.currImgWithDes : ''}
+                    onClick = {() => handleMouseClick(currIndex)}
+                    className = {visibleIndex === currIndex ? styles.currImgWithDes : ''}
                     />
                 <img 
                     src = {nextPic.url} 
@@ -71,7 +71,7 @@ const Gallery = ( {listOfPictureInfos} ) => {
             </div>
 
 
-            <div className={`${styles.description} ${visibleIndex === index ? styles.show : ''}`}>
+            <div className={`${styles.description} ${visibleIndex === currIndex ? styles.show : ''}`}>
 
                 <button className = {styles.closeButton} onClick = {handleMouseClose}>X</button>
         

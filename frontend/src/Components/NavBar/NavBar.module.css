@@ -7,9 +7,9 @@
     gap: 30%;
     background-color: black;
     align-items: center;
-    -webkit-box-shadow: 4px 10px 5px 0px rgba(240,24,24,1);
-    -moz-box-shadow: 4px 10px 5px 0px rgba(240,24,24,1);
-    box-shadow: 4px 10px 5px 0px rgba(240,24,24,1); 
+    -webkit-box-shadow: 4px 10px 5px 0 var(--primary);
+    -moz-box-shadow: 4px 10px 5px 0px var(--primary);
+    box-shadow: 4px 10px 5px 0px var(--primary); 
     width: auto;
     height: 110px
 }
@@ -28,14 +28,90 @@
     justify-content: flex-end;
 }
 
+
+/* styling copy from https://ui-buttons.web.app/double-diagonal */
+
+.navRight a,
+.navRight a *,
+.navRight a :after,
+.navRight a :before,
+.navRight a:after,
+.navRight a:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+
 .navRight a {
-    display: inline-block;
-    background-color: aliceblue;
-    padding: 7%;
-    border-radius: 20px;
-    border: 5px solid pink;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-appearance: button;
+    background-color: var(--light);
+    background-image: none;
+    cursor: pointer;
+    font-size: 100%;
+    font-weight: 900;
+    line-height: 1.5;
+    margin: 0;
+    -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+    padding: 0;
+    text-transform: uppercase;
+    border-radius: 99rem;
+    border-width: 2px;
+    overflow: hidden;
+    padding: 0.8rem 3rem;
+    position: relative;
 }
 
 .navRight a:hover {
-    background-color: aquamarine;
+    position: relative;
+    color: white;
+    z-index: 2;
+}
+
+.navRight a:disabled {
+ cursor: default;
+}
+
+.navRight a:-moz-focusring {
+  outline: auto;
+}
+
+.navRight a [hidden] {
+  display: none;
+}
+
+.navRight a:after,
+.navRight a:before {
+  --tilt: 1.2rem;
+  background: var(--primary);
+  -webkit-clip-path: polygon(
+    0 0,
+    calc(100% - var(--tilt)) 0,
+    100% 100%,
+    0 100%
+  );
+  clip-path: polygon(0 0, calc(100% - var(--tilt)) 0, 100% 100%, 0 100%);
+  content: "";
+  display: block;
+  height: 100%;
+  left: calc(-100% - var(--tilt));
+  position: absolute;
+  top: 0;
+  transform: translateX(var(--progress, 0));
+  transition: transform 0.2s ease;
+  width: calc(100% + var(--tilt));
+  z-index: -1;
+}
+
+.navRight a:after {
+  left: 100%;
+  transform: translateX(var(--progress, 0)) rotate(180deg);
+  z-index: -1;
+}
+
+.navRight a:hover:before {
+  --progress: 100%;
+}
+
+.navRight a:hover:after {
+  --progress: -100%;
 }

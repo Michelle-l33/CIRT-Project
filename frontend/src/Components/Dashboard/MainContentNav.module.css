@@ -33,9 +33,9 @@
     color: var(--dark);
 }
 
-.mainContent nav svg{
-    cursor: pointer;
-    font-size: 20px;
+.mainContent nav > span{
+    font-size: large;
+    font-weight: 600;
     color: var(--dark);
     margin-right: auto;
 }

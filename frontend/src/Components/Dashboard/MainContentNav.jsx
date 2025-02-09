@@ -1,26 +1,23 @@
 import styles from './MainContentNav.module.css';
 
 import sparLogo from '../../Asset/Spartans.logo.png'
-import { HiOutlineMenu } from "react-icons/hi";
 import { FaRegBell } from "react-icons/fa";
 
 import { dashBoardContext } from './Dashboard';
 
-import { useContext, useMemo } from 'react';
+import { useContext } from 'react';
 
 const MainContentNav = () => {
 
-    const {isChecked, handleToggle, windowWidth} = useContext(dashBoardContext);
+    const {isChecked, handleToggle, isClose} = useContext(dashBoardContext);
 
-    const mainContentClass = useMemo( () => {
-             return `${styles.mainContent} ${windowWidth < 768 ? styles.close : ''}`;
-    }, [windowWidth]);
+    const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
 
     return (
         <div className = {mainContentClass}>
 
             <nav>
-                <HiOutlineMenu />
+                <span> Welcome! </span>
                 
                 <input type = "checkbox"
                 id = "themeToggle"
@@ -33,6 +30,7 @@ const MainContentNav = () => {
                     <FaRegBell />
                     <span className = {styles.count}> 12 </span>
                 </a>
+                
                 <a href = "" className = {styles.profile}>
                     <img src = {sparLogo} alt = "Spartan Logo"/>
                 </a>

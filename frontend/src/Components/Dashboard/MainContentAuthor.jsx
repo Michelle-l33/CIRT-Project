@@ -9,9 +9,10 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
 import { BiTask } from "react-icons/bi";
 
-import { dashBoardContext } from './Dashboard';
+import TrackBar from "./TrackBar";
 
-import { useState, useMemo, useContext } from 'react';
+import { dashBoardContext } from './Dashboard';
+import { useState, useContext } from 'react';
 
 
 const taskListToBeComplete = [
@@ -37,14 +38,11 @@ function getDate() {
 
 const MainContent = () => {
 
-    const { windowWidth } = useContext(dashBoardContext);
-
-    const mainContentClass = useMemo( () => {
-         return `${styles.mainContent} ${windowWidth < 768 ? styles.close : ''}`;
-    }, [windowWidth]);
-
+    const { isClose } = useContext(dashBoardContext);
+    
     const [currentDate] = useState(getDate());
 
+    const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     return (
         <div className = {mainContentClass}>
 
@@ -103,7 +101,7 @@ const MainContent = () => {
 
                 <div className = {styles.bottomData}>
                     <div className = {styles.trachBarContainer}>
-                        <span>This is where we put the trackbar?</span>
+                        <TrackBar currentStep = {2} />
                     </div>
 
 

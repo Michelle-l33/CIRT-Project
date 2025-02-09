@@ -1,0 +1,73 @@
+.trackingContainer {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.stepContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 70px;
+    position: relative;
+}
+
+.stepWrapper {
+    position: relative;
+    z-index: 1;
+}
+
+.styleStep {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--grey);
+    border: 3px solid var(--light-orange);
+    transition: 0.4s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.styleStep * {
+    font-size: 19px;
+    color: var(--dark);
+}
+
+.styleStep.completed {
+    border: 3px solid var(--orange);
+}
+
+.stepLabel {
+    position: absolute;
+    top: 66px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+/* building a line between them */
+.stepContainer:before {
+    content: "";
+    width: 100%;
+    position: absolute;
+    background: var(--grey);
+    height: 4px;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+}
+
+/* darken progress bar with after */
+.stepContainer:after {
+    content: '';
+    position: absolute;
+    background: var(--dark);
+    height: 4px;
+    width: var(--prog-width, 100%);
+    top: 50%;
+    transition: 0.4s ease;
+    transform: translateY(-50%);
+    left: 0;
+}

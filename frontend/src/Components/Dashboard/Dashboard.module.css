@@ -8,7 +8,7 @@
 .dashBoardContainer{
     background: var(--grey);
     overflow-x: hidden;
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .dashBoardContainer * {

@@ -1,40 +1,46 @@
 import styles from './Sidebar.module.css'
 import { Link } from "react-router-dom";
 
-import { IoIosWater } from "react-icons/io";
+import { RiDashboardHorizontalLine } from "react-icons/ri";
+import { GrDocument } from "react-icons/gr";
+import { LuMessageSquareMore } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
+import { MdOutlineSettings } from "react-icons/md";
+import { RiLogoutCircleLine } from "react-icons/ri";
+import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 
 import { dashBoardContext } from './Dashboard';
-import { useState, useContext, useMemo } from 'react';
+import { useState, useContext } from 'react';
 
 const listOfIcon = [
     {
         Name: "Dashboard",
-        iconComponent: IoIosWater,
+        iconComponent: RiDashboardHorizontalLine,
         url: "#"
     },
 
     {
         Name: "Document",
-        iconComponent: IoIosWater,
+        iconComponent: GrDocument,
         url: "#"
     },
 
 
     {
-        Name: "Message",
-        iconComponent: IoIosWater,
+        Name: "Comment",
+        iconComponent: LuMessageSquareMore,
         url: "#"
     },
 
     {
         Name: "User",
-        iconComponent: IoIosWater,
+        iconComponent: FaRegUser,
         url: "#"
     },
 
     {
         Name: "Setting",
-        iconComponent: IoIosWater,
+        iconComponent: MdOutlineSettings,
         url: "#"
     },
 
@@ -45,7 +51,7 @@ const listOfIcon = [
 const Sidebar = () => {
 
     const [hoverIdx, setHover] = useState(10000);
-    const {windowWidth} = useContext(dashBoardContext);
+    const {isClose} = useContext(dashBoardContext);
 
     const handleHover = (idx) => {
         setHover(idx);
@@ -71,14 +77,12 @@ const Sidebar = () => {
         return optionMenu;
     }
 
-    const sidebarClass = useMemo(() => {
-        return `${styles.sideBar} ${windowWidth < 768 ? styles.close : ''}`;
-    }, [windowWidth]);
+    const sidebarClass = `${styles.sideBar} ${isClose ? styles.close : ''}`;
 
     return (
         <div className = {sidebarClass}>
             <Link to = "#" className = {styles.logo}>
-                <IoIosWater/>
+                <GiDiceTwentyFacesTwenty/>
                 <div className = {styles.logoName}><span>CI</span>RT</div>
             </Link>
             
@@ -88,7 +92,7 @@ const Sidebar = () => {
 
             <ul className = {styles.sideMenu}>
                 <li><Link to = "#" className = {styles.logout}>
-                    <IoIosWater />
+                    <RiLogoutCircleLine />
                     Logout
                 </Link></li>
             </ul>

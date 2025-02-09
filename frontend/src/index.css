@@ -3,7 +3,7 @@
   --primary: #d0012b;
   --light-primary: #F5A3A8;
   --grey: #eee;
-  --dark-grey: #AAAAAA;
+  --dark-grey: #939292;
   --dark: #363949;
   --danger: #6F42C1;
   --light-danger: #BFA2E6;
@@ -14,7 +14,7 @@
   --blue: #1976D2;
   --light-blue: #CFE8FF;
   --orange: #FD7E14;
-  --light-orange: #FFB570;
+  --light-orange: #ffb5709c;
 }
 
 a:-webkit-any-link {
