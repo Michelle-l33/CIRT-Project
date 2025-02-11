@@ -22,7 +22,7 @@
     height: 40px;
     border-radius: 50%;
     background-color: var(--grey);
-    border: 3px solid var(--light-orange);
+    border: 3px solid var(--light-primary);
     transition: 0.4s ease;
     display: flex;
     justify-content: center;
@@ -31,11 +31,11 @@
 
 .styleStep * {
     font-size: 19px;
-    color: var(--dark);
+    color: var(--dark); 
 }
 
 .styleStep.completed {
-    border: 3px solid var(--orange);
+    border: 3px solid var(--primary);
 }
 
 .stepLabel {
@@ -65,7 +65,7 @@
     position: absolute;
     background: var(--dark);
     height: 4px;
-    width: var(--prog-width, 100%);
+    width: var(--prog-width, 0);
     top: 50%;
     transition: 0.4s ease;
     transform: translateY(-50%);

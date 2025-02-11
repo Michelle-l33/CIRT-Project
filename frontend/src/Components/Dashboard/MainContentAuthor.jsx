@@ -25,6 +25,7 @@ const taskListToBeComplete = [
         title: "Resubmit",
         description: "You need to Resubmitttttttttt"
     },
+
 ];
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
@@ -40,7 +41,7 @@ const MainContent = () => {
 
     const { isClose } = useContext(dashBoardContext);
     
-    const [currentDate] = useState(getDate());
+    const [ currentDate ] = useState(getDate());
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     return (
@@ -93,7 +94,7 @@ const MainContent = () => {
                     <li key = 'happy'>
                         <FaRegSmileWink />
                         <span class = {styles.info}>
-                            <h3>Smile XD</h3>
+                            <h3>Smile xD</h3>
                             <span>Be Happy!</span>
                         </span>
                     </li>
@@ -101,7 +102,7 @@ const MainContent = () => {
 
                 <div className = {styles.bottomData}>
                     <div className = {styles.trachBarContainer}>
-                        <TrackBar currentStep = {2} />
+                        <TrackBar currentStep = {3} />
                     </div>
 
 

@@ -15,7 +15,6 @@ const LoginPage = () => {
     const [isReviewer, setIsReviewer] = useState(false);
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPass] = useState("");
-   
 
    
 
