@@ -1,6 +1,6 @@
 import styles from './Gallery.module.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const Gallery = ( {listOfPictureInfos} ) => { 
@@ -38,11 +38,36 @@ const Gallery = ( {listOfPictureInfos} ) => {
         setVisibleIndex(null);
     };
 
+
+    
+    // this is for handling different windown size
+    const MOBILESIZE = 768;
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILESIZE); 
+    const preWidth = useRef(window.innerWidth);
+    
+    useEffect(() => {
+        const handleResize = () => {
+
+            const currWidth = window.innerWidth;
+            if (currWidth <= MOBILESIZE && preWidth.current > MOBILESIZE) {
+                setIsMobile(true);
+            } else if (currWidth > MOBILESIZE && preWidth.current <= MOBILESIZE) {
+                setIsMobile(false);
+            }
+            preWidth.current = currWidth;
+        }
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
+
     return( // html goes in the return()
 
-        <div className = {styles.bigPictureContainer}>
+        <div className = {`${styles.bigPictureContainer} ${isMobile ? styles.mobile : ''}`}>
             <button onClick={handlePrevClick} className = {styles.button}>
-                Prev
+                <span>&#8592;</span>
             </button>
             
             {/* <span>  
@@ -60,7 +85,7 @@ const Gallery = ( {listOfPictureInfos} ) => {
                     src = {currPic.url} 
                     alt = {currPic.title}
                     onClick = {() => handleMouseClick(currIndex)}
-                    className = {visibleIndex === currIndex ? styles.currImgWithDes : ''}
+                    className = {`${visibleIndex === currIndex ? styles.currImgWithDes : ''}`}
                     />
                 <img 
                     src = {nextPic.url} 
@@ -71,7 +96,8 @@ const Gallery = ( {listOfPictureInfos} ) => {
             </div>
 
 
-            <div className={`${styles.description} ${visibleIndex === currIndex ? styles.show : ''}`}>
+            <div className={`${styles.description} 
+                             ${visibleIndex === currIndex ? styles.show : ''}`}>
 
                 <button className = {styles.closeButton} onClick = {handleMouseClose}>X</button>
         
@@ -86,7 +112,7 @@ const Gallery = ( {listOfPictureInfos} ) => {
             </div>
 
             <button onClick={handleNextClick} className = {styles.button}>
-                Next
+                <span>&#8594;</span>
             </button>
 
             

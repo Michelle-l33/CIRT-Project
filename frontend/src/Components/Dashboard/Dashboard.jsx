@@ -9,7 +9,6 @@ import { createContext, useState, useEffect, useRef } from 'react';
 
 export const dashBoardContext = createContext(null);
 
-
 const isAuthor = true;
 const COLLAPSE_WIDTH = 768;
 
@@ -32,9 +31,9 @@ const Dashboard = () => {
             //when the current window size and previous window size are on different sides of the threshold of COLLAPSE_WIDTH
             const currWidth = window.innerWidth;
             if (currWidth <= COLLAPSE_WIDTH && prevWidth.current > COLLAPSE_WIDTH){
-                setIsClose(true)
+                setIsClose(true);
             } else if (currWidth > COLLAPSE_WIDTH && prevWidth.current <= COLLAPSE_WIDTH) {
-                setIsClose(false)
+                setIsClose(false);
             }
 
             prevWidth.current = currWidth;
