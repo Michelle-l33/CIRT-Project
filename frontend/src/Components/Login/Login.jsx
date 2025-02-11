@@ -3,19 +3,25 @@
 
 import React, { useState } from "react";
 import styles from './Login.module.css';
+import Cookies from  'js-cookie';
+import { useUser } from "./UserContext";
 
 
 const LoginPage = () => {
     // State to manage form data
+    const {handleLogout} = useUser();
+    const {user, setUser} = useUser(); //gets current user info
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
     const [isAuthor, setIsAuthor] = useState(false);
     const [isEditor, setIsEditor] = useState(false);
     const [isReviewer, setIsReviewer] = useState(false);
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPass] = useState("");
-
+    const [alertMessage, setAlertMessage] = useState('');
+  
    
 
     const handleLoginSubmit = async (e) => {
@@ -32,11 +38,17 @@ const LoginPage = () => {
                 body: JSON.stringify(userData),
               });
     
-          const data = response.json();
+          const data = await response.json();
     
           if (response.ok){
-            window.alert("Login Successful!");
-            window.location.href = "/"; 
+            const userObj = {name:data.name, email:loginEmail, token:data.token};
+            Cookies.set('user', JSON.stringify(userObj),{expires:7}) // sets cookies; expires in 7 days
+            setUser(userObj)
+            setAlertMessage("Login Successful!");
+            setTimeout(()=>{
+              setAlertMessage('');
+            },2000);
+            window.location.href = "/dashboard"; 
           }
           else{
             window.alert("Invalid Credentials. Please Try Again!");
@@ -48,12 +60,15 @@ const LoginPage = () => {
         console.log(error.message)
       }
     }
-
+    const capitalizeName = (name) => {
+      return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
     
-        const userData = { name, email, password, isAuthor, isEditor, isReviewer};
+        const capitalizedName = capitalizeName(name);
+        const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer};
 
     
         try {
@@ -78,26 +93,41 @@ const LoginPage = () => {
           window.alert("Error: " + error.message);
         }
       
-      };
+    }
+      
     
-      const handleAccountType =(e) =>{
+       const handleAccountType =(e) =>{
 
         const type = e.target.value;
         // Reset all role states
         setIsAuthor(false);
         setIsEditor(false);
         setIsReviewer(false);
+        setIsPublic(false);
 
         // Set the selected role
         if (type === "author") setIsAuthor(true);
         else if (type === "editor") setIsEditor(true);
         else if (type === "reviewer") setIsReviewer(true);
+        else if (type === "public") setIsPublic(true);
         
 
-      };
+      }
 
+      
+    
+
+      
+    
+ 
     return (
+      
         <div className={styles.loginContainer}>
+          {alertMessage && (
+                  <div className={styles.alert}>
+                    {alertMessage}
+                  </div>
+                )}
         <div className={styles.loginContainer}>
             <div className={styles.accounts}>
                 
@@ -119,6 +149,7 @@ const LoginPage = () => {
 
                 {/* Register Form */}
                 <div className={styles.register}>
+                  
                     <h2>Register</h2>
                     <form onSubmit={handleRegisterSubmit}>
                         <label htmlFor="register-username">Enter your Username:</label>
@@ -130,6 +161,7 @@ const LoginPage = () => {
                         <label htmlFor="account-type">Account Type:</label>
                         <select name="account_type" id="account-type" onChange={(handleAccountType)}required>
                             <option value="none">Select Account Type</option>
+                            <option value="public">Personal</option>
                             <option value="author">Author</option>
                             <option value="editor">Editor</option>
                             <option value="reviewer" >Reviewer</option>
@@ -144,9 +176,12 @@ const LoginPage = () => {
                     </form>
                 </div>
             </div>
+          
+          
         </div>
     </div>
     );
 };
+
 
 export default LoginPage;
