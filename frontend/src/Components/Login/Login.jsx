@@ -60,11 +60,15 @@ const LoginPage = () => {
         console.log(error.message)
       }
     }
+    const capitalizeName = (name) => {
+      return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+  };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
     
-        const userData = { name, email, password, isAuthor, isEditor, isReviewer};
+        const capitalizedName = capitalizeName(name);
+        const userData = { name: capitalizedName, email, password, isAuthor, isEditor, isReviewer};
 
     
         try {
@@ -107,6 +111,9 @@ const LoginPage = () => {
         
 
       }
+
+      
+    
 
       
     

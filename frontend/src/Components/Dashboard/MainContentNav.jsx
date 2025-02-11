@@ -19,7 +19,7 @@ const MainContentNav = () => {
         <div className = {mainContentClass}>
 
             <nav>
-                <span> Welcome {user.name}! </span>
+                <span> Welcome {user ? user.name : 'Guest'}! </span>
                 
                 <input type = "checkbox"
                 id = "themeToggle"
