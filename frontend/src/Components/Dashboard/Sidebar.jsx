@@ -1,5 +1,6 @@
 import styles from './Sidebar.module.css'
 import { Link } from "react-router-dom";
+import { useUser } from '../Login/UserContext';
 
 import { RiDashboardHorizontalLine } from "react-icons/ri";
 import { GrDocument } from "react-icons/gr";
@@ -49,7 +50,7 @@ const listOfIcon = [
 
 
 const Sidebar = () => {
-
+    const {handleLogout} = useUser();
     const [hoverIdx, setHover] = useState(10000);
     const {isClose} = useContext(dashBoardContext);
 
@@ -91,10 +92,19 @@ const Sidebar = () => {
             </ul>
 
             <ul className = {styles.sideMenu}>
-                <li><Link to = "#" className = {styles.logout}>
+                <li>
+                    <a href="#" className={styles.logout} onClick={(e) => {
+                    e.preventDefault();  // Prevent the default link behavior
+                    handleLogout();
+                    }}>
+                        <RiLogoutCircleLine/>
+                    Logout
+                    </a>
+                </li>
+                {/* <li><Link to = "#" className = {styles.logout}>
                     <RiLogoutCircleLine />
                     Logout
-                </Link></li>
+                </Link></li> */}
             </ul>
 
         </div>

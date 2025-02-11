@@ -6,18 +6,20 @@ import { FaRegBell } from "react-icons/fa";
 import { dashBoardContext } from './Dashboard';
 
 import { useContext } from 'react';
+import { useUser } from '../Login/UserContext';
 
 const MainContentNav = () => {
 
     const {isChecked, handleToggle, isClose} = useContext(dashBoardContext);
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
+    const {user}=useUser();
 
     return (
         <div className = {mainContentClass}>
 
             <nav>
-                <span> Welcome! </span>
+                <span> Welcome {user.name}! </span>
                 
                 <input type = "checkbox"
                 id = "themeToggle"
