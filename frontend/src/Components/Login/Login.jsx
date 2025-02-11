@@ -14,6 +14,7 @@ const LoginPage = () => {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
     const [isAuthor, setIsAuthor] = useState(false);
     const [isEditor, setIsEditor] = useState(false);
     const [isReviewer, setIsReviewer] = useState(false);
@@ -68,7 +69,7 @@ const LoginPage = () => {
         e.preventDefault();
     
         const capitalizedName = capitalizeName(name);
-        const userData = { name: capitalizedName, email, password, isAuthor, isEditor, isReviewer};
+        const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer};
 
     
         try {
@@ -108,6 +109,7 @@ const LoginPage = () => {
         if (type === "author") setIsAuthor(true);
         else if (type === "editor") setIsEditor(true);
         else if (type === "reviewer") setIsReviewer(true);
+        else if (type === "public") setIsPublic(true);
         
 
       }
@@ -159,6 +161,7 @@ const LoginPage = () => {
                         <label htmlFor="account-type">Account Type:</label>
                         <select name="account_type" id="account-type" onChange={(handleAccountType)}required>
                             <option value="none">Select Account Type</option>
+                            <option value="public">Personal</option>
                             <option value="author">Author</option>
                             <option value="editor">Editor</option>
                             <option value="reviewer" >Reviewer</option>
