@@ -1,6 +1,56 @@
 /* box shadow copied from https://getcssscan.com/css-box-shadow-examples */
 
+/* calculations for dynamic font size: https://medium.com/@bogdanfromkyiv/dynamic-font-size-using-only-css3-757ea901d0fe */
+
 /* Nice article about overflow clip: https://kilianvalkhof.com/2022/css-html/do-you-know-about-overflow-clip/ */
+
+.galleryContainer {
+    background: #7f7f7f;
+    margin: 0;
+    padding: 0;
+}
+
+.galleryContainer h1 {
+    text-transform: uppercase;
+    padding-bottom: 5px;
+    text-align: center;
+    position: relative;
+    padding: 20px 0 0 0;
+    margin: 0;
+    font-family: "Impact", sans-serif;
+    font-weight: 300;
+    font-size: clamp(1rem, 2.5vw, 4rem);
+    color: #080808;
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+    }
+
+.galleryContainer h1:before {
+    width: 28px;
+    height: 5px;
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    margin-left: -14px;
+    background-color: var(--primary);
+  }
+
+  .galleryContainer h1:after {
+    width: 100px;
+    height: 1px;
+    display: block;
+    content: "";
+    position: relative;
+    margin-top: 25px;
+    left: 50%;
+    bottom: 17px;
+    margin-left: -50px;
+    background-color: var(--primary);
+  }
+
 
 .bigPictureContainer {
     display: flex;
@@ -36,9 +86,9 @@
 
 .description.show {
     opacity: 1;
-    top: 0;
     right: 5%;
-    width: 50%;
+    max-width: 50%;
+    width: auto;
     height: 100%;
     transition: opacity 0.3s ease, width 0.3s ease;
     box-shadow: rgba(214, 3, 3, 0.3) 0px 0px 0px 3px;
@@ -47,7 +97,7 @@
 }
 
 /* text styling takrn from https://tympanus.net/codrops/2012/11/02/heading-set-styling-with-css/ */
-.description.show h2 {
+.description h2 {
     margin: 20px 0 20px 0;
 	color: #343434;
 	font-weight: normal;
@@ -58,7 +108,7 @@
 	text-shadow: 0 2px white, 0 3px #777;
 }
 
-.description.show h3 {
+.description h3 {
     margin: 5px 0 5px 0;
 	color: #343434;
 	font-weight: normal;
@@ -68,7 +118,7 @@
     text-decoration: underline;
 }
 
-.description.show p {
+.description p {
     margin-top: 15px;
 	color: #343434;
 	font-size: clamp(1rem, 1.8vw, 1.2rem);
@@ -87,7 +137,7 @@
 
 .imgContainer {
     display: flex;
-    justify-content: center;
+    justify-content:mcenter;
     align-items: center;
     position: relative;
     width: 100%;
@@ -100,7 +150,7 @@
 .imgContainer > img {
     position: relative;
     object-fit: cover;
-    width: 33.33%;
+    width: 33.333333%;
     aspect-ratio: 2 / 3;
     cursor: pointer;
     -webkit-filter: brightness(100%);
@@ -152,6 +202,10 @@
     outline: none;
     transition: 1s ease-in-out;
     border-radius: 50%;
+    position: absolute;
+}
+.bigPictureContainer .description + .button{
+    right: 0;
 }
 
 .button:hover {
@@ -176,7 +230,7 @@
     top: 10px;
     cursor: pointer;
     align-items: center;
-    background-image: linear-gradient(144deg,var(--primary), var(--light-primary),#ACABB0);
+    background-image: linear-gradient(144deg,var(--primary), var(--light-primary),#a09797bb);
     border: 0;
     border-radius: 50%;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -198,16 +252,56 @@
 
 .closeButton:hover {
   outline: 0;
-  background-image: linear-gradient(144deg,#ACABB0, var(--light-primary), var(--primary));
+  background-image: linear-gradient(144deg,#a09797bb, var(--light-primary), var(--primary));
 }
 
 
 
 /* this part is me trying to do responsive design :( */
-/* .bigPictureContainer.mobile {
-    border: 1px solid crimson;
+.mobile .imgContainer img:first-child,
+.mobile .imgContainer img:last-child{
+    display: none;
+}
+.mobile .imgContainer {
+    margin: 0;
+    padding: 10px;
+    width: auto;
 }
 
-.bigPictureContainer.mobile *{
-    border: 1px solid indigo;
-} */
+.mobile .imgContainer img, .mobile .currImgWithDes {
+    transform: none;
+    width: 100%;
+    width: 100%;
+}
+
+.mobile .description{
+    z-index: -1;
+    opacity: 0;
+    width: 100vw;
+    height: 100%;
+    margin: 0; 
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px; 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(0); 
+}
+
+.mobile .description.show {
+    opacity: 1;
+    max-width: 100%;
+    z-index: 6;
+}
+
+.mobile .description h2, 
+.mobile .description h3,
+.mobile .description p {
+    color: white;
+    text-shadow: none;
+}
+
+.mobile .description p {
+    background: rgba(100, 99, 99, 0.192);
+}

@@ -64,58 +64,60 @@ const Gallery = ( {listOfPictureInfos} ) => {
 
 
     return( // html goes in the return()
-
-        <div className = {`${styles.bigPictureContainer} ${isMobile ? styles.mobile : ''}`}>
-            <button onClick={handlePrevClick} className = {styles.button}>
-                <span>&#8592;</span>
-            </button>
-            
-            {/* <span>  
-                ({index + 1} of {listOfPictureInfos.length})
-            </span> */}
-
-            <div className = {styles.imgContainer}>
+        <div className = {styles.galleryContainer}>
+            <h1>Gallery</h1>
+            <div className = {`${styles.bigPictureContainer} ${isMobile ? styles.mobile : ''}`}>
+                <button onClick={handlePrevClick} className = {styles.button}>
+                    <span>&#8592;</span>
+                </button>
                 
-                <img 
-                    src = {prevPic.url} 
-                    alt = {prevPic.title}
-                    onClick = {() => {handlePrevClick(); handleMouseClick(prevIndex);}}
-                    />
-                <img
-                    src = {currPic.url} 
-                    alt = {currPic.title}
-                    onClick = {() => handleMouseClick(currIndex)}
-                    className = {`${visibleIndex === currIndex ? styles.currImgWithDes : ''}`}
-                    />
-                <img 
-                    src = {nextPic.url} 
-                    alt = {nextPic.title}
-                    onClick = {() => {handleNextClick(); handleMouseClick(nextIndex);}}
-                    />
+                {/* <span>  
+                    ({index + 1} of {listOfPictureInfos.length})
+                </span> */}
+
+                <div className = {styles.imgContainer}>
                     
-            </div>
+                    <img 
+                        src = {prevPic.url} 
+                        alt = {prevPic.title}
+                        onClick = {() => {handlePrevClick(); handleMouseClick(prevIndex);}}
+                        />
+                    <img
+                        src = {currPic.url} 
+                        alt = {currPic.title}
+                        onClick = {() => handleMouseClick(currIndex)}
+                        className = {`${visibleIndex === currIndex ? styles.currImgWithDes : ''}`}
+                        />
+                    <img 
+                        src = {nextPic.url} 
+                        alt = {nextPic.title}
+                        onClick = {() => {handleNextClick(); handleMouseClick(nextIndex);}}
+                        />
+                        
+                </div>
 
 
-            <div className={`${styles.description} 
-                             ${visibleIndex === currIndex ? styles.show : ''}`}>
+                <div className={`${styles.description} 
+                                ${visibleIndex === currIndex ? styles.show : ''}`}>
 
-                <button className = {styles.closeButton} onClick = {handleMouseClose}>X</button>
-        
-                <h2> Title: {currPic.title} </h2>
+                    <button className = {styles.closeButton} onClick = {handleMouseClose}>&#10005;</button>
+            
+                    <h2> Title: {currPic.title} </h2>
 
-                <h3> Author: {currPic.author}</h3>
+                    <h3> Author: {currPic.author}</h3>
 
-                <p>
-                    {currPic.description}
-                </p>
+                    <p>
+                        {currPic.description}
+                    </p>
+                    
+                </div>
+
+                <button onClick={handleNextClick} className = {styles.button}>
+                    <span>&#8594;</span>
+                </button>
+
                 
             </div>
-
-            <button onClick={handleNextClick} className = {styles.button}>
-                <span>&#8594;</span>
-            </button>
-
-            
         </div>
     
     );    
