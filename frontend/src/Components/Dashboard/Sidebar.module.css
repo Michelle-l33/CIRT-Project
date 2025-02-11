@@ -119,5 +119,5 @@
 }
 
 .sideBar .sideMenu li a.logout:hover {
-    color: var(--primary);
+    color: var(--light-danger);
 }

@@ -51,7 +51,7 @@ const TrackBar = ({currentStep}) => {
     return (
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
-            <ul className = {styles.stepContainer}
+            <ol className = {styles.stepContainer}
                 style = {{"--prog-width": width}}>
                 {steps.map((step, idx) => (
                     <li key = {idx} className = {styles.stepWrapper}>
@@ -63,7 +63,7 @@ const TrackBar = ({currentStep}) => {
                         </div>
                     </li>
                 ))}
-            </ul>
+            </ol>
         </div>
     );
 }

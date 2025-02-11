@@ -14,7 +14,7 @@
   --blue: #1976D2;
   --light-blue: #CFE8FF;
   --orange: #FD7E14;
-  --light-orange: #ffb5709c;
+  --light-orange: #fddfc3e9;
 }
 
 a:-webkit-any-link {
@@ -28,6 +28,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: var(--light);
 }
 
 code {

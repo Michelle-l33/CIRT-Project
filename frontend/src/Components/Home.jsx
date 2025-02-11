@@ -1,15 +1,15 @@
 import NavBar from './NavBar/NavBar';
 import DropDownBar from './DropDownBar/DropDownBar'
 import Gallery from './Gallery/Gallery'
-import SearchBar from './SearchBar'
+import SearchBar from './SearchBar/SearchBar'
 import FAQ from './FAQ/FAQ'
 import Footer from './Footer/Footer'
 
 
-import beidou from '../Asset/beidou.webp';
-import clorinde from '../Asset/clorinde.webp';
-import navia from '../Asset/navia.webp';
-import ningguang from '../Asset/ningguang.webp';
+import beidou from '../Asset/montreal.avif';
+import clorinde from '../Asset/clean.avif';
+import navia from '../Asset/posters.avif';
+import ningguang from '../Asset/talent.avif';
 
         
 const listOfPictureInfos = [

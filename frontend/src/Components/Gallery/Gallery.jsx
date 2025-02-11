@@ -1,6 +1,6 @@
 import styles from './Gallery.module.css';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 
 const Gallery = ( {listOfPictureInfos} ) => { 
@@ -38,58 +38,86 @@ const Gallery = ( {listOfPictureInfos} ) => {
         setVisibleIndex(null);
     };
 
+
+    
+    // this is for handling different windown size
+    const MOBILESIZE = 768;
+    const [isMobile, setIsMobile] = useState(window.innerWidth <= MOBILESIZE); 
+    const preWidth = useRef(window.innerWidth);
+    
+    useEffect(() => {
+        const handleResize = () => {
+
+            const currWidth = window.innerWidth;
+            if (currWidth <= MOBILESIZE && preWidth.current > MOBILESIZE) {
+                setIsMobile(true);
+            } else if (currWidth > MOBILESIZE && preWidth.current <= MOBILESIZE) {
+                setIsMobile(false);
+            }
+            preWidth.current = currWidth;
+        }
+
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
+
+
     return( // html goes in the return()
-
-        <div className = {styles.bigPictureContainer}>
-            <button onClick={handlePrevClick} className = {styles.button}>
-                Prev
-            </button>
-            
-            {/* <span>  
-                ({index + 1} of {listOfPictureInfos.length})
-            </span> */}
-
-            <div className = {styles.imgContainer}>
+        <div className = {styles.galleryContainer}>
+            <h1>Gallery</h1>
+            <div className = {`${styles.bigPictureContainer} ${isMobile ? styles.mobile : ''}`}>
+                <button onClick={handlePrevClick} className = {styles.button}>
+                    <span>&#8592;</span>
+                </button>
                 
-                <img 
-                    src = {prevPic.url} 
-                    alt = {prevPic.title}
-                    onClick = {() => {handlePrevClick(); handleMouseClick(prevIndex);}}
-                    />
-                <img
-                    src = {currPic.url} 
-                    alt = {currPic.title}
-                    onClick = {() => handleMouseClick(currIndex)}
-                    className = {visibleIndex === currIndex ? styles.currImgWithDes : ''}
-                    />
-                <img 
-                    src = {nextPic.url} 
-                    alt = {nextPic.title}
-                    onClick = {() => {handleNextClick(); handleMouseClick(nextIndex);}}
-                    />
+                {/* <span>  
+                    ({index + 1} of {listOfPictureInfos.length})
+                </span> */}
+
+                <div className = {styles.imgContainer}>
                     
-            </div>
+                    <img 
+                        src = {prevPic.url} 
+                        alt = {prevPic.title}
+                        onClick = {() => {handlePrevClick(); handleMouseClick(prevIndex);}}
+                        />
+                    <img
+                        src = {currPic.url} 
+                        alt = {currPic.title}
+                        onClick = {() => handleMouseClick(currIndex)}
+                        className = {`${visibleIndex === currIndex ? styles.currImgWithDes : ''}`}
+                        />
+                    <img 
+                        src = {nextPic.url} 
+                        alt = {nextPic.title}
+                        onClick = {() => {handleNextClick(); handleMouseClick(nextIndex);}}
+                        />
+                        
+                </div>
 
 
-            <div className={`${styles.description} ${visibleIndex === currIndex ? styles.show : ''}`}>
+                <div className={`${styles.description} 
+                                ${visibleIndex === currIndex ? styles.show : ''}`}>
 
-                <button className = {styles.closeButton} onClick = {handleMouseClose}>X</button>
-        
-                <h2> Title: {currPic.title} </h2>
+                    <button className = {styles.closeButton} onClick = {handleMouseClose}>&#10005;</button>
+            
+                    <h2> Title: {currPic.title} </h2>
 
-                <h3> Author: {currPic.author}</h3>
+                    <h3> Author: {currPic.author}</h3>
 
-                <p>
-                    {currPic.description}
-                </p>
+                    <p>
+                        {currPic.description}
+                    </p>
+                    
+                </div>
+
+                <button onClick={handleNextClick} className = {styles.button}>
+                    <span>&#8594;</span>
+                </button>
+
                 
             </div>
-
-            <button onClick={handleNextClick} className = {styles.button}>
-                Next
-            </button>
-
-            
         </div>
     
     );    

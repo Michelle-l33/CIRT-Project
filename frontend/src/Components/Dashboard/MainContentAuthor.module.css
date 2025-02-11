@@ -88,13 +88,13 @@
 }
 
 .mainContent main .insights li:nth-child(1) svg{
-    background: var(--light-blue);
-    color: var(--blue);
+    background: var(--light-orange);
+    color: var(--orange);
 }
 
 .mainContent main .insights li:nth-child(2) svg{
-    background: var(--light-danger);
-    color: var(--danger);
+    background: var(--light-blue);
+    color: var(--blue);
 }
 
 .mainContent main .insights li:nth-child(3) svg{
