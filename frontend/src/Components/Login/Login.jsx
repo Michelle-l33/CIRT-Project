@@ -104,6 +104,7 @@ const LoginPage = () => {
         setIsAuthor(false);
         setIsEditor(false);
         setIsReviewer(false);
+        setIsPublic(false);
 
         // Set the selected role
         if (type === "author") setIsAuthor(true);
