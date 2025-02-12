@@ -25,7 +25,6 @@ const taskListToBeComplete = [
         title: "Resubmit",
         description: "You need to Resubmitttttttttt"
     },
-
 ];
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react

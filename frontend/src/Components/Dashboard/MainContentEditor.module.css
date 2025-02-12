@@ -48,3 +48,147 @@
     color: var(--light);
     font-weight: bold;
 }
+
+
+.mainContent .tab .tabHeader {
+    display: flex;
+    background-color: var(--dark-grey);
+    color: var(--light);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+}
+
+.mainContent .tab .tabHeader h3 {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.mainContent .tab .tabHeader .left {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+.mainContent .tab .tabHeader .left form{
+    max-width: 400px;
+}
+
+.mainContent .tab .tabHeader .left .formInput {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.mainContent .tab .tabHeader .left .formInput input{
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    border: none;
+    background: var(--grey);
+    border-radius: 36px 0 0 36px;
+    outline: none;
+    width: 100%;
+    color: var(--dark);
+}
+
+.mainContent .tab .tabHeader .left .formInput button{
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 0 36px 36px 0;
+    cursor: pointer;
+}
+
+.mainContent .tab .tabHeader button {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+    padding: 3px;
+}
+
+.mainContent .tab .tabHeader button:hover {
+    background: var(--light-grey);
+}
+
+.mainContent .submissionList {
+    background-color: var(--light);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-grey);
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 16px;
+}
+
+.mainContent .submissionList .submission {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--grey);
+    color: var(--dark);
+    border-radius: 5px;
+}
+
+.mainContent .submissionList .submission svg {
+    padding: 5px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.mainContent .submissionList .submission .submissionDes {
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.mainContent .submissionList .submission .submissionStatus {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin-right: 10%;
+    border-radius: 36px;
+    width: 15%;
+}
+
+.mainContent .submissionList .submission .submissionStatus.submitted {
+    background: var(--light-orange);
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.mainContent .submissionList .submission .submissionStatus.underReview {
+    background: var(--light-blue);
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.mainContent .submissionList .submission .submissionStatus.reviewed {
+    background: var(--light-success);
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.mainContent .submissionList .submission .submissionStatus.accepted {
+    background: var(--light-warning);
+    color: var(--warning);
+    border-color: var(--warning);
+}

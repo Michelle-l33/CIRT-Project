@@ -1,6 +1,9 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import styles from './MainContentEditor.module.css';
 
+
+// all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
+
 const MainContentEditor = () => {
 
     const location = useLocation();
@@ -10,7 +13,7 @@ const MainContentEditor = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <Link to = "/Dashboard"><h1>Dashboard</h1></Link>                       
+                    <Link to = "/Dashboard"><h1>Dashboard Editor - A work In Progress</h1></Link>                       
                 </div>
 
                 <div className={styles.tabNav}>
