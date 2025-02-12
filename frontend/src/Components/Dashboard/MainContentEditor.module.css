@@ -1,0 +1,50 @@
+.mainContent {
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+
+.mainContent main {
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.mainContent .header h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--dark);
+}
+
+.mainContent .tabNav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px; 
+    background-color: var(--light);
+    padding: 10px 20px; 
+    border-bottom: 2px solid var(--dark);
+    border-radius: 10px;
+}
+
+.mainContent .tabNav a {
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+.mainContent .tabNav a:hover {
+    background-color: var(--grey);
+}
+
+.mainContent .tabNav .tabActive,
+.mainContent .tabNav .tabActive:hover{
+    background-color: var(--primary);
+    color: var(--light);
+    font-weight: bold;
+}

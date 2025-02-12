@@ -16,7 +16,6 @@ const NavBar = ({isLoggedIn}) => {
                  style = {{visibility: isLoggedIn ? 'hidden':'visible'}}>
 
                 <Link to="/Login"> Login </Link>
-                {/* <a href = "/Login/Login.jsx"> Login </a> */}
             </div>
         </nav>
     );

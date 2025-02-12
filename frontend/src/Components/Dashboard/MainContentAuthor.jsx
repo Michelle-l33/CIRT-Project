@@ -37,7 +37,7 @@ function getDate() {
   }
 
 
-const MainContent = () => {
+const MainContentAuthor = () => {
 
     const { isClose } = useContext(dashBoardContext);
     
@@ -132,4 +132,4 @@ const MainContent = () => {
     );
 };
 
-export default MainContent;
+export default MainContentAuthor;

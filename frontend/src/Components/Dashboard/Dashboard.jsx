@@ -4,12 +4,15 @@ import styles from './Dashboard.module.css'
 import Sidebar from './Sidebar';
 import MainContentNav from './MainContentNav'
 import MainContentAuthor from './MainContentAuthor';
+import MainContentEditor from './MainContentEditor';
 
 import { createContext, useState, useEffect, useRef } from 'react';
 
 export const dashBoardContext = createContext(null);
 
-const isAuthor = true;
+const isAuthor = false;
+const isEditor = true;
+
 const COLLAPSE_WIDTH = 768;
 
 const Dashboard = () => {
@@ -50,6 +53,7 @@ const Dashboard = () => {
                 <Sidebar />
                 <MainContentNav/>
                 {isAuthor && <MainContentAuthor />}
+                {isEditor && <MainContentEditor />}
             </div>      
         </dashBoardContext.Provider>
     );
