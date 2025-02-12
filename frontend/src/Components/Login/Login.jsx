@@ -21,8 +21,7 @@ const LoginPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPass] = useState("");
     const [alertMessage, setAlertMessage] = useState('');
-   
-
+  
    
 
     const handleLoginSubmit = async (e) => {
