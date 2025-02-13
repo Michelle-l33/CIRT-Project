@@ -38,10 +38,18 @@ function App() {
           <Route path="/Login" element={<Login />} />
 
           <Route path="/Dashboard" element={<Redirect />} />
-          <Route path="Author" element={<Dashboard props = {<MainContentAuthor/>} />}/>
+          <Route path="Author" element={<Dashboard 
+                              component={<MainContentAuthor />} 
+                              isEditor={isEditor} 
+                              isAuthor={isAuthor} 
+                            />}/>
           <Route path="/Editor" element={<Navigate to="/Editor/Task" replace />} />
 
-          <Route path="/Editor" element={<Dashboard props = {<MainContentEditor/>} />}>
+          <Route path="/Editor" element={<Dashboard 
+                              component={<MainContentEditor />} 
+                              isEditor={isEditor} 
+                              isAuthor={isAuthor} 
+                            />}>
             <Route path="TabNav" element={<TabNav />}>
               <Route path="MyQueue" element={<MyQueue />} />
               <Route path="AllActive" element={<AllActive />} />

@@ -12,7 +12,7 @@ const COLLAPSE_WIDTH = 768;
 
 //Conditional routing and rendering taken from https://stackoverflow.com/questions/73700464/big-react-component-with-conditional-rendering-or-smaller-separate-components
 
-const Dashboard = ({props}) => {
+const Dashboard = ({component, isEditor, isAuthor}) => {
 
     //this part is for changing dark and white theme
     const [isChecked, setChecked] = useState(false);  
@@ -46,9 +46,9 @@ const Dashboard = ({props}) => {
 
         <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose}}>
                 <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
-                    <Sidebar />
+                    <Sidebar isEditor = {isEditor} isAuthor ={isAuthor}/>
                     <MainContentNav/>
-                    {props}
+                    {component}
                 </div>     
         </dashBoardContext.Provider>
     );

@@ -11,10 +11,10 @@ const TabNav = () => {
     return(
         <>
                 <div className={styles.tabNav}>
-                    <Link to="MyQueue" className = {`${location.pathname === '/Dashboard/TabNav/MyQueue' ? styles.tabActive : ''}`}>My Queue</Link>
-                    <Link to="AllActive" className={`${location.pathname === '/Dashboard/TabNav/AllActive' ? styles.tabActive : ''}`}>All Active</Link>
-                    <Link to="Unassigned" className={`${location.pathname === '/Dashboard/TabNav/Unassigned' ? styles.tabActive : ''}`}>Unassigned</Link>
-                    <Link to="Archives" className={`${location.pathname === '/Dashboard/TabNav/Archives' ? styles.tabActive : ''}`}>Archives</Link>       
+                    <Link to="MyQueue" className = {`${location.pathname === '/Editor/TabNav/MyQueue' ? styles.tabActive : ''}`}>My Queue</Link>
+                    <Link to="AllActive" className={`${location.pathname === '/Editor/TabNav/AllActive' ? styles.tabActive : ''}`}>All Active</Link>
+                    <Link to="Unassigned" className={`${location.pathname === '/Editor/TabNav/Unassigned' ? styles.tabActive : ''}`}>Unassigned</Link>
+                    <Link to="Archives" className={`${location.pathname === '/Editor/TabNav/Archives' ? styles.tabActive : ''}`}>Archives</Link>       
                 </div>
         
                 <div className={styles.content}>
