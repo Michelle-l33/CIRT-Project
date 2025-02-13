@@ -15,9 +15,9 @@ import { useState, useContext } from 'react';
 
 const listOfIcon = [
     {
-        Name: "Dashboard",
+        Name: "TabNav",
         iconComponent: RiDashboardHorizontalLine,
-        url: "#"
+        url: "TabNav"
     },
 
     {
@@ -30,7 +30,7 @@ const listOfIcon = [
     {
         Name: "Comment",
         iconComponent: LuMessageSquareMore,
-        url: "#"
+        url: "Task"
     },
 
     {

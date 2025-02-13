@@ -3,19 +3,16 @@ import styles from './Dashboard.module.css'
 
 import Sidebar from './Sidebar';
 import MainContentNav from './MainContentNav'
-import MainContentAuthor from './MainContentAuthor';
-import MainContentEditor from './MainContentEditor';
 
 import { createContext, useState, useEffect, useRef } from 'react';
 
 export const dashBoardContext = createContext(null);
 
-const isAuthor = false;
-const isEditor = true;
-
 const COLLAPSE_WIDTH = 768;
 
-const Dashboard = () => {
+//Conditional routing and rendering taken from https://stackoverflow.com/questions/73700464/big-react-component-with-conditional-rendering-or-smaller-separate-components
+
+const Dashboard = ({props}) => {
 
     //this part is for changing dark and white theme
     const [isChecked, setChecked] = useState(false);  
@@ -44,17 +41,15 @@ const Dashboard = () => {
         window.addEventListener("resize", handleResize);
         return () => window.removeEventListener("resize", handleResize)
     },[]);
-
-
+    
     return (
 
         <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose}}>
-            <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
-                <Sidebar />
-                <MainContentNav/>
-                {isAuthor && <MainContentAuthor />}
-                {isEditor && <MainContentEditor />}
-            </div>      
+                <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
+                    <Sidebar />
+                    <MainContentNav/>
+                    {props}
+                </div>     
         </dashBoardContext.Provider>
     );
 };
