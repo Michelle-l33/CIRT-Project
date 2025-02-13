@@ -24,7 +24,7 @@
     -webkit-transition: all 0.4s ease 0s;
     -o-transition: all 0.4s ease 0s;
     transition: all 0.4s ease 0s;
-    }
+}
 
 .galleryContainer h1:before {
     width: 28px;
@@ -36,7 +36,7 @@
     left: 50%;
     margin-left: -14px;
     background-color: var(--primary);
-  }
+}
 
   .galleryContainer h1:after {
     width: 100px;
@@ -49,8 +49,7 @@
     bottom: 17px;
     margin-left: -50px;
     background-color: var(--primary);
-  }
-
+}
 
 .bigPictureContainer {
     display: flex;
@@ -75,7 +74,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 15px;
-    background-color: rgb(255, 240, 240);
+    background-color: #FFEDFA;
     z-index: 5;
     opacity: 0;
     transition: opacity 0.3s ease, width 0.3s ease;;
@@ -110,8 +109,8 @@
 
 .description h3 {
     margin: 5px 0 5px 0;
-	color: #343434;
-	font-weight: normal;
+	color: #DE3163;
+	font-weight: 600;
 	font-size: clamp(1.2rem, 2vw, 1.6rem);
 	line-height: 40px;
 	font-family: 'Orienta', sans-serif;
@@ -128,20 +127,20 @@
 	font-family: 'Orienta', sans-serif;
 	letter-spacing: 1px;
 	font-style: italic;
-    background: #f4d8d8ad;
+    background: #ccdf92bb;
     padding: 10px;
     border-radius: 20px;
     overflow-y: auto;
     max-height: 70%;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 .imgContainer {
     display: flex;
-    justify-content:mcenter;
+    justify-content: center;
     align-items: center;
     position: relative;
     width: 100%;
-    flex-grow: 2;
     padding: 25px 0;
 }
 
@@ -174,7 +173,6 @@
     cursor: pointer;
     transform: scale(1.1) translateX(-65%);
     box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
-
 }
 
 .imgContainer img:nth-child(2){
@@ -200,10 +198,13 @@
     background: transparent;
     border: 1px solid var(--primary);
     outline: none;
-    transition: 1s ease-in-out;
+    transition: all 1s ease;
     border-radius: 50%;
     position: absolute;
+    cursor: pointer;
+    text-align: center;
 }
+
 .bigPictureContainer .description + .button{
     right: 0;
 }
@@ -248,7 +249,7 @@
     white-space: nowrap;
     cursor: pointer;
     box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
-    }
+}
 
 .closeButton:hover {
   outline: 0;
@@ -256,12 +257,12 @@
 }
 
 
-
 /* this part is me trying to do responsive design :( */
 .mobile .imgContainer img:first-child,
 .mobile .imgContainer img:last-child{
     display: none;
 }
+
 .mobile .imgContainer {
     margin: 0;
     padding: 10px;
@@ -304,4 +305,9 @@
 
 .mobile .description p {
     background: rgba(100, 99, 99, 0.192);
+}
+
+.mobile .button{
+    width: 40px;
+    height: 40px;
 }

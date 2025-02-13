@@ -101,10 +101,6 @@ const Sidebar = () => {
                     Logout
                     </a>
                 </li>
-                {/* <li><Link to = "#" className = {styles.logout}>
-                    <RiLogoutCircleLine />
-                    Logout
-                </Link></li> */}
             </ul>
 
         </div>

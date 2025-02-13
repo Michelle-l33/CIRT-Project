@@ -25,7 +25,6 @@ const taskListToBeComplete = [
         title: "Resubmit",
         description: "You need to Resubmitttttttttt"
     },
-
 ];
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
@@ -37,7 +36,7 @@ function getDate() {
   }
 
 
-const MainContent = () => {
+const MainContentAuthor = () => {
 
     const { isClose } = useContext(dashBoardContext);
     
@@ -132,4 +131,4 @@ const MainContent = () => {
     );
 };
 
-export default MainContent;
+export default MainContentAuthor;
