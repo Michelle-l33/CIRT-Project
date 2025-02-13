@@ -5,25 +5,15 @@ const Submission = require("../models/Submission");
 const router = express.Router();
 
 
-// Register User
+// Upload Submission
 router.post("/upload", async (req, res) => {
   try {
-    const { name, email, password,isPublic, isAuthor, isEditor, isReviewer } = req.body;
+    const { authorID, title, firstName, lastName, document, isPoster, isArticle, abstract } = req.body;
 
-    const lowerEmail = email.toLowerCase();
+    const newSubmission = new Submission({ authorID, title, firstName, lastName, document, isPoster, isArticle, abstract });
+    await newSubmission.save();
     
-    const existingUser = await User.findOne({ email:lowerEmail });
-    if (existingUser) {
-      return res.status(400).json({ error: "Email is already registered." });
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({ name, email:lowerEmail, password: hashedPassword,isPublic, isAuthor, isEditor, isReviewer });
-    await newUser.save();
-    
-    res.status(201).json({ message: "User registered successfully!" });
+    res.status(201).json({ message: "Submission Uploaded Successfully!" });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
