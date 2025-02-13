@@ -4,32 +4,28 @@
     top: 0;
     z-index: 1000;
     padding: 2%;
+    gap: 30%;
     background-color: black;
     align-items: center;
     -webkit-box-shadow: 4px 10px 5px 0 var(--primary);
     -moz-box-shadow: 4px 10px 5px 0px var(--primary);
-    box-shadow: 4px 10px 5px 0px var(--primary); 
+    box-shadow: 1px 6px 5px 5px var(--primary); 
     width: auto;
-    height: 110px;
-    justify-content: space-between;
+    height: 110px
 }
 
 
 .navLeft img{
+    margin-left: 40%;
     object-fit: cover;
     height: 115px;
 }
 
-/* .navRight {
-    width: 30%;
+.navRight {
+    width: 50%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
-} */
-
-.navRight{
-  padding: 0;
-  margin: 0 20px 0 0;
 }
 
 
@@ -118,4 +114,8 @@
 
 .navRight a:hover:after {
   --progress: -100%;
+}
+
+.hidden {
+  display: none;
 }
