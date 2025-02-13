@@ -23,8 +23,8 @@ router.post("/upload", async (req, res) => {
 // Get All posters
 router.get("/gallery", async (req, res) => {
   try {
-    const users = await User.find({}, "-password"); // Exclude password
-    res.json(users);
+    const posters = await Submisison.find({isPoster:true}); //finds posters only
+    res.json(posters);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -33,11 +33,28 @@ router.get("/gallery", async (req, res) => {
 // Get All articles
 router.get("/publications", async (req, res) => {
     try {
-      const users = await User.find({}, "-password"); // Exclude password
-      res.json(users);
+      const articles = await Submission.find({isArticle:true}); // finds articles only
+      res.json(articles);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
   });
+
+  router.get("/submission/:id", async (req, res) => {
+    try {
+      const { id } = req.params;
+      const submission = await Submission.findById(id);
+  
+      if (!submission) {
+        return res.status(404).json({ message: "Submission not found" });
+      }
+  
+      res.json(submission);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+  
+
 
 module.exports = router;
