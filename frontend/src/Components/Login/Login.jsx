@@ -47,7 +47,7 @@ const LoginPage = () => {
           setAlertMessage("Login Successful!");
           setTimeout(()=>{
             setAlertMessage('');
-          },2000);
+          },3000);
           window.location.href = "/dashboard"; 
         }
         else{
