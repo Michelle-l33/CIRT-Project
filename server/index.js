@@ -22,7 +22,7 @@ app.get("/", (req, res) => {
 
 //Routes
 app.use("/user", require("./routes/user"));
-app.use("/doc", require("./routes/submission"));
+app.use("/submission", require("./routes/submission"));
 
 // Start server
 app.listen(PORT, () => {

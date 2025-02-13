@@ -40,7 +40,7 @@ router.get("/publications", async (req, res) => {
     }
   });
 
-  router.get("/submission/:id", async (req, res) => {
+  router.get("/:id", async (req, res) => {
     try {
       const { id } = req.params;
       const submission = await Submission.findById(id);

@@ -10,9 +10,12 @@
 
 ## How To Test Using React:
 - open terminal
+- npm install for overall project, frontend, and server!!
 - 'cd frontend'
-- 'npm install'
 - 'npm start'
+- new terminal for server and cd and start
+
+
 
 ## Team Member Contributions
 - Below are the main contributions each team member made to this project!
@@ -20,9 +23,15 @@
 ### Luigi - Front End
 
 ### Chris - Back End
+- Connecting Mongo database to project
+- Login Password Security
+- Firebase Connection
 
 ### Hien - Front End
 
 ### Hanna - Front End/Documentation
 
 ### Michelle - Back End
+- Connecting Mongo database to project
+- User & Submission Schemas and Routing
+- Login/Register/Logout Function
