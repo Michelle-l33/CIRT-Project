@@ -3,106 +3,129 @@ import NavBar from '../NavBar/NavBar';
 
 import React, { useState } from "react";
 import styles from './Login.module.css';
+import Cookies from  'js-cookie';
+import { useUser } from "./UserContext";
 
 
 const LoginPage = () => {
     // State to manage form data
+    const {handleLogout} = useUser();
+    const {user, setUser} = useUser(); //gets current user info
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
     const [isAuthor, setIsAuthor] = useState(false);
     const [isEditor, setIsEditor] = useState(false);
     const [isReviewer, setIsReviewer] = useState(false);
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPass] = useState("");
+    const [alertMessage, setAlertMessage] = useState('');
    
 
-   
-
+  
     const handleLoginSubmit = async (e) => {
-        e.preventDefault();
+      e.preventDefault();
 
-        const userData = { email: loginEmail, password: loginPassword };
-    
-        try {
-            const response = await fetch("http://localhost:8082/user/login", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(userData),
-              });
-    
-          const data = response.json();
-    
-          if (response.ok){
-            window.alert("Login Successful!");
-            window.location.href = "/"; 
-          }
-          else{
-            window.alert("Invalid Credentials. Please Try Again!");
-            console.log(data.error);
-          }
+      const userData = { email: loginEmail, password: loginPassword };
+  
+      try {
+          const response = await fetch("http://localhost:8082/user/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(userData),
+            });
+  
+        const data = await response.json();
+  
+        if (response.ok){
+          const userObj = {name:data.name, email:loginEmail, token:data.token};
+          Cookies.set('user', JSON.stringify(userObj),{expires:7}) // sets cookies; expires in 7 days
+          setUser(userObj)
+          setAlertMessage("Login Successful!");
+          setTimeout(()=>{
+            setAlertMessage('');
+          },2000);
+          window.location.href = "/dashboard"; 
+        }
+        else{
+          window.alert("Invalid Credentials. Please Try Again!");
+          console.log(data.error);
+        }
+    }
+    catch(error){
+      window.alert("Error!!!")
+      console.log(error.message)
+    }
+  }
+  const capitalizeName = (name) => {
+    return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+};
+
+  const handleRegisterSubmit = async (e) => {
+      e.preventDefault();
+  
+      const capitalizedName = capitalizeName(name);
+      const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer};
+
+  
+      try {
+        const response = await fetch("http://localhost:8082/user/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userData),
+        });
+  
+        const data = await response.json();
+  
+        if (response.ok) {
+          window.alert("User registered successfully!");
+          window.location.reload();
+        } else {
+          window.alert( data.error||"Something went wrong!");
+          console.log(data.error);
+        }
+      } catch (error) {
+        window.alert("Error: " + error.message);
       }
-      catch(error){
-        window.alert("Error!!!")
-        console.log(error.message)
-      }
+    
+  }
+    
+     const handleAccountType =(e) =>{
+
+      const type = e.target.value;
+      // Reset all role states
+      setIsAuthor(false);
+      setIsEditor(false);
+      setIsReviewer(false);
+      setIsPublic(false);
+
+      // Set the selected role
+      if (type === "author") setIsAuthor(true);
+      else if (type === "editor") setIsEditor(true);
+      else if (type === "reviewer") setIsReviewer(true);
+      else if (type === "public") setIsPublic(true);
+      
+
     }
 
-
-    const handleRegisterSubmit = async (e) => {
-        e.preventDefault();
     
-        const userData = { name, email, password, isAuthor, isEditor, isReviewer};
-
-    
-        try {
-          const response = await fetch("http://localhost:8082/user/register", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(userData),
-          });
-    
-          const data = await response.json();
-    
-          if (response.ok) {
-            window.alert("User registered successfully!");
-            window.location.reload();
-          } else {
-            window.alert( data.error||"Something went wrong!");
-            console.log(data.error);
-          }
-        } catch (error) {
-          window.alert("Error: " + error.message);
-        }
-      
-      };
-    
-      const handleAccountType =(e) =>{
-
-        const type = e.target.value;
-        // Reset all role states
-        setIsAuthor(false);
-        setIsEditor(false);
-        setIsReviewer(false);
-
-        // Set the selected role
-        if (type === "author") setIsAuthor(true);
-        else if (type === "editor") setIsEditor(true);
-        else if (type === "reviewer") setIsReviewer(true);
-        
-
-      };
-
     return (
           <div>
+            
             <header>
               <NavBar isLoggedIn = {false}/>
             </header>
            
+            {alertMessage && (
+                  <div className={styles.alert}>
+                    {alertMessage}
+                  </div>
+                )}
             
             <div className={styles.accounts}>   
                 {/* Login Form */}
@@ -134,6 +157,7 @@ const LoginPage = () => {
                         <label htmlFor="account-type">Account Type:</label>
                         <select name="account_type" id="account-type" onChange={(handleAccountType)}required>
                             <option value="none">Select Account Type</option>
+                            <option value="public">Personal</option>
                             <option value="author">Author</option>
                             <option value="editor">Editor</option>
                             <option value="reviewer" >Reviewer</option>
