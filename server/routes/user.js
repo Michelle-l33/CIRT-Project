@@ -8,8 +8,10 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   try {
     const { name, email, password,isPublic, isAuthor, isEditor, isReviewer } = req.body;
+
+    const lowerEmail = email.toLowerCase();
     
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email:lowerEmail });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already registered." });
     }
@@ -17,7 +19,7 @@ router.post("/register", async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ name, email, password: hashedPassword,isPublic, isAuthor, isEditor, isReviewer });
+    const newUser = new User({ name, email:lowerEmail, password: hashedPassword,isPublic, isAuthor, isEditor, isReviewer });
     await newUser.save();
     
     res.status(201).json({ message: "User registered successfully!" });
@@ -29,9 +31,10 @@ router.post("/register", async (req, res) => {
 router.post('/login', async (req, res) => {
     try {
       const { email, password } = req.body;
+      const lowerEmail = email.toLowerCase();
   
       // Find user by email
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ email: lowerEmail });
       if (!user) {
         return res.status(404).json({ message: 'User not found.' });
       }
