@@ -1,4 +1,4 @@
-// the whole design is from https://www.youtube.com/watch?v=D88K1esxwuo&t=98s
+//the whole design is from https://www.youtube.com/watch?v=D88K1esxwuo&t=98s
 import styles from './Dashboard.module.css'
 
 import Sidebar from './Sidebar';

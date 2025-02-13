@@ -1,15 +1,34 @@
 import { Outlet, Link, useLocation } from 'react-router-dom';
 import styles from './MainContentEditor.module.css';
 
+import { BiTask } from "react-icons/bi";
 
-// all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
+import { useContext } from 'react';
+import { dashBoardContext } from './Dashboard';
+
+//all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
+
+const taskListToBeComplete = [
+    {
+        title: "Look at reviews",
+        description: "You need to look at the reviewsssss"
+    },
+
+    {
+        title: "Resubmit",
+        description: "You need to Resubmitttttttttt"
+    },
+];
 
 const MainContentEditor = () => {
 
     const location = useLocation();
 
+    const { isClose } = useContext(dashBoardContext);
+
+    const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     return (
-        <div className = {styles.mainContent}>
+        <div className = {mainContentClass}>
             <main>
 
                 <div className = {styles.header}>
@@ -27,7 +46,21 @@ const MainContentEditor = () => {
                     <Outlet />
                 </div>
                 
+                <div className = {styles.taskListEd}>
+                    <h2>Task</h2>
 
+                    <ul className = {styles.taskList}>
+                        {taskListToBeComplete.map((task, idx) =>
+                            <li key = {idx}>
+                                <div className = {styles.taskTitle}>
+                                    <BiTask />
+                                    <p>{task.title}</p>
+                                </div>
+                                <p>{task.description}</p>
+                            </li>
+                        )}
+                    </ul>
+                </div>
             </main>
         </div>
     );

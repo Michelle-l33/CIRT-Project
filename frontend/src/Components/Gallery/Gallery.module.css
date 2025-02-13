@@ -51,7 +51,6 @@
     background-color: var(--primary);
 }
 
-
 .bigPictureContainer {
     display: flex;
     position: relative;
@@ -75,7 +74,7 @@
     justify-content: flex-start;
     align-items: flex-start;
     gap: 15px;
-    background-color: rgb(255, 240, 240);
+    background-color: #FFEDFA;
     z-index: 5;
     opacity: 0;
     transition: opacity 0.3s ease, width 0.3s ease;;
@@ -110,8 +109,8 @@
 
 .description h3 {
     margin: 5px 0 5px 0;
-	color: #343434;
-	font-weight: normal;
+	color: #DE3163;
+	font-weight: 600;
 	font-size: clamp(1.2rem, 2vw, 1.6rem);
 	line-height: 40px;
 	font-family: 'Orienta', sans-serif;
@@ -128,11 +127,12 @@
 	font-family: 'Orienta', sans-serif;
 	letter-spacing: 1px;
 	font-style: italic;
-    background: #f4d8d8ad;
+    background: #ccdf92bb;
     padding: 10px;
     border-radius: 20px;
     overflow-y: auto;
     max-height: 70%;
+    box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px;
 }
 
 .imgContainer {
@@ -198,10 +198,11 @@
     background: transparent;
     border: 1px solid var(--primary);
     outline: none;
-    transition: 1s ease-in-out;
+    transition: all 1s ease;
     border-radius: 50%;
     position: absolute;
     cursor: pointer;
+    text-align: center;
 }
 
 .bigPictureContainer .description + .button{
@@ -304,4 +305,9 @@
 
 .mobile .description p {
     background: rgba(100, 99, 99, 0.192);
+}
+
+.mobile .button{
+    width: 40px;
+    height: 40px;
 }

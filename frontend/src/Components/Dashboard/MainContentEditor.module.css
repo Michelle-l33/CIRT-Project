@@ -5,7 +5,6 @@
     transition: all 0.3s ease;
 }
 
-
 .mainContent main {
     width: 100%;
     padding: 36px 24px;
@@ -19,6 +18,81 @@
     color: var(--dark);
 }
 
+/* .mainContent .taskListEd {
+    border: 7px solid;
+    border-color: var(--primary) var(--light-primary) var(--light-primary) var(--primary);
+} */
+
+.mainContent .taskListEd h2 {
+    display: block;
+    font-size: 30px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: var(--dark-grey) 0px 20px 10px -10px;
+    border-bottom: 2px solid var(--dark-grey);
+    border-radius: 10px;
+    margin-bottom: 45px;
+    color: var(--dark);
+}
+
+.mainContent main .taskListEd{
+    width: 100%;
+    max-height: 50vh;
+    overflow-y: auto;
+    background-color: var(--light);
+    border-radius: 15px;
+    margin: 30px 0;
+}
+
+.mainContent main .taskListEd li{
+    width: 100%;
+    margin-bottom: 16px;
+    background: var(--dark-grey);
+    padding: 14px 10px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    position: relative;
+    backdrop-filter: brightness(1.9);
+}
+  
+.mainContent main .taskListEd li::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    border-radius: 10px;
+    background: var(--transparent-light);
+  }
+  
+
+.mainContent main .taskListEd li .taskTitle{
+    display: flex;
+    align-items: center;
+    width: 35%;
+}
+
+.mainContent main .taskListEd li .taskTitle p{
+    margin-left: 6px;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.mainContent main .taskListEd li svg{
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  color: #D2122E;
+}
+
+.mainContent main .taskListEd li .taskTitle + p {
+    color: var(--dark);
+}
+
 .mainContent .tabNav {
     display: flex;
     justify-content: space-around;
@@ -28,6 +102,7 @@
     padding: 10px 20px; 
     border-bottom: 2px solid var(--dark);
     border-radius: 10px;
+    flex-wrap: wrap;
 }
 
 .mainContent .tabNav a {
@@ -49,7 +124,6 @@
     font-weight: bold;
 }
 
-
 .mainContent .tab .tabHeader {
     display: flex;
     background-color: var(--dark-grey);
@@ -58,6 +132,7 @@
     border-radius: 10px;
     margin: 10px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .mainContent .tab .tabHeader h3 {
@@ -135,6 +210,8 @@
     display: grid;
     grid-auto-rows: auto;
     row-gap: 16px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 
 .mainContent .submissionList .submission {
@@ -144,6 +221,8 @@
     background-color: var(--grey);
     color: var(--dark);
     border-radius: 5px;
+    position: relative;
+    width: 100%;
 }
 
 .mainContent .submissionList .submission svg {
@@ -164,7 +243,7 @@
     align-items: center;
     border: 1px solid black;
     padding: 5px;
-    margin-right: 10%;
+    margin-right: calc(10% - 25px);
     border-radius: 36px;
     width: 15%;
 }
@@ -192,3 +271,86 @@
     color: var(--warning);
     border-color: var(--warning);
 }
+
+.mainContent .submissionList .submission .submissionStatus + svg {
+    position: relative;
+    border-radius: 50%;
+}
+
+.mainContent .submissionList .submission .submissionStatus + svg:hover {
+    background-color: var(--dark-grey);
+}
+
+.mainContent .submissionList .submission .submissionOption {
+    flex-direction: column;
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    z-index: 3;
+    border: 1px solid var(--dark);
+    background-color: var(--dark-grey);
+    padding: 5px;
+    gap: 5px;
+    border-radius: 10px;
+    color: var(--dark);
+    display: none;
+    grid-template-columns: minmax(100px, fit-content);
+}
+
+.mainContent .submissionList .submission .submissionOption.show {
+    display: grid;
+}
+
+.mainContent .submissionList .submission .submissionOption * {
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--light);
+}
+
+.mainContent .submissionList .submission .submissionOption *:hover {
+    background-color: var(--dark-grey);
+}
+
+
+/* this part is for dealing with small width */
+.mainContent.close {
+    width: calc(100% - 60px);
+    left: 60px;
+    height: fit-content;
+}
+
+.mainContent.close .tabNav * {
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent.close .tab .tabHeader {
+    overflow-x: auto;
+}
+
+.mainContent.close .submissionList .submission{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-wrap: wrap;
+    padding: 8px;
+    gap: 10px;
+}
+
+.mainContent.close .submissionDes {
+    flex: 1;
+    min-width: 120px;
+    word-wrap: break-word;
+}
+
+.mainContent.close .submissionList .submission .submissionStatus {
+    min-width: 100px;
+    max-width: 30%;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+

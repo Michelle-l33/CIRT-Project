@@ -3,6 +3,8 @@ import { FaRegCircle } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GiFrozenRing } from "react-icons/gi";
 
+import { useState, useEffect, useRef } from 'react';
+
 const getStepStatus = (currentStep) => {
     switch(currentStep) {
         case 1:
@@ -33,14 +35,40 @@ const getStepStatus = (currentStep) => {
     }
 }
 
-const Submission = ({submission}) => {
+//detecting click anywhere https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
+function useOutsideAlerter(ref, setOptionClicked) {
+    useEffect(() => {
+      function handleClickOutside(event) {
+        if (ref.current && !ref.current.contains(event.target)) {
+            setOptionClicked(false);
+        }
+      }
+      document.addEventListener("click", handleClickOutside);
+      return () => {
+        document.removeEventListener("click", handleClickOutside);
+      };
+    }, [ref]);
+  }
 
+const Submission = ({submission}) => {
+    
     const { stepTitle, statusClass } = getStepStatus(submission.currentStep);
+
+    const [isOptionClicked, setOptionClicked] = useState(false);
+
+    const handleOptionClick = () => {
+        setOptionClicked(!isOptionClicked);
+    }
+
+    const dropdownRef = useRef(null);
+
+    useOutsideAlerter(dropdownRef, setOptionClicked);
 
     return (
         <div className = {styles.submission}>
 
             <GiFrozenRing />
+
             <div className = {styles.submissionDes}>
                 <h4>{submission.author}</h4>
                 <p>{submission.title}</p>
@@ -51,8 +79,12 @@ const Submission = ({submission}) => {
                   
                 <span>{stepTitle}</span>
             </div>
-                <CiMenuKebab />
-      
+            
+            <CiMenuKebab ref = {dropdownRef} onClick = {handleOptionClick}/>
+            <div  className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
+                <span>Option 1</span>
+                <span>Assign a reviewer</span>
+            </div>
         </div>
     );
 };

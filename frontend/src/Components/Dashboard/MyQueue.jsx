@@ -26,7 +26,42 @@ const listOfSubmissions = [
     author: "Bibi",
     title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
     currentStep: 4,
-  }
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 4,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 1,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 4,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 3,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 2,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 4,
+  },
+  {
+    author: "Bibi",
+    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+    currentStep: 3,
+  },
 ]
 
 
