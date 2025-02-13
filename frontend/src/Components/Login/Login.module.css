@@ -129,3 +129,16 @@ accounts > input:focus, select:focus {
     font-size: 24px;
     font-weight: 700;
 } */
+.passwordRequirements {
+    margin-top: 10px;
+    font-size: 0.9em;
+}
+
+.passwordRequirements ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.passwordRequirements li {
+    margin: 5px 0;
+}
