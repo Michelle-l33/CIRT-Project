@@ -11,6 +11,11 @@
     background-color: var(--light);
     border-radius: 15px;
     margin: 30px 0;
+    box-shadow: var(--transparent-dark) 0px 30px 50px -30px, rgba(0, 0, 0, 0.152) 0px 20px 30px -40px;
+}
+
+.taskListEd .taskList {
+    padding-bottom: 35px;
 }
 
 .taskListEd h2 {

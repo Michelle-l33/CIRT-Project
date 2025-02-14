@@ -4,7 +4,7 @@ import { useUser } from '../../Login/UserContext';
 
 import { RiDashboardHorizontalLine } from "react-icons/ri";
 import { GrDocument } from "react-icons/gr";
-import { LuMessageSquareMore } from "react-icons/lu";
+import { FaTasks } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
@@ -20,7 +20,7 @@ const Sidebar = ({ isEditor, isAuthor }) => {
     const location = useLocation();
 
     const listOfEditorIcons = [
-        {Name: "Task", iconComponent: LuMessageSquareMore, url: "Task"},
+        {Name: "Task", iconComponent: FaTasks, url: "Task"},
         {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
         {Name: "Document", iconComponent: GrDocument, url: "DocumentTab"},
         {Name: "User", iconComponent: FaRegUser, url: "#"},

@@ -1,0 +1,1 @@
+import styles from './SubmissionRecord.module.css';

@@ -56,10 +56,6 @@ const Submission = ({submission}) => {
 
     const [isOptionClicked, setOptionClicked] = useState(false);
 
-    const handleOptionClick = () => {
-        setOptionClicked(!isOptionClicked);
-    }
-
     const dropdownRef = useRef(null);
 
     useOutsideAlerter(dropdownRef, setOptionClicked);
@@ -80,7 +76,7 @@ const Submission = ({submission}) => {
                 <span>{stepTitle}</span>
             </div>
             
-            <CiMenuKebab ref = {dropdownRef} onClick = {handleOptionClick}/>
+            <CiMenuKebab ref = {dropdownRef} onClick = {() => setOptionClicked(!isOptionClicked)}/>
             <div  className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
                 <span>Option 1</span>
                 <span>Assign a reviewer</span>

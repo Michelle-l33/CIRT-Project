@@ -1,4 +1,3 @@
-
 .tabNav {
     display: flex;
     justify-content: space-around;
@@ -152,6 +151,13 @@
     margin-right: calc(10% - 25px);
     border-radius: 36px;
     width: 15%;
+    min-width: 135px;
+}
+
+.submissionList .submission .submissionStatus svg {
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
 }
 
 .submissionList .submission .submissionStatus.submitted {
@@ -217,6 +223,7 @@
     background-color: var(--dark-grey);
 }
 
+
 /* this part is for dealing with small width */
 .tabNavContainer.close {
     width: calc(100% - 60px);
@@ -233,7 +240,7 @@
     overflow-x: auto;
 }
 
-.tabNavContainer.close .submissionList .submission{
+.tabNavContainer.close .submissionList .submission {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -255,4 +262,7 @@
     padding: 5px;
     font-size: 0.9rem;
     flex-shrink: 0;
+}
+.tabNavContainer.close .submissionList .submission .submissionStatus svg {
+    display: none;
 }

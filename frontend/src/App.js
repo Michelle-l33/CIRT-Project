@@ -11,7 +11,7 @@ import SubmissionAuthor from './Components/SubmissionAuthor/SubmissionAuthor';
 import { UserProvider } from './Components/Login/UserContext';
 
 import TabNav from './Components/Dashboard/TabNav/TabNav';
-import Task from './Components/Dashboard/Task/Task';
+import Task from './Components/Dashboard/Task/TaskList';
 import SubmissionRecord from './Components/Dashboard/SubmissionRecord/SubmissionRecord';
 import MainContentAuthor from './Components/Dashboard/MainContentAuthor';
 import MainContentEditor from './Components/Dashboard/MainContentEditor';
