@@ -1,7 +1,7 @@
 :root {
   --light: #f6f6f9;
   --primary: #d0012b;
-  --light-primary:#FF3131;
+  --light-primary:#ff313167;
   --grey: #eee;
   --dark-grey: #939292;
   --dark: #363949;
@@ -15,7 +15,7 @@
   --light-blue: #CFE8FF;
   --orange: #FD7E14;
   --light-orange: #fddfc3e9;
-  --transparent-light: #ffffff66;
+  --transparent-light: #ffffffb1;
 }
 
 a:-webkit-any-link {

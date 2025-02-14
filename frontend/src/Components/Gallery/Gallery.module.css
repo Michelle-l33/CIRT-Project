@@ -95,16 +95,16 @@
     overflow-y: auto;
 }
 
-/* text styling takrn from https://tympanus.net/codrops/2012/11/02/heading-set-styling-with-css/ */
+/* text styling taken from https://tympanus.net/codrops/2012/11/02/heading-set-styling-with-css/ */
 .description h2 {
     margin: 20px 0 20px 0;
-	color: #343434;
+	color: #B03052;
 	font-weight: normal;
 	font-family: 'Ultra', sans-serif;   
 	font-size: clamp(1.5rem, 2.5vw, 2rem);
 	line-height: 42px;
 	text-transform: uppercase;
-	text-shadow: 0 2px white, 0 3px #777;
+	text-shadow: 0 2px #D76C82, 0 3px #7763631a;
 }
 
 .description h3 {

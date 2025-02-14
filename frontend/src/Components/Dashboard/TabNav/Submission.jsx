@@ -1,4 +1,4 @@
-import styles from './MainContentEditor.module.css';
+import styles from './TabNav.module.css';
 import { FaRegCircle } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GiFrozenRing } from "react-icons/gi";

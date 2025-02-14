@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.css'
 import { Link, useLocation } from "react-router-dom";
-import { useUser } from '../Login/UserContext';
+import { useUser } from '../../Login/UserContext';
 
 import { RiDashboardHorizontalLine } from "react-icons/ri";
 import { GrDocument } from "react-icons/gr";
@@ -10,7 +10,7 @@ import { MdOutlineSettings } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 
-import { dashBoardContext } from './Dashboard';
+import { dashBoardContext } from '../Dashboard';
 import { useContext } from 'react';
 
 
@@ -20,9 +20,9 @@ const Sidebar = ({ isEditor, isAuthor }) => {
     const location = useLocation();
 
     const listOfEditorIcons = [
-        {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
-        {Name: "Document", iconComponent: GrDocument, url: "#"},
         {Name: "Task", iconComponent: LuMessageSquareMore, url: "Task"},
+        {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
+        {Name: "Document", iconComponent: GrDocument, url: "DocumentTab"},
         {Name: "User", iconComponent: FaRegUser, url: "#"},
         {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
     ]

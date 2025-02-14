@@ -1,4 +1,4 @@
-import styles from './MainContentEditor.module.css';
+import styles from './Task.module.css';
 
 import { BiTask } from "react-icons/bi";
 
