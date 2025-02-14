@@ -9,7 +9,7 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
 import { BiTask } from "react-icons/bi";
 
-import TrackBar from "./TrackBar";
+import TrackBar from "./TrackBar/TrackBar";
 
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext } from 'react';
@@ -101,7 +101,7 @@ const MainContentAuthor = () => {
 
                 <div className = {styles.bottomData}>
                     <div className = {styles.trachBarContainer}>
-                        <TrackBar currentStep = {3} />
+                        <TrackBar currentStep = {2} />
                     </div>
 
 

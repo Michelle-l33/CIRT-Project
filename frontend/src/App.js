@@ -10,15 +10,16 @@ import SubmissionReview from './Components/SubmissionReview/SubmissionReview';
 import SubmissionAuthor from './Components/SubmissionAuthor/SubmissionAuthor';
 import { UserProvider } from './Components/Login/UserContext';
 
-import TabNav from './Components/Dashboard/EditorTabNav';
-import Task from './Components/Dashboard/EditorTask';
+import TabNav from './Components/Dashboard/TabNav/TabNav';
+import Task from './Components/Dashboard/Task/Task';
+import SubmissionRecord from './Components/Dashboard/SubmissionRecord/SubmissionRecord';
 import MainContentAuthor from './Components/Dashboard/MainContentAuthor';
 import MainContentEditor from './Components/Dashboard/MainContentEditor';
 
-import MyQueue from './Components/Dashboard/MyQueue';
-import AllActive from './Components/Dashboard/AllActive';
-import Unassigned from './Components/Dashboard/Unassigned';
-import Archives from './Components/Dashboard/Archives';
+import MyQueue from './Components/Dashboard/TabNav/MyQueue';
+import AllActive from './Components/Dashboard/TabNav/AllActive';
+import Unassigned from './Components/Dashboard/TabNav/Unassigned';
+import Archives from './Components/Dashboard/TabNav/Archives';
 
 const isEditor = true;
 const isAuthor = false;
@@ -54,12 +55,14 @@ function App() {
                               isAuthor={isAuthor} 
                             />}>
             <Route path="TabNav" element={<TabNav />}>
+              <Route index element={<Navigate to="MyQueue" replace />}  />
               <Route path="MyQueue" element={<MyQueue />} />
               <Route path="AllActive" element={<AllActive />} />
               <Route path="Unassigned" element={<Unassigned />} />
               <Route path="Archives" element={<Archives />} />
             </Route>
             <Route path="Task" element={<Task />} />
+            <Route path="DocumentTab" element={<SubmissionRecord />} />
           </Route>
           
         </Routes>

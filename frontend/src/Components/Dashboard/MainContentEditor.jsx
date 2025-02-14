@@ -1,6 +1,6 @@
 import styles from './MainContentEditor.module.css';
 
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 
 import { useContext } from 'react';
@@ -19,7 +19,7 @@ const MainContentEditor = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <Link to = "/Dashboard"><h1>Dashboard Editor - A work In Progress</h1></Link>                       
+                    <h1>Dashboard Editor - A work In Progress</h1>                
                 </div>
 
                 <div className={styles.content}>

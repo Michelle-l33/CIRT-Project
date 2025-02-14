@@ -1,0 +1,258 @@
+
+.tabNav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 10px; 
+    background-color: var(--light);
+    padding: 10px 20px; 
+    border-bottom: 2px solid var(--dark);
+    border-radius: 10px;
+    flex-wrap: wrap;
+}
+
+.tabNav a {
+    padding: 15px;
+    border-radius: 8px;
+    transition: background 0.3s ease;
+    font-size: 1rem;
+    color: var(--dark);
+}
+
+.tabNav a:hover {
+    background-color: var(--grey);
+}
+
+.tabNav .tabActive,
+.tabNav .tabActive:hover{
+    background-color: var(--primary);
+    color: var(--light);
+    font-weight: bold;
+}
+
+.tab .tabHeader {
+    display: flex;
+    background-color: var(--dark-grey);
+    color: var(--light);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tab .tabHeader h3 {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.tab .tabHeader .left {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+.tab .tabHeader .left form{
+    max-width: 400px;
+}
+
+.tab .tabHeader .left .formInput {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.tab .tabHeader .left .formInput input{
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    border: none;
+    background: var(--grey);
+    border-radius: 36px 0 0 36px;
+    outline: none;
+    width: 100%;
+    color: var(--dark);
+}
+
+.tab .tabHeader .left .formInput button{
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 0 36px 36px 0;
+    cursor: pointer;
+}
+
+.tab .tabHeader button {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+    padding: 3px;
+}
+
+.tab .tabHeader button:hover {
+    background: var(--light-grey);
+}
+
+.submissionList {
+    background-color: var(--light);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-grey);
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 16px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.submissionList .submission {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    background-color: var(--grey);
+    color: var(--dark);
+    border-radius: 5px;
+    position: relative;
+    width: 100%;
+}
+
+.submissionList .submission svg {
+    padding: 5px;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.submissionList .submission .submissionDes {
+    margin-left: 20px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.submissionList .submission .submissionStatus {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid black;
+    padding: 5px;
+    margin-right: calc(10% - 25px);
+    border-radius: 36px;
+    width: 15%;
+}
+
+.submissionList .submission .submissionStatus.submitted {
+    background: var(--light-orange);
+    color: var(--orange);
+    border-color: var(--orange);
+}
+
+.submissionList .submission .submissionStatus.underReview {
+    background: var(--light-blue);
+    color: var(--blue);
+    border-color: var(--blue);
+}
+
+.submissionList .submission .submissionStatus.reviewed {
+    background: var(--light-success);
+    color: var(--success);
+    border-color: var(--success);
+}
+
+.submissionList .submission .submissionStatus.accepted {
+    background: var(--light-warning);
+    color: var(--warning);
+    border-color: var(--warning);
+}
+
+.submissionList .submission .submissionStatus + svg {
+    position: relative;
+    border-radius: 50%;
+}
+
+.submissionList .submission .submissionStatus + svg:hover {
+    background-color: var(--dark-grey);
+}
+
+.submissionList .submission .submissionOption {
+    flex-direction: column;
+    position: absolute;
+    right: 3%;
+    top: 50%;
+    z-index: 3;
+    border: 1px solid var(--dark);
+    background-color: var(--dark-grey);
+    padding: 5px;
+    gap: 5px;
+    border-radius: 10px;
+    color: var(--dark);
+    display: none;
+    grid-template-columns: minmax(100px, fit-content);
+}
+
+.submissionList .submission .submissionOption.show {
+    display: grid;
+}
+
+.submissionList .submission .submissionOption * {
+    padding: 5px;
+    border-radius: 5px;
+    background: var(--light);
+}
+
+.submissionList .submission .submissionOption *:hover {
+    background-color: var(--dark-grey);
+}
+
+/* this part is for dealing with small width */
+.tabNavContainer.close {
+    width: calc(100% - 60px);
+    left: 60px;
+    height: fit-content;
+}
+
+.tabNavContainer.close .tabNav * {
+    width: 100%;
+    align-items: center;
+}
+
+.tabNavContainer.close .tab .tabHeader {
+    overflow-x: auto;
+}
+
+.tabNavContainer.close .submissionList .submission{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    text-wrap: wrap;
+    padding: 8px;
+    gap: 10px;
+}
+
+.tabNavContainer.close .submissionDes {
+    flex: 1;
+    min-width: 120px;
+    word-wrap: break-word;
+}
+
+.tabNavContainer.close .submissionList .submission .submissionStatus {
+    min-width: 100px;
+    max-width: 30%;
+    text-align: center;
+    padding: 5px;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}

@@ -1,4 +1,4 @@
-import styles from './MainContentEditor.module.css';
+import styles from './TabNav.module.css';
 
 import { BsSearchHeart } from "react-icons/bs";
 import { FiFilter } from "react-icons/fi";

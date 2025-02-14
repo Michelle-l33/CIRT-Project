@@ -25,8 +25,7 @@ const NavBar = ({isLoggedIn}) => {
             <div className = {styles.navLeft}>
                 <Link to="/"> 
                     <img src = {logo} alt = "Logo"/>
-                </Link>
-                
+                </Link>             
             </div>
 
             <div className = {styles.navRight}>
