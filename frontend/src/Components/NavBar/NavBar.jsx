@@ -32,7 +32,6 @@ const NavBar = ({isLoggedIn}) => {
             <div className = {styles.navRight}>
 
                 <Link to="/Login"> Login </Link>
-                {/* <a href = "/Login/Login.jsx"> Login </a> */}
             </div>
         </nav>
     );

@@ -98,6 +98,10 @@
     transition: all 0.3s ease;
 }
 
+.sideBar .sideMenu li a:hover {
+    color: #aae470;
+}
+
 .sideBar .sideMenu li.active a {
     color: var(--success);
 }

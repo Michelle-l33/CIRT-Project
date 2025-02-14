@@ -38,6 +38,7 @@
     font-weight: 600;
     color: var(--dark);
     margin-right: auto;
+    z-index: 1001;
 }
 
 .mainContent nav .notif {
@@ -69,7 +70,7 @@
     height: 36px;
     object-fit: cover;
     border-radius: 50%;
-    align-self:flex-end
+    align-self: flex-end;
 }
 
 .mainContent nav .themeToggle {

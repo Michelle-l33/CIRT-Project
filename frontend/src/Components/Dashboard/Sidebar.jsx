@@ -1,5 +1,5 @@
 import styles from './Sidebar.module.css'
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useUser } from '../Login/UserContext';
 
 import { RiDashboardHorizontalLine } from "react-icons/ri";
@@ -11,64 +11,47 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 
 import { dashBoardContext } from './Dashboard';
-import { useState, useContext } from 'react';
-
-const listOfIcon = [
-    {
-        Name: "Dashboard",
-        iconComponent: RiDashboardHorizontalLine,
-        url: "#"
-    },
-
-    {
-        Name: "Document",
-        iconComponent: GrDocument,
-        url: "#"
-    },
+import { useContext } from 'react';
 
 
-    {
-        Name: "Comment",
-        iconComponent: LuMessageSquareMore,
-        url: "#"
-    },
-
-    {
-        Name: "User",
-        iconComponent: FaRegUser,
-        url: "#"
-    },
-
-    {
-        Name: "Setting",
-        iconComponent: MdOutlineSettings,
-        url: "#"
-    },
-
-]
-
-
-
-const Sidebar = () => {
+const Sidebar = ({ isEditor, isAuthor }) => {
     const {handleLogout} = useUser();
-    const [hoverIdx, setHover] = useState(10000);
     const {isClose} = useContext(dashBoardContext);
+    const location = useLocation();
 
-    const handleHover = (idx) => {
-        setHover(idx);
+    const listOfEditorIcons = [
+        {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
+        {Name: "Document", iconComponent: GrDocument, url: "#"},
+        {Name: "Task", iconComponent: LuMessageSquareMore, url: "Task"},
+        {Name: "User", iconComponent: FaRegUser, url: "#"},
+        {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
+    ]
+
+    const listOfAuthorIcons = [
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Author" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Author/User" },
+        { Name: "Settings", iconComponent: MdOutlineSettings, url: "/Author/Settings" },
+    ];
+
+    let listOfIcon;
+
+    if (isAuthor) {
+        listOfIcon = listOfAuthorIcons;
+    } else if (isEditor) {
+        listOfIcon = listOfEditorIcons;
+    } else {
+        listOfIcon = [];
     }
 
-    const handleLeave = () => {
-        setHover(10000);
-    }
+    const isLocation = (url) => {
+        return location.pathname.includes(url) || location.pathname === url;
+    };
 
-    function CreateMenu () {
+    const CreateMenu =({listOfIcon}) => {
 
         const optionMenu = listOfIcon.map((icon, idx) =>
             <li key = {idx}
-                onMouseOver = {() => handleHover(idx)}
-                onMouseLeave = {() => handleLeave(idx)}
-                className = {`${ hoverIdx === idx ? styles.active : ''}`}>
+                className = {`${isLocation(icon.url) ? styles.active : ''}`}>
                 <Link to = {icon.url}>
                     <icon.iconComponent />
                     {icon.Name}
@@ -88,7 +71,7 @@ const Sidebar = () => {
             </Link>
             
             <ul className ={styles.sideMenu}>
-                <CreateMenu />
+                <CreateMenu listOfIcon={listOfIcon}/>
             </ul>
 
             <ul className = {styles.sideMenu}>
@@ -101,10 +84,6 @@ const Sidebar = () => {
                     Logout
                     </a>
                 </li>
-                {/* <li><Link to = "#" className = {styles.logout}>
-                    <RiLogoutCircleLine />
-                    Logout
-                </Link></li> */}
             </ul>
 
         </div>
