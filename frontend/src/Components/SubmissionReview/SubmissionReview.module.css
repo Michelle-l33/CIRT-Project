@@ -1,0 +1,97 @@
+.bigContainer {
+    display: flex;
+}
+
+.pdfContainerLeft {
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    margin: 10px;
+    border: 5px solid black;
+}
+
+.pdfContainerLeft > * {
+    text-align: center;
+    align-items: center;
+    width: auto;
+}
+
+.rightContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    width: auto;
+    margin: 10px;
+    border: 5px solid black;
+}
+
+img {
+    width: 60%;
+    height: auto;
+}
+
+.submissionBox {
+    display: flex;
+    border: 2px solid black;
+    width: 150px;
+    align-items: center;
+    justify-content: right;
+    margin: 15px;
+}
+
+.submissionBox > * {
+    margin: 10px;
+    list-style: none;
+    padding: 0;
+}
+
+.contributorsContainer {
+    display: flex;
+    border: 2px solid black;
+    width: 150px;
+    align-items: center;
+    justify-content: center;
+    margin: 15px;
+
+}
+
+.commentsContainer {
+    display: flex;
+    justify-content: center; /* y axis */
+    align-items: flex-end; /* x axis */
+    flex-direction: column;
+    width: 20%;
+    margin: 10px;
+    border: 5px solid black;
+}
+
+.commentsContainer > h5 {
+    margin: 10px;
+    text-align: right;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+li {
+    margin: 3px;
+}
+
+p {
+    width: auto;
+    height: auto;
+    margin: 10px;
+}
+
+.fileUploadContainer {
+    height: auto;
+}
+
+.fileUploadContainer > p > span {
+    color: blue;
+    text-decoration: underline;
+}

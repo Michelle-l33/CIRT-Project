@@ -6,6 +6,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './Components/Home';
 import Login from './Components/Login/Login';
 import Dashboard from './Components/Dashboard/Dashboard';
+import SubmissionReview from './Components/SubmissionReview/SubmissionReview';
+import SubmissionAuthor from './Components/SubmissionAuthor/SubmissionAuthor';
 import { UserProvider } from './Components/Login/UserContext';
 //import NavBar from './Components/NavBar'
 
@@ -19,6 +21,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/SubmissionReview" element={<SubmissionReview />} />
+          <Route path="/SubmissionAuthor" element={<SubmissionAuthor />} />
         </Routes>
       </Router>
       </UserProvider>
