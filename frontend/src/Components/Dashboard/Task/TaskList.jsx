@@ -1,11 +1,11 @@
 import styles from './Task.module.css';
 
-import { BiTask } from "react-icons/bi";
+import Task from './Task';
 
 const taskListToBeComplete = [
     {
         title: "Look at reviews",
-        description: "You need to look at the reviewsssss"
+        description: "You need to look at the reviewsssss sjdb ashdba hasdbashdab sahdbasdhb sahdb"
     },
 
     {
@@ -14,8 +14,7 @@ const taskListToBeComplete = [
     },
 ];
 
-const TabNav = () => {
-
+const TaskList = () => {
     
     return(
         <div className = {styles.taskListEd}>
@@ -24,11 +23,7 @@ const TabNav = () => {
         <ul className = {styles.taskList}>
             {taskListToBeComplete.map((task, idx) =>
                 <li key = {idx}>
-                    <div className = {styles.taskTitle}>
-                        <BiTask />
-                        <p>{task.title}</p>
-                    </div>
-                    <p>{task.description}</p>
+                    <Task title = {task.title} description = {task.description}/>
                 </li>
             )}
         </ul>
@@ -36,4 +31,4 @@ const TabNav = () => {
     );
 }
 
-export default TabNav;
+export default TaskList;

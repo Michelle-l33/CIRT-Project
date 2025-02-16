@@ -154,39 +154,11 @@
     width: 100%;
     max-height: 50vh;
     overflow-y: auto;
-}
-
-.mainContent main .bottomData .reminders .taskList li{
-    width: 100%;
-    margin-bottom: 16px;
-    background: var(--grey);
-    padding: 14px 10px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
 }
 
-.mainContent main .bottomData .reminders .taskList li .taskTitle{
-    display: flex;
-    align-items: center;
-    width: 35%;
-}
-
-.mainContent main .bottomData .reminders .taskList li .taskTitle p{
-    margin-left: 6px;
-    font-weight: 500;
-    color: var(--dark);
-}
-
-.mainContent main .bottomData .reminders .taskList li svg{
-  cursor: pointer;
-  width: 25px;
-  height: 25px;
-  color: #D2122E;
-}
-
-.mainContent main .bottomData .reminders .taskList li .taskTitle + p {
-    color: var(--dark-grey);
+.mainContent main .bottomData .reminders .taskList li {
+    background-color: dark;
 }
 
 .mainContent.close{

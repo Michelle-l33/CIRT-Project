@@ -1,9 +1,3 @@
-
-/* .taskListEd {
-    border: 7px solid;
-    border-color: var(--primary) var(--light-primary) var(--light-primary) var(--primary);
-} */
-
 .taskListEd{
     width: 100%;
     max-height: 50vh;
@@ -30,51 +24,90 @@
     color: var(--dark);
 }
 
-.taskListEd li{
+.taskIncomplete {
     width: 100%;
     margin-bottom: 16px;
-    background: var(--dark-grey);
-    padding: 14px 10px;
+    background: var(--grey);
+    padding: 0 10px;
     border-radius: 10px;
-    display: flex;
-    align-items: center;
-    box-shadow: rgba(136, 165, 191, 0.48) 6px 2px 16px 0px, rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(1.1);
     position: relative;
-    backdrop-filter: brightness(1.9);
 }
 
-.taskListEd li::before {
+.taskIncomplete:before {
     content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: absolute; 
+    width: 10px;
     height: 100%;
-    z-index: -1;
-    border-radius: 10px;
-    background: var(--transparent-light);
-  }
-
-.taskListEd li .taskTitle{
-    display: flex;
-    align-items: center;
-    width: 35%;
+    left: 0;
+    border-radius: 10px 0 0 10px;
+    background-color: #d0012a74;
 }
 
-.taskListEd li .taskTitle p{
-    margin-left: 6px;
-    font-weight: 500;
+.taskIncomplete.complete:before {
+    background-color: #388e3c87;
+}
+
+.taskIncomplete .taskTitle {
+    display: grid;
+    grid-template-columns: 1fr 3fr 16fr;
+    padding: 15px 10px;
+    border-radius: 5px;
+    border-bottom: 1px dashed var(--dark);
+    align-items: center;
     color: var(--dark);
 }
 
-.taskListEd li svg{
-  cursor: pointer;
+.taskIncomplete .taskTitle svg {
+    transition: transform 1s ease;
+    margin-right: 3px;
+}
+
+.taskIncomplete.complete .taskTitle svg {
+    color: var(--success);
+}
+
+.taskTitle .taskDescription {
+    color: var(--dark);
+    padding-left: 10%;
+}
+
+.taskIncomplete .taskTitle svg{
   width: 25px;
   height: 25px;
-  color: #D2122E;
+  color: var(--primary);
 }
 
-.taskListEd li .taskTitle + p {
-    color: var(--dark);
+.taskIncomplete .taskButtons {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
 }
 
+.taskIncomplete .taskButtons * {
+    cursor: pointer;
+    padding: 3px 10px;
+    border: 0;
+    background: none;
+    background-blend-mode: overlay;
+    transition: all 0.3s ease-in-out;
+    position: relative;
+    color: var(--dark-grey);
+}
+
+
+.taskButtons *:hover {
+    color: var(--danger);
+    transition: color 0.3s ease;
+}
+
+.taskButtons button:not(:last-child)::after {
+    content: "";
+    width: 1px;
+    height: 100%;
+    background-color: var(--dark-grey);
+    position: absolute;
+    right: 0;
+    top: 0;
+}

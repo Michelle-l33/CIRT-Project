@@ -10,6 +10,7 @@ import { GrNotes } from "react-icons/gr";
 import { BiTask } from "react-icons/bi";
 
 import TrackBar from "./TrackBar/TrackBar";
+import Task from './Task/Task';
 
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext } from 'react';
@@ -26,22 +27,22 @@ const taskListToBeComplete = [
         description: "You need to Resubmitttttttttt"
     },
 
+    {
+        title: "Resubmit",
+        description: "You need to Resubmitttttttttt"
+    },
+
+    {
+        title: "Resubmit",
+        description: "You need to Resubmitttttttttt"
+    },
+
+    {
+        title: "Resubmit",
+        description: "You need to Resubmitttttttttt"
+    },
+
 ];
-
-
-const CreateReminder = ({taskListToBeComplete}) => {
-    const taskList = taskListToBeComplete.map((task, idx) =>
-        <li key = {idx}>
-            <div className = {styles.taskTitle}>
-                <BiTask />
-                <p>{task.title}</p>
-            </div>
-            <p>{task.description}</p>
-        </li>
-    )
-
-    return taskList;
-}
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
 function getDate() {
@@ -128,7 +129,11 @@ const MainContentAuthor = () => {
                         </div>
 
                         <ul className = {styles.taskList}>
-                            <CreateReminder taskListToBeComplete = {taskListToBeComplete}/>
+                            {taskListToBeComplete.map((task, idx) =>
+                                <li key = {idx}>
+                                    <Task title = {task.title} description = {task.description}/>
+                                </li>
+                            )}
                         </ul>                                  
                     </div>
 
