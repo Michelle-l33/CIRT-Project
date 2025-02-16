@@ -1,4 +1,9 @@
-.filesContainer .header {
+.docTabContainer {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+}
+
+.header {
     display: flex;
     justify-content: space-around;
     background-color: var(--light);
@@ -10,24 +15,24 @@
 }
 
 
-.filesContainer .header .left {
+.header .left {
     display: flex;
     align-items: center;
     height: 36px;
     gap: 15px;
 }
 
-.filesContainer .header .left form{
+.header .left form{
     max-width: 400px;
 }
 
-.filesContainer .header .left .formInput {
+.header .left .formInput {
     display: flex;
     align-items: center;
     height: 36px;
 }
 
-.filesContainer .header .left .formInput input{
+.header .left .formInput input{
     flex-grow: 1;
     padding: 0 16px;
     height: 100%;
@@ -39,7 +44,7 @@
     color: var(--dark);
 }
 
-.filesContainer .header .left .formInput button{
+.header .left .formInput button{
     width: 80px;
     height: 100%;
     display: flex;
@@ -54,7 +59,7 @@
     cursor: pointer;
 }
 
-.filesContainer .header button {
+.header button {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -66,7 +71,7 @@
     padding: 3px;
 }
 
-.filesContainer .header button:hover {
+.header button:hover {
     background: var(--light-grey);
 }
 
@@ -74,6 +79,8 @@
     display: grid;
     grid-auto-rows: auto;
     row-gap: 15px;
+    max-height: 45vh;
+    overflow-y: auto;
 }
 
 .listItem {
@@ -83,31 +90,55 @@
     background-color: var(--transparent-dark);
     border-radius: 3px;
     border-bottom: var(--transparent-light);
+    align-items: center;
 }
 
 .listItem * {
-    color: black
+    color: rgb(61, 53, 53);
 }
 
 .listItem button {
-    color: black;
-    background-color: var(--primary);
+    color: var(--primary);
+    background-color: var(--light-primary);
     border-radius: 3px;
     border: 1px solid var(--primary);
+    padding: 10px;
+    border-radius: 20px;
+    transition: all 0.7s ease;
 }
 
+.listItem button:hover {
+    color: var(--light);
+    background-color: var(--primary);
+}
 
 .contentList .listItem:nth-child(3n+1) {
-    background-color: #FFA27F;
-    border-color: #FFA27F;
+    background-color: #f9d6e7;
 }
 
 .contentList .listItem:nth-child(3n+2) {
-    background-color: #FFE8C5;
-    border-color: #FFE8C5;
+    background-color: #FFE4CF;
 }
   
 .contentList .listItem:nth-child(3n) {
-    background-color: #97BE5A;
-    border-color: #97BE5A;
+    background-color: #FFFDD7;
+}
+
+.contentList .listItem:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.statusContainer {
+    background-color: var(--light);
+    height: 30vh;
+}
+
+.statusContainer .statusAction {
+    display: flex;
+    flex-direction: column
+}
+
+.participateContainer {
+    background-color: var(--light);
+    height: 30vh;
 }

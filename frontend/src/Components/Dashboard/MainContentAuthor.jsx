@@ -25,7 +25,23 @@ const taskListToBeComplete = [
         title: "Resubmit",
         description: "You need to Resubmitttttttttt"
     },
+
 ];
+
+
+const CreateReminder = ({taskListToBeComplete}) => {
+    const taskList = taskListToBeComplete.map((task, idx) =>
+        <li key = {idx}>
+            <div className = {styles.taskTitle}>
+                <BiTask />
+                <p>{task.title}</p>
+            </div>
+            <p>{task.description}</p>
+        </li>
+    )
+
+    return taskList;
+}
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
 function getDate() {
@@ -112,15 +128,7 @@ const MainContentAuthor = () => {
                         </div>
 
                         <ul className = {styles.taskList}>
-                            {taskListToBeComplete.map((task, idx) =>
-                                <li key = {idx}>
-                                    <div className = {styles.taskTitle}>
-                                        <BiTask />
-                                        <p>{task.title}</p>
-                                    </div>
-                                    <p>{task.description}</p>
-                                </li>
-                            )}
+                            <CreateReminder taskListToBeComplete = {taskListToBeComplete}/>
                         </ul>                                  
                     </div>
 

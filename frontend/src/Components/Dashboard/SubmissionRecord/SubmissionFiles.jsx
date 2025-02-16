@@ -44,6 +44,18 @@ const SubmissionFiles = () => {
                     <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
                     <button>Download</button>
                 </li>
+
+                <li className = {styles.listItem}>
+                    <h4>Author's name</h4>
+                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
+                    <button>Download</button>
+                </li>
+
+                <li className = {styles.listItem}>
+                    <h4>Author's name</h4>
+                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
+                    <button>Download</button>
+                </li>
             </ul>
         </div>
     )
