@@ -6,7 +6,7 @@ const SubmissionParticipant = () => {
 
         <div className={styles.participateContainer}>
                 <div className = {styles.header}>
-                    <h3>Submission accepted for review</h3>
+                    <h3>Submission Participants</h3>
                     <button>Assign</button>
                 </div>
 

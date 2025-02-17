@@ -1,8 +1,27 @@
 import styles from './SubmissionRecord.module.css';
 
+import { Link } from "react-router-dom";
+
 import { BsSearchHeart } from "react-icons/bs";
 
+import { useContext } from 'react';
+import { sumissionContext } from './SubmissionRecord'
+
+const Submission = ({author, title, url}) => {
+    return (
+        <>
+            <h4>{author}</h4>
+            <Link to = {url}>
+                <p>{title}</p>
+            </Link>
+            <button>Download</button>
+        </>
+    );
+};
+
 const SubmissionFiles = () => {
+
+    const { currSubmission, setCurrSubmission, submissionList } = useContext(sumissionContext);
 
     return(
         <div className = {styles.filesContainer}>
@@ -21,41 +40,11 @@ const SubmissionFiles = () => {
             </div>
             
             <ul className = {styles.contentList}>
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
-
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
-
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
-
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
-
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
-
-                <li className = {styles.listItem}>
-                    <h4>Author's name</h4>
-                    <a href = "#"><p>Title: sbbdda sabd ashdb ashdb asdb</p></a>
-                    <button>Download</button>
-                </li>
+                {submissionList.map((submission, idx) =>
+                    <li key = {idx} className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} onClick = {() => setCurrSubmission(submission)}>
+                        <Submission author = {submission.author} title = {submission.title} url = {submission.url} />
+                    </li>
+                )}
             </ul>
         </div>
     )

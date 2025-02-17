@@ -10,6 +10,8 @@
 
 .taskListEd .taskList {
     padding-bottom: 35px;
+    display: grid;
+    row-gap: 20px;
 }
 
 .taskListEd h2 {

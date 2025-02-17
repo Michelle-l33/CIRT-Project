@@ -14,7 +14,6 @@
     color: var(--dark);
 }
 
-
 .header .left {
     display: flex;
     align-items: center;
@@ -81,6 +80,7 @@
     row-gap: 15px;
     max-height: 45vh;
     overflow-y: auto;
+    padding: 5px 0;
 }
 
 .listItem {
@@ -91,58 +91,6 @@
     border-radius: 3px;
     border-bottom: var(--transparent-light);
     align-items: center;
-}
-
-.filesContainer .listItem a {
-    color: var(--dark-grey);
-    position: relative;
-    transition: color 0.3s ease;
-    font-weight: 550;
-}
-
-.filesContainer .listItem a:before {
-    content: "";
-    position: absolute;
-    background-color: #24375457;
-    width: 100%;
-    height: 2px;
-    bottom: -3px;
-}
-
-.filesContainer .listItem a:after {
-    content: "";
-    position: absolute;
-    background-color: #233754;
-    left: 0;
-    bottom: -3px;
-    width: 100%;
-    height: 2px;
-    transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
-}
-
-.filesContainer .listItem a:hover {
-    color: #3b5360;
-}
-
-.filesContainer .listItem a:hover:after {
-    transform: scaleX(1);
-}
-
-.listItem button {
-    color: var(--primary);
-    background-color: var(--light-primary);
-    border-radius: 3px;
-    border: 1px solid var(--primary);
-    padding: 10px;
-    border-radius: 20px;
-    transition: all 0.7s ease;
-    cursor: pointer;
-}
-
-.listItem button:hover {
-    color: var(--light);
-    background-color: var(--primary);
 }
 
 .contentList .listItem:nth-child(3n+1) {
@@ -174,4 +122,211 @@
 .participateContainer {
     background-color: var(--light);
     height: 30vh;
+}
+
+
+/* this part is for styling for the submission files */
+
+.filesContainer .listItem {
+    z-index: 1;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    position: relative;
+}
+
+.filesContainer .listItem:hover, .filesContainer .listItem.active {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px var(--transparent-dark);
+    border: 5px inset var(--transparent-light);
+}
+
+.filesContainer .listItem.active {
+    padding: 15px;
+    opacity: 1;
+}
+
+.filesContainer .listItem:not(.active) {
+    opacity: 0.7;
+}
+
+.filesContainer .listItem:after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 3px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 10px 40px var(--light);
+}
+
+.filesContainer .listItem:active:after {
+    box-shadow: 0 0 0 0 var(--light);
+    opacity: 1;
+    transition: 0s;
+}
+
+.filesContainer .listItem button {
+    color: var(--primary);
+    background-color: var(--light-primary);
+    border-radius: 3px;
+    border: 1px solid var(--primary);
+    padding: 10px;
+    border-radius: 20px;
+    transition: all 0.7s ease;
+    cursor: pointer;
+    position: relative;
+    z-index: 2;
+}
+
+.filesContainer .listItem button:hover {
+    color: var(--light);
+    background-color: var(--primary);
+}
+
+.filesContainer .listItem a {
+    color: var(--dark-grey);
+    position: relative;
+    transition: color 0.3s ease;
+    font-weight: 550;
+    z-index: 2;
+}
+
+.filesContainer .listItem a:before {
+    content: "";
+    position: absolute;
+    background-color: #24375457;
+    width: 100%;
+    height: 2px;
+    bottom: -3px;
+}
+
+.filesContainer .listItem a:after {
+    content: "";
+    position: absolute;
+    background-color: #233754;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.filesContainer .listItem a:hover {
+    color: #3b5360;
+}
+
+.filesContainer .listItem a:hover:after {
+    transform: scaleX(1);
+}
+
+/* this part is for styling for the submission comments */
+
+.commentContainer .left button {
+    padding: 7px;
+    cursor: pointer;
+}
+
+.commentContainer .left button span {
+    position: relative;
+}
+
+.commentContainer .left button span::after {
+    content: "";
+    width: 95%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    background-color: var(--light);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+.commentContainer .left button:hover span::after {
+    left: 50%;
+    transform: scaleX(1) translate(-50%, -50%);
+}
+
+.commentContainer .left button:hover {
+    background-color: var(--light-primary);
+    color: var(--light);
+}
+
+.commentContainer .contentList {
+    padding: 10px 0;
+}
+
+.commentContainer .contentList .listItem {
+    background-color: var(--light);
+    color: var(--dark);
+    border-radius: 10px;
+    box-shadow: var(--grey) 0px 2px 5px 0px, var(--dark) 0px 1px 1px 0px;
+}
+
+.commentContainer .contentList .listItem {
+    display: grid;
+    row-gap: 5px;
+}
+
+.commentContainer .contentList .listItem span {
+    margin-left: auto;
+    align-items: center;
+    font-weight: 550;
+    padding: 10px;
+    position: relative;
+    z-index: 2;
+}
+
+.commentContainer .contentList .listItem span:after {
+    content: "";
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    border-radius: 5px 5px 5px 0;
+    clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.contentList .listItem:nth-child(3n+1) span:after {
+    background-color: #f9d6e77d;
+}
+
+.contentList .listItem:nth-child(3n+2) span:after {
+    background-color: #ffe4cf7b;
+}
+
+.contentList .listItem:nth-child(3n+3) span:after {
+    background-color: #fffdd796;
+}
+
+
+/* this part is for styling submission status */
+
+.statusContainer {
+    border-radius: 10px;
+}
+
+
+
+/* this part is for styling submission participant */
+
+.participateContainer {
+    border-radius: 10px;
+}
+
+.participateContainer .header {
+    border-radius: 10px 10px 3px 3px;
+}
+
+.participateContainer .participateList li {
+    display: grid;
+    grid-template-columns: 2fr 6fr 2fr;
+    text-align: center;
+    align-items: center;
 }

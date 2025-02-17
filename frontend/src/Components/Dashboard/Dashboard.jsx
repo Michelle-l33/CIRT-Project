@@ -20,6 +20,7 @@ const Dashboard = ({component, isEditor, isAuthor}) => {
         setChecked((prev) => !prev);
     };
 
+
     //this part is to handle window resizing
     //codes learn and copy from https://dev.to/musselmanth/re-rendering-react-components-at-breakpoint-window-resizes-a-better-way-4343
     const [isClose, setIsClose] = useState(window.innerWidth <= COLLAPSE_WIDTH);

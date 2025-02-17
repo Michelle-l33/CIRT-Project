@@ -7,7 +7,6 @@ import { MdUploadFile } from "react-icons/md";
 import { IoDocumentOutline } from "react-icons/io5";
 import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
-import { BiTask } from "react-icons/bi";
 
 import TrackBar from "./TrackBar/TrackBar";
 import Task from './Task/Task';
