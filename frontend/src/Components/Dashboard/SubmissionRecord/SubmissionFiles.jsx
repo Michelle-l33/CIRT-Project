@@ -42,6 +42,7 @@ const SubmissionFiles = () => {
             <ul className = {styles.contentList}>
                 {submissionList.map((submission, idx) =>
                     <li key = {idx} 
+                        // the title is a placeholder for id
                         className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} 
                         onClick = {() => setCurrSubmission(submission)}>
                         <Submission author = {submission.author} title = {submission.title} url = {submission.url} />

@@ -3,7 +3,7 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import Home from './Components/Home';
+import Home from './Components/HomePage/Home';
 import Login from './Components/Login/Login';
 import Dashboard from './Components/Dashboard/Dashboard';
 import SubmissionReview from './Components/SubmissionReview/SubmissionReview';
