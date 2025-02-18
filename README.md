@@ -28,6 +28,9 @@
 - Below are the main contributions each team member made to this project!
 
 ### Luigi - Front End
+- Login/Register Page
+- Submission & Reviewer Page
+- Focus on UX and UI
 
 ### Chris - Back End
 - Connecting Mongo database to project
