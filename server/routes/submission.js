@@ -2,13 +2,15 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/user");
 const Submission = require("../models/Submission");
+const authenticateUser = require("../middleware/authenticateUser"); // Add middleware
 const router = express.Router();
 
 
 // Upload Submission
 router.post("/upload", async (req, res) => {
   try {
-    const { authorID, title, firstName, lastName, document, isPoster, isArticle, abstract } = req.body;
+    const { title, firstName, lastName, document, isPoster, isArticle, abstract } = req.body;
+    const authorID = req.user._id;
 
     const newSubmission = new Submission({ authorID, title, firstName, lastName, document, isPoster, isArticle, abstract });
     await newSubmission.save();
@@ -23,7 +25,7 @@ router.post("/upload", async (req, res) => {
 // Get All posters
 router.get("/gallery", async (req, res) => {
   try {
-    const posters = await Submisison.find({isPoster:true}); //finds posters only
+    const posters = await Submission.find({isPoster:true}); //finds posters only
     res.json(posters);
   } catch (error) {
     res.status(500).json({ error: error.message });
