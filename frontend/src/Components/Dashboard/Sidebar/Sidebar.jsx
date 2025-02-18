@@ -14,7 +14,7 @@ import { dashBoardContext } from '../Dashboard';
 import { useContext } from 'react';
 
 
-const Sidebar = ({ isEditor, isAuthor }) => {
+const Sidebar = ( {isEditor, isAuthor} ) => {
     const {handleLogout} = useUser();
     const {isClose} = useContext(dashBoardContext);
     const location = useLocation();

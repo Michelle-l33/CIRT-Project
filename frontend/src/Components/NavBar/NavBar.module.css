@@ -47,7 +47,7 @@
 .navRight a {
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: button;
-    background-color: var(--light);
+    background-color: #f6f6f9;
     background-image: none;
     cursor: pointer;
     font-size: 100%;

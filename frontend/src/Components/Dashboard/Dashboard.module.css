@@ -8,6 +8,22 @@
 }
 
 .dashBoardContainer{
+    --light: #f6f6f9;
+    --grey: #eee;
+    --dark-grey: #939292;
+    --dark: #363949;
+    --danger: #6F42C1;
+    --light-danger: #BFA2E6;
+    --warning: #FBC02D;
+    --light-warning: #FFF2C6;
+    --success: #388E3C;
+    --light-success: #BBF7D0;
+    --blue: #1976D2;
+    --light-blue: #CFE8FF;
+    --orange: #FD7E14;
+    --light-orange: #fddfc3e9;
+    --transparent-light: #ffffffb1;
+    --transparent-dark: #00000013;
     background: var(--grey);
     overflow-x: hidden;
     min-height: 100vh;

@@ -28,6 +28,8 @@
 - Firebase Connection
 
 ### Hien - Front End
+- Working on the HomePage, and DashBoard
+- Working on some Routes
 
 ### Hanna - Front End/Documentation
 

@@ -12,7 +12,7 @@ export const sumissionContext = createContext(null);
 const SubmissionRecord = () => {
 
     const [ currSubmission, setCurrSubmission ] = useState(null);
-    const [submissionList, setSubmissionList] = useState([]);
+    const [ submissionList, setSubmissionList ] = useState([]);
 
     console.log(currSubmission)
     const submissionListTest = [
@@ -62,6 +62,7 @@ const SubmissionRecord = () => {
     
     useEffect(() => {
         setSubmissionList(submissionListTest);
+        console.log("take Effect")
     }, [])
 
     return(

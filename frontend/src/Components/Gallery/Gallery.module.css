@@ -231,7 +231,7 @@
     top: 10px;
     cursor: pointer;
     align-items: center;
-    background-image: linear-gradient(144deg,var(--primary), var(--light-primary),#a09797bb);
+    background-image: linear-gradient(144deg,var(--primary),#7763631a);
     border: 0;
     border-radius: 50%;
     box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
@@ -248,12 +248,12 @@
     touch-action: manipulation;
     white-space: nowrap;
     cursor: pointer;
-    box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+    box-shadow: #fcdaf2 0px 0px 0px 3px;
 }
 
 .closeButton:hover {
   outline: 0;
-  background-image: linear-gradient(144deg,#a09797bb, var(--light-primary), var(--primary));
+  background-image: linear-gradient(144deg,#7763631a, var(--primary));
 }
 
 

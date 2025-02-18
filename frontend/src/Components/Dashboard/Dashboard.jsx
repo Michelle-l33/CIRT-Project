@@ -40,6 +40,7 @@ const Dashboard = ({component, isEditor, isAuthor}) => {
             prevWidth.current = currWidth;
         }    
         window.addEventListener("resize", handleResize);
+        console.log("window resize")
         return () => window.removeEventListener("resize", handleResize)
     },[]);
     
