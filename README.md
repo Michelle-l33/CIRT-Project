@@ -42,6 +42,8 @@
 - Working on some Routes
 
 ### Hanna - Front End/Documentation
+- Footer, Home, and FAQ Pages
+- High-level Design Doc
 
 ### Michelle - Back End
 - Connecting Mongo database to project
