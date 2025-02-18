@@ -13,7 +13,7 @@
     - Setting up database and connecting to frontend
     - Creating top priority pages (home, dashboard, login/signup, gallery, submissions)
     - Ensuring functionality of mainly signing up, logging in, database storage/retrieval.
-    - Currently working on submission func. and connecting firebase to store pdfs.
+    - Currently working on submission func. and connecting firebase to store pdfs as well as building corresponding pages to display and interact with that.
 
 ## How To Test Using React:
 - open terminal
