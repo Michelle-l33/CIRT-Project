@@ -1,3 +1,5 @@
+/* Main Styles */
+
 .mainContent {
     position: relative;
     width: calc(100% - 230px);
@@ -164,4 +166,10 @@
 .mainContent.close{
     width: calc(100% - 60px);
     left: 60px;
+}
+
+/* Submission Pop Up Styles */
+
+.submissionPopUp {
+    display: none;
 }
