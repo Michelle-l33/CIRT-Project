@@ -32,18 +32,22 @@
 - Submission & Reviewer Page
 - Focus on UX and UI
 
-### Chris - Back End
-- Connecting Mongo database to project
-- Login Password Security
-- Firebase Connection
-
 ### Hien - Front End
 - Working on the HomePage, and DashBoard
 - Working on some Routes
 
 ### Hanna - Front End/Documentation
+- Footer, Home, and FAQ Pages
+- High-level Design Doc
+
+### Chris - Back End
+- Setting up frontend and backend frameworks
+- Connecting Mongo database to project
+- Login Password Security
+- Firebase Connection
 
 ### Michelle - Back End
+- Setting up frontend and backend frameworks
 - Connecting Mongo database to project
 - User & Submission Schemas and Routing
 - Login/Register/Logout Function
