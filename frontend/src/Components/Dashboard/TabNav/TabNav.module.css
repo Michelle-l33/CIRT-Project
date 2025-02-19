@@ -29,6 +29,7 @@
     font-weight: bold;
 }
 
+
 .tab .tabHeader {
     display: flex;
     background-color: var(--dark-grey);

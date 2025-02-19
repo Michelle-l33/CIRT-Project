@@ -141,7 +141,7 @@
 }
 
 .filesContainer .listItem.active {
-    padding: 15px;
+    padding: 25px 20px;
     opacity: 1;
     border-style: double;
     border-radius: 20px;

@@ -51,6 +51,7 @@ const Sidebar = ( {isEditor, isAuthor} ) => {
 
         const optionMenu = listOfIcon.map((icon, idx) =>
             <li key = {idx}
+                // I didn't know NavLink exist :(
                 className = {`${isLocation(icon.url) ? styles.active : ''}`}>
                 <Link to = {icon.url}>
                     <icon.iconComponent />
