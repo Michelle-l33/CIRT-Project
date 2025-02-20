@@ -11,9 +11,9 @@ const RedirectDashboard = () => {
     // const [isReviewer, setIsReviewer] = useState(false);
 
 
-    useEffect(() => {
+    useEffect(() => { // use effect makes sure user is rendered before acting on it
         if (user) {
-            console.log("User issss: ",user);
+            // console.log("User issss: ",user); // checks if user is loaded correctly
             if (user.isEditor) {
                 setIsEditor(true);
                 setIsAuthor(false);
