@@ -12,7 +12,11 @@ const COLLAPSE_WIDTH = 768;
 
 //Conditional routing and rendering taken from https://stackoverflow.com/questions/73700464/big-react-component-with-conditional-rendering-or-smaller-separate-components
 
-const Dashboard = ({component, isEditor, isAuthor}) => {
+const Dashboard = ({component}) => {
+
+    const isEditor = true;
+    const isAuthor = false;
+
 
     //this part is for changing dark and white theme
     const [isChecked, setChecked] = useState(false);  
@@ -40,7 +44,7 @@ const Dashboard = ({component, isEditor, isAuthor}) => {
             prevWidth.current = currWidth;
         }    
         window.addEventListener("resize", handleResize);
-        console.log("window resize")
+        
         return () => window.removeEventListener("resize", handleResize)
     },[]);
     
