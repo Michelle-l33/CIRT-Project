@@ -6,13 +6,13 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { UserProvider } from './Components/Login/UserContext';
 import ProtectedRoutes from './Components/Routing/ProtectedRoutes';
 import RedirectDashboard from './Components/Routing/DashboardRedirect';
+import DashboardRoutes from './Components/Routing/DashboardRoutes';
 
 import Home from './Components/HomePage/Home';
 import Login from './Components/Login/Login';
 import SubmissionReview from './Components/SubmissionReview/SubmissionReview';
 import SubmissionAuthor from './Components/SubmissionAuthor/SubmissionAuthor';
 
-import DashboardRoutes from './Components/Routing/DashboardRoutes';
 
 // import Dashboard from './Components/Dashboard/Dashboard';
 

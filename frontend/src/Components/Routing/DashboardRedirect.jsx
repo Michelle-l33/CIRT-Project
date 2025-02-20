@@ -1,14 +1,16 @@
 import { Navigate } from 'react-router-dom';
-// import { useUser } from '../../Login/UserContext';
+
+import { useUser } from '../Login/UserContext';
 
 const RedirectDashboard = () => {
-    // const { user } = useUser();
+    
+    const { user } = useUser();
 
-    // const isEditor = user.isEditor;
-    // const isAuthor = user.isAuthor
+    // if (!user) return <Navigate to="/" replace />;
 
-    const isAuthor = false;
-    const isEditor = true;
+    const isEditor = user.isEditor;
+    const isAuthor = user.isAuthor;
+
 
     if (isEditor) return <Navigate to="Editor" replace />;
     if (isAuthor) return <Navigate to="Author" replace />;
