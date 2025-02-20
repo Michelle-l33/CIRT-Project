@@ -56,9 +56,8 @@ const LoginPage = () => {
             const data = await response.json();
 
             if (response.ok) {
-                const userObj = { name: data.name, email: loginEmail, token: data.token };
-                Cookies.set('user', JSON.stringify(userObj), { expires: 7 }); // Sets cookies; expires in 7 days
-                setUser(userObj);
+                
+                Cookies.set('userID', data._id, { expires: 7, path: '/' }); // Sets cookies; expires in 7 days
                 setAlertMessage("Login Successful!");
                 setTimeout(() => {
                     setAlertMessage('');
