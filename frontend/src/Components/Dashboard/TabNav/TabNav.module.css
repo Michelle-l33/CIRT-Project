@@ -29,7 +29,6 @@
     font-weight: bold;
 }
 
-
 .tab .tabHeader {
     display: flex;
     background-color: var(--dark-grey);
@@ -106,6 +105,21 @@
 
 .tab .tabHeader button:hover {
     background: var(--light-grey);
+}
+
+.submissionOption {
+    position: absolute;
+    display: none;
+}
+
+.tabHeader .submissionOption {
+    width: 100px;
+    z-index: 4;
+    background-color: red;
+}
+
+.tabHeader .submissionOption.show {
+    display: block;
 }
 
 .submissionList {
@@ -196,8 +210,6 @@
 }
 
 .submissionList .submission .submissionOption {
-    flex-direction: column;
-    position: absolute;
     right: 3%;
     top: 50%;
     z-index: 3;
@@ -207,7 +219,6 @@
     gap: 5px;
     border-radius: 10px;
     color: var(--dark);
-    display: none;
     grid-template-columns: minmax(100px, fit-content);
 }
 

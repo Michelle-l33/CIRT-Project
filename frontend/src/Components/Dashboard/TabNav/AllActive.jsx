@@ -1,57 +1,47 @@
 import styles from './TabNav.module.css';
 
-import { BsSearchHeart } from "react-icons/bs";
-import { FiFilter } from "react-icons/fi";
-
+import TabHeader from './TabHeader';
 import Submission from "./Submission";
-const listOfSubmissions = [
-  {
-    author: "Ben",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 4,
-  },
-  {
-    author: "Bob",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 3,
-  },
-  {
-    author: "Ban",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 2,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 1,
-  }
-]
+
+import { useState } from 'react';
 
 const AllActive = () => {
 
+  const [ submissionList ] = useState(
+    [
+      {
+        author: "Ben",
+        title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+        stage: 4,
+      },
+      {
+        author: "Bob",
+        title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+        stage: 3,
+      },
+      {
+        author: "Ban",
+        title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+        stage: 2,
+      },
+      {
+        author: "Bibi",
+        title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+        stage: 1,
+      }
+    ]
+  );
+
+
+    const [filteredList, setFilteredList] = useState(submissionList);
+
     return (
          <div className = {styles.tab}>
-                  <div className = {styles.tabHeader}>
-                      <h3>All Active</h3>
-        
-                      <div className = {styles.left}>
-                        <form>
-                            <div className = {styles.formInput}>
-                                <input type = "search" placeholder = "Search"></input>
-                                <button><BsSearchHeart /></button>
-                            </div>
-                        </form>
-        
-                        <button><FiFilter /> Filters</button>
-                        <button>New Submission</button>  
-                        
-                      </div>
-        
-                  </div>
+                  <TabHeader tabHeader="All Active" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
 
                   <ul className = {styles.submissionList}>
              
-                      {listOfSubmissions.map((submission, idx  )=>
+                      {filteredList.map((submission, idx  )=>
                         <li key = {idx}>
                             <Submission submission = {submission}/>
                         </li>
