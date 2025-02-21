@@ -29,11 +29,6 @@ const RedirectDashboard = () => {
     console.log( "Author: ",isAuthor);
     console.log("Editor: ",isEditor);
  
-    
-
-
-    // const isAuthor = false;
-    // const isEditor = true;
 
     if (isEditor) return <Navigate to="Editor" replace />;
     if (isAuthor) return <Navigate to="Author" replace />;

@@ -3,7 +3,7 @@ import { FaRegCircle } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GiFrozenRing } from "react-icons/gi";
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 const getStepStatus = (currentStep) => {
     switch(currentStep) {
@@ -36,29 +36,27 @@ const getStepStatus = (currentStep) => {
 }
 
 //detecting click anywhere https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-function useOutsideAlerter(ref, setOptionClicked) {
-    useEffect(() => {
-      function handleClickOutside(event) {
-        if (ref.current && !ref.current.contains(event.target)) {
+
+const Submission = ({submission}) => {
+    
+    const { stepTitle, statusClass } = getStepStatus(submission.stage);
+
+    const [ isOptionClicked, setOptionClicked ] = useState(false);
+
+    const dropdownRef = useRef(null);
+
+    const handleClickOutside = useCallback((event) => {
+        if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setOptionClicked(false);
         }
-      }
+      }, [dropdownRef, setOptionClicked])
+
+    useEffect(() => {
       document.addEventListener("click", handleClickOutside);
       return () => {
         document.removeEventListener("click", handleClickOutside);
       };
-    }, [ref]);
-  }
-
-const Submission = ({submission}) => {
-    
-    const { stepTitle, statusClass } = getStepStatus(submission.currentStep);
-
-    const [isOptionClicked, setOptionClicked] = useState(false);
-
-    const dropdownRef = useRef(null);
-
-    useOutsideAlerter(dropdownRef, setOptionClicked);
+    }, [handleClickOutside]);
 
     return (
         <div className = {styles.submission}>
@@ -77,7 +75,7 @@ const Submission = ({submission}) => {
             </div>
             
             <CiMenuKebab ref = {dropdownRef} onClick = {() => setOptionClicked(!isOptionClicked)}/>
-            <div  className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
+            <div className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
                 <span>Option 1</span>
                 <span>Assign a reviewer</span>
             </div>

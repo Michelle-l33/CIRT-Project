@@ -1,103 +1,90 @@
 import styles from './TabNav.module.css';
 
-import { BsSearchHeart } from "react-icons/bs";
-import { FiFilter } from "react-icons/fi";
-
-
 import Submission from "./Submission";
-
-const listOfSubmissions = [
-  {
-    author: "Ben",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 1,
-  },
-  {
-    author: "Bob",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 2,
-  },
-  {
-    author: "Ban",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 3,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 4,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 4,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 1,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 4,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 3,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 2,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 4,
-  },
-  {
-    author: "Bibi",
-    title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-    currentStep: 3,
-  },
-]
-
+import TabHeader from './TabHeader';
+import { useState } from 'react';
 
 const MyQueue = () => {
 
+    const [ submissionList ] = useState(
+      [
+        {
+          author: "Ben",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 1,
+        },
+        {
+          author: "Bob",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 2,
+        },
+        {
+          author: "Ban",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 3,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 4,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 4,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 1,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 4,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 3,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 2,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 4,
+        },
+        {
+          author: "Bibi",
+          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          stage: 3,
+        },
+      ]
+    );
+
+
+    const [filteredList, setFilteredList] = useState(submissionList);
+
     return (
-        <div className = {styles.tab}>
-          <div className = {styles.tabHeader}>
-              <h3>My Assigned</h3>
 
-              <div className = {styles.left}>
-                <form>
-                    <div className = {styles.formInput}>
-                        <input type = "search" placeholder = "Search"></input>
-                        <button><BsSearchHeart /></button>
-                    </div>
-                </form>
+          <div className = {styles.tab}>
+            <TabHeader tabHeader="My Asssigned" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
 
-                <button><FiFilter /> Filters</button>
-                <button>New Submission</button>  
+            <ul className = {styles.submissionList}>
+              
+                {filteredList.map((submission, idx  )=>
+                  <li key = {idx}>
+                      <Submission submission = {submission}/>
+                  </li>
+                )}
                 
-              </div>
-
+            </ul>
           </div>
 
-
-          <ul className = {styles.submissionList}>
-             
-              {listOfSubmissions.map((submission, idx  )=>
-                <li key = {idx}>
-                    <Submission submission = {submission}/>
-                </li>
-              )}
-              
-          </ul>
-        </div>
     );
 };
 

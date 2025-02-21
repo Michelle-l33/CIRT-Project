@@ -1,28 +1,31 @@
 import styles from './TabNav.module.css';
-import { BsSearchHeart } from "react-icons/bs";
-import { FiFilter } from "react-icons/fi";
+
+import TabHeader from './TabHeader';
+
+import Submission from "./Submission";
+
+import { useState } from 'react';
 
 const Archives = () => {
 
+    const [ submissionList ] = useState([]);
+
+    const [filteredList, setFilteredList] = useState(submissionList);
+
     return (
-        <div className = {styles.tab}>
-                  <div className = {styles.tabHeader}>
-                      <h3>Archives</h3>
-        
-                      <div className = {styles.left}>
-                        <form>
-                            <div className = {styles.formInput}>
-                                <input type = "search" placeholder = "Search"></input>
-                                <button><BsSearchHeart /></button>
-                            </div>
-                        </form>
-        
-                        <button><FiFilter /> Filters</button>
-                        <button>New Submission</button>  
-                        
-                      </div>
-        
-                  </div>
+         <div className = {styles.tab}>
+                  <TabHeader tabHeader="Archives" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
+
+                  <ul className = {styles.submissionList}>
+             
+                      {filteredList.map((submission, idx  )=>
+                        <li key = {idx}>
+                            <Submission submission = {submission}/>
+                        </li>
+                      )}
+                      
+                  </ul>
+                      
         </div>
     );
 };
