@@ -62,7 +62,6 @@ const SubmissionRecord = () => {
     
     useEffect(() => {
         setSubmissionList(submissionListTest);
-        console.log("take Effect")
     }, [])
 
     return(

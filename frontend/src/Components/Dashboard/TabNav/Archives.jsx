@@ -8,7 +8,13 @@ import { useState } from 'react';
 
 const Archives = () => {
 
-    const [ submissionList ] = useState([]);
+    const [ submissionList ] = useState([
+        {
+            author: "Ben",
+            title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+            stage: 4,
+        },
+    ]);
 
     const [filteredList, setFilteredList] = useState(submissionList);
 
@@ -18,11 +24,11 @@ const Archives = () => {
 
                   <ul className = {styles.submissionList}>
              
-                      {filteredList.map((submission, idx  )=>
+                        {filteredList.length > 0 ? (filteredList.map((submission, idx)=>
                         <li key = {idx}>
                             <Submission submission = {submission}/>
                         </li>
-                      )}
+                        )) : (<span>No Submission Found</span>)}
                       
                   </ul>
                       

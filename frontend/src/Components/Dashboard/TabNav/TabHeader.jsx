@@ -5,25 +5,56 @@ import { BsSearchHeart } from "react-icons/bs";
 import { FiFilter } from "react-icons/fi";
 
 
-
 const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
 
     const categories = ["Submitted", "Under Review", "Reviewed", "Accepted"];
 
+    const [selectedCategory, setSelectedCategory] = useState([]);
+
+    const [search, setSearch] = useState("");
+
+    const categoryMapping = {
+        "Submitted": 1,
+        "Under Review": 2,
+        "Reviewed": 3,
+        "Accepted": 4
+    };
+
+    useEffect(() => {
+        let filteredResults = submissionList;
+
+        // Apply category filter
+        if (selectedCategory.length > 0) {
+            const selectedStages = selectedCategory.map((category) => categoryMapping[category]);
+            filteredResults = filteredResults.filter(submission =>
+                categories.length === 0 || selectedStages.includes(submission.stage)
+            );
+        }
+
+        // Apply search filter
+        if (search) {
+            filteredResults = filteredResults.filter(submission =>
+                submission.author.toLowerCase().includes(search.toLowerCase()) ||
+                submission.title.toLowerCase().includes(search.toLowerCase())
+            );
+        }
+
+        // Set the filtered list
+        setFilteredList(filteredResults);
+        console.log("TAKE EFFECT")
+    }, [search, selectedCategory, submissionList]);
+    
     return (
         <div className = {styles.tabHeader}>
               <h3>{tabHeader}</h3>
 
               <div className = {styles.left}>
-                <form>
-                    <div className = {styles.formInput}>
-                        <input type = "search" placeholder = "Search"></input>
-                        <button><BsSearchHeart /></button>
-                    </div>
-                </form>
 
-                <FilterButton categories = {categories} submissionList = {submissionList} setFilteredList = {setFilteredList}/>
-                <button>New Submission</button>  
+                {/* tabSearchBar component is defined down below */}
+                <TabSearchBar search = {search} setSearch = {setSearch}/>
+                {/* FilterButton component is defined down below */}
+                <FilterButton categories = {categories} selectedCategory = {selectedCategory} setSelectedCategory = {setSelectedCategory}/>
+                <button >New Submission</button>  
 
             </div>
         </div>
@@ -35,9 +66,31 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
 
 
 
+const TabSearchBar = ({search, setSearch}) => {
+
+    const handleSearchChange = (event) => {
+        setSearch(event.target.value);
+    };
+
+    return(
+    <form onSubmit = {(event) => event.preventDefault()}>
+        <div className = {styles.formInput}>
+            <input  type = "search" 
+                    id = 'tabSearchBox'
+                    placeholder = "Search"
+                    value = {search}
+                    onChange = {handleSearchChange}></input>
+            <button type = "submit" ><BsSearchHeart /></button>
+        </div>
+    </form>
+    );
+};
+
+
+
 
 // codes from handling Filtering logics taken from https://stackoverflow.com/questions/74584926/filtering-with-checkboxes-in-react
-const FilterButton = ({ categories, submissionList, setFilteredList }) => {
+const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
     // this part is for controlling the filter open or not
     const [ filterOpen, setFilterOpen ] = useState(false);
     const dropdownRef = useRef(null);
@@ -63,32 +116,30 @@ const FilterButton = ({ categories, submissionList, setFilteredList }) => {
     }, [handleClickOutside]);
 
 
-
-
     // this part is for filtering the submissionList with the checkbox
-    const categoryMapping = {
-        "Submitted": 1,
-        "Under Review": 2,
-        "Reviewed": 3,
-        "Accepted": 4
-    };
+    // const categoryMapping = {
+    //     "Submitted": 1,
+    //     "Under Review": 2,
+    //     "Reviewed": 3,
+    //     "Accepted": 4
+    // };
 
-    const [ selectedCheckboxes, setSelectedCheckboxes ] = useState([]);
+    // const [ selectedCheckboxes, setSelectedCheckboxes ] = useState([]);
 
-    const filterProducts = (categories) => {
-        const selectedStages = categories.map((category) => categoryMapping[category]);
-        setFilteredList(submissionList.filter((submission) => 
-            categories.length === 0 || selectedStages.includes(submission.stage)
-        ));
-    }
+    // const filterProducts = (categories) => {
+    //     const selectedStages = categories.map((category) => categoryMapping[category]);
+    //     setFilteredList(submissionList.filter((submission) => 
+    //         categories.length === 0 || selectedStages.includes(submission.stage)
+    //     ));
+    // }
 
     const handleCheck = (option) => {
-        const updatedCheckboxes = selectedCheckboxes.includes(option) ?
-            selectedCheckboxes.filter((category) => category !== option)
-            : [...selectedCheckboxes, option];
+        const updatedCheckboxes = selectedCategory.includes(option) ?
+        selectedCategory.filter((category) => category !== option)
+            : [...selectedCategory, option];
 
-        setSelectedCheckboxes(updatedCheckboxes);
-        filterProducts(updatedCheckboxes);
+        setSelectedCategory(updatedCheckboxes);
+        // filterProducts(updatedCheckboxes);
     }
 
     return (
@@ -101,7 +152,7 @@ const FilterButton = ({ categories, submissionList, setFilteredList }) => {
                                     <input
                                         className="formCheck"
                                         type="checkbox"
-                                        checked={selectedCheckboxes.includes(option)}
+                                        checked={selectedCategory.includes(option)}
                                         onChange = {() => handleCheck(option)}
                                     />
                                     <label className="formCheckLabel" htmlFor={`filter${idx}`}>
@@ -114,3 +165,4 @@ const FilterButton = ({ categories, submissionList, setFilteredList }) => {
         </>
     );
 };
+

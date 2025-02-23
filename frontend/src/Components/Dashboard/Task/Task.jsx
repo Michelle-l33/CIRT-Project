@@ -16,7 +16,7 @@ const Task = ( {title, description} ) => {
                 <p className = {styles.taskDescription}>{description}</p>
             </div>
             <div className = {styles.taskButtons}>
-                <button onClick = {() => setIsComplete(true)}>Mark as Complete</button>
+                <button onClick = {() => setIsComplete(!isComplete)}>Mark as Complete</button>
                 <button>Hide Task</button>
             </div>
         </div>
