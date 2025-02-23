@@ -9,58 +9,69 @@ const MyQueue = () => {
     const [ submissionList ] = useState(
       [
         {
+          id: 101,
           author: "Ben",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "1shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 1,
         },
-        {
+        { 
+          id: 102,
           author: "Bob",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "2shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 2,
         },
         {
+          id: 103,
           author: "Ban",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "3shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 3,
         },
         {
+          id: 104,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "4shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 4,
         },
         {
+          id: 105,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "5shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 4,
         },
         {
+          id: 106,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "6shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 1,
         },
         {
+          id: 107,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "7shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 4,
         },
         {
+          id: 108,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "8shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 3,
         },
         {
+          id: 109,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "9shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 2,
         },
         {
+          id: 110,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "4shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 4,
         },
         {
+          id: 111,
           author: "Bibi",
-          title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
+          title: "7shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
           stage: 3,
         },
       ]
@@ -69,6 +80,7 @@ const MyQueue = () => {
 
     const [filteredList, setFilteredList] = useState(submissionList);
 
+
     return (
 
           <div className = {styles.tab}>
@@ -76,11 +88,11 @@ const MyQueue = () => {
 
             <ul className = {styles.submissionList}>
               
-                {filteredList.map((submission, idx  )=>
-                  <li key = {idx}>
+                {filteredList.length > 0 ? (filteredList.map((submission)=>
+                  <li key = {submission.id}>
                       <Submission submission = {submission}/>
                   </li>
-                )}
+                )) : (<span>No Submission Found</span>)}
                 
             </ul>
           </div>

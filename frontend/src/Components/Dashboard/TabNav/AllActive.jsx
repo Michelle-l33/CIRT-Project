@@ -41,11 +41,11 @@ const AllActive = () => {
 
                   <ul className = {styles.submissionList}>
              
-                      {filteredList.map((submission, idx  )=>
-                        <li key = {idx}>
-                            <Submission submission = {submission}/>
-                        </li>
-                      )}
+                      {filteredList.length > 0 ? (filteredList.map((submission, idx)=>
+                      <li key = {idx}>
+                          <Submission submission = {submission}/>
+                      </li>
+                    )) : (<span>No Submission Found</span>)}
                       
                   </ul>
                       
