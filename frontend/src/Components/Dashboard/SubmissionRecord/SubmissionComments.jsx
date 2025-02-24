@@ -1,14 +1,6 @@
 import styles from './SubmissionRecord.module.css';
 
-
-const Comment = ({content, sender}) => {
-    return(
-        <>
-            <p>{content}</p>
-            <span>{`From: ${sender}`}</span>
-        </>
-    );
-};
+import { useState } from 'react';
 
 const commentList = [
     {
@@ -32,7 +24,7 @@ const SubmissionDiscussion = () => {
                 <h3>Submission Comments</h3>
 
                  <div className = {styles.left}>
-                    <button><span>Add a comment</span></button>
+                    <ButtonWithCommentForm />
                 </div>
             </div>
 
@@ -40,6 +32,7 @@ const SubmissionDiscussion = () => {
 
                 {commentList.map((comment, idx) => 
                     <li key = {idx} className = {styles.listItem}>
+                        {/* the code for Comment component is down below */}
                         <Comment content = {comment.comment} sender = {comment.sender}/>
                     </li>
                 )}
@@ -51,3 +44,36 @@ const SubmissionDiscussion = () => {
 };
 
 export default SubmissionDiscussion;
+
+
+const Comment = ({content, sender}) => {
+    return(
+        <>
+            <p>{content}</p>
+            <span>{`From: ${sender}`}</span>
+        </>
+    );
+};
+
+const ButtonWithCommentForm = () => {
+
+    const [isOpen, setIsOpen] = useState(false);
+
+    return (
+    <>
+        <button onClick = {() => setIsOpen(true)}>
+            <span>Add a comment</span>
+        </button>
+
+        <div className = {`${styles.commentForm} ${isOpen ? styles.show : ""}`}>
+            <h4>Add Comments</h4>
+            <form>
+                <textarea/>
+                <button>
+                    Submit
+                </button>
+            </form>
+            <button class = {styles.closeBtn} onClick = {() => setIsOpen(false)}>X</button>
+        </div>
+    </>)
+}

@@ -8,30 +8,37 @@ const RedirectDashboard = () => {
     // const [isPublic, setIsPublic] = useState(false);
     const [isAuthor, setIsAuthor] = useState(false);
     const [isEditor, setIsEditor] = useState(false);
-    // const [isReviewer, setIsReviewer] = useState(false);
+    const [isReviewer, setIsReviewer] = useState(false);
 
 
     useEffect(() => { // use effect makes sure user is rendered before acting on it
         if (user) {
             // console.log("User issss: ",user); // checks if user is loaded correctly
             if (user.isEditor) {
-                setIsEditor(true);
                 setIsAuthor(false);
+                setIsEditor(true);
+                setIsReviewer(false);
             } else if (user.isAuthor) {
                 setIsAuthor(true);
                 setIsEditor(false);
+                setIsReviewer(false);
+            } else if (user.isReviewer) {
+                setIsAuthor(false);
+                setIsEditor(false);
+                setIsReviewer(true);
             }
         }
         else {
             console.log("No User");
         }
     }, [user]);
-    console.log( "Author: ",isAuthor);
-    console.log("Editor: ",isEditor);
+    // console.log( "Author: ",isAuthor);
+    // console.log("Editor: ",isEditor);
  
 
     if (isEditor) return <Navigate to="Editor" replace />;
     if (isAuthor) return <Navigate to="Author" replace />;
+    if (isReviewer) return <Navigate to="Reviewer" replace />;
     return <Navigate to="/" replace />;
 };
 

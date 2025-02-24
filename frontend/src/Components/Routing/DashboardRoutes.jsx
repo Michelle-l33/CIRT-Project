@@ -4,6 +4,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import Dashboard from '../Dashboard/Dashboard';
 import MainContentAuthor from '../Dashboard/MainContentAuthor';
 import MainContentEditor from '../Dashboard/MainContentEditor';
+import MainContentReviewer from '../Dashboard/MainContentReviewer';
 import Task from '../Dashboard/Task/TaskList';
 import TabNav from '../Dashboard/TabNav/TabNav';
 import MyQueue from '../Dashboard/TabNav/MyQueue';
@@ -19,9 +20,11 @@ const DashboardRoutes = () => {
             <Route path="/Dashboard"/>
                 <Route path="Author" element={<Dashboard 
                                     component={<MainContentAuthor />}/>}/>
+                <Route path="Reviewer" element={<Dashboard 
+                                    component={<MainContentReviewer />}/>}/>
                 <Route path="Editor" element={<Dashboard 
                                     component={<MainContentEditor />}/>}>
-                <Route index element={<Navigate to="Task" replace />} />
+                <Route index element={<Navigate to="Task" replace />}/>
             
                 <Route path="TabNav" element={<TabNav />}>
                     <Route index element={<Navigate to="MyQueue" replace />}  />

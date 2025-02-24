@@ -5,64 +5,57 @@ import SubmissionDiscussion from './SubmissionComments';
 import SubmissionSatus from './SubmissionStatus';
 import SubmissionParticipant from './SubmissonParticipant';
 
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState } from 'react';
 
 export const sumissionContext = createContext(null);
 
 const SubmissionRecord = () => {
 
     const [ currSubmission, setCurrSubmission ] = useState(null);
-    const [ submissionList, setSubmissionList ] = useState([]);
-
-    console.log(currSubmission)
-    const submissionListTest = [
+    const [ submissionList ] = useState([
         {
-            author: "Author's name 1",
+            author: "Kiril Pangu",
             title: "Title1: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 1,
         },
         {
-            author: "Author's name 2",
+            author: "Marie-Ève Gaby",
             title: "Title2: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 3,
         },
         {
-            author: "Author's name 3",
+            author: "Peter Nithya",
             title: "Title3: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 4,
         },
         {
-            author: "Author's name 4",
+            author: "Kole Ozan",
             title: "Title4: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 1,
         },
         {
-            author: "Author's name 5",
+            author: "Slàine Bastian",
             title: "Title5: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 2
         },
         {
-            author: "Author's name 6",
+            author: "Africanus Aster",
             title: "Title6: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 2
         },
         {
-            author: "Author's name 7",
+            author: "María Ángeles Latda",
             title: "Title7: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 4
         },
-    ]
-    
-    useEffect(() => {
-        setSubmissionList(submissionListTest);
-    }, [])
+    ]);
 
     return(
 

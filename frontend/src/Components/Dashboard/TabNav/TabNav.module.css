@@ -38,6 +38,7 @@
     margin: 10px;
     align-items: center;
     flex-wrap: wrap;
+    position: relative;
 }
 
 .tab .tabHeader h3 {
@@ -113,13 +114,76 @@
 }
 
 .tabHeader .submissionOption {
-    width: 100px;
+    width: auto;
+    right: 10%;
+    top: 100%;
     z-index: 4;
-    background-color: red;
+    grid-template-columns: minmax(150px, fit-content);
+    padding: 3px 0;
+    row-gap: 2px;
+}
+
+.tabHeader .submissionOption .option {
+    color: var(--dark);
+    background-color: var(--grey);
+    padding: 5px;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tabHeader .submissionOption .formCheck {
+    visibility: none;
+    opacity: 0;
+}
+
+.tabHeader .submissionOption .formCheckLabel {
+    position: relative;
+    cursor: pointer;
+}
+
+.tabHeader .submissionOption .formCheckLabel::before {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--dark);
+    background-color: var(--light);
+    cursor: pointer;
+    left: 0;
+    top: 50%;
+    transform: translate(-100%, -50%);
+}
+
+.tabHeader .submissionOption .formCheck:checked + .formCheckLabel::before {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.tabHeader .submissionOption .formCheck:checked + .formCheckLabel::after {
+    content: "";
+    border: 2px solid var(--light);
+    border-top: none;
+    border-right: none;
+    height: 6px;
+    width: 12px;
+    position: absolute;
+    left: -5px;
+    top: 0;
+    transform: rotate(-45deg) translate(-100%, -50%);
+}
+
+
+.tabHeader .submissionOption .formCheckLabel:hover {
+    color: var(--primary);
 }
 
 .tabHeader .submissionOption.show {
-    display: block;
+    display: grid;
 }
 
 .submissionList {

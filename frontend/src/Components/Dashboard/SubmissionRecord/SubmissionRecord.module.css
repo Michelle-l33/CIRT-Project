@@ -12,6 +12,7 @@
     border-radius: 10px 10px 0 0;
     border: 1px solid var(--transparent-dark);
     color: var(--dark);
+    position: relative;
 }
 
 .header .left {
@@ -141,7 +142,7 @@
 }
 
 .filesContainer .listItem.active {
-    padding: 25px 20px;
+    padding: 20px;
     opacity: 1;
     border-style: double;
     border-radius: 20px;
@@ -256,6 +257,33 @@
 .commentContainer .left button:hover {
     background-color: var(--light-primary);
     color: var(--light);
+}
+
+.commentContainer .left .commentForm {
+    position: absolute;
+    background-color: #ffd6e5;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    opacity: 0;
+    display: none;
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 40vh;
+}
+
+.commentContainer .left .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.commentContainer .left .commentForm.show {
+    opacity: 1;
+    display: block;
 }
 
 .commentContainer .contentList {

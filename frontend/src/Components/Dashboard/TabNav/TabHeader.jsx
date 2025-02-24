@@ -27,7 +27,7 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
         if (selectedCategory.length > 0) {
             const selectedStages = selectedCategory.map((category) => categoryMapping[category]);
             filteredResults = filteredResults.filter(submission =>
-                categories.length === 0 || selectedStages.includes(submission.stage)
+                selectedStages.includes(submission.stage)
             );
         }
 
@@ -35,13 +35,11 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
         if (search) {
             filteredResults = filteredResults.filter(submission =>
                 submission.author.toLowerCase().includes(search.toLowerCase()) ||
-                submission.title.toLowerCase().includes(search.toLowerCase())
-            );
+                submission.title.toLowerCase().includes(search.toLowerCase()));
         }
 
         // Set the filtered list
         setFilteredList(filteredResults);
-        console.log("TAKE EFFECT")
     }, [search, selectedCategory, submissionList]);
     
     return (
@@ -66,7 +64,7 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
 
 
 
-const TabSearchBar = ({search, setSearch}) => {
+export const TabSearchBar = ({search, setSearch}) => {
 
     const handleSearchChange = (event) => {
         setSearch(event.target.value);
@@ -76,7 +74,6 @@ const TabSearchBar = ({search, setSearch}) => {
     <form onSubmit = {(event) => event.preventDefault()}>
         <div className = {styles.formInput}>
             <input  type = "search" 
-                    id = 'tabSearchBox'
                     placeholder = "Search"
                     value = {search}
                     onChange = {handleSearchChange}></input>
@@ -87,10 +84,8 @@ const TabSearchBar = ({search, setSearch}) => {
 };
 
 
+export const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
 
-
-// codes from handling Filtering logics taken from https://stackoverflow.com/questions/74584926/filtering-with-checkboxes-in-react
-const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
     // this part is for controlling the filter open or not
     const [ filterOpen, setFilterOpen ] = useState(false);
     const dropdownRef = useRef(null);
@@ -116,23 +111,7 @@ const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
     }, [handleClickOutside]);
 
 
-    // this part is for filtering the submissionList with the checkbox
-    // const categoryMapping = {
-    //     "Submitted": 1,
-    //     "Under Review": 2,
-    //     "Reviewed": 3,
-    //     "Accepted": 4
-    // };
-
-    // const [ selectedCheckboxes, setSelectedCheckboxes ] = useState([]);
-
-    // const filterProducts = (categories) => {
-    //     const selectedStages = categories.map((category) => categoryMapping[category]);
-    //     setFilteredList(submissionList.filter((submission) => 
-    //         categories.length === 0 || selectedStages.includes(submission.stage)
-    //     ));
-    // }
-
+    // this part is for getting checkbox
     const handleCheck = (option) => {
         const updatedCheckboxes = selectedCategory.includes(option) ?
         selectedCategory.filter((category) => category !== option)
@@ -142,21 +121,24 @@ const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
         // filterProducts(updatedCheckboxes);
     }
 
+
+
     return (
         <>
         <button ref = {buttonRef} onClick = {() => setFilterOpen(!filterOpen)}><FiFilter /> Filters</button>
         <div ref = {dropdownRef} className={styles.filterDropdown}>
                         <div className = {`${styles.submissionOption} ${filterOpen ? styles.show : ''}`}>
                             {categories.map((option, idx) => (
-                                <div className="option" id = {`filter${idx}`}>
+                                <div className={styles.option} >
                                     <input
-                                        className="formCheck"
+                                        className= {styles.formCheck}
                                         type="checkbox"
                                         checked={selectedCategory.includes(option)}
                                         onChange = {() => handleCheck(option)}
+                                        id = {`filter${idx}`}
                                     />
-                                    <label className="formCheckLabel" htmlFor={`filter${idx}`}>
-                                            {option}
+                                    <label className={styles.formCheckLabel} htmlFor={`filter${idx}`}>
+                                        {option}
                                     </label>
                                 </div>
                             ))}

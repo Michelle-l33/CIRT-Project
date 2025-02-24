@@ -11,11 +11,6 @@ import { useState } from 'react';
 const Unassigned = () => {
 
     const [ submissionList ] = useState([
-        {
-            author: "Ben",
-            title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
-            stage: 4,
-        }
     ]);
 
     const [filteredList, setFilteredList] = useState(submissionList);
