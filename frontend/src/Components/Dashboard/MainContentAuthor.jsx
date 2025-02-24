@@ -135,9 +135,9 @@ const MainContentAuthor = () => {
                         </div>
 
                         <ul className={styles.taskList}>
-                            {taskListToBeComplete.map((task, idx) =>
-                                <li key={idx}>
-                                    <Task title={task.title} description={task.description}/>
+                            {taskListToBeComplete.map((task) =>
+                                <li key={task.id}>
+                                    <Task task = {task}/>
                                 </li>
                             )}
                         </ul>                                  

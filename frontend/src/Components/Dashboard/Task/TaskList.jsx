@@ -33,7 +33,7 @@ let nextID = 103;
 export const AddTask = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [title, setTitle] = useState("");
-    const [decription, setDescription] = useState("");
+    const [description, setDescription] = useState("");
 
     const dispatch = useTasksDispatch();
 
@@ -42,10 +42,12 @@ export const AddTask = () => {
 
         dispatch({
             type: "add",
-            id: ++nextID,
+            id: nextID++,
             title: title,
-            decription: decription,
+            description: description,
         })
+
+        setIsOpen(false);
     }
 
     return (
@@ -58,7 +60,7 @@ export const AddTask = () => {
             <form onSubmit = {handleSubmit}>
                 <input type = "text" value = {title} placeholder = "Task Title" onChange = {(event) => setTitle(event.target.value)} />
 
-                <textarea value = {decription} placeholder = "Task Decription" onChange = {(event) => setDescription(event.target.value)}/>
+                <textarea value = {description} placeholder = "Task Decription" onChange = {(event) => setDescription(event.target.value)}/>
 
                 <button type = "submit">
                     Submit
@@ -78,11 +80,11 @@ export const TaskList = () => {
     return(
     
         <ul className = {styles.taskList}>
-            {taskList.map((task) =>
+            {taskList.length >0 ? (taskList.map((task) =>
                 <li key = {task.id}>
                     <Task task = {task}/>
-                </li>
-            )}
+                </li>)
+            ) : (<span>Nooooooo Task! Yay!</span>)}
         </ul>
     
     );

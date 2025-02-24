@@ -1,6 +1,6 @@
 .taskListEd{
     width: 100%;
-    max-height: 50vh;
+    max-height: 75vh;
     overflow-y: auto;
     background-color: var(--light);
     border-radius: 15px;
