@@ -1,19 +1,17 @@
 import styles from './MainContentNav.module.css';
 
-import sparLogo from '../../Asset/Spartans.logo.png'
+import sparLogo from '../../../Asset/Spartans.logo.png'
 import { FaRegBell } from "react-icons/fa";
 
-import { dashBoardContext } from './Dashboard';
+import { dashBoardContext } from '../Dashboard';
 
 import { useContext } from 'react';
-import { useUser } from '../Login/UserContext';
 
 const MainContentNav = () => {
 
-    const {isChecked, handleToggle, isClose} = useContext(dashBoardContext);
+    const {isChecked, handleToggle, isClose, user} = useContext(dashBoardContext);
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
-    const {user}=useUser();
 
     return (
         <div className = {mainContentClass}>

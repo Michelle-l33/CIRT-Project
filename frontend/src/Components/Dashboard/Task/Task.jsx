@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const Task = ( {title, description} ) => {
 
-    const [ isComplete, setIsComplete] = useState(false);
+    const [ isComplete, setIsComplete ] = useState(false);
 
     return (
         <div className = {`${styles.taskIncomplete} ${isComplete ? styles.complete:''}`}>

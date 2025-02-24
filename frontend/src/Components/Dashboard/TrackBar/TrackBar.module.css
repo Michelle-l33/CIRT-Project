@@ -8,8 +8,14 @@
 .stepContainer {
     display: flex;
     justify-content: space-between;
-    margin-top: 70px;
-    position: relative;
+    margin-top: 60px;
+    position: relative; 
+}
+
+.trackingContainer h4 {
+    padding-top: 10px;
+    padding-bottom: 1px;
+    border-bottom: 1px dotted var(--dark-grey);
 }
 
 .stepWrapper {

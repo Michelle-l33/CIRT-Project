@@ -2,9 +2,10 @@
 import styles from './Dashboard.module.css'
 
 import Sidebar from './Sidebar/Sidebar';
-import MainContentNav from './MainContentNav'
+import MainContentNav from './MainContentNav/MainContentNav'
 
 import { createContext, useState, useEffect, useRef } from 'react';
+import { useUser } from '../Login/UserContext';
 
 export const dashBoardContext = createContext(null);
 
@@ -13,6 +14,8 @@ const COLLAPSE_WIDTH = 768;
 //Conditional routing and rendering taken from https://stackoverflow.com/questions/73700464/big-react-component-with-conditional-rendering-or-smaller-separate-components
 
 const Dashboard = ({component}) => {
+
+    const { user } = useUser();
 
     const isEditor = true;
     const isAuthor = false;
@@ -50,7 +53,7 @@ const Dashboard = ({component}) => {
     
     return (
 
-        <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose}}>
+        <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose, user}}>
                 <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
                     <Sidebar isEditor = {isEditor} isAuthor ={isAuthor}/>
                     <MainContentNav/>

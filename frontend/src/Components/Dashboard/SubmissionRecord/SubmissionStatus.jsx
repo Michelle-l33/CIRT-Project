@@ -52,7 +52,7 @@ const SubmissionSatus = () => {
                 {currentStep === 3 && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission sent back to Editor </h3>
+                        <h3>Submission sent back from Reviewer </h3>
                     </div>
 
                     <div className = {styles.statusAction}>

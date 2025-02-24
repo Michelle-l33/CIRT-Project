@@ -64,7 +64,7 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
 
 
 
-const TabSearchBar = ({search, setSearch}) => {
+export const TabSearchBar = ({search, setSearch}) => {
 
     const handleSearchChange = (event) => {
         setSearch(event.target.value);
@@ -74,7 +74,6 @@ const TabSearchBar = ({search, setSearch}) => {
     <form onSubmit = {(event) => event.preventDefault()}>
         <div className = {styles.formInput}>
             <input  type = "search" 
-                    id = 'tabSearchBox'
                     placeholder = "Search"
                     value = {search}
                     onChange = {handleSearchChange}></input>
@@ -85,7 +84,7 @@ const TabSearchBar = ({search, setSearch}) => {
 };
 
 
-const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
+export const FilterButton = ({ categories, selectedCategory, setSelectedCategory}) => {
 
     // this part is for controlling the filter open or not
     const [ filterOpen, setFilterOpen ] = useState(false);
