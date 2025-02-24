@@ -14,16 +14,50 @@
     row-gap: 20px;
 }
 
-.taskListEd h2 {
-    display: block;
-    font-size: 30px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: var(--dark-grey) 0px 20px 10px -10px;
-    border-bottom: 2px solid var(--dark-grey);
+.taskListEd .taskHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 10px;
     margin-bottom: 45px;
     color: var(--dark);
+    padding: 10px;
+    box-shadow: var(--dark-grey) 0px 20px 10px -10px;
+    border-bottom: 2px solid var(--dark-grey);
+    position: relative;
+}
+
+.taskListEd h2 {
+    display: block;
+    font-size: 30px;
+}
+
+
+.taskListEd .taskForm {
+    position: absolute;
+    background-color: #ffd6e5;
+    top: 0;
+    left: 0;
+    z-index: 4;
+    opacity: 0;
+    display: none;
+    transition: all 0.5s ease-in-out;
+    width: 100%;
+    height: 40vh;
+}
+
+.taskListEd .closeBtn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+}
+
+.taskListEd .taskForm.show {
+    opacity: 1;
+    display: block;
 }
 
 .taskIncomplete {
@@ -113,3 +147,4 @@
     right: 0;
     top: 0;
 }
+

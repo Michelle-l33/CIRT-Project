@@ -2,37 +2,88 @@ import styles from './Task.module.css';
 
 import Task from './Task';
 
+import { useTasks, TasksProvider, useTasksDispatch } from './TaskContext';
+
 import { useState } from 'react';
 
+// An example for taskList taken from https://react.dev/learn/scaling-up-with-reducer-and-context
+
+const TaskPage = () => {
+    return(
+        <TasksProvider>
+            <div className = {styles.taskListEd}>
+                <div className = {styles.taskHeader}>
+                    <h2>Task for the Editor</h2>
+                    {/* definition for AddTask is down below */}
+                    <AddTask />
+                </div>
+
+                {/* definition for TaskList is down below */}
+                <TaskList />
+            </div>
+        </TasksProvider>
+    )
+}
+
+export default TaskPage;
 
 
-const TaskList = () => {
+let nextID = 103;
 
-    const [ taskList ] = useState([
-        {
-            title: "Look at reviews",
-            description: "You need to look at the reviewsssss sjdb ashdba hasdbashdab sahdbasdhb sahdb"
-        },
-    
-        {
-            title: "Resubmit",
-            description: "You need to Resubmitttttttttt"
-        },
-    ])
+export const AddTask = () => {
+    const [isOpen, setIsOpen] = useState(false);
+    const [title, setTitle] = useState("");
+    const [decription, setDescription] = useState("");
+
+    const dispatch = useTasksDispatch();
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+
+        dispatch({
+            type: "add",
+            id: ++nextID,
+            title: title,
+            decription: decription,
+        })
+    }
+
+    return (
+        <>
+        <button onClick = {() => setIsOpen(true)}>
+            <span>Add a comment</span>
+        </button>
+        <div className = {`${styles.taskForm} ${isOpen ? styles.show : ""}`}>
+            <h4>Add Task</h4>
+            <form onSubmit = {handleSubmit}>
+                <input type = "text" value = {title} placeholder = "Task Title" onChange = {(event) => setTitle(event.target.value)} />
+
+                <textarea value = {decription} placeholder = "Task Decription" onChange = {(event) => setDescription(event.target.value)}/>
+
+                <button type = "submit">
+                    Submit
+                </button>
+            </form>
+            <button class = {styles.closeBtn} onClick = {() => setIsOpen(false)}>X</button>
+        </div>
+        </>
+    )
+}
+
+
+export const TaskList = () => {
+
+    const taskList = useTasks();
     
     return(
-        <div className = {styles.taskListEd}>
-        <h2>Task</h2>
-        
+    
         <ul className = {styles.taskList}>
-            {taskList.map((task, idx) =>
-                <li key = {idx}>
-                    <Task title = {task.title} description = {task.description}/>
+            {taskList.map((task) =>
+                <li key = {task.id}>
+                    <Task task = {task}/>
                 </li>
             )}
         </ul>
-    </div>
+    
     );
 }
-
-export default TaskList;
