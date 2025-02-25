@@ -2,25 +2,53 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Submission = require("../models/Submission");
-const authenticateUser = require("../middleware/authenticateUser"); // Add middleware
+//const authenticateUser = require("../middleware/authenticateUser"); // Add middleware
 const router = express.Router();
+const upload = require("../awsConnect");
 
 
 // Upload Submission
-router.post("/upload", async (req, res) => {
+router.post("/upload", upload.single("document"), async (req, res) => {
   try {
-    const { title, firstName, lastName, document, isPoster, isArticle, abstract } = req.body;
-    const authorID = req.user._id;
+    console.log(req.body);  // To check the other form fields
+    console.log(req.file);  // To check the uploaded file
+    if (!req.file) {
+      return res.status(400).json({ error: "File upload failed!" });
+    }
 
-    const newSubmission = new Submission({ authorID, title, firstName, lastName, document, isPoster, isArticle, abstract });
+    const authorID = req.cookies.userID;  // Retrieve userID from cookies
+
+
+    // Check if authorID is provided in the cookies
+    if (!authorID) {
+      return res.status(400).json({ error: "User ID is required in cookies" });
+    }
+
+    const { title, firstName, lastName, isPoster, isArticle, abstract } = req.body;
+
+    const newSubmission = new Submission({
+      authorID,
+      title,
+      firstName,
+      lastName,
+      document: req.file.location, // S3 file URL
+      isPoster,
+      isArticle,
+      abstract,
+      stage: "1",
+    });
+
     await newSubmission.save();
-    
-    res.status(201).json({ message: "Submission Uploaded Successfully!" });
+
+    res.status(201).json({ message: "File uploaded successfully!", fileUrl: req.file.location });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
 
+router.get('/', (req, res) => {
+  res.json({ message: 'This is the submission endpoint' });
+});
 
 // Get All posters
 router.get("/gallery", async (req, res) => {

@@ -10,7 +10,11 @@ const submissionSchema = new mongoose.Schema({
   isPoster:{type: Boolean,default:false },
   isArticle:{type:Boolean, default:false},
   abstract: {type:String},
-  stage: {type:String , default: "1"} 
+  stage: {
+    type: String,
+    enum: ["1", "2", "3", "4", "5"], // Restrict values to valid stages
+    default: "1",
+  },
   // stage 1: new submission ("Just Submitted!")
   //stage 2: sent to reviewer ("Being Reviewed!")
   //stage 3: returned from reviewer (only for editor to see??)

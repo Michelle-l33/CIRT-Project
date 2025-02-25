@@ -1,6 +1,8 @@
 
 import styles from './SubmissionAuthor.module.css';
 import { useState } from 'react';
+import {useUser} from '../Login/UserContext';
+import Cookies from 'js-cookie';
 
 const SubmissionAuthorPage = () => {
 
@@ -11,6 +13,7 @@ const SubmissionAuthorPage = () => {
     const [submissionType, setSubmissionType] = useState("");
     const [stage, setStage]= useState("1");
     const [authorID, setAuthorID] = useState("");
+    const [loading, setLoading] = useState(false); // Loading state
     
 
 
@@ -20,11 +23,22 @@ const SubmissionAuthorPage = () => {
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
+        if (!document) {
+            return window.alert("Please upload a file.");
+        }
+        
+
+        setLoading(true);
+
         const isPoster = submissionType === "poster";
         const isArticle = submissionType === "article";
 
+        const userID = Cookies.get('userID');
+        if (!userID){
+            return window.alert("You must be logged in to submit an article.");
+        } 
         const formData = new FormData();
-        formData.append("authorID", authorID); // Make sure authorID is included
+        formData.append("authorID", userID); // Make sure authorID is included
         formData.append("title", title);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
@@ -38,6 +52,8 @@ const SubmissionAuthorPage = () => {
             const response = await fetch("http://localhost:8082/submission/upload", {
                 method: "POST",
                 body: formData,
+                credentials: 'include',
+                
             });
             const data = await response.json();
             if (response.ok) {
@@ -49,6 +65,8 @@ const SubmissionAuthorPage = () => {
             }
         } catch (error) {
             window.alert("Error: " + error.message);
+        } finally {
+            setLoading(false);
         }
         }
     
@@ -71,11 +89,11 @@ const SubmissionAuthorPage = () => {
                                 <input type="radio" id="articleRadio" name="submissionType" value="article" checked={submissionType === "article"} onChange={(e) => setSubmissionType(e.target.value)} required/>
                                 <label htmlFor="articleRadio">Article</label>
                             </li>
-                            <li><input type="file" onChange={handleFileChange} /></li>
+                            <li><input type="file" name="document" accept="application/pdf" onChange={handleFileChange} required/></li>
                         </ul>
                         {document && <p>Uploaded file: <span>{document.name}</span></p>}
-                        <button type="submit" className={styles.submitButton}>
-                            Submit
+                        <button type="submit" className={styles.submitButton} disabled={loading}>
+                            {loading ? "Uploading..." : "Submit"}
                         </button>
                     </form>
                     
