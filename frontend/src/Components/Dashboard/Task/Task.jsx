@@ -2,22 +2,32 @@ import styles from './Task.module.css';
 
 import { FaCircleXmark, FaCircleCheck } from "react-icons/fa6";
 
-import { useState } from 'react';
+import { useTasksDispatch } from './TaskContext';
 
-const Task = ( {title, description} ) => {
 
-    const [ isComplete, setIsComplete ] = useState(false);
+const Task = ( {task} ) => {
+
+    const dispatch = useTasksDispatch(); //grab the function
 
     return (
-        <div className = {`${styles.taskIncomplete} ${isComplete ? styles.complete:''}`}>
+        <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
             <div className = {styles.taskTitle}>
-                {isComplete? <FaCircleCheck /> : <FaCircleXmark />}
-                <p>{title}</p>
-                <p className = {styles.taskDescription}>{description}</p>
+                {task.isComplete ? <FaCircleCheck /> : <FaCircleXmark />}
+                <p>{task.title}</p>
+                <p className = {styles.taskDescription}>{task.description}</p>
             </div>
             <div className = {styles.taskButtons}>
-                <button onClick = {() => setIsComplete(!isComplete)}>Mark as Complete</button>
-                <button>Hide Task</button>
+                <button onClick = {e => dispatch({
+                    type: "change",
+                    task: {
+                        ...task,
+                        isComplete: !task.isComplete
+                    }
+                })} >Mark as Complete</button>
+                <button onClick = {() => dispatch({
+                    type: "hide",
+                    id: task.id
+                })} >Hide Task</button>
             </div>
         </div>
     );

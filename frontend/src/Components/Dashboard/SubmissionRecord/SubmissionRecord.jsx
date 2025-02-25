@@ -5,14 +5,18 @@ import SubmissionDiscussion from './SubmissionComments';
 import SubmissionSatus from './SubmissionStatus';
 import SubmissionParticipant from './SubmissonParticipant';
 
-import { createContext, useState } from 'react';
+import { createContext, useState, useReducer } from 'react';
 
 export const sumissionContext = createContext(null);
 
 const SubmissionRecord = () => {
+    function submissionReducer(submission, action) {
+
+    }
 
     const [ currSubmission, setCurrSubmission ] = useState(null);
-    const [ submissionList ] = useState([
+
+    const [ submissionList, dispatch ] = useReducer( submissionReducer, [
         {
             author: "Kiril Pangu",
             title: "Title1: sbbdda sabd ashdb ashdb asdb",
