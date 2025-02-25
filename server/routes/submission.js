@@ -46,8 +46,13 @@ router.post("/upload", upload.single("document"), async (req, res) => {
   }
 });
 
-router.get('/', (req, res) => {
-  res.json({ message: 'This is the submission endpoint' });
+router.get('/', async (req, res) => {
+  try {
+    const submissions = await Submission.find(); // Fetch all submissions from the database
+    res.json(submissions); // Send the submissions as a response
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch submissions' });
+  }
 });
 
 // Get All posters
