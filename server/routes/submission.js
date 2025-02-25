@@ -2,7 +2,6 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const Submission = require("../models/Submission");
-//const authenticateUser = require("../middleware/authenticateUser"); // Add middleware
 const router = express.Router();
 const upload = require("../awsConnect");
 
@@ -75,20 +74,63 @@ router.get("/publications", async (req, res) => {
     }
   });
 
-  router.get("/:id", async (req, res) => {
-    try {
-      const { id } = req.params;
-      const submission = await Submission.findById(id);
-  
-      if (!submission) {
-        return res.status(404).json({ message: "Submission not found" });
-      }
-  
-      res.json(submission);
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+// individual submission
+router.get("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const submission = await Submission.findById(id);
+
+    if (!submission) {
+      return res.status(404).json({ message: "Submission not found" });
     }
-  });
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// get all of authors submissions
+router.get("/:authorID", async (req, res) => {
+  try {
+    const { authorID } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(authorID)){
+      return res.status(400).json({ message: "Invalid author ID" });
+    }
+
+    const submission = await Submission.find(authorID);
+
+    if (!submission) {
+      return res.status(404).json({ message: "No Submissions For This Author" });
+    }
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post("/:submissionID/record", async (req,res)=>{
+  try{
+      const {originalSubmissionID} = req.params;
+      const {comment}= req.body;
+      
+      if(!mongoose.Types.ObjectId.isValid(originalSubmissionID)){
+        return res.status(400).json({message: "Invalid author ID"});
+      }
+
+      const newComment = new Comment({
+        originalSubmissionID,
+        comment
+      })
+
+  }
+  catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+
+});
   
 
 
