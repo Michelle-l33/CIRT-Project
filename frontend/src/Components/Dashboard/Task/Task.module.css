@@ -24,7 +24,6 @@
     padding: 10px;
     box-shadow: var(--dark-grey) 0px 20px 10px -10px;
     border-bottom: 2px solid var(--dark-grey);
-    position: relative;
 }
 
 .taskListEd h2 {
@@ -32,18 +31,69 @@
     font-size: 30px;
 }
 
-
 .taskListEd .taskForm {
     position: absolute;
     background-color: #ffd6e5;
     top: 0;
-    left: 0;
+    left: 50%;
+    margin: 0;
     z-index: 4;
     opacity: 0;
     display: none;
+    transform: translate(-50%, 40%);
     transition: all 0.5s ease-in-out;
-    width: 100%;
-    height: 40vh;
+    width: 80%;
+    height: 50vh;
+    border-radius: 10px;
+    grid-template-rows: 1fr 4fr;
+    padding: 5px;
+}
+
+.taskListEd .taskForm > h4 {
+    width: fit-content;
+    height: fit-content;
+    margin: auto;
+    display: block;
+    font-size: clamp(1rem, 2.5vw, 2rem);
+}
+
+.taskListEd .taskForm > form {
+    display: grid;
+    grid-template-rows: 2fr 8fr 1fr;
+    padding: 10px;
+    row-gap: 10px; 
+}
+.taskListEd .taskForm > form * {
+    font-size: 1rem;
+}
+
+/* button styling copied from https://getcssscan.com/css-buttons-examples */
+.taskListEd .taskForm > form button {
+    background-color: var(--dark);
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  box-sizing: border-box;
+  color: var(--light);
+  cursor: pointer;
+  text-align: center;
+  text-decoration-thickness: auto;
+  transition-duration: .2s;
+  transition-property: background-color,border-color,color,fill,stroke;
+  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: auto;
+  position: static;
+}
+.taskListEd .taskForm > form button:hover {
+    background-color: var(--dark-grey);
+}
+
+.taskListEd .taskForm > form button:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
 }
 
 .taskListEd .closeBtn {
@@ -57,7 +107,7 @@
 
 .taskListEd .taskForm.show {
     opacity: 1;
-    display: block;
+    display: grid;
 }
 
 .taskIncomplete {

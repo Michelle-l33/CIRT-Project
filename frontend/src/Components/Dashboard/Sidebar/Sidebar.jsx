@@ -14,7 +14,7 @@ import { dashBoardContext } from '../Dashboard';
 import { useContext } from 'react';
 
 
-const Sidebar = ( {isEditor, isAuthor} ) => {
+const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
     const {handleLogout} = useUser();
     const {isClose} = useContext(dashBoardContext);
     const location = useLocation();
@@ -33,14 +33,20 @@ const Sidebar = ( {isEditor, isAuthor} ) => {
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "/Author/Settings" },
     ];
 
+    const listOfReviewerIcons = [
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Author" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Author/User" },
+        { Name: "Settings", iconComponent: MdOutlineSettings, url: "/Author/Settings" },
+    ];
+
     let listOfIcon;
 
     if (isAuthor) {
         listOfIcon = listOfAuthorIcons;
     } else if (isEditor) {
         listOfIcon = listOfEditorIcons;
-    } else {
-        listOfIcon = [];
+    } else if (isReviewer){
+        listOfIcon = listOfReviewerIcons;
     }
 
     const isLocation = (url) => {
