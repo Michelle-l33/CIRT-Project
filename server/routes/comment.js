@@ -15,10 +15,10 @@ router.get("/", async (req, res) => {
 });
 
 // add comments
-router.post("/record/:submissionID", async (req,res)=>{
+router.post("/", async (req,res)=>{
     try{
-        const {originalSubmissionID} = req.params;
-        const {comment}= req.body;
+        
+        const {originalSubmissionID, comment}= req.body;
         
         if(!mongoose.Types.ObjectId.isValid(originalSubmissionID)){
           return res.status(400).json({message: "Invalid author ID"});
@@ -41,12 +41,12 @@ router.post("/record/:submissionID", async (req,res)=>{
   
   });
   // retrieve comments
-  router.get("/retrieve/:submissionID", async (req, res) => {
+  router.get("/:originalSubmissionID", async (req, res) => {
     try {
       const { originalSubmissionID } = req.params; // Get the submissionID from the URL parameter
   
       // Find comments where the submissionID matches the provided ID
-      const comments = await Comment.find({ originalSubmissionID: originalSubmissionID });
+      const comments = await Comment.find({ originalSubmissionID});
   
       console.log("Fetched Comments:", comments); // Debugging line
       res.json(comments); // Send the fetched comments as a JSON response

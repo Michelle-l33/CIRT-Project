@@ -1,5 +1,5 @@
 import styles from './SubmissionRecord.module.css';
-import { useParams } from "react-router-dom";
+import { useParams,useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 
@@ -17,32 +17,36 @@ import { useState, useEffect } from 'react';
 
 
 const SubmissionDiscussion = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const originalSubmissionID = queryParams.get('submissionId'); // Pulls the submissionId query parameter
+    console.log("ID CHECK", originalSubmissionID);
     const [comment, setComment] = useState("");
-    const {originalSubmissionID} = useParams(); // pulls ID from URL
+    //const {originalSubmissionID} = useParams(); // pulls ID from URL
     const [loading, setLoading]=useState(true);
     const [commentList, setCommentList] = useState([]);
 
-    useEffect(()=>{
-        const fetchComments = async () => {
-            try {
-                console.log("ID", originalSubmissionID);
-                const response = await fetch(`http://localhost:8082/comment/retrieve/${originalSubmissionID}`,{
-                    method: "GET"
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to fetch comments");
-                }
-        
-                const comments = await response.json();
-                setCommentList(comments);
-                console.log("Comments",commentList);
-            } catch (error) {
-                console.error("Error fetching comments:", error);
-            } finally {
-                setLoading(false);
+
+    const fetchComments = async () => {
+        try {
+            console.log("Fetching for: ", originalSubmissionID);
+            const response = await fetch(`http://localhost:8082/comment/${originalSubmissionID}`,{
+                method: "GET"
+            })
+            if (!response.ok) {
+                throw new Error("Failed to fetch comments");
             }
-        };
-        
+    
+            const comments = await response.json();
+            setCommentList(comments);
+            console.log("Comments",commentList);
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(()=>{
         fetchComments();
     },[originalSubmissionID]);
 
@@ -60,9 +64,11 @@ const SubmissionDiscussion = () => {
             console.error("Submission ID is missing!");
             return;
         }
+        console.log("Submitting comment:", { originalSubmissionID, comment });
         try{
-            const commentData = {comment };
-            const response = await fetch(`http://localhost:8082/comment/record/${originalSubmissionID}`,{
+            const commentData = {originalSubmissionID, comment };
+            
+            const response = await fetch("http://localhost:8082/comment",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -75,7 +81,7 @@ const SubmissionDiscussion = () => {
             if (response.ok) {
                 window.alert("Comment Saved!")
                 setComment("");
-                window.reload();
+                fetchComments();
             
             } else {
                 window.alert(data.error || "Something went wrong!");
@@ -108,7 +114,7 @@ const SubmissionDiscussion = () => {
                 {commentList.map((comment, idx) => 
                     <li key = {idx} className = {styles.listItem}>
                         {/* the code for Comment component is down below */}
-                        <Comment content = {comment.comment} sender = {comment.sender}/>
+                        <Comment content = {comment.comment} sender = {"Reviewer"}/>
                     </li>
                 )}
 

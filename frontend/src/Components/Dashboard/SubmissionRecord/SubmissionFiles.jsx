@@ -39,7 +39,7 @@ const SubmissionFiles = () => {
 
     const handleSubmissionChange = (submission) => {
         setCurrSubmission(submission);
-        navigate(`${submission._id}`);
+        navigate(`?submissionId=${submission._id}`);
     }
     
     return(
