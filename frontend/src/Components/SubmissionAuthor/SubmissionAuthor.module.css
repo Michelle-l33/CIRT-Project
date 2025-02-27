@@ -1,59 +1,30 @@
 .bigContainer {
-    display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  border: 5px solid var(--dark);
+  color: var(--dark);
 }
 
-.pdfContainerLeft {
-    justify-content: center;
-    align-items: center;
-    width: 80%;
-    margin: 10px;
-    border: 5px solid black;
+/* Input Styles */
+.boxInput input {
+  border: 2px solid transparent;
+  width: 15em;
+  height: 2.5em;
+  padding-left: 0.8em;
+  outline: none;
+  overflow: hidden;
+  background-color: #F3F3F3;
+  border-radius: 10px;
+  transition: all 0.5s;
 }
 
-.pdfContainerLeft > * {
-    text-align: center;
-    align-items: center;
-    width: auto;
-}
-
-.rightContainer {
-    display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    flex-direction: column;
-    width: auto;
-    margin: 10px;
-    border: 5px solid black;
-}
-
-img {
-    width: 60%;
-    height: auto;
-}
-
-.submissionBox {
-    display: flex;
-    border: 2px solid black;
-    width: 150px;
-    align-items: center;
-    justify-content: right;
-    margin: 15px;
-}
-
-.submissionBox > * {
-    margin: 10px;
-    list-style: none;
-    padding: 0;
-}
-
-.contributorsContainer {
-    display: flex;
-    border: 2px solid black;
-    width: 150px;
-    align-items: center;
-    justify-content: center;
-    margin: 15px;
-
+.boxInput input:hover,
+.boxInput input:focus {
+  border: 2px solid #de3755;
+  box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+  background-color: white;
 }
 
 .commentsContainer {
@@ -94,4 +65,49 @@ p {
 .fileUploadContainer > p > span {
     color: blue;
     text-decoration: underline;
+}
+
+.posterDescription, .abstractInput {
+  height: 150px; 
+  min-height: 100px; 
+  max-height: 300px; 
+  width: min(80vw, 700px);
+  
+  
+  padding: 12px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  
+  border: 1.5px solid #ccc; /* Light border */
+  border-radius: 8px; /* Smooth rounded edges */
+  background-color: #fafafa; /* Light background */
+  
+  outline: none; /* Removes default blue outline */
+  resize: vertical; /* Allows vertical resizing only */
+  overflow-y: auto; /* Enables scrolling when needed */
+  transition: border 0.3s ease, background-color 0.3s ease;
+}
+
+/* Change border color when focused */
+.posterDescription:focus, .abstractInput:focus {
+  /* border-color: #007BFF;
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.2); */
+  border: 2px solid #de3755;
+  box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+  background-color: white;
+}
+
+/* Placeholder styling */
+.posterDescription::placeholder, .abstractInput::placeholder {
+  color: #999;
+  font-style: italic;
+}
+
+/* Optional: Disable text resizing for mobile */
+@media (max-width: 600px) {
+  .posterDescription, .abstractInput {
+      resize: none;
+  }
 }
