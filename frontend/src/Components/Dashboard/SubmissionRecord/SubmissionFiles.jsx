@@ -1,6 +1,6 @@
 import styles from './SubmissionRecord.module.css';
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { BsSearchHeart } from "react-icons/bs";
 
@@ -8,7 +8,7 @@ import { useContext, useState } from 'react';
 import { sumissionContext } from './SubmissionRecord'
 
 
-const Submission = ({author, title, url}) => {
+export const Submission = ({author, title, url}) => {
     return (
         <>
             <h4>{author}</h4>
@@ -34,6 +34,13 @@ const SubmissionFiles = () => {
 
         setFilteredList(filteredList);
     }
+
+    const navigate = useNavigate()
+
+    const handleSubmissionChange = (submission) => {
+        setCurrSubmission(submission);
+        navigate(`${submission.id}`);
+    }
     
     return(
         <div className = {styles.filesContainer}>
@@ -42,6 +49,7 @@ const SubmissionFiles = () => {
                 <h3>Submission Files</h3>
 
                  <div className = {styles.left}>
+
                     <form onSubmit = {(event) => event.preventDefault()}>
                         <div className = {styles.formInput}>
                             <input  type = "text" 
@@ -59,7 +67,7 @@ const SubmissionFiles = () => {
                     <li key = {idx} 
                         // the title is a placeholder for id
                         className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} 
-                        onClick = {() => setCurrSubmission(submission)}>
+                        onClick = {() => handleSubmissionChange(submission)}>
                         <Submission author = {submission.author} title = {submission.title} url = {submission.url} />
                     </li>
                 )) : (<span>No Submission Found</span>)}

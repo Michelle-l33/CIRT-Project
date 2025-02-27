@@ -17,43 +17,50 @@ const SubmissionRecord = () => {
     const [ currSubmission, setCurrSubmission ] = useState(null);
 
     const [ submissionList, dispatch ] = useReducer( submissionReducer, [
-        {
+        {   
+            id: 101,
             author: "Kiril Pangu",
             title: "Title1: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 1,
         },
         {
+            id: 102,
             author: "Marie-Ève Gaby",
             title: "Title2: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 3,
         },
         {
+            id: 103,
             author: "Peter Nithya",
             title: "Title3: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 4,
         },
         {
+            id: 104,
             author: "Kole Ozan",
             title: "Title4: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 1,
         },
         {
+            id: 105,
             author: "Slàine Bastian",
             title: "Title5: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 2
         },
         {
+            id: 106,
             author: "Africanus Aster",
             title: "Title6: sbbdda sabd ashdb ashdb asdb",
             url: "#",
             currentStep: 2
         },
         {
+            id: 107,
             author: "María Ángeles Latda",
             title: "Title7: sbbdda sabd ashdb ashdb asdb",
             url: "#",

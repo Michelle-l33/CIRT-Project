@@ -2,7 +2,7 @@ import NavBar from '../NavBar/NavBar';
 import DropDownBar from '../DropDownBar/DropDownBar'
 import Gallery from './Gallery/Gallery'
 import SearchBar from './SearchBar/SearchBar'
-import FAQ from '../FAQ/FAQ'
+import FAQ from './FAQ/FAQ'
 import Footer from './Footer/Footer'
 
 

@@ -17,10 +17,6 @@ const Dashboard = ({component}) => {
 
     const { user } = useUser();
 
-    const isEditor = true;
-    const isAuthor = false;
-
-
     //this part is for changing dark and white theme
     const [isChecked, setChecked] = useState(false);  
     const handleToggle = () => {
@@ -55,7 +51,7 @@ const Dashboard = ({component}) => {
 
         <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose, user}}>
                 <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
-                    <Sidebar isEditor = {isEditor} isAuthor ={isAuthor}/>
+                    <Sidebar isEditor = {user.isEditor} isAuthor ={user.isAuthor} isReviewer={user.isReviewer}/>
                     <MainContentNav/>
                     {component}
                 </div>     

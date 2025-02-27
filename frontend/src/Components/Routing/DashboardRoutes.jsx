@@ -34,7 +34,9 @@ const DashboardRoutes = () => {
                     <Route path="Archives" element={<Archives />} />
                 </Route>
                 <Route path="Task" element={<TaskPage />} />
-                <Route path="DocumentTab" element={<SubmissionRecord />} />
+                <Route path="DocumentTab" element={<SubmissionRecord />}>
+                    <Route path=":id"></Route>
+                </Route>
             </Route>
         </Routes>
     )
