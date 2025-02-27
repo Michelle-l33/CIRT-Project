@@ -26,6 +26,7 @@ app.get("/", (req, res) => {
 //Routes
 app.use("/user", require("./routes/user"));
 app.use("/submission", require("./routes/submission"));
+app.use("/comment", require("./routes/comment"));
 
 // Start server
 app.listen(PORT, () => {

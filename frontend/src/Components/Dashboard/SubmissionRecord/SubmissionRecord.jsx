@@ -5,7 +5,7 @@ import SubmissionDiscussion from './SubmissionComments';
 import SubmissionSatus from './SubmissionStatus';
 import SubmissionParticipant from './SubmissonParticipant';
 
-import { createContext, useState, useReducer } from 'react';
+import { createContext, useState, useReducer, useEffect } from 'react';
 
 export const sumissionContext = createContext(null);
 
@@ -15,8 +15,9 @@ const SubmissionRecord = () => {
     }
 
     const [ currSubmission, setCurrSubmission ] = useState(null);
-
-    const [ submissionList, dispatch ] = useReducer( submissionReducer, [
+    const[submissionList,setSubmissionList] = useState([]);
+    const [loading, setLoading] = useState(true);
+    /* const [ submissionList, dispatch ] = useReducer( submissionReducer, [
         {   
             id: 101,
             author: "Kiril Pangu",
@@ -66,7 +67,33 @@ const SubmissionRecord = () => {
             url: "#",
             currentStep: 4
         },
-    ]);
+    ]); */
+
+    useEffect(()=>{
+        const fetchSubmissions = async () => {
+            try {
+                const response = await fetch("http://localhost:8082/submission/unpublished",{
+                    method: "GET"
+                })
+                if (!response.ok) {
+                    throw new Error("Failed to fetch submissions");
+                }
+        
+                const submissions = await response.json();
+                setSubmissionList(submissions);
+                console.log(submissionList);
+            } catch (error) {
+                console.error("Error fetching submissions:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchSubmissions();
+    },[]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
 
     return(
 

@@ -1,7 +1,8 @@
 const express = require("express");
-const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 const User = require("../models/User");
 const Submission = require("../models/Submission");
+const Comment = require("../models/Comment");
 const router = express.Router();
 const upload = require("../awsConnect");
 
@@ -73,6 +74,16 @@ router.get("/publications", async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+//get all unpublished articles
+  router.get("/unpublished", async (req, res) => {
+    try {
+      const articles = await Submission.find({isArticle:true, stage: { $ne: "5" }}); // finds articles that are unpublished
+      console.log("Fetched Articles:", articles); // Debugging line
+      res.json(articles);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 // individual submission
 router.get("/:id", async (req, res) => {
@@ -111,26 +122,6 @@ router.get("/:authorID", async (req, res) => {
   }
 });
 
-router.post("/:submissionID/record", async (req,res)=>{
-  try{
-      const {originalSubmissionID} = req.params;
-      const {comment}= req.body;
-      
-      if(!mongoose.Types.ObjectId.isValid(originalSubmissionID)){
-        return res.status(400).json({message: "Invalid author ID"});
-      }
-
-      const newComment = new Comment({
-        originalSubmissionID,
-        comment
-      })
-
-  }
-  catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-
-});
   
 
 
