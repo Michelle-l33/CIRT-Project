@@ -13,6 +13,7 @@ const SubmissionAuthorPage = () => {
     const [submissionType, setSubmissionType] = useState("");
     const [stage, setStage]= useState("1");
     const [authorID, setAuthorID] = useState("");
+    const [placeholderInput, setPlaceholderInput] = useState("");
     const [loading, setLoading] = useState(false); // Loading state
     
 
@@ -46,6 +47,7 @@ const SubmissionAuthorPage = () => {
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
         formData.append("stage", stage);
+        formData.append("placeholderInput", placeholderInput); // Conditional Input
 
 
         try{
@@ -74,31 +76,46 @@ const SubmissionAuthorPage = () => {
 
     return (
         <div className={styles.bigContainer}>
-            <div className={styles.pdfContainerLeft}>
-                <div className={styles.fileUploadContainer}>
-                    <h3>Submission Area</h3>
-                    <form onSubmit = {handleSubmit}>
-                        <ul>
-                            <li><input type="text" placeholder="Submission Title" onChange={(e)=>setTitle(e.target.value)} required/></li>
-                            <li><input type="text" placeholder="Author's First name/alias"onChange={(e)=>setFirstName(e.target.value)} required/></li>
-                            <li><input type="text" placeholder="Author's Last name/alias" onChange={(e)=>setLastName(e.target.value)} required/></li>
-                            <li>
-                                <input type="radio" id="posterRadio" name="submissionType" value="poster" checked={submissionType === "poster"} onChange={(e) => setSubmissionType(e.target.value)} required />
-                                <label htmlFor="posterRadio">Poster</label>
-                            
-                                <input type="radio" id="articleRadio" name="submissionType" value="article" checked={submissionType === "article"} onChange={(e) => setSubmissionType(e.target.value)} required/>
-                                <label htmlFor="articleRadio">Article</label>
-                            </li>
-                            <li><input type="file" name="document" accept="application/pdf" onChange={handleFileChange} required/></li>
-                        </ul>
-                        {document && <p>Uploaded file: <span>{document.name}</span></p>}
-                        <button type="submit" className={styles.submitButton} disabled={loading}>
-                            {loading ? "Uploading..." : "Submit"}
-                        </button>
-                    </form>
-                    
+            <form onSubmit = {handleSubmit}>
+                <h1>Submission Area</h1>
+                <div className={styles.boxInput}>
+                    <input type="text" onChange={(e)=>setTitle(e.target.value)} required placeholder="Title"/>
                 </div>
-            </div>
+                <div className={styles.boxInput}>
+                    <input type="text" onChange={(e)=>setFirstName(e.target.value)} required placeholder="First/alias"/>
+                </div>
+                <div className={styles.boxInput}>
+                    <input type="text" onChange={(e)=>setLastName(e.target.value)} required placeholder="Last/alias"/>
+                </div>
+                <div className={styles.radioInput}>
+                    <input type="radio" id="articleRadio" name="submissionType" value="article"
+                        checked={submissionType === "article"}
+                        onChange={(e) => setSubmissionType(e.target.value)}
+                        required />
+                    <label htmlFor="articleRadio">Article</label>
+                    <input type="radio" id="posterRadio" name="submissionType" value="poster"
+                        checked={submissionType === "poster"}
+                        onChange={(e) => setSubmissionType(e.target.value)}
+                        required />
+                    <label htmlFor="posterRadio">Poster</label>
+                </div>
+
+                {/* Conditional Input */}
+                {submissionType === "article" && (
+                    <div className={styles.boxInput}>
+                        <textarea className={styles.abstractInput} value={placeholderInput} onChange={(e) => setPlaceholderInput(e.target.value)} placeholder="Abstract" />
+                    </div>
+                )}
+                {submissionType === "poster" && (
+                    <div className={styles.boxInput}>
+                        <textarea className={styles.posterDescription} value={placeholderInput} onChange={(e) => setPlaceholderInput(e.target.value)} placeholder="Description of poster" />
+                    </div>
+                )}
+
+                <div className={styles.uploadInput}><input type="file" onChange={handleFileChange} /></div>
+                {document && <p>Uploaded file: <span>{document.name}</span></p>}
+                <button type="submit" className={styles.submitButton}>Submit</button>
+            </form>
         </div>
     );
 };
