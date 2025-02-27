@@ -42,6 +42,7 @@ const SubmissionDiscussion = () => {
                 setLoading(false);
             }
         };
+        
         fetchComments();
     },[originalSubmissionID]);
 
@@ -55,10 +56,13 @@ const SubmissionDiscussion = () => {
         if (!comment.trim()) {
             return window.alert("Please enter a comment.");
         }
-
+        if (!originalSubmissionID) {
+            console.error("Submission ID is missing!");
+            return;
+        }
         try{
-            const commentData = { originalSubmissionID, comment };
-            const response = await fetch(`http://localhost:8082/comment/record`,{
+            const commentData = {comment };
+            const response = await fetch(`http://localhost:8082/comment/record/${originalSubmissionID}`,{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -71,11 +75,8 @@ const SubmissionDiscussion = () => {
             if (response.ok) {
                 window.alert("Comment Saved!")
                 setComment("");
-                setCommentList((prevList) => [
-                    ...prevList,
-                    { comment, sender: "Your Name" } // You can modify sender as needed
-                ]);
-                
+                window.reload();
+            
             } else {
                 window.alert(data.error || "Something went wrong!");
                 console.log(data.error);
