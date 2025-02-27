@@ -8,10 +8,10 @@ import { useContext, useState } from 'react';
 import { sumissionContext } from './SubmissionRecord'
 
 
-export const Submission = ({author, title, url}) => {
+export const Submission = ({firstName, lastName, title, url}) => {
     return (
         <>
-            <h4>{author}</h4>
+            <h4>{firstName} {lastName}</h4>
             <Link to = {url}>
                 <p>{title}</p>
             </Link>
@@ -68,7 +68,7 @@ const SubmissionFiles = () => {
                         // the title is a placeholder for id
                         className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
-                        <Submission author = {submission.author} title = {submission.title} url = {submission.url} />
+                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.url} />
                     </li>
                 )) : (<span>No Submission Found</span>)}
             </ul>
