@@ -7,6 +7,8 @@ import { BsSearchHeart } from "react-icons/bs";
 import { useContext, useState } from 'react';
 import { sumissionContext } from './SubmissionRecord'
 
+// populates files into editor "document" tab
+
 
 export const Submission = ({firstName, lastName, title, url}) => {
     return (
