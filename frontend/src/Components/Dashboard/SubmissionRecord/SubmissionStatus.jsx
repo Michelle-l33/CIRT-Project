@@ -1,13 +1,14 @@
 import styles from './SubmissionRecord.module.css';
 
-import { sumissionContext } from './SubmissionRecord'
-import { useContext, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const SubmissionSatus = () => {
+import { useSubmissionsDispatch } from './SubmissionContext'
 
-    const { currSubmission } = useContext(sumissionContext);
+const SubmissionStatus = ( {currSubmission} ) => {
 
-    const [ currentStep, setCurrentStep ] = useState(0);
+    const [ currentStep, setCurrentStep ] = useState("0");
+
+    const dispatch = useSubmissionsDispatch();
 
     const updateCurrStep = useCallback(() => {
         if (currSubmission) {
@@ -23,6 +24,19 @@ const SubmissionSatus = () => {
         return <div className={styles.noStatus}>No submission selected</div>;
     }
 
+    const handleUpdateStage = (newStage) => {
+        dispatch({
+            type: 'updateStage',
+            submission: {
+                ...currSubmission,
+                stage: newStage,
+            },
+        });
+        
+        setCurrentStep(newStage);
+    };
+
+
     return(
 
         <div className={styles.statusContainer}>
@@ -33,7 +47,7 @@ const SubmissionSatus = () => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Send to a reviewer</button>
+                        <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
@@ -45,6 +59,7 @@ const SubmissionSatus = () => {
                     </div>
 
                     <div className = {styles.statusAction}>
+                    <button onClick = {() => handleUpdateStage("3")}>Update State</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
@@ -56,7 +71,7 @@ const SubmissionSatus = () => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Approve Submission</button>
+                        <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
@@ -77,4 +92,4 @@ const SubmissionSatus = () => {
     );
 }
 
-export default SubmissionSatus;
+export default SubmissionStatus;

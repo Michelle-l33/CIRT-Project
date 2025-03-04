@@ -1,11 +1,12 @@
 import styles from './SubmissionRecord.module.css';
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 import { BsSearchHeart } from "react-icons/bs";
 
-import { useContext, useState } from 'react';
-import { sumissionContext } from './SubmissionRecord'
+import { useState, useEffect } from 'react';
+
+import { useSubmissions } from './SubmissionContext'
 
 // populates files into editor "document" tab
 
@@ -22,26 +23,36 @@ export const Submission = ({firstName, lastName, title, url}) => {
     );
 };
 
-const SubmissionFiles = () => {
+const SubmissionFiles = ({setCurrSubmission}) => {
 
-    const { currSubmission, setCurrSubmission, submissionList } = useContext(sumissionContext);
+    const submissionList = useSubmissions();
 
-    const [ filteredList, setFilteredList ] = useState(submissionList);
+    const [ filteredList, setFilteredList ] = useState([]);
+
+    const [ searchParams, setSearchParams ] = useSearchParams();
+
+    const currentSubmissionId = searchParams.get('submissionId');
+
+    useEffect(() => {
+        setFilteredList(submissionList);
+    }, [submissionList]);
 
     const handleSearch = (query) => {
 
         const filteredList = submissionList.filter((submission) => 
-            submission.author.toLowerCase().includes(query.toLowerCase()) ||
+            submission.firstName.toLowerCase().includes(query.toLowerCase()) ||
+            submission.lastName.toLowerCase().includes(query.toLowerCase()) ||
             submission.title.toLowerCase().includes(query.toLowerCase()))
 
         setFilteredList(filteredList);
     }
 
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
 
     const handleSubmissionChange = (submission) => {
+        // navigate(`?submissionId=${submission._id}`);
         setCurrSubmission(submission);
-        navigate(`?submissionId=${submission._id}`);
+        setSearchParams({ submissionId: submission._id });
     }
     
     return(
@@ -68,7 +79,7 @@ const SubmissionFiles = () => {
                 {filteredList.length > 0 ? (filteredList.map((submission, idx) =>
                     <li key = {idx} 
                         // the title is a placeholder for id
-                        className = {`${styles.listItem} ${currSubmission?._id === submission._id? styles.active : ''}`} 
+                        className = {`${styles.listItem} ${currentSubmissionId === submission._id? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
                         <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.url} />
                     </li>

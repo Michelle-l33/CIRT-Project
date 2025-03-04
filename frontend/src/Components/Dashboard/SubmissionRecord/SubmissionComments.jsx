@@ -1,5 +1,5 @@
 import styles from './SubmissionRecord.module.css';
-import { useParams,useLocation } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 
 
@@ -8,7 +8,7 @@ const SubmissionDiscussion = () => {
     const location = useLocation();
     const queryParams = new URLSearchParams(location.search);
     const originalSubmissionID = queryParams.get('submissionId'); // Pulls the submissionId query parameter
-    console.log("ID CHECK", originalSubmissionID);
+    // console.log("ID CHECK", originalSubmissionID);
     const [comment, setComment] = useState("");
     //const {originalSubmissionID} = useParams(); // pulls ID from URL
     const [loading, setLoading]=useState(true);
@@ -90,7 +90,8 @@ const SubmissionDiscussion = () => {
                 <h3>Submission Comments</h3>
 
                  <div className = {styles.left}>
-                    <ButtonWithCommentForm 
+                    <ButtonWithCommentForm
+                        // the code for ButtonWithCommentForm component is down below
                         comment={comment} 
                         setComment={setComment} 
                         handleCommentSubmit={handleCommentSubmit} />

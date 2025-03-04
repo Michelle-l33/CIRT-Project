@@ -5,55 +5,26 @@ import SubmissionDiscussion from './SubmissionComments';
 import SubmissionStatus from './SubmissionStatus';
 import SubmissionParticipant from './SubmissonParticipant';
 
-import { createContext, useState, useEffect } from 'react';
-
-export const sumissionContext = createContext(null);
+import { SubmissionsProvider } from './SubmissionContext'
+import { useState } from 'react';
 
 const SubmissionRecord = () => {
 
-    const [ currSubmission, setCurrSubmission ] = useState(null);
-    const[ submissionList,setSubmissionList ] = useState([]);
-    const [ loading, setLoading ] = useState(true);
+    const [currSubmission, setCurrSubmission] = useState(null);
 
-
-    useEffect(()=>{
-        const fetchSubmissions = async () => {
-            try {
-                const response = await fetch("http://localhost:8082/submission/unpublished",{
-                    method: "GET"
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to fetch submissions");
-                }
-        
-                const submissions = await response.json();
-                setSubmissionList(submissions);
-                
-            } catch (error) {
-                console.error("Error fetching submissions:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchSubmissions();
-    },[]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
 
     return(
 
-        <sumissionContext.Provider value = {{currSubmission, setCurrSubmission, submissionList}}>
+        <SubmissionsProvider>
 
             <div className={styles.docTabContainer}>
-                <SubmissionFiles />
-                <SubmissionStatus />
+                <SubmissionFiles setCurrSubmission = {setCurrSubmission}/>
+                <SubmissionStatus currSubmission={currSubmission}/>
                 <SubmissionDiscussion />
                 <SubmissionParticipant />
             </div>
 
-        </sumissionContext.Provider>
+        </SubmissionsProvider>
     );
 }
 
