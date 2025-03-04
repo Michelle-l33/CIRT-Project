@@ -7,11 +7,13 @@ import { BsSearchHeart } from "react-icons/bs";
 import { useContext, useState } from 'react';
 import { sumissionContext } from './SubmissionRecord'
 
+// populates files into editor "document" tab
 
-export const Submission = ({author, title, url}) => {
+
+export const Submission = ({firstName, lastName, title, url}) => {
     return (
         <>
-            <h4>{author}</h4>
+            <h4>{firstName} {lastName}</h4>
             <Link to = {url}>
                 <p>{title}</p>
             </Link>
@@ -39,7 +41,7 @@ const SubmissionFiles = () => {
 
     const handleSubmissionChange = (submission) => {
         setCurrSubmission(submission);
-        navigate(`${submission.id}`);
+        navigate(`?submissionId=${submission._id}`);
     }
     
     return(
@@ -66,9 +68,9 @@ const SubmissionFiles = () => {
                 {filteredList.length > 0 ? (filteredList.map((submission, idx) =>
                     <li key = {idx} 
                         // the title is a placeholder for id
-                        className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} 
+                        className = {`${styles.listItem} ${currSubmission?._id === submission._id? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
-                        <Submission author = {submission.author} title = {submission.title} url = {submission.url} />
+                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.url} />
                     </li>
                 )) : (<span>No Submission Found</span>)}
             </ul>

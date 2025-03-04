@@ -6,6 +6,7 @@
 - [DropBox](https://www.dropbox.com/scl/fo/xvikjrl9ob1ukagjmxs43/AKxChc2clfhdJ03SJDHrACo?rlkey=j2s4ux0se4konjxcrfzqdkd1o&st=7gfhzz2k&dl=0)
 - [Requirements](https://docs.google.com/document/d/1lFIXtXBgnSvL8d2HnRoLCGoNdaF_c6cdfq0GLQ3BuXE/edit?usp=sharing)
 - [High-Level Design & Detailed Design Choices](https://docs.google.com/document/d/1wyFex_5XaIXCU4bGs7JTG4qBH1iVAm-tuMCLuVPQKoE/edit?tab=t.0)
+- [Benchmark 2 Goals & Planning](https://docs.google.com/document/d/1HjV7ZaoKBteM3dKOUZxkNFSrAIwTt7Rca0wdhQtciYI/edit?usp=sharing)
 
 ## Technical Work as of 2/18/2025:
 - Main focus:
@@ -51,3 +52,7 @@
 - Connecting Mongo database to project
 - User & Submission Schemas and Routing
 - Login/Register/Logout Function
+- Submission Functionality
+- Document Tab Population
+- Editor/Reviewer Commenting Functionality
+

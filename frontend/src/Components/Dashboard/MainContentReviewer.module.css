@@ -51,7 +51,7 @@
 .submissionContaniner .submission * {
     font-weight: 400;
     text-align: center;
-    padding: 5px 0;
+    padding: 20px 0;
     border-radius: 5px;
     color: var(--dark);
     background-color: var(--transparent-light);

@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const connectDB = require("./connection");
+const cookieParser = require('cookie-parser');
 require ("dotenv").config();
 const PORT = process.env.PORT || 8082;
 
@@ -14,6 +15,8 @@ app.use(cors({
 app.use(express.json()); // Allows parsing of JSON requests
 connectDB();
 
+app.use(cookieParser());
+
 
 // Example API route
 app.get("/", (req, res) => {
@@ -23,6 +26,7 @@ app.get("/", (req, res) => {
 //Routes
 app.use("/user", require("./routes/user"));
 app.use("/submission", require("./routes/submission"));
+app.use("/comment", require("./routes/comment"));
 
 // Start server
 app.listen(PORT, () => {
