@@ -66,7 +66,7 @@ const SubmissionFiles = () => {
                 {filteredList.length > 0 ? (filteredList.map((submission, idx) =>
                     <li key = {idx} 
                         // the title is a placeholder for id
-                        className = {`${styles.listItem} ${currSubmission?.title === submission.title? styles.active : ''}`} 
+                        className = {`${styles.listItem} ${currSubmission?._id === submission._id? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
                         <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.url} />
                     </li>

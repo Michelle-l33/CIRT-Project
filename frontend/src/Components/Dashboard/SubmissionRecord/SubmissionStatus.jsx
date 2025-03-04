@@ -7,11 +7,11 @@ const SubmissionSatus = () => {
 
     const { currSubmission } = useContext(sumissionContext);
 
-    const [currentStep, setCurrentStep] = useState(0);
+    const [ currentStep, setCurrentStep ] = useState(0);
 
     const updateCurrStep = useCallback(() => {
         if (currSubmission) {
-            setCurrentStep(currSubmission.currentStep || 0);
+            setCurrentStep(currSubmission.stage);
         }
     }, [currSubmission]);
 
@@ -20,13 +20,13 @@ const SubmissionSatus = () => {
     }, [updateCurrStep]);
 
     if (!currSubmission) {
-        return <div className={styles.noStaus}>No submission selected</div>;
+        return <div className={styles.noStatus}>No submission selected</div>;
     }
 
     return(
 
         <div className={styles.statusContainer}>
-                {currentStep === 1 && <>
+                {currentStep === "1" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission accepted for review</h3>
@@ -38,7 +38,7 @@ const SubmissionSatus = () => {
                     </div>
               </>}
                     
-                {currentStep === 2 && <>
+                {currentStep === "2" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission sent to reviewers</h3>
@@ -49,7 +49,7 @@ const SubmissionSatus = () => {
                     </div>
               </>}
 
-                {currentStep === 3 && <>
+                {currentStep === "3" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission sent back from Reviewer </h3>
@@ -61,7 +61,7 @@ const SubmissionSatus = () => {
                     </div>
               </>}
 
-                {currentStep === 4 && <>
+                {currentStep === "4" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission Approved</h3>
