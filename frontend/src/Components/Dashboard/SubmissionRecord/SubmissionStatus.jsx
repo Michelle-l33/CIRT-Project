@@ -59,7 +59,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                    <button onClick = {() => handleUpdateStage("4")}>Update State</button>
+                    <button onClick = {() => handleUpdateStage("3")}>Update State</button>
                         <button>Decline submission</button>           
                     </div>
               </>}

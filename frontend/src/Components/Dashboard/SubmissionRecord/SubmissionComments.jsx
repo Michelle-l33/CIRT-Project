@@ -90,7 +90,8 @@ const SubmissionDiscussion = () => {
                 <h3>Submission Comments</h3>
 
                  <div className = {styles.left}>
-                    <ButtonWithCommentForm 
+                    <ButtonWithCommentForm
+                        // the code for ButtonWithCommentForm component is down below
                         comment={comment} 
                         setComment={setComment} 
                         handleCommentSubmit={handleCommentSubmit} />
