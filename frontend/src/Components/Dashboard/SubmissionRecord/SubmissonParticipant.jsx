@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styles from './SubmissionRecord.module.css';
 
-const SubmissionParticipant = () => {
+const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a prop
     const [participants, setParticipants] = useState([]);
     const [showReviewers, setShowReviewers] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -27,9 +27,28 @@ const SubmissionParticipant = () => {
         fetchParticipants();
     }, []);
 
-    // Handle "Assign" button click
-    const handleAssignClick = () => {
-        setShowReviewers((prev) => !prev); // Toggle between true and false
+    // Handle "Assign Reviewer" button click
+    const handleAssignReviewer = async (reviewerId) => {
+        try {
+            const response = await fetch(`http://localhost:8082/submission/${submissionId}/assign-reviewer`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ reviewerId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to assign reviewer');
+            }
+
+            const updatedSubmission = await response.json();
+            console.log('Reviewer assigned successfully:', updatedSubmission);
+            alert('Reviewer assigned successfully!');
+        } catch (error) {
+            console.error('Error assigning reviewer:', error);
+            alert('Error assigning reviewer. Please try again.');
+        }
     };
 
     // Filter participants to only include reviewers if `showReviewers` is true
@@ -49,7 +68,7 @@ const SubmissionParticipant = () => {
         <div className={styles.participateContainer}>
             <div className={styles.header}>
                 <h3>Submission Participants</h3>
-                <button onClick={handleAssignClick}>
+                <button onClick={() => setShowReviewers((prev) => !prev)}>
                     {showReviewers ? 'Hide Reviewers' : 'Assign'}
                 </button>
             </div>
@@ -59,7 +78,7 @@ const SubmissionParticipant = () => {
                     <li key={participant._id}>
                         <span>{participant.isAuthor ? 'Author' : participant.isReviewer ? 'Reviewer' : 'Participant'}</span>
                         <span>{participant.name}</span>
-                        <button>Assign Reviewer</button>
+                        <button onClick={() => handleAssignReviewer(participant._id)}>Assign Reviewer</button>
                     </li>
                 ))}
             </ul>
