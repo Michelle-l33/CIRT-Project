@@ -40,7 +40,7 @@ const AllActive = () => {
     const optionList = [
       {
         name: "View in Detail",
-        function: () => navigate=("")
+        function: () => navigate("/")
       },
     ]
     return (

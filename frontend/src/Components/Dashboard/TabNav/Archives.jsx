@@ -24,7 +24,7 @@ const Archives = () => {
     const optionList = [
       {
         name: "View in Detail",
-        function: () => navigate=("")
+        function: () => navigate("")
       },
     ]
 

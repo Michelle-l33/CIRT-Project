@@ -26,7 +26,7 @@ const Unassigned = () => {
     const optionList = [
       {
         name: "View in Detail",
-        function: () => navigate=("")
+        function: () => navigate("")
       },
       {
         name: "Accept Submission",

@@ -79,7 +79,7 @@ const Submission = ({submission, optionList}) => {
                 {/* <span>Option 1</span>
                 <span>Assign a reviewer</span> */}
                 {optionList.map((option) => (
-                    <button OnClick = {option.function} key = {option.name}>{option.name}</button>))}
+                    <button onClick = {option.function} key = {option.name}>{option.name}</button>))}
             </div>
         </div>
     );
