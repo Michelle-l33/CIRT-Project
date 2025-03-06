@@ -12,6 +12,7 @@ import AllActive from '../Dashboard/TabNav/AllActive';
 import Unassigned from '../Dashboard/TabNav/Unassigned';
 import Archives from '../Dashboard/TabNav/Archives';
 import SubmissionRecord from '../Dashboard/SubmissionRecord/SubmissionRecord';
+import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor';
 
 
 const DashboardRoutes = () => {
@@ -38,6 +39,7 @@ const DashboardRoutes = () => {
                     <Route path=":id"></Route>
                 </Route>
             </Route>
+            <Route path="/SubmissionAuthor" element={<SubmissionAuthorPage />} />
         </Routes>
     )
 }
