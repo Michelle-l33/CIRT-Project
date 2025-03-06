@@ -95,10 +95,30 @@ export function SubmissionsProvider( {children} ) {
     if (isPending) {
         return <div>Loading...</div>;
     }
+    const updateSubmissionStage = async (submission, newStage) => {
+        try {
+            const response = await fetch(`http://localhost:8082/submission/${submission._id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ stage: newStage }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Failed to update submission stage");
+            }
+
+            const updatedSubmission = await response.json();
+            dispatch({ type: "updateStageSuccess", submission: updatedSubmission });
+        } catch (error) {
+            console.error("Error updating stage:", error);
+        }
+    };
 
     return (
         <SubmissionsContext.Provider value = {submissionList}>
-            <SubmissionsDispatchContext.Provider value = {dispatch}>
+            <SubmissionsDispatchContext.Provider value = {{dispatch, updateSubmissionStage}}>
                 {children}
             </SubmissionsDispatchContext.Provider>
         </SubmissionsContext.Provider>
@@ -110,7 +130,7 @@ function submissionReducer(submissionList, action) {
         case "setMyQueueSubmissions": {
             return action.submissions;
         }
-        case "updateStage": {
+        case "updateStageSuccess": {
             return submissionList.map((submission) => {
                 if (submission._id === action.submission._id) {
                     return action.submission;

@@ -150,6 +150,27 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
   }
 });
 
+router.put("/:id", async (req,res) =>{
+  try {
+    const { id } = req.params;
+    const { stage } = req.body;
+
+    const updatedSubmission = await Submission.findByIdAndUpdate(
+        id,
+        { stage },
+        { new: true } // Return updated document
+    );
+
+    if (!updatedSubmission) {
+        return res.status(404).json({ message: "Submission not found" });
+    }
+
+    res.json(updatedSubmission);
+} catch (error) {
+    res.status(500).json({ error: error.message });
+}
+})
+
   
 
 
