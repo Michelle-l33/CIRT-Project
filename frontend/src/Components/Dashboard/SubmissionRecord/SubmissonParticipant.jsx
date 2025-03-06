@@ -28,9 +28,6 @@ const SubmissionParticipant = () => {
 
                 // Fetch the current submission to get the reviewerID
                 const submissionResponse = await fetch(`http://localhost:8082/submission/${originalSubmissionID}`);
-                if (!submissionResponse.ok) {
-                    throw new Error('Failed to fetch submission');
-                }
                 const submissionData = await submissionResponse.json();
 
                 // If the submission has a reviewerID, find the reviewer in the participants list
