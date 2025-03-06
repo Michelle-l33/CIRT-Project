@@ -1,17 +1,20 @@
 import styles from './SubmissionRecord.module.css';
 
-import { sumissionContext } from './SubmissionRecord'
-import { useContext, useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
-const SubmissionSatus = () => {
+import { useSubmissionsDispatch } from './SubmissionContext'
 
-    const { currSubmission } = useContext(sumissionContext);
 
-    const [currentStep, setCurrentStep] = useState(0);
+const SubmissionStatus = ( {currSubmission} ) => {
+
+    const [ currentStep, setCurrentStep ] = useState("0");
+
+    const { updateSubmissionStage } = useSubmissionsDispatch();
+
 
     const updateCurrStep = useCallback(() => {
         if (currSubmission) {
-            setCurrentStep(currSubmission.currentStep || 0);
+            setCurrentStep(currSubmission.stage);
         }
     }, [currSubmission]);
 
@@ -20,48 +23,59 @@ const SubmissionSatus = () => {
     }, [updateCurrStep]);
 
     if (!currSubmission) {
-        return <div className={styles.noStaus}>No submission selected</div>;
+        return <div className={styles.noStatus}>No submission selected</div>;
     }
+
+    const handleUpdateStage = async (newStage) => {
+        if (!currSubmission) return;
+
+        await updateSubmissionStage(currSubmission, newStage);
+        setCurrentStep(newStage); // Update UI after successful API call
+        
+        setCurrentStep(newStage);
+    };
+
 
     return(
 
         <div className={styles.statusContainer}>
-                {currentStep === 1 && <>
+                {currentStep === "1" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission accepted for review</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Send to a reviewer</button>
+                        <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
                     
-                {currentStep === 2 && <>
+                {currentStep === "2" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission sent to reviewers</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
+                    <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
 
-                {currentStep === 3 && <>
+                {currentStep === "3" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission sent back from Reviewer </h3>
+                        <h3>Submission Comments Sent To Author  </h3>
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Approve Submission</button>
+                        <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
 
-                {currentStep === 4 && <>
+                {currentStep === "4" && <>
 
                     <div className = {styles.header}>
                         <h3>Submission Approved</h3>
@@ -77,4 +91,4 @@ const SubmissionSatus = () => {
     );
 }
 
-export default SubmissionSatus;
+export default SubmissionStatus;

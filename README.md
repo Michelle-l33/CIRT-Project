@@ -52,3 +52,7 @@
 - Connecting Mongo database to project
 - User & Submission Schemas and Routing
 - Login/Register/Logout Function
+- Submission Functionality
+- Document Tab Population
+- Editor/Reviewer Commenting Functionality
+

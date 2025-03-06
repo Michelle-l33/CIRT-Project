@@ -142,7 +142,7 @@
 }
 
 .filesContainer .listItem.active {
-    padding: 20px;
+    padding: 17px;
     opacity: 1;
     border-style: double;
     border-radius: 20px;
@@ -299,27 +299,32 @@
 }
 
 .commentContainer .contentList .listItem {
-    display: grid;
+    display: flex;
     row-gap: 5px;
+    position: relative;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .commentContainer .contentList .listItem span {
-    margin-left: auto;
     align-items: center;
     font-weight: 550;
     padding: 10px;
     position: relative;
     z-index: 2;
+    flex-basis: 1;
+    margin-left: auto;
 }
 
 .commentContainer .contentList .listItem span:after {
     content: "";
-    width: 200%;
+    width: 120%;
     height: 100%;
     position: absolute;
+    z-index: -1;
     right: 0;
     top: 0;
-    z-index: -1;
     border-radius: 5px 5px 5px 0;
     clip-path: polygon(20% 0%, 100% 0, 100% 100%, 0% 100%);
 }

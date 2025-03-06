@@ -3,6 +3,7 @@ import styles from './MainContentReviewer.module.css';
 
 import { useContext } from 'react';
 import { dashBoardContext } from './Dashboard';
+import TabHeader from './TabNav/TabHeader'
 
 //all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
 
@@ -17,7 +18,7 @@ const MainContentReviewer = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Dashboard Reviewer - This is so painful</h1>                
+                    <h1>Dashboard Reviewer - What should be on here?</h1>                
                 </div>
 
                 <div className={styles.content}>

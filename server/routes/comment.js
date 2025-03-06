@@ -1,14 +1,23 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Comment = require("../models/Comment")
+const Comment = require("../models/Comment");
 const router = express.Router();
 
-
+// Root route ("/") to fetch all comments
+router.get("/", async (req, res) => {
+    try {
+        // Fetch all comments from the database
+        const comments = await Comment.find();
+        res.status(200).json(comments);
+    } catch (error) {
+        res.status(500).json({ error: error.message }); // Send an error response if there's a failure
+    }
+});
 
 // add comments
-router.post("/record", async (req,res)=>{
+router.post("/", async (req,res)=>{
     try{
-      
+        
         const {originalSubmissionID, comment}= req.body;
         
         if(!mongoose.Types.ObjectId.isValid(originalSubmissionID)){
@@ -32,12 +41,12 @@ router.post("/record", async (req,res)=>{
   
   });
   // retrieve comments
-  router.get("/retrieve/:submissionID", async (req, res) => {
+  router.get("/:originalSubmissionID", async (req, res) => {
     try {
       const { originalSubmissionID } = req.params; // Get the submissionID from the URL parameter
   
       // Find comments where the submissionID matches the provided ID
-      const comments = await Comment.find({ originalSubmissionID: originalSubmissionID });
+      const comments = await Comment.find({ originalSubmissionID});
   
       console.log("Fetched Comments:", comments); // Debugging line
       res.json(comments); // Send the fetched comments as a JSON response
