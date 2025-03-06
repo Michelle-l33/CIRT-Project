@@ -279,11 +279,16 @@
     z-index: 3;
     border: 1px solid var(--dark);
     background-color: var(--dark-grey);
-    padding: 5px;
+    padding: 3px;
     gap: 5px;
     border-radius: 10px;
     color: var(--dark);
     grid-template-columns: minmax(100px, fit-content);
+}
+
+.submissionList .submission .submissionOption button {
+    border: none;
+    color: var(--dark);
 }
 
 .submissionList .submission .submissionOption.show {
