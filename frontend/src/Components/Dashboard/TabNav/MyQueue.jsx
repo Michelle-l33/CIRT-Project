@@ -82,7 +82,7 @@ const MyQueue = () => {
 
     const fetchEditorAssignments = async () =>{
       try{
-        const response = await fetch(`http://localhost:8082/submission/myQueue/${user._id}`,{
+        const response = await fetch(`http://localhost:8082/submission/myQueue/${user.id}`,{
           method:"GET"
         }
           

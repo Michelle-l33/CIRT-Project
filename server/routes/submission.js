@@ -180,7 +180,7 @@ router.get("/myQueue/:editorID",async (req,res)=>{
       return res.status(400).json({ message: "Invalid editor ID" });
     }
 
-    const submission = await Submission.find({editorID, isArticle:true, stage: { $ne: "4" }});
+    const submission = await Submission.find({editorID, isArticle:true, stage: { $nin: ["4","0"] }});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions Assigned To This Editor" });
