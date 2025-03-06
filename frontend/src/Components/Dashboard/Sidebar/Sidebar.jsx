@@ -28,15 +28,15 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
     ]
 
     const listOfAuthorIcons = [
-        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Author" },
-        { Name: "User", iconComponent: FaRegUser, url: "/Author/User" },
-        { Name: "Settings", iconComponent: MdOutlineSettings, url: "/Author/Settings" },
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "" },
+        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     const listOfReviewerIcons = [
-        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Author" },
-        { Name: "User", iconComponent: FaRegUser, url: "/Author/User" },
-        { Name: "Settings", iconComponent: MdOutlineSettings, url: "/Author/Settings" },
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "" },
+        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     let listOfIcon;
