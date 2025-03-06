@@ -46,6 +46,7 @@ router.post("/upload", upload.single("document"), async (req, res) => {
   }
 });
 
+//all submissions
 router.get('/', async (req, res) => {
   try {
     const submissions = await Submission.find(); // Fetch all submissions from the database
@@ -77,7 +78,7 @@ router.get("/publications", async (req, res) => {
 //get all unpublished articles
   router.get("/unpublished", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true, stage: { $ne: "5" }}); // finds articles that are unpublished
+      const articles = await Submission.find({isArticle:true, stage: { $ne: "4" }}); // finds articles that are unpublished
       console.log("Fetched Articles:", articles); // Debugging line
       res.json(articles);
     } catch (error) {
@@ -150,6 +151,7 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
   }
 });
 
+//changes specific submission stage
 router.put("/:id", async (req,res) =>{
   try {
     const { id } = req.params;
@@ -169,6 +171,25 @@ router.put("/:id", async (req,res) =>{
 } catch (error) {
     res.status(500).json({ error: error.message });
 }
+})
+
+router.get("/myQueue/:editorID",async (req,res)=>{
+  try{
+    const {editorID} = req.params;
+    if(!mongoose.Types.ObjectId.isValid(editorID)){
+      return res.status(400).json({ message: "Invalid editor ID" });
+    }
+
+    const submission = await Submission.find({editorID, isArticle:true, stage: { $ne: "4" }});
+
+    if (!submission) {
+      return res.status(404).json({ message: "No Submissions Assigned To This Editor" });
+    }
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 })
 
   
