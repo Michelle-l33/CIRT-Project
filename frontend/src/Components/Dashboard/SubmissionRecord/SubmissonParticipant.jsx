@@ -1,22 +1,40 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from "react-router-dom";
 import styles from './SubmissionRecord.module.css';
 
-const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a prop
+const SubmissionParticipant = () => {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const originalSubmissionID = queryParams.get('submissionId'); // Pulls the submissionId query parameter
+    console.log("ID CHECK", originalSubmissionID);
+
     const [participants, setParticipants] = useState([]);
     const [showReviewers, setShowReviewers] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [currentReviewer, setCurrentReviewer] = useState(null); // State to store the current reviewer
 
-    // Fetch participants from the backend
+    // Fetch participants and current reviewer from the backend
     useEffect(() => {
-        const fetchParticipants = async () => {
+        const fetchData = async () => {
             try {
-                const response = await fetch('http://localhost:8082/user'); // Replace with your backend URL
-                if (!response.ok) {
+                // Fetch all participants
+                const participantsResponse = await fetch('http://localhost:8082/user');
+                if (!participantsResponse.ok) {
                     throw new Error('Failed to fetch participants');
                 }
-                const data = await response.json();
-                setParticipants(data);
+                const participantsData = await participantsResponse.json();
+                setParticipants(participantsData);
+
+                // Fetch the current submission to get the reviewerID
+                const submissionResponse = await fetch(`http://localhost:8082/submission/${originalSubmissionID}`);
+                const submissionData = await submissionResponse.json();
+
+                // If the submission has a reviewerID, find the reviewer in the participants list
+                if (submissionData.reviewerID) {
+                    const reviewer = participantsData.find((participant) => participant._id === submissionData.reviewerID);
+                    setCurrentReviewer(reviewer);
+                }
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -24,13 +42,13 @@ const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a 
             }
         };
 
-        fetchParticipants();
-    }, []);
+        fetchData();
+    }, [originalSubmissionID]);
 
     // Handle "Assign Reviewer" button click
     const handleAssignReviewer = async (reviewerId) => {
         try {
-            const response = await fetch(`http://localhost:8082/submission/${submissionId}/assign-reviewer`, {
+            const response = await fetch(`http://localhost:8082/submission/${originalSubmissionID}/assign-reviewer`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -44,6 +62,11 @@ const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a 
 
             const updatedSubmission = await response.json();
             console.log('Reviewer assigned successfully:', updatedSubmission);
+
+            // Update the current reviewer in the state
+            const reviewer = participants.find((participant) => participant._id === reviewerId);
+            setCurrentReviewer(reviewer);
+
             alert('Reviewer assigned successfully!');
         } catch (error) {
             console.error('Error assigning reviewer:', error);
@@ -54,7 +77,9 @@ const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a 
     // Filter participants to only include reviewers if `showReviewers` is true
     const displayedParticipants = showReviewers
         ? participants.filter((participant) => participant.isReviewer)
-        : []; // Empty array when `showReviewers` is false
+        : currentReviewer
+        ? [currentReviewer] // Show the current reviewer if one exists
+        : []; // Empty array if no reviewer is assigned
 
     if (loading) {
         return <div>Loading...</div>;
@@ -78,7 +103,9 @@ const SubmissionParticipant = ({ submissionId }) => { // Pass submissionId as a 
                     <li key={participant._id}>
                         <span>{participant.isAuthor ? 'Author' : participant.isReviewer ? 'Reviewer' : 'Participant'}</span>
                         <span>{participant.name}</span>
-                        <button onClick={() => handleAssignReviewer(participant._id)}>Assign Reviewer</button>
+                        {showReviewers && ( // Only show the "Assign Reviewer" button when reviewers are visible
+                            <button onClick={() => handleAssignReviewer(participant._id)}>Assign Reviewer</button>
+                        )}
                     </li>
                 ))}
             </ul>

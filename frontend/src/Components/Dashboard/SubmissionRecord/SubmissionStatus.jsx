@@ -4,11 +4,13 @@ import { useState, useEffect, useCallback } from 'react';
 
 import { useSubmissionsDispatch } from './SubmissionContext'
 
+
 const SubmissionStatus = ( {currSubmission} ) => {
 
     const [ currentStep, setCurrentStep ] = useState("0");
 
-    const dispatch = useSubmissionsDispatch();
+    const { updateSubmissionStage } = useSubmissionsDispatch();
+
 
     const updateCurrStep = useCallback(() => {
         if (currSubmission) {
@@ -24,14 +26,11 @@ const SubmissionStatus = ( {currSubmission} ) => {
         return <div className={styles.noStatus}>No submission selected</div>;
     }
 
-    const handleUpdateStage = (newStage) => {
-        dispatch({
-            type: 'updateStage',
-            submission: {
-                ...currSubmission,
-                stage: newStage,
-            },
-        });
+    const handleUpdateStage = async (newStage) => {
+        if (!currSubmission) return;
+
+        await updateSubmissionStage(currSubmission, newStage);
+        setCurrentStep(newStage); // Update UI after successful API call
         
         setCurrentStep(newStage);
     };
@@ -59,7 +58,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                    <button onClick = {() => handleUpdateStage("3")}>Update State</button>
+                    <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
@@ -67,7 +66,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "3" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission sent back from Reviewer </h3>
+                        <h3>Submission Comments Sent To Author  </h3>
                     </div>
 
                     <div className = {styles.statusAction}>
