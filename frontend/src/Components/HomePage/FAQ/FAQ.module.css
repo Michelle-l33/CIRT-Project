@@ -1,5 +1,66 @@
 .cirtIntro {
-    text-align: center;
-    background-color: rgb(236, 243, 246);
-    padding: 2-px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    column-gap: 4rem;
+    padding: 15px 4rem;
+}
+
+.cirtIntro .wordsContainer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.cirtIntro .wordsContainer h1 {
+    display: block;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: 1px;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* Easy read more Button: https://paulbakaus.com/multiline-truncated-text-with-show-more-button-with-just-css/ */
+.cirtIntro .wordsContainer input {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+
+.cirtIntro .wordsContainer .longerDes {
+    display: none;
+}
+
+input[type="checkbox"]:checked + .longerDes {
+    display: block;
+}
+
+label[for="expanded"]::before {
+    content: "Show more";
+    cursor: pointer;
+}
+
+input[type="checkbox"]:checked + p + label::before {
+    content: "Show less";
+}
+
+.cirtIntro .imgContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    padding: 0;
+}
+
+.cirtIntro .imgContainer img{
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    object-fit: fill;
+    border: transparent;
+    border-radius: 10px;
 }
