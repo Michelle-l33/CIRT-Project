@@ -11,6 +11,7 @@ import Login from './Components/Login/Login';
 import SubmissionReview from './Components/SubmissionReview/SubmissionReview';
 import SubmissionAuthor from './Components/SubmissionAuthor/SubmissionAuthor';
 import Gallery from './Components/Gallery/Gallery';
+import Papers from './Components/Papers/Papers';
 import { dashBoardContext } from './Components/Dashboard/Dashboard';
 
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/SubmissionReview" element={<SubmissionReview />} />
           <Route path="/SubmissionAuthor" element={<SubmissionAuthor />} />
           <Route path="/Gallery" element={<Gallery />} />
+          <Route path="/Papers" element={<Papers />} />
           <Route path="/Dashboard" element = {<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<RedirectDashboard />} />
             <Route path="/Dashboard/*" element={<DashboardRoutes />}/>
