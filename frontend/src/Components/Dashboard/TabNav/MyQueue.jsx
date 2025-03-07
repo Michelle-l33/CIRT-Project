@@ -5,33 +5,14 @@ import TabHeader from './TabHeader';
 import { useState, useEffect } from 'react';
 import {useUser} from '../../Login/UserContext';
 import { useNavigate } from "react-router-dom";
+import { useSubmissions } from '../SubmissionRecord/SubmissionContext';
 
 
 const MyQueue = () => {
     const {user} = useUser();
     const [submissionList, setSubmissionList] = useState([]);
-
-
-    const fetchEditorAssignments = async () =>{
-      try{
-        const response = await fetch(`http://localhost:8082/submission/myQueue/${user.id}`,{
-          method:"GET"
-        }
-          
-        )
-        if (!response.ok){
-          throw new Error("Failed to fetch editor assigned submissions");
-        }
-        const data = await response.json();
-        setSubmissionList(data);
-
-      }
-      catch (error) {
-        console.error("Error fetching submissions:", error);
-      }
-    }
-
-    const [filteredList, setFilteredList] = useState(submissionList);
+    const [ filteredList, setFilteredList ] = useState([]);
+    //console.log("LIST: ",submissionList);
 
     const navigate = useNavigate();
     const optionList = [
@@ -40,6 +21,30 @@ const MyQueue = () => {
         function: () => navigate("")
       },
     ]
+
+    useEffect(()=>{
+      const fetchMyQueue = async () =>{
+       try { 
+        const response = await fetch(`http://localhost:8082/submission/myQueue/${user._id}`,{
+          method: "GET"
+        })
+        if (!response.ok){
+          throw new Error("Failed to fetch submissions");
+        }
+        const data = await response.json();
+        setSubmissionList(data);
+      }  catch (error) {
+        console.error("Error fetching submissions:", error);
+      }
+    };
+    fetchMyQueue();
+
+    }, [user._id]);
+
+    useEffect(() => {
+      // Update filteredList when submissionList is fetched
+      setFilteredList(submissionList);
+  }, [submissionList]);
 
     return (
 

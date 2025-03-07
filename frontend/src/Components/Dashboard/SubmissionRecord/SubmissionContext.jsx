@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer, useState, useTransition, useEffect } from 'react';
 
+import { useUser } from '../../Login/UserContext';
 const SubmissionsContext = createContext(null);
 
 const SubmissionsDispatchContext = createContext(null);
@@ -66,15 +67,17 @@ const SubmissionsDispatchContext = createContext(null);
 
 
 export function SubmissionsProvider( {children} ) {
+    const {user} = useUser();
     const [isPending, startTransition] = useTransition();
     const [initialSubmissions, setInitialSubmissions] = useState([]);
     const [submissionList, dispatch] = useReducer(submissionReducer, initialSubmissions);
+
 
    useEffect(()=>{
     startTransition( () => {
         const fetchSubmissions = async () => {
             try {
-                const response = await fetch("http://localhost:8082/submission/unpublished",{
+                const response = await fetch(`http://localhost:8082/submission/myQueue/${user._id}`,{
                     method: "GET"
                 })
                 if (!response.ok) {
