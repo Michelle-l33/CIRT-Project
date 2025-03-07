@@ -78,7 +78,7 @@ router.get("/publications", async (req, res) => {
 //get all unpublished articles
   router.get("/unpublished", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true, stage: { $ne: "4" }}); // finds articles that are unpublished
+      const articles = await Submission.find({isArticle:true, stage: { $nin: ["4", "0"] }}); // finds articles that are unpublished
       console.log("Fetched Articles:", articles); // Debugging line
       res.json(articles);
     } catch (error) {

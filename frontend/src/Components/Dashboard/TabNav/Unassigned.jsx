@@ -29,7 +29,7 @@ const Unassigned = () => {
         function: () => navigate("")
       },
       {
-        name: "Accept Submission",
+        name: "Edit Submission",
         funtion: handleAssignEditor
       }
     ]

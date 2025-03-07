@@ -7,22 +7,22 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 const getStepStatus = (currentStep) => {
     switch(currentStep) {
-        case 1:
+        case "1":
             return { 
                 stepTitle: "Submitted", 
                 statusClass: `${styles.submissionStatus} ${styles.submitted}`
             };
-        case 2:
+        case "2":
             return { 
                 stepTitle: "Under Review", 
                 statusClass: `${styles.submissionStatus} ${styles.underReview}`
             };
-        case 3:
+        case "3":
             return { 
-                stepTitle: "Reviewed", 
+                stepTitle: "Author Revising", 
                 statusClass: `${styles.submissionStatus} ${styles.reviewed}`
             };
-        case 4:
+        case "4":
             return { 
                 stepTitle: "Accepted", 
                 statusClass: `${styles.submissionStatus} ${styles.accepted}`
