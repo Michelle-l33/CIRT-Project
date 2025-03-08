@@ -1,22 +1,43 @@
-import React, { useState } from 'react'; // Add useState import
+import React, { useState, useEffect } from 'react'; // Add useState import
 import { Link } from 'react-router-dom';
 import styles from './Gallery.module.css';
 
 const Gallery = () => {
   // State for search query
   const [searchQuery, setSearchQuery] = useState('');
+  const [posters,setPosters] = useState([]);
+
+  useEffect(()=>{
+    const fetchGallery = async ()=>{
+      try{
+        const response = await fetch("http://localhost:8082/submission/gallery",{
+          method:"GET"
+        })
+        if(!response.ok){
+          throw new Error ("Failed to fetch gallery");
+        }
+        const data = await response.json();
+        setPosters(data);
+        console.log("Posters: ", posters);
+      } catch (error){
+        console.error("Error fetching gallery:", error);
+      }
+    }
+    fetchGallery();
+  },[]);
 
   // Posters data
-  const posters = [
-    { id: 1, title: "AI in Healthcare", author: "Dr. Smith", img: 'poster1.jpeg' },
-    { id: 2, title: "Marine Biology", author: "Dr. Johnson", img: 'poster2.jpeg' },
-    { id: 3, title: "Urban Development", author: "Dr. Williams", img: 'poster3.jpeg' },
-    { id: 4, title: "Quantum Computing", author: "Dr. Brown", img: 'poster4.jpeg' },
-    { id: 5, title: "Climate Change", author: "Dr. Davis", img: 'poster5.jpeg' },
-    { id: 6, title: "Neuroscience", author: "Dr. Wilson", img: 'poster6.jpeg' }
-  ];
+  // const posters = [
+  //   { id: 1, title: "AI in Healthcare", author: "Dr. Smith", img: 'poster1.jpeg' },
+  //   { id: 2, title: "Marine Biology", author: "Dr. Johnson", img: 'poster2.jpeg' },
+  //   { id: 3, title: "Urban Development", author: "Dr. Williams", img: 'poster3.jpeg' },
+  //   { id: 4, title: "Quantum Computing", author: "Dr. Brown", img: 'poster4.jpeg' },
+  //   { id: 5, title: "Climate Change", author: "Dr. Davis", img: 'poster5.jpeg' },
+  //   { id: 6, title: "Neuroscience", author: "Dr. Wilson", img: 'poster6.jpeg' }
+  // ];
 
   // Filter posters based on search query
+  
   const filteredPosters = posters.filter(poster => {
     const searchLower = searchQuery.toLowerCase();
     return (

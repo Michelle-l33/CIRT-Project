@@ -1,19 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Papers.module.css';
 
 const Papers = () => {
   const [searchQuery, setSearchQuery] = useState('');
-
+  const [papers, setPapers] = useState([]);
   // Dummy data for papers
-  const papers = [
-    { id: 1, title: "AI in Healthcare Research", author: "Dr. Smith", pdf: 'pdf1.pdf' },
-    { id: 2, title: "Marine Biology Study", author: "Dr. Johnson", pdf: 'pdf2.pdf' },
-    { id: 3, title: "Urban Development Analysis", author: "Dr. Williams", pdf: 'pdf3.pdf' },
-    { id: 4, title: "Quantum Computing Advancements", author: "Dr. Brown", pdf: 'pdf4.pdf' },
-    { id: 5, title: "Climate Change Impact", author: "Dr. Davis", pdf: 'pdf5.pdf' },
-    { id: 6, title: "Neuroscience Breakthroughs", author: "Dr. Wilson", pdf: 'pdf6.pdf' }
-  ];
+  // const papers = [
+  //   { id: 1, title: "AI in Healthcare Research", author: "Dr. Smith", pdf: 'pdf1.pdf' },
+  //   { id: 2, title: "Marine Biology Study", author: "Dr. Johnson", pdf: 'pdf2.pdf' },
+  //   { id: 3, title: "Urban Development Analysis", author: "Dr. Williams", pdf: 'pdf3.pdf' },
+  //   { id: 4, title: "Quantum Computing Advancements", author: "Dr. Brown", pdf: 'pdf4.pdf' },
+  //   { id: 5, title: "Climate Change Impact", author: "Dr. Davis", pdf: 'pdf5.pdf' },
+  //   { id: 6, title: "Neuroscience Breakthroughs", author: "Dr. Wilson", pdf: 'pdf6.pdf' }
+  // ];
+
+
+  useEffect(()=>{
+    const fetchPapers = async ()=>{
+      try{
+        const response = await fetch("http://localhost:8082/submission/publications",{
+          method:"GET"
+        })
+        if(!response.ok){
+          throw new Error ("Failed to fetch papers");
+        }
+        const data = await response.json();
+        setPapers(data);
+        console.log("Papers: ", papers);
+      } catch (error){
+        console.error("Error fetching papers:", error);
+      }
+    }
+    fetchPapers();
+  },[]);
 
   // Filter papers based on search query
   const filteredPapers = papers.filter(paper => {
