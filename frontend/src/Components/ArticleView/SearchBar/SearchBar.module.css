@@ -1,0 +1,98 @@
+.searchContainer {
+    display: block;
+}
+
+.searchContainer .headerOptions {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+}
+
+.searchContainer .headerOptions .tabOptions {
+    display: grid;
+    grid-template-columns: repeat(2, 110px);
+    justify-content: start;
+}
+
+.headerOptions .tabOptions .radioLabel, .headerOptions .advanceFilter {
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 0;
+    padding-block: 1px;
+    padding-inline: 6px;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    box-sizing: border-box;
+    padding: 5px;
+    transition: background-color 0.3s ease, transform 0.5s ease;
+}
+.radioLabel input {
+    display: none;
+}
+
+.headerOptions .radioLabel:hover {
+    background-color: var(--primary);
+    color: white;
+    transform: rotate(360deg);
+}
+
+.headerOptions .advanceFilter {
+    border: 1px solid black;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.headerOptions .advanceFilter:hover {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.searchContainer .searchInput {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+    max-height: 60px;
+    margin: 0;
+}
+
+.searchContainer .searchInput input {
+    padding: 10px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 550;
+    margin: 0;
+    text-rendering: optimizelegibility;
+    transition: transform 250ms cubic-bezier(0.17, 0.67, 0.83, 0.67) 0s;
+    flex-grow: 8;
+}
+
+.searchContainer .searchInput button {
+    height: auto;
+    flex-grow: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.searchContainer .searchInput button:hover{
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.searchContainer .searchInput button svg {
+    font-size: 1.5rem;
+}
