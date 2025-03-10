@@ -6,7 +6,7 @@ import { useState } from 'react';
 const SearchBar = () => {
 
     const [ query, setQuery ] = useState("");
-    const [ tab, setTab ] = useState("article");
+    const [ tab, setTab ] = useState("articles");
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {

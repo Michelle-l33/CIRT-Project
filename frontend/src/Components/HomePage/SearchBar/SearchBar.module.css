@@ -1,16 +1,17 @@
 .bigContainer {
     padding: 15px 4rem;
+    height: 60vh;
 }
 
 .bigContainer h2 {
     display: block;
     margin: 0;
     font-weight: 600;
+    font-size: clamp(1.5rem, 4vw, 5.5rem); 
     line-height: 1.2;
     letter-spacing: 1px;
     padding-top: 0;
     padding-bottom: 0;
-    font-size: 1.5em;
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
 }
