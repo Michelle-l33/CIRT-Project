@@ -19,7 +19,15 @@
     line-height: 1.2;
     letter-spacing: 1px;
     padding-top: 0;
-    padding-bottom: 0;
+    padding-bottom: 45px;
+    font-size: clamp(1.5rem, 4vw, 5.5rem);
+}
+
+.cirtIntro .wordsContainer h1 + span {
+    display: block;
+    font-weight: 500;
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+    padding-bottom: 20px; 
 }
 
 /* Easy read more Button: https://paulbakaus.com/multiline-truncated-text-with-show-more-button-with-just-css/ */
@@ -33,16 +41,25 @@
     display: none;
 }
 
-input[type="checkbox"]:checked + .longerDes {
+input[type="checkbox"]:checked ~ .longerDes {
     display: block;
+    margin-top: 0;
+    font-size: 1rem;
 }
 
 label[for="expanded"]::before {
     content: "Show more";
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 20px;
     cursor: pointer;
+    color: white;
+    background-color: var(--primary);
+    display: inline-block;
+    margin-bottom: 10px;
 }
 
-input[type="checkbox"]:checked + p + label::before {
+input[type="checkbox"]:checked + label::before {
     content: "Show less";
 }
 

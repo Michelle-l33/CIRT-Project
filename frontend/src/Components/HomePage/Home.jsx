@@ -11,6 +11,8 @@ import clorinde from '../../Asset/clean.avif';
 import navia from '../../Asset/posters.avif';
 import ningguang from '../../Asset/talent.avif';
 
+import Gallery from './Gallery/Gallery';
+
 const listOfPictureInfos = [
   {
     title: "Beidou",
@@ -71,7 +73,7 @@ const homePage = () => {
       <main>
         <FAQ />
         <SearchBar />
-        {/* Remove <Gallery /> since it's now a separate page */}
+        <Gallery listOfPictureInfos ={listOfPictureInfos}/>
         <Footer />
       </main>
     </div>
