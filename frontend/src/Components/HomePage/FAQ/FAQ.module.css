@@ -20,6 +20,7 @@
     letter-spacing: 1px;
     padding-top: 0;
     padding-bottom: 0;
+    font-size: clamp(1.5rem, 4vw, 5.5rem); 
 }
 
 /* Easy read more Button: https://paulbakaus.com/multiline-truncated-text-with-show-more-button-with-just-css/ */
