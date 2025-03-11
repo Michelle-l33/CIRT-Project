@@ -75,7 +75,7 @@ const Gallery = () => {
           />
         </div>
         <nav className={styles.sidebarNav}>
-          <Link to="/browse" className={styles.navItem}>All Posters</Link>
+          <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
           <Link to="/Papers" className={styles.navItem}>All Papers</Link> 
           <Link to="/submit" className={styles.navItem}>Submit Research</Link>
           <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
