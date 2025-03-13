@@ -163,7 +163,7 @@
 
 .mainContent main .bottomData .comment .commentList li {
     background-color: var(--dark-grey);
-    border: 1px solid black;
+    border: 1px solid var(--transparent-dark);
     width: 100%;
     background: var(--grey);
     padding: 10px;
