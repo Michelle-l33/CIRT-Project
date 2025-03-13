@@ -12,13 +12,21 @@ import { useSubmissions } from './SubmissionContext'
 
 
 export const Submission = ({firstName, lastName, title, url}) => {
+    const handleDownload = () => {
+        const link = document.createElement("a");
+        link.href = url;
+        link.setAttribute("download", ""); // Triggers download
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    };
     return (
         <>
             <h4>{firstName} {lastName}</h4>
             <Link to = {url}>
                 <p>{title}</p>
             </Link>
-            <button>Download</button>
+            <button onClick={handleDownload}>Download</button>
         </>
     );
 };
@@ -81,7 +89,7 @@ const SubmissionFiles = ({setCurrSubmission}) => {
                         // the title is a placeholder for id
                         className = {`${styles.listItem} ${currentSubmissionId === submission._id? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
-                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.url} />
+                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.document} />
                     </li>
                 )) : (<span>No Submission Found</span>)}
             </ul>
