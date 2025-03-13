@@ -147,20 +147,50 @@
     flex-basis: 500px;
 } 
 
-.mainContent main .bottomData .reminders{
+.mainContent main .bottomData .comment{
     flex-grow: 1;
     flex-basis: 300px;
 }
 
-.mainContent main .bottomData .reminders .taskList{
+.mainContent main .bottomData .comment .commentList{
     width: 100%;
     max-height: 50vh;
     overflow-y: auto;
     border-radius: 10px;
+    display: grid;
+    row-gap: 20px;
 }
 
-.mainContent main .bottomData .reminders .taskList li {
-    background-color: dark;
+.mainContent main .bottomData .comment .commentList li {
+    background-color: var(--dark-grey);
+    border: 1px solid black;
+    width: 100%;
+    background: var(--grey);
+    padding: 10px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    backdrop-filter: blur(1.1);
+    position: relative;
+    display: flex;
+    row-gap: 5px;
+    position: relative;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.mainContent .comment .commentList li p {
+    border-bottom: 1px dotted var(--primary);
+    padding-bottom: 1em;
+    width: 100%;
+}
+
+.mainContent .comment .commentList li span {
+    align-items: center;
+    font-weight: 550;
+    position: relative;
+    z-index: 2;
+    flex-basis: 1;
+    margin-left: auto;
 }
 
 .mainContent.close{

@@ -42,7 +42,8 @@ const Gallery = () => {
     const searchLower = searchQuery.toLowerCase();
     return (
       poster.title.toLowerCase().includes(searchLower) ||
-      poster.author.toLowerCase().includes(searchLower)
+      poster.firstName.toLowerCase().includes(searchLower) ||
+      poster.lastName.toLowerCase().includes(searchLower)
     );
   });
 

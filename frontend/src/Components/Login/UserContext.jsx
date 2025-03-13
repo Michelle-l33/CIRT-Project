@@ -42,7 +42,7 @@ export const UserProvider = ({ children }) => {
   const handleLogout = () =>{
     Cookies.remove('userID');
     setUser(null);
-    window.location.href= "/login";
+    window.location.href= "/Login";
     };
 
     if (loading) {

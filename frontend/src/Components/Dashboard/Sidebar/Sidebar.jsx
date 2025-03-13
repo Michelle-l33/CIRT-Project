@@ -83,13 +83,13 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
 
             <ul className = {styles.sideMenu}>
                 <li>
-                    <a href="#" className={styles.logout} onClick={(e) => {
-                    e.preventDefault();  // Prevent the default link behavior
+                    <button className={styles.logout} onClick={(e) => {
+                    e.preventDefault(); // Prevent the default link behavior
                     handleLogout();
                     }}>
                         <RiLogoutCircleLine/>
                     Logout
-                    </a>
+                    </button>
                 </li>
             </ul>
 
