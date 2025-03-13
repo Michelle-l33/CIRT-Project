@@ -64,7 +64,7 @@ const Submission = ({submission}) => {
             <GiFrozenRing />
 
             <div className = {styles.submissionDes}>
-                <h4>{submission.author}</h4>
+                <h4>{submission.firstName} {submission.lastName}</h4>
                 <p>{submission.title}</p>
             </div>
                     
