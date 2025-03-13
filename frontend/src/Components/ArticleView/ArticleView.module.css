@@ -1,0 +1,112 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bigContainer {
+    display: grid;
+    grid-template-rows: auto auto 1fr; /* Navbar, Title, Content */
+    grid-template-columns: 1fr; /* Single-column layout for responsiveness */
+    grid-template-areas:
+        "navbar"
+        "title"
+        "content";
+    min-height: 100vh;
+    background-color: #f4f4f4;
+}
+
+
+.articleInformation {
+    border-top: #1d1d1d;
+    border-style: solid;
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+    padding: 3em 0.5em;
+}
+
+.categoryTag {
+    padding: 0.5em 1em;
+}
+
+.title {
+    grid-area: title;
+    padding: 0.5em 1em;
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: left;
+}
+
+.contributors {
+    grid-area: title;
+    padding: 0.5em 1em;
+    font-size: 1em;
+    text-align: left;
+    text-decoration: underline;
+}
+
+.pdfWrapper {
+    background-color: #303030;
+    /* padding: 1em; */
+    text-align: center;
+    min-height: 400px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pdfNavBar {
+    background-color: #1d1d1d;
+    padding: 1em 1em;
+    display: grid;
+    grid-template-columns: 0.4fr 1.2fr 0.4fr;
+    grid-area: "left" "center" "right";
+    /* display: flex;
+    justify-content: space-between;
+    align-items: center; */
+}
+
+.pdfNavBar > * > button {
+    border-radius: 5px;
+    padding: 0.2em;
+}
+
+.pdfNavBar > * > button:hover {
+    background-color: #ffffff3a;
+    transition: ease-out 0.3s;
+}
+
+.leftControl > * {
+    background-color: #1d1d1d;
+    border: none;
+    margin: 0 0.5em;
+    grid-area: "left";
+}
+
+.centerControl > * {
+    background-color: #1d1d1d;
+    border: none;
+    margin: 0 0.5em;
+    grid-area: "center";
+}
+
+.rightControl > * {
+    background-color: #1d1d1d;
+    border: none;
+    margin: 0 0.5em;
+    grid-area: "right";
+}
+
+.pdfWrapper > img {
+    padding: 5em;
+    height: 60em;
+    width: 40em;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .contentWrapper {
+        grid-template-columns: 1fr; /* Stack sidebar & PDF on small screens */
+    }
+}

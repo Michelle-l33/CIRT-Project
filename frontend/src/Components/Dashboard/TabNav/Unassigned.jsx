@@ -6,12 +6,11 @@ import Submission from "./Submission";
 
 import { useState } from 'react';
 
-
+import { useNavigate } from "react-router-dom";
 
 const Unassigned = () => {
 
     const [ submissionList ] = useState([
-
         {
             firstName: "Ben",
             lastName: "Ben",
@@ -22,6 +21,20 @@ const Unassigned = () => {
 
     const [filteredList, setFilteredList] = useState(submissionList);
 
+    const navigate = useNavigate();
+
+    const handleAssignEditor = () => {};
+    const optionList = [
+      {
+        name: "View in Detail",
+        function: () => navigate("")
+      },
+      {
+        name: "Edit Submission",
+        funtion: handleAssignEditor
+      }
+    ]
+
     return (
          <div className = {styles.tab}>
                   <TabHeader tabHeader="Unassigned" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
@@ -30,7 +43,7 @@ const Unassigned = () => {
              
                         {filteredList.length > 0 ? (filteredList.map((submission, idx)=>
                         <li key = {idx}>
-                            <Submission submission = {submission}/>
+                            <Submission submission = {submission} optionList = {optionList}/>
                         </li>
                         )) : (<span>No Submission Found</span>)}
                       

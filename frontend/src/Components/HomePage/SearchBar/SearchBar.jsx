@@ -1,25 +1,19 @@
 import styles from './SearchBar.module.css';
 
-const SearchBar =() => {
+import SearchBar from '../../ArticleView/SearchBar/SearchBar';
+
+const SearchBarHome =() => {
     //javascript funcs go here
     return( // html goes in the return()
 
-        <div>
-            <h1>This is where you search!</h1>
+        <div className = {styles.bigContainer}>
+            <h2>This is where you search!</h2>
 
             <div className = {styles.searchContainer}>
-                <select>
-                    <option>Author</option>
-                    <option>Article</option>
-                    <option>Poster</option>
-                </select> 
-                <form id = "searchForm">
-                    <label for="keyWord">Searching for:</label>
-                    <input type="text" id="keyWord" name="keyWord"/>
-                </form>
+                <SearchBar />
             </div>
 
         </div>
     );
 };
-export default SearchBar; //make sure to export the function
+export default SearchBarHome; //make sure to export the function

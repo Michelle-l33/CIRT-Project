@@ -10,7 +10,7 @@ import { GrNotes } from "react-icons/gr";
 
 import TrackBar from "./TrackBar/TrackBar";
 import Task from './Task/Task';
-import SubmissionPage from '../SubmissionAuthor/SubmissionAuthor';
+import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext } from 'react';
