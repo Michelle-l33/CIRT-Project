@@ -7,22 +7,22 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 const getStepStatus = (currentStep) => {
     switch(currentStep) {
-        case 1:
+        case "1":
             return { 
                 stepTitle: "Submitted", 
                 statusClass: `${styles.submissionStatus} ${styles.submitted}`
             };
-        case 2:
+        case "2":
             return { 
                 stepTitle: "Under Review", 
                 statusClass: `${styles.submissionStatus} ${styles.underReview}`
             };
-        case 3:
+        case "3":
             return { 
-                stepTitle: "Reviewed", 
+                stepTitle: "Author Revising", 
                 statusClass: `${styles.submissionStatus} ${styles.reviewed}`
             };
-        case 4:
+        case "4":
             return { 
                 stepTitle: "Accepted", 
                 statusClass: `${styles.submissionStatus} ${styles.accepted}`
@@ -37,7 +37,7 @@ const getStepStatus = (currentStep) => {
 
 //detecting click anywhere https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
 
-const Submission = ({submission}) => {
+const Submission = ({submission, optionList}) => {
     
     const { stepTitle, statusClass } = getStepStatus(submission.stage);
 
@@ -76,8 +76,10 @@ const Submission = ({submission}) => {
             
             <CiMenuKebab ref = {dropdownRef} onClick = {() => setOptionClicked(!isOptionClicked)}/>
             <div className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
-                <span>Option 1</span>
-                <span>Assign a reviewer</span>
+                {/* <span>Option 1</span>
+                <span>Assign a reviewer</span> */}
+                {optionList.map((option) => (
+                    <button onClick = {option.function} key = {option.name}>{option.name}</button>))}
             </div>
         </div>
     );

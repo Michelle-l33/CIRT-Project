@@ -10,6 +10,7 @@ import Home from './Components/HomePage/Home';
 import Login from './Components/Login/Login';
 import ArticleView from './Components/ArticleView/ArticleView';
 import Gallery from './Components/Gallery/Gallery';
+import Papers from './Components/Papers/Papers';
 import { dashBoardContext } from './Components/Dashboard/Dashboard';
 
 
@@ -35,6 +36,7 @@ function App() {
           <Route path="/Login" element={<Login />} />
           <Route path="/ArticleView" element={<ArticleView />} />
           <Route path="/Gallery" element={<Gallery />} />
+          <Route path="/Papers" element={<Papers />} />
           <Route path="/Dashboard" element = {<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<RedirectDashboard />} />
             <Route path="/Dashboard/*" element={<DashboardRoutes />}/>
