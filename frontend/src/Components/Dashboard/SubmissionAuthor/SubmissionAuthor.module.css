@@ -42,17 +42,17 @@
     text-align: right;
 }
 
-ul {
+.bigContainer ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-li {
+.bigContainer li {
     margin: 3px;
 }
 
-p {
+.bigContainer p {
     width: auto;
     height: auto;
     margin: 10px;
@@ -72,8 +72,6 @@ p {
   min-height: 100px; 
   max-height: 300px; 
   width: min(80vw, 700px);
-  
-  
   padding: 12px;
   font-size: 16px;
   font-family: Arial, sans-serif;

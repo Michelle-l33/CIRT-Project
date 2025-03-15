@@ -200,6 +200,6 @@
 
 /* Submission Pop Up Styles */
 
-.submissionPopUp {
+.mainContent .submissionPopUp {
     display: none;
 }

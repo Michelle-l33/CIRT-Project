@@ -1,0 +1,32 @@
+.currentAssignemt .listHeader, .currentAssignemt .submissionContainer .submission {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    border-radius: 5px;
+    color: var(--light);
+    gap: 5px;
+}
+
+.currentAssignemt .listHeader li {
+    font-weight: 550;
+    background-color: var(--primary);
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-size: 1.17rem;
+}
+
+.currentAssignemt .submissionContainer {
+    border-radius: 5px;
+    margin: 10px 0;
+    display: grid;
+    row-gap: 16px;
+}
+
+.submissionContainer .submission * {
+    font-weight: 400;
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 5px;
+    color: var(--dark);
+    background-color: var(--transparent-light);
+}
