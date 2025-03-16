@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as pdfjsLib from 'pdfjs-dist/webpack';
 import styles from './Gallery.module.css';
-
+//chat helped with this page
 const PosterCard = ({ poster }) => {
   const canvasRef = useRef(null);
 
@@ -14,15 +14,12 @@ const PosterCard = ({ poster }) => {
         const page = await pdf.getPage(1); // Render first page
         const viewport = page.getViewport({ scale: 0.2 });
 
-        // Clear the canvas before rendering
         const context = canvasRef.current.getContext('2d');
         context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
 
-        // Set canvas dimensions
         canvasRef.current.width = viewport.width;
         canvasRef.current.height = viewport.height;
 
-        // Render the PDF page
         await page.render({
           canvasContext: context,
           viewport: viewport,
@@ -36,7 +33,6 @@ const PosterCard = ({ poster }) => {
       renderThumbnail();
     }
 
-    // Cleanup function to cancel any ongoing rendering
     return () => {
       if (canvasRef.current) {
         const context = canvasRef.current.getContext('2d');

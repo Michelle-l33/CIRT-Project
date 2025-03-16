@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Gallery.module.css';
-import PosterCard from './PosterCard'; // Import the new component
+import PosterCard from './PosterCard';
 
 const Gallery = () => {
   const [searchQuery, setSearchQuery] = useState('');
