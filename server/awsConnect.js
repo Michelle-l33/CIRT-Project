@@ -24,6 +24,8 @@ const upload = multer({
     key: function (req, file, cb) {
       cb(null, `uploads/${Date.now()}-${file.originalname}`);
     },
+    acl: 'public-read', // Ensure the file is publicly accessible (optional, depending on your needs)
+    contentDisposition: 'inline', // Set the Content-Disposition header to inline
   }),
 });
 
