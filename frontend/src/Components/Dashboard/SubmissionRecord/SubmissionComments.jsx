@@ -115,7 +115,6 @@ const SubmissionDiscussion = () => {
 
 export default SubmissionDiscussion;
 
-
 const Comment = ({content, sender}) => {
     return(
         <>

@@ -1,6 +1,12 @@
 .bigContainer {
-    padding: 15px 4rem;
-    height: 60vh;
+    margin: 25px 0;
+    padding: 0 4rem 25px 4rem;
+    height: 80vh;
+    background-color: var(--light-primary);
+    border: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .bigContainer h2 {
