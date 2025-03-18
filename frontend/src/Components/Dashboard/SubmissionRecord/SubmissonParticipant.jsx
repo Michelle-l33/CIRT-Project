@@ -79,9 +79,8 @@ const SubmissionParticipant = () => {
     // Filter participants to only include reviewers if `showReviewers` is true
     const displayedParticipants = showReviewers
         ? participants.filter((participant) => participant.isReviewer)
-        : currentReviewers
-        ? [currentReviewers] // Show the current reviewer if one exists
-        : []; // Empty array if no reviewer is assigned
+        : currentReviewers;
+        
 
     if (loading) {
         return <div>Loading...</div>;
