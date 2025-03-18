@@ -57,7 +57,7 @@ const Gallery = () => {
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <Link to="/">
-          <imgs
+          <img
             src="/assets/utampa_logo.png"
             alt="UT Logo"
             className={styles.logo}
