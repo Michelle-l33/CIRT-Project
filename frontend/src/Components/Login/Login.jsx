@@ -157,8 +157,8 @@ const LoginPage = () => {
                 <div className={styles.login}>
                     <h2>Login</h2>
                     <form onSubmit={handleLoginSubmit}>
-                        <label htmlFor="login-username" id="formComponent">Enter your Email:</label>
-                        <input type="text" id="login-username" name="username" placeholder="Username" onChange={(e) => setLoginEmail(e.target.value)} required />
+                        <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
+                        <input type="text" id="login-email" name="email" placeholder="Email" onChange={(e) => setLoginEmail(e.target.value)} required />
 
                         <label htmlFor="login-password">Enter your Password:</label>
                         <input type={showPasswordLogin ? "text" : "password"} id="login-password" name="password" placeholder="Password" onChange={(e) => setLoginPass(e.target.value)} required />
