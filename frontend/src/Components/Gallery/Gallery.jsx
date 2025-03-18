@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Gallery.module.css';
 import PosterCard from './PosterCard';
+import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [posters, setPosters] = useState([]);
+    const [searchParams] = useSearchParams();
+    const query = searchParams.get("q") || "";
+
+    const [searchQuery, setSearchQuery] = useState(query);
+    const [posters, setPosters] = useState([]);
 
   // Fetch gallery data
   useEffect(() => {
