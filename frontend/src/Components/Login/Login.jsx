@@ -18,6 +18,8 @@ const LoginPage = () => {
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPass] = useState("");
     const [alertMessage, setAlertMessage] = useState('');
+    const [showPasswordRegister, setShowPasswordRegister] = useState(false);
+    const [showPasswordLogin, setShowPasswordLogin] = useState(false);
 
     // State for password requirements
     const [passwordRequirements, setPasswordRequirements] = useState({
@@ -128,6 +130,14 @@ const LoginPage = () => {
         else if (type === "public") setIsPublic(true);
     };
 
+    const togglePasswordVisibilityRegister = () => {
+        setShowPasswordRegister(!showPasswordRegister);
+      };
+    
+    const togglePasswordVisibilityLogin = () => {
+    setShowPasswordLogin(!showPasswordLogin);
+    };
+
 
 
     return (
@@ -151,7 +161,15 @@ const LoginPage = () => {
                         <input type="text" id="login-username" name="username" placeholder="Username" onChange={(e) => setLoginEmail(e.target.value)} required />
 
                         <label htmlFor="login-password">Enter your Password:</label>
-                        <input type="password" id="login-password" name="password" placeholder="Password" onChange={(e) => setLoginPass(e.target.value)} required />
+                        <input type={showPasswordLogin ? "text" : "password"} id="login-password" name="password" placeholder="Password" onChange={(e) => setLoginPass(e.target.value)} required />
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={showPasswordLogin}
+                                onChange={togglePasswordVisibilityLogin}
+                            />
+                        Show Password
+                        </label>
 
                         <button id="loginButton" type="submit">Log In</button>
                     </form>
@@ -180,7 +198,7 @@ const LoginPage = () => {
 
                         <label htmlFor="register-password">Enter your Password:</label>
                         <input
-                            type="password"
+                            type={showPasswordRegister ? "text" : "password"}
                             id="register-password"
                             name="password"
                             placeholder="Password"
@@ -190,6 +208,14 @@ const LoginPage = () => {
                             }}
                             required
                         />
+                        <label>
+                            <input
+                                type="checkbox"
+                                checked={showPasswordRegister}
+                                onChange={togglePasswordVisibilityRegister}
+                            />
+                        Show Password
+                        </label>
 
                         {/* Password Requirements List */}
                         <div className={styles.passwordRequirements}>
