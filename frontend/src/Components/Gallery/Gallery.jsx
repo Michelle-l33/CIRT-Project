@@ -56,11 +56,14 @@ const Gallery = () => {
 
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <img
+          <Link to="/">
+          <imgs
             src="/assets/utampa_logo.png"
             alt="UT Logo"
             className={styles.logo}
           />
+          </Link>
+          
         </div>
         <nav className={styles.sidebarNav}>
           <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
