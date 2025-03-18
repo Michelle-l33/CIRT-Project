@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Papers.module.css';
+import { useSearchParams } from "react-router-dom";
 
 const Papers = () => {
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("q") || "";
+  
+  const [searchQuery, setSearchQuery] = useState(query);
   const [papers, setPapers] = useState([]);
   // Dummy data for papers
   // const papers = [
@@ -40,7 +45,8 @@ const Papers = () => {
     const searchLower = searchQuery.toLowerCase();
     return (
       paper.title.toLowerCase().includes(searchLower) ||
-      paper.author.toLowerCase().includes(searchLower)
+      paper.firstName.toLowerCase().includes(searchLower) ||
+      paper.lastName.toLowerCase().includes(searchLower)
     );
   });
 

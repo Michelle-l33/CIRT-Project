@@ -138,15 +138,25 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
     }
 
     // Find the submission and update the reviewerID field
-    const submission = await Submission.findByIdAndUpdate(
-      submissionId,
-      { reviewerID: reviewerId },
-      { new: true } // Return the updated document
-    );
+    const submission = await Submission.findById(submissionId);
 
     if (!submission) {
       return res.status(404).json({ error: "Submission not found" });
     }
+    if (submission.reviewerID1?.toString() === reviewerId || submission.reviewerID2?.toString() === reviewerId) {
+      return res.status(400).json({ error: "Reviewer is already assigned to this submission" });
+    }
+
+    // Check available reviewer slots
+    if (!submission.reviewerID1) {
+      submission.reviewerID1 = reviewerId;
+    } else if (!submission.reviewerID2) {
+      submission.reviewerID2 = reviewerId;
+    } else {
+      return res.status(400).json({ error: "Both reviewer slots are full" });
+    }
+
+    await submission.save();
 
     res.json(submission);
   } catch (error) {
