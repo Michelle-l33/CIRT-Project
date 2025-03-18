@@ -125,7 +125,6 @@
     height: 30vh;
 }
 
-
 /* this part is for styling for the submission files */
 
 .filesContainer .listItem {
@@ -225,6 +224,10 @@
 
 .filesContainer .listItem a:hover:after {
     transform: scaleX(1);
+}
+
+.filesContainer .contentList span {
+    color: var(--dark)
 }
 
 /* this part is for styling for the submission comments */
@@ -346,6 +349,10 @@
 
 .statusContainer {
     border-radius: 10px;
+}
+
+.noStatus {
+    color: var(--dark)
 }
 
 

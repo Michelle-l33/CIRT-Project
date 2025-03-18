@@ -197,6 +197,7 @@
     row-gap: 16px;
     max-height: 80vh;
     overflow-y: auto;
+    color: var(--dark);
 }
 
 .submissionList .submission {

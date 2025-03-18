@@ -41,13 +41,13 @@
     display: none;
 }
 
-input[type="checkbox"]:checked ~ .longerDes {
+.cirtIntro input[type="checkbox"]:checked ~ .longerDes {
     display: block;
     margin-top: 0;
     font-size: 1rem;
 }
 
-label[for="expanded"]::before {
+.cirtIntro label[for="expanded"]::before {
     content: "Show more";
     padding: 10px;
     border: 1px solid black;
@@ -59,7 +59,7 @@ label[for="expanded"]::before {
     margin-bottom: 10px;
 }
 
-input[type="checkbox"]:checked + label::before {
+.cirtIntro input[type="checkbox"]:checked + label::before {
     content: "Show less";
 }
 

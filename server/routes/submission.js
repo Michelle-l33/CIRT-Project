@@ -35,7 +35,10 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       isPoster,
       isArticle,
       abstract,
+      //tags,
       stage: "1",
+      reviewerID,
+      editorID
     });
 
     await newSubmission.save();
@@ -69,7 +72,7 @@ router.get("/gallery", async (req, res) => {
 // Get All articles
 router.get("/publications", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true}); // finds articles only
+      const articles = await Submission.find({isArticle:true, stage: { $nin: ["1","0","2","3"]}}); // finds articles only
       res.json(articles);
     } catch (error) {
       res.status(500).json({ error: error.message });

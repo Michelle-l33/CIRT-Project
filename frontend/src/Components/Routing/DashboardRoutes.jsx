@@ -13,6 +13,8 @@ import Unassigned from '../Dashboard/TabNav/Unassigned';
 import Archives from '../Dashboard/TabNav/Archives';
 import SubmissionRecord from '../Dashboard/SubmissionRecord/SubmissionRecord';
 import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor';
+import Current from '../Dashboard/ReviewerAssignment/Current';
+import All from '../Dashboard/ReviewerAssignment/All';
 
 
 const DashboardRoutes = () => {
@@ -22,23 +24,28 @@ const DashboardRoutes = () => {
                 <Route path="Author" element={<Dashboard 
                                     component={<MainContentAuthor />}/>}/>
                 <Route path="Reviewer" element={<Dashboard 
-                                    component={<MainContentReviewer />}/>}/>
+                                    component={<MainContentReviewer />}/>}>
+                    <Route index element={<Navigate to="Current" replace />}/>
+                    <Route path = "Current" element={<Current />} />
+                    <Route path = "All" element={<All />} />
+                </Route>
+
                 <Route path="Editor" element={<Dashboard 
                                     component={<MainContentEditor />}/>}>
                 <Route index element={<Navigate to="Task" replace />}/>
             
-                <Route path="TabNav" element={<TabNav />}>
-                    <Route index element={<Navigate to="MyQueue" replace />}  />
-                    <Route path="MyQueue" element={<MyQueue />} />
-                    <Route path="AllActive" element={<AllActive />} />
-                    <Route path="Unassigned" element={<Unassigned />} />
-                    <Route path="Archives" element={<Archives />} />
+                    <Route path="TabNav" element={<TabNav />}>
+                        <Route index element={<Navigate to="MyQueue" replace />}  />
+                        <Route path="MyQueue" element={<MyQueue />} />
+                        <Route path="AllActive" element={<AllActive />} />
+                        <Route path="Unassigned" element={<Unassigned />} />
+                        <Route path="Archives" element={<Archives />} />
+                    </Route>
+                    <Route path="Task" element={<TaskPage />} />
+                    <Route path="DocumentTab" element={<SubmissionRecord />}>
+                        <Route path=":id"></Route>
+                    </Route>
                 </Route>
-                <Route path="Task" element={<TaskPage />} />
-                <Route path="DocumentTab" element={<SubmissionRecord />}>
-                    <Route path=":id"></Route>
-                </Route>
-            </Route>
             <Route path="/SubmissionAuthor" element={<SubmissionAuthorPage />} />
         </Routes>
     )

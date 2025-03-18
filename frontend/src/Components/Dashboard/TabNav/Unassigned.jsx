@@ -12,7 +12,8 @@ const Unassigned = () => {
 
     const [ submissionList ] = useState([
         {
-            author: "Ben",
+            firstName: "Ben",
+            lastName: "Ben",
             title: "shdfasg hvd dgvasgd gdasv ahsd dhavd sdhvasnd hajsgdh hsdvs",
             stage: 4,
         },
