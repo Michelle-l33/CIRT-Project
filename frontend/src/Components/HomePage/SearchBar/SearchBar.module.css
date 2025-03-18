@@ -8,7 +8,7 @@
         ". searchContainer ."
         "searchPic searchPic searchPic";
     border-radius: 15px;
-    box-shadow: var(--primary) 0px 4px 10px;
+    box-shadow: var(--light-primary) 0px 4px 10px;
     position: relative;
 }
 
