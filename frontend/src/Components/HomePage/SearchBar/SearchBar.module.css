@@ -1,6 +1,15 @@
 .bigContainer {
-    padding: 15px 4rem;
-    height: 60vh;
+    margin: 25px 0;
+    padding: 0 4rem 25px 4rem;
+    height: 80vh;
+    position: relative;
+    border: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 10px;
+    position: relative;
 }
 
 .bigContainer h2 {
