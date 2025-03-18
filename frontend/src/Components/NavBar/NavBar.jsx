@@ -4,21 +4,11 @@ import PropTypes from 'prop-types';
 
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
-import React, { useEffect } from 'react';
 
 const NavBar = ({isLoggedIn}) => {
     //javascript funcs go here
 
-    // const location = useLocation();
-
-    // useEffect(() => {
-    //     const loginButton = document.getElementById('loginButton');
-    //     if (location.pathname === '/Login') {
-    //         loginButton.classList.add('hidden');
-    //     } else {
-    //         loginButton.classList.remove('hidden');
-    //     }
-    // }, [location]); // this makes it so login button doesnt show on the /Login page
+    const location = useLocation();
 
     return( // html goes in the return()
         <nav className={styles.navBar}>
@@ -29,8 +19,7 @@ const NavBar = ({isLoggedIn}) => {
             </div>
 
             <div className = {styles.navRight}>
-
-                <Link to="/Login"> Login </Link>
+                <Link to="/Login" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> Login </Link>
             </div>
         </nav>
     );
