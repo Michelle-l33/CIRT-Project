@@ -9,6 +9,8 @@ import { FaRegUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
+import { IoNewspaperOutline } from "react-icons/io5";
+
 
 import { dashBoardContext } from '../Dashboard';
 import { useContext } from 'react';
@@ -34,7 +36,8 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
     ];
 
     const listOfReviewerIcons = [
-        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "" },
+        { Name: "Current", iconComponent: IoNewspaperOutline, url: "Current" },
+        { Name: "All", iconComponent: RiDashboardHorizontalLine, url: "All" },
         { Name: "User", iconComponent: FaRegUser, url: "#" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
@@ -83,13 +86,13 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
 
             <ul className = {styles.sideMenu}>
                 <li>
-                    <a href="#" className={styles.logout} onClick={(e) => {
-                    e.preventDefault();  // Prevent the default link behavior
+                    <button className={styles.logout} onClick={(e) => {
+                    e.preventDefault(); // Prevent the default link behavior
                     handleLogout();
                     }}>
                         <RiLogoutCircleLine/>
                     Logout
-                    </a>
+                    </button>
                 </li>
             </ul>
 

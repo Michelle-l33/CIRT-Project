@@ -3,7 +3,7 @@ import styles from './MainContentReviewer.module.css';
 
 import { useContext } from 'react';
 import { dashBoardContext } from './Dashboard';
-import TabHeader from './TabNav/TabHeader'
+import { Outlet } from 'react-router-dom';
 
 //all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
 
@@ -22,33 +22,7 @@ const MainContentReviewer = () => {
                 </div>
 
                 <div className={styles.content}>
-                    <ul className={styles.listHeader}>
-                        <li>Title</li>
-                        <li>Date Assigned</li>
-                        <li>Editor</li>
-                        <li>Due Date?</li>
-                    </ul>
-
-                    <ul className = {styles.submissionContaniner}>
-                        <li className = {styles.submission}>
-                            <h4>fsdfh sdjgfdfh dfhgs asdgasf sdfhg</h4>
-                            <span>10/23</span>
-                            <p>Editor's name</p>
-                            <time>10/27</time>
-                        </li>
-                        <li className = {styles.submission}>
-                            <h4>fsdfh sdjgfdfh dfhgs asdgasf sdfhg</h4>
-                            <span>10/23</span>
-                            <p>Editor's name</p>
-                            <time>10/27</time>
-                        </li>
-                        <li className = {styles.submission}>
-                            <h4>fsdfh sdjgfdfh dfhgs asdgasf sdfhg</h4>
-                            <span>10/23</span>
-                            <p>Editor's name</p>
-                            <time>10/27</time>
-                        </li>
-                    </ul>
+                    <Outlet />
                 </div>
                 
                 

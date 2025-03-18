@@ -34,7 +34,8 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
         // Apply search filter
         if (search) {
             filteredResults = filteredResults.filter(submission =>
-                submission.author.toLowerCase().includes(search.toLowerCase()) ||
+                submission.firstName.toLowerCase().includes(search.toLowerCase()) ||
+                submission.lastName.toLowerCase().includes(search.toLowerCase()) ||
                 submission.title.toLowerCase().includes(search.toLowerCase()));
         }
 

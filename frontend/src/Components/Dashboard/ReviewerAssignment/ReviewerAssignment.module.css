@@ -1,0 +1,60 @@
+.currentAssignemt .listHeader, .currentAssignemt .submissionContainer .submission {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr;
+    border-radius: 5px;
+    color: var(--light);
+    gap: 5px;
+    transition: all 0.5s ease;
+}
+
+.currentAssignemt {
+    position: relative;
+}
+
+.currentAssignemt .listHeader li {
+    font-weight: 550;
+    background-color: var(--primary);
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 5px;
+    font-size: 1.17rem;
+}
+
+.currentAssignemt .submissionContainer {
+    border-radius: 5px;
+    margin: 10px 0;
+    display: grid;
+    row-gap: 16px;
+    max-height: 60vh;
+    overflow-y: scroll;
+}
+
+.currentAssignemt .submissionContainer .submission:hover {
+    cursor: pointer;
+}
+
+.submissionContainer .submission * {
+    font-weight: 400;
+    text-align: center;
+    padding: 20px 0;
+    border-radius: 5px;
+    color: var(--dark);
+    background-color: var(--transparent-light);
+}
+
+.submissionContainer:hover .submission:not(:hover) {
+    filter: blur(3px) saturate(100%) contrast(150%);
+    transition: all 0.3s ease;
+}
+
+.currentAssignemt .commentContainer {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: var(--light);
+}

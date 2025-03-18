@@ -9,34 +9,12 @@ import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
 
 import TrackBar from "./TrackBar/TrackBar";
-import Task from './Task/Task';
+
 import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext } from 'react';
 
-const taskListToBeComplete = [
-    {
-        title: "Look at reviews",
-        description: "You need to look at the reviewsssss"
-    },
-    {
-        title: "Resubmit",
-        description: "You need to Resubmitttttttttt"
-    },
-    {
-        title: "Resubmit",
-        description: "You need to Resubmitttttttttt"
-    },
-    {
-        title: "Resubmit",
-        description: "You need to Resubmitttttttttt"
-    },
-    {
-        title: "Resubmit",
-        description: "You need to Resubmitttttttttt"
-    },
-];
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
 function getDate() {
@@ -128,18 +106,21 @@ const MainContentAuthor = () => {
                         <TrackBar currentStep={2} />
                     </div>
 
-                    <div className={styles.reminders}>
+                    <div className={styles.comment}>
                         <div className={styles.header}>
                             <GrNotes />
-                            <h3>Reminders</h3>
+                            <h3>Comments</h3>
                         </div>
 
-                        <ul className={styles.taskList}>
-                            {taskListToBeComplete.map((task) =>
-                                <li key={task.id}>
-                                    <Task task = {task}/>
-                                </li>
-                            )}
+                        <ul className={styles.commentList}>
+                            <li>
+                                <p>Hello, hello, baby, you called? I can't hear a thing</p>
+                                <span>- From: Editor</span>
+                            </li>
+                            <li>
+                                <p>I have got no service in the club, you say, say?</p>
+                                <span>- From: Reviewer</span>
+                            </li>
                         </ul>                                  
                     </div>
                 </div>

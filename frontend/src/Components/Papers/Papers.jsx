@@ -66,11 +66,13 @@ const Papers = () => {
       {/* Sidebar */}
       <aside className={styles.sidebar}>
         <div className={styles.sidebarHeader}>
-          <img 
-            src="/assets/utampa_logo.png" 
-            alt="UT Logo" 
+        <Link to="/">
+          <img
+            src="/assets/utampa_logo.png"
+            alt="UT Logo"
             className={styles.logo}
           />
+          </Link>
         </div>
         <nav className={styles.sidebarNav}>
           <Link to="/Papers" className={styles.navItem}>All Papers</Link>
