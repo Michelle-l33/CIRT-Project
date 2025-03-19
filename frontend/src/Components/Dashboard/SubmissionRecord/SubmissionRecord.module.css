@@ -116,18 +116,19 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     position: relative;
+    color: var(--dark);
 }
 
 .contentList .listItem:nth-child(3n+1) {
-    background-color: #f9d6e7;
+    background-color: var(--pink);
 }
 
 .contentList .listItem:nth-child(3n+2) {
-    background-color: #FFE4CF;
+    background-color: var(--peach);
 }
   
 .contentList .listItem:nth-child(3n) {
-    background-color: #FFFDD7;
+    background-color: var(--lime);
 }
 
 .contentList .listItem:last-child {
@@ -137,14 +138,39 @@
 .filesContainer .listItem:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px var(--transparent-dark);
-    border: 5px solid var(--transparent-light);
+    border: 2px solid var(--transparent-light);
+    opacity: 1;
 }
 
 .filesContainer .listItem.active {
-    
+    padding-left: 12%;
+    opacity: 1;
+    transform: translateX(10px);
+    transition: transform 0.3s ease, padding-left 0.3s ease, clip-path 0.3s ease;
+    overflow: hidden;
+    position: relative;
 }
 
-.filesContainer:hover .listItem:not(.active) {
+.filesContainer .listItem.active::before {
+    content: "";
+    position: absolute;
+    width: calc(12% - 15px);
+    height: 100%;
+    left: 0;
+    background-color: var(--transparent-light);
+    clip-path: polygon(65% 0, 100% 50%, 65% 100%, 0 100%, 0 0);
+    transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
+}
+
+.filesContainer .listItem.active:hover::before {
+    background-color: var(--transparent-light);
+    clip-path: polygon(60% 0, 100% 50%, 60% 100%, 0 100%, 0 0);
+    transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.filesContainer .contentList:hover .listItem:not(.active),
+.filesContainer .contentList:hover .listItem:not(:hover) {
     opacity: 0.7;
 }
 
@@ -335,15 +361,15 @@
 }
 
 .contentList .listItem:nth-child(3n+1) span:after {
-    background-color: #f9d6e77d;
+    background-color: var(--pink)
 }
 
 .contentList .listItem:nth-child(3n+2) span:after {
-    background-color: #ffe4cf7b;
+    background-color: var(--peach)
 }
 
 .contentList .listItem:nth-child(3n+3) span:after {
-    background-color: #fffdd796;
+    background-color: var((--lime))
 }
 
 

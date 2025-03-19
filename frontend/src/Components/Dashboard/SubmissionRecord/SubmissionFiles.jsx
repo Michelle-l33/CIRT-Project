@@ -23,9 +23,10 @@ export const Submission = ({firstName, lastName, title, url}) => {
     return (
         <>
             <h4>{firstName} {lastName}</h4>
-            <Link to = {url}>
+            <Link to="/ArticleView" target="_blank">
                 <p>{title}</p>
             </Link>
+
             <button onClick={handleDownload}>Download</button>
         </>
     );
