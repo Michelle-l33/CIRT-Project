@@ -1,5 +1,5 @@
 .bigContainer {
-    margin: 25px 0 5px 0;
+    margin: 25px 0 4px 0;
     max-height: 80vh;
     display: grid;
     grid-template-columns: 4rem calc(100% - 8rem) 4rem;
@@ -7,14 +7,17 @@
         ". searchHeading ."
         ". searchContainer ."
         "searchPic searchPic searchPic";
-    border-radius: 15px;
-    box-shadow: var(--light-primary) 0px 4px 10px;
+     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06), 
+        0 4px 8px rgba(0, 0, 0, 0.04);
     position: relative;
+    background: linear-gradient(to bottom, rgba(248, 238, 238, 0) 0%, rgba(248, 238, 238, 0.8) 10%, rgba(248, 238, 238, 1) 20%);
 }
+
+/* border image learn from https://www.smashingmagazine.com/2024/01/css-border-image-property/ */
 
 .bigContainer .searchHeading {
     display: block;
-    margin: 0;
+    margin-right: auto;
     font-weight: 600;
     font-size: clamp(1.5rem, 4vw, 5.5rem); 
     line-height: 1.2;
@@ -24,6 +27,12 @@
     margin-block-start: 0.83em;
     margin-block-end: 0.83em;
     grid-area: searchHeading;
+    --s: 3px;   /* the thickness */
+    --w: 100vw; /* the width */
+    --g: 10px;  /* the gap */
+    border-image: 
+       conic-gradient(var(--primary) 0 0) 
+       0 50%/calc(50% - var(--s)/2) var(--w)/0 calc(var(--w) + var(--g));
 }
 
 .searchContainer {
