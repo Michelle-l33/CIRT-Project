@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from "react-router-dom";
 import styles from './SubmissionRecord.module.css';
+import { FaHandPointLeft } from "react-icons/fa";
+
 
 const SubmissionParticipant = () => {
     const location = useLocation();
@@ -104,7 +106,7 @@ const SubmissionParticipant = () => {
                         <span>{participant.isAuthor ? 'Author' : participant.isReviewer ? 'Reviewer' : 'Participant'}</span>
                         <span>{participant.name}</span>
                         {showReviewers && ( // Only show the "Assign Reviewer" button when reviewers are visible
-                            <button onClick={() => handleAssignReviewer(participant._id)}>Assign Reviewer</button>
+                            <button onClick={() => handleAssignReviewer(participant._id)}><FaHandPointLeft /></button>
                         )}
                     </li>
                 ))}

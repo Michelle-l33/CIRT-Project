@@ -30,7 +30,6 @@ const SubmissionStatus = ( {currSubmission} ) => {
         if (!currSubmission) return;
 
         await updateSubmissionStage(currSubmission, newStage);
-        setCurrentStep(newStage); // Update UI after successful API call
         
         setCurrentStep(newStage);
     };
@@ -58,7 +57,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                    <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
+                        <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
                         <button>Decline submission</button>           
                     </div>
               </>}
@@ -70,8 +69,8 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>
-                        <button>Decline submission</button>           
+                        <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>             
+                        <button>Decline submission</button>                
                     </div>
               </>}
 

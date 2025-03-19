@@ -1,7 +1,7 @@
 import styles from './SubmissionRecord.module.css';
-import { useParams, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
-
+import { IoIosClose } from "react-icons/io";
 
 
 const SubmissionDiscussion = () => {
@@ -89,13 +89,11 @@ const SubmissionDiscussion = () => {
             <div className = {styles.header}>
                 <h3>Submission Comments</h3>
 
-                 <div className = {styles.left}>
-                    <ButtonWithCommentForm
+                <ButtonWithCommentForm
                         // the code for ButtonWithCommentForm component is down below
                         comment={comment} 
                         setComment={setComment} 
                         handleCommentSubmit={handleCommentSubmit} />
-                </div>
             </div>
 
             <ul className = {styles.contentList}>
@@ -145,7 +143,9 @@ const ButtonWithCommentForm = ({ comment, setComment, handleCommentSubmit }) => 
                     Submit
                 </button>
             </form>
-            <button class = {styles.closeBtn} onClick = {() => setIsOpen(false)}>X</button>
+            <button className = {styles.closeBtn} onClick = {() => setIsOpen(false)}>
+                &times;
+            </button>
         </div>
     </>)
 }

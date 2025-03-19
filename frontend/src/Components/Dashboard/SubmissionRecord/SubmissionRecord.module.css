@@ -13,6 +13,7 @@
     border: 1px solid var(--transparent-dark);
     color: var(--dark);
     position: relative;
+    height: 10vh;
 }
 
 .header .left {
@@ -92,21 +93,6 @@
     border-radius: 3px;
     border-bottom: var(--transparent-light);
     align-items: center;
-}
-
-.statusContainer {
-    background-color: var(--light);
-    height: 30vh;
-}
-
-.statusContainer .statusAction {
-    display: flex;
-    flex-direction: column
-}
-
-.participateContainer {
-    background-color: var(--light);
-    height: 30vh;
 }
 
 /* this part is for styling for the submission files */
@@ -260,16 +246,20 @@
 
 /* this part is for styling for the submission comments */
 
-.commentContainer .left button {
+.commentContainer {
+    position: relative;
+}
+
+.commentContainer button {
     padding: 7px;
     cursor: pointer;
 }
 
-.commentContainer .left button span {
+.commentContainer button span {
     position: relative;
 }
 
-.commentContainer .left button span::after {
+.commentContainer button span::after {
     content: "";
     width: 95%;
     height: 1px;
@@ -280,41 +270,98 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.commentContainer .left button:hover span::after {
+.commentContainer button:hover span::after {
     left: 50%;
     transform: scaleX(1) translate(-50%, -50%);
 }
 
-.commentContainer .left button:hover {
+.commentContainer button:hover {
     background-color: var(--light-primary);
     color: var(--light);
 }
 
-.commentContainer .left .commentForm {
+.commentContainer .commentForm {
     position: absolute;
-    background-color: #ffd6e5;
     top: 0;
-    left: 0;
-    z-index: 4;
-    opacity: 0;
-    display: none;
-    transition: all 0.5s ease-in-out;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 80%;
+    max-width: 100%;
     height: 40vh;
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 4;
 }
 
-.commentContainer .left .closeBtn {
+.commentContainer .commentForm h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.commentForm textarea {
+    width: 100%;
+    height: 20vh;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--transparent-dark);
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: var(--dark);
+    font-weight: 500;
+    box-sizing: border-box;
+    background: var(--light);
+}
+
+.commentForm textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+}
+
+.commentForm button {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.commentContainer .closeBtn {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 3px;
+    background-color: var(--primary);
+    cursor: pointer;
 }
 
-.commentContainer .left .commentForm.show {
-    opacity: 1;
+.commentContainer .closeBtn * {
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+    color: var(--light);
+}
+
+
+.commentContainer .commentForm.show {
     display: block;
+    opacity: 1;
 }
 
 .commentContainer .contentList {
@@ -377,17 +424,55 @@
 
 .statusContainer {
     border-radius: 10px;
+    background-color: var(--light);
+    height: 35vh;
 }
 
 .noStatus {
     color: var(--dark)
 }
 
+.statusContainer .statusAction {
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    padding: 10px;
+    max-height: 60%;
+    overflow-y: auto;
+}
 
+.statusContainer .statusAction button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.statusContainer .statusAction button:hover {
+    background-color: var(--light-primary);
+}
+
+.statusContainer .statusAction button:last-child {
+    margin-top: 10px;
+    background-color: var(--danger);
+}
+
+.statusContainer .statusAction button:last-child:hover {
+    background-color: var(--light-danger);
+}
 
 /* this part is for styling submission participant */
 
 .participateContainer {
+    background-color: var(--light);
+    height: 35vh;
     border-radius: 10px;
 }
 
@@ -395,9 +480,63 @@
     border-radius: 10px 10px 3px 3px;
 }
 
+.participateContainer .header button {
+    padding: 7px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+}
+
+.participateContainer .header button:hover {
+    background-color: var(--light-primary);
+    color: var(--light);
+}
+
+.participateContainer .participateList {
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    padding: 10px;
+    max-height: 60%;
+    overflow-y: auto;
+}
+
 .participateContainer .participateList li {
     display: grid;
     grid-template-columns: 2fr 6fr 2fr;
     text-align: center;
     align-items: center;
+    padding: 5px;
+    color: var(--dark);
+    box-shadow: 0 2px 4px var(--transparent-dark);
+
 }
+
+.participateContainer .participateList li button {
+    padding: 7px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+}
+
+.participateContainer .participateList li button svg {
+    font-size: 1rem;
+}
+
+.participateContainer .participateList li button:hover {
+    background-color: var(--light-success);
+    color: var(--success);
+}
+
