@@ -13,6 +13,7 @@
     border: 1px solid var(--transparent-dark);
     color: var(--dark);
     position: relative;
+    height: 10vh;
 }
 
 .header .left {
@@ -94,37 +95,6 @@
     align-items: center;
 }
 
-.contentList .listItem:nth-child(3n+1) {
-    background-color: #f9d6e7;
-}
-
-.contentList .listItem:nth-child(3n+2) {
-    background-color: #FFE4CF;
-}
-  
-.contentList .listItem:nth-child(3n) {
-    background-color: #FFFDD7;
-}
-
-.contentList .listItem:last-child {
-    border-radius: 0 0 10px 10px;
-}
-
-.statusContainer {
-    background-color: var(--light);
-    height: 30vh;
-}
-
-.statusContainer .statusAction {
-    display: flex;
-    flex-direction: column
-}
-
-.participateContainer {
-    background-color: var(--light);
-    height: 30vh;
-}
-
 /* this part is for styling for the submission files */
 
 .filesContainer .listItem {
@@ -132,22 +102,61 @@
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     position: relative;
+    color: var(--dark);
 }
 
-.filesContainer .listItem:hover, .filesContainer .listItem.active {
+.contentList .listItem:nth-child(3n+1) {
+    background-color: var(--pink);
+}
+
+.contentList .listItem:nth-child(3n+2) {
+    background-color: var(--peach);
+}
+  
+.contentList .listItem:nth-child(3n) {
+    background-color: var(--lime);
+}
+
+.contentList .listItem:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.filesContainer .listItem:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px var(--transparent-dark);
-    border: 5px inset var(--transparent-light);
+    border: 2px solid var(--transparent-light);
+    opacity: 1;
 }
 
 .filesContainer .listItem.active {
-    padding: 17px;
+    padding-left: 12%;
     opacity: 1;
-    border-style: double;
-    border-radius: 20px;
+    transform: translateX(10px);
+    transition: transform 0.3s ease, padding-left 0.3s ease, clip-path 0.3s ease;
+    overflow: hidden;
+    position: relative;
 }
 
-.filesContainer .listItem:not(.active) {
+.filesContainer .listItem.active::before {
+    content: "";
+    position: absolute;
+    width: calc(12% - 15px);
+    height: 100%;
+    left: 0;
+    background-color: var(--transparent-light);
+    clip-path: polygon(65% 0, 100% 50%, 65% 100%, 0 100%, 0 0);
+    transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
+}
+
+.filesContainer .listItem.active:hover::before {
+    background-color: var(--transparent-light);
+    clip-path: polygon(60% 0, 100% 50%, 60% 100%, 0 100%, 0 0);
+    transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.filesContainer .contentList:hover .listItem:not(.active),
+.filesContainer .contentList:hover .listItem:not(:hover) {
     opacity: 0.7;
 }
 
@@ -178,7 +187,7 @@
     border: 1px solid var(--primary);
     padding: 10px;
     border-radius: 20px;
-    transition: all 0.7s ease;
+    transition: color 0.7s ease, outline-offset 0.3s ease, border-color 0.7s ease;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -187,6 +196,11 @@
 .filesContainer .listItem button:hover {
     color: var(--light);
     background-color: var(--primary);
+}
+
+.filesContainer .listItem button:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .filesContainer .listItem a {
@@ -215,7 +229,7 @@
     width: 100%;
     height: 2px;
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filesContainer .listItem a:hover {
@@ -232,16 +246,20 @@
 
 /* this part is for styling for the submission comments */
 
-.commentContainer .left button {
+.commentContainer {
+    position: relative;
+}
+
+.commentContainer button {
     padding: 7px;
     cursor: pointer;
 }
 
-.commentContainer .left button span {
+.commentContainer button span {
     position: relative;
 }
 
-.commentContainer .left button span::after {
+.commentContainer button span::after {
     content: "";
     width: 95%;
     height: 1px;
@@ -252,41 +270,98 @@
     transition: transform 0.3s ease-in-out;
 }
 
-.commentContainer .left button:hover span::after {
+.commentContainer button:hover span::after {
     left: 50%;
     transform: scaleX(1) translate(-50%, -50%);
 }
 
-.commentContainer .left button:hover {
+.commentContainer button:hover {
     background-color: var(--light-primary);
     color: var(--light);
 }
 
-.commentContainer .left .commentForm {
+.commentContainer .commentForm {
     position: absolute;
-    background-color: #ffd6e5;
     top: 0;
-    left: 0;
-    z-index: 4;
-    opacity: 0;
-    display: none;
-    transition: all 0.5s ease-in-out;
-    width: 100%;
+    left: 50%;
+    transform: translateX(-50%); /* Center it horizontally */
+    width: 80%;
+    max-width: 100%;
     height: 40vh;
+    background-color: var(--light);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 4;
 }
 
-.commentContainer .left .closeBtn {
+.commentContainer .commentForm h4 {
+    font-size: 18px;
+    margin-bottom: 12px;
+    color: var(--dark);
+}
+
+.commentForm textarea {
+    width: 100%;
+    height: 20vh;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--transparent-dark);
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: var(--dark);
+    font-weight: 500;
+    box-sizing: border-box;
+    background: var(--light);
+}
+
+.commentForm textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+}
+
+.commentForm button {
+    background-color: var(--primary);
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.commentContainer .closeBtn {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 3px;
+    background-color: var(--primary);
+    cursor: pointer;
 }
 
-.commentContainer .left .commentForm.show {
-    opacity: 1;
+.commentContainer .closeBtn * {
+    width: 24px;
+    height: 24px;
+    font-size: 1rem;
+    color: var(--light);
+}
+
+
+.commentContainer .commentForm.show {
     display: block;
+    opacity: 1;
 }
 
 .commentContainer .contentList {
@@ -333,15 +408,15 @@
 }
 
 .contentList .listItem:nth-child(3n+1) span:after {
-    background-color: #f9d6e77d;
+    background-color: var(--pink)
 }
 
 .contentList .listItem:nth-child(3n+2) span:after {
-    background-color: #ffe4cf7b;
+    background-color: var(--peach)
 }
 
 .contentList .listItem:nth-child(3n+3) span:after {
-    background-color: #fffdd796;
+    background-color: var((--lime))
 }
 
 
@@ -349,17 +424,55 @@
 
 .statusContainer {
     border-radius: 10px;
+    background-color: var(--light);
+    height: 35vh;
 }
 
 .noStatus {
     color: var(--dark)
 }
 
+.statusContainer .statusAction {
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    padding: 10px;
+    max-height: 60%;
+    overflow-y: auto;
+}
 
+.statusContainer .statusAction button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 1rem;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.statusContainer .statusAction button:hover {
+    background-color: var(--light-primary);
+}
+
+.statusContainer .statusAction button:last-child {
+    margin-top: 10px;
+    background-color: var(--danger);
+}
+
+.statusContainer .statusAction button:last-child:hover {
+    background-color: var(--light-danger);
+}
 
 /* this part is for styling submission participant */
 
 .participateContainer {
+    background-color: var(--light);
+    height: 35vh;
     border-radius: 10px;
 }
 
@@ -367,9 +480,63 @@
     border-radius: 10px 10px 3px 3px;
 }
 
+.participateContainer .header button {
+    padding: 7px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+}
+
+.participateContainer .header button:hover {
+    background-color: var(--light-primary);
+    color: var(--light);
+}
+
+.participateContainer .participateList {
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    padding: 10px;
+    max-height: 60%;
+    overflow-y: auto;
+}
+
 .participateContainer .participateList li {
     display: grid;
     grid-template-columns: 2fr 6fr 2fr;
     text-align: center;
     align-items: center;
+    padding: 5px;
+    color: var(--dark);
+    box-shadow: 0 2px 4px var(--transparent-dark);
+
 }
+
+.participateContainer .participateList li button {
+    padding: 7px;
+    cursor: pointer;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--grey);
+    color: var(--dark);
+}
+
+.participateContainer .participateList li button svg {
+    font-size: 1rem;
+}
+
+.participateContainer .participateList li button:hover {
+    background-color: var(--light-success);
+    color: var(--success);
+}
+

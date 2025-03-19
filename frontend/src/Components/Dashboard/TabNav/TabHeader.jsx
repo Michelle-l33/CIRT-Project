@@ -14,10 +14,10 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
     const [search, setSearch] = useState("");
 
     const categoryMapping = {
-        "Submitted": 1,
-        "Under Review": 2,
-        "Reviewed": 3,
-        "Accepted": 4
+        "Submitted": "1",
+        "Under Review": "2",
+        "Reviewed": "3",
+        "Accepted": "4"
     };
 
     useEffect(() => {
