@@ -94,22 +94,6 @@
     align-items: center;
 }
 
-.contentList .listItem:nth-child(3n+1) {
-    background-color: #f9d6e7;
-}
-
-.contentList .listItem:nth-child(3n+2) {
-    background-color: #FFE4CF;
-}
-  
-.contentList .listItem:nth-child(3n) {
-    background-color: #FFFDD7;
-}
-
-.contentList .listItem:last-child {
-    border-radius: 0 0 10px 10px;
-}
-
 .statusContainer {
     background-color: var(--light);
     height: 30vh;
@@ -134,20 +118,33 @@
     position: relative;
 }
 
-.filesContainer .listItem:hover, .filesContainer .listItem.active {
+.contentList .listItem:nth-child(3n+1) {
+    background-color: #f9d6e7;
+}
+
+.contentList .listItem:nth-child(3n+2) {
+    background-color: #FFE4CF;
+}
+  
+.contentList .listItem:nth-child(3n) {
+    background-color: #FFFDD7;
+}
+
+.contentList .listItem:last-child {
+    border-radius: 0 0 10px 10px;
+}
+
+.filesContainer .listItem:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px var(--transparent-dark);
-    border: 5px inset var(--transparent-light);
+    border: 5px solid var(--transparent-light);
 }
 
 .filesContainer .listItem.active {
-    padding: 17px;
-    opacity: 1;
-    border-style: double;
-    border-radius: 20px;
+    
 }
 
-.filesContainer .listItem:not(.active) {
+.filesContainer:hover .listItem:not(.active) {
     opacity: 0.7;
 }
 
@@ -178,7 +175,7 @@
     border: 1px solid var(--primary);
     padding: 10px;
     border-radius: 20px;
-    transition: all 0.7s ease;
+    transition: color 0.7s ease, outline-offset 0.3s ease, border-color 0.7s ease;
     cursor: pointer;
     position: relative;
     z-index: 2;
@@ -187,6 +184,11 @@
 .filesContainer .listItem button:hover {
     color: var(--light);
     background-color: var(--primary);
+}
+
+.filesContainer .listItem button:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
 
 .filesContainer .listItem a {
@@ -215,7 +217,7 @@
     width: 100%;
     height: 2px;
     transform: scaleX(0);
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .filesContainer .listItem a:hover {
