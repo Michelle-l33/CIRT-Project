@@ -36,9 +36,7 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       isArticle,
       abstract,
       //tags,
-      stage: "1",
-      reviewerID,
-      editorID
+      stage: "1"
     });
 
     await newSubmission.save();
