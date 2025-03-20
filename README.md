@@ -40,6 +40,7 @@
 ### Hanna - Front End/Documentation
 - Footer, Home, and FAQ Pages
 - High-level Design Doc
+- Papers + Gallery Pages
 
 ### Chris - Back End
 - Setting up frontend and backend frameworks
@@ -56,4 +57,11 @@
 - Submission Functionality
 - Document Tab Population
 - Editor/Reviewer Commenting Functionality
+- Connecting Stage Management to Database
+- Assisted with setting up AWS connection
+- Submission feature - storing pdfs in aws
+- My Queue and All Active population
+- Populating Gallery and Papers and previewing pdfs for gallery
+- Show password feature
+- Modified reviewer assigning to add 2 reviewers to a submission
 
