@@ -46,8 +46,10 @@
 - Setting up frontend and backend frameworks
 - Connecting Mongo database to project
 - Login Password Security
-- Firebase Connection
 - Assigning reviewers
+- Assisted in AWS setup
+- Assisted in AWS connection
+
 
 ### Michelle - Back End
 - Setting up frontend and backend frameworks
