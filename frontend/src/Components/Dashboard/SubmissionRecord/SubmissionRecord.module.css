@@ -121,13 +121,6 @@
     border-radius: 0 0 10px 10px;
 }
 
-.filesContainer .listItem:hover {
-    transform: translateY(-2px);
-    box-shadow: 0px 4px 10px var(--transparent-dark);
-    border: 2px solid var(--transparent-light);
-    opacity: 1;
-}
-
 .filesContainer .listItem.active {
     padding-left: 12%;
     opacity: 1;
@@ -155,9 +148,16 @@
     transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.filesContainer .contentList:hover .listItem:not(.active),
-.filesContainer .contentList:hover .listItem:not(:hover) {
+.contentList:hover .listItem:not(.active),
+.contentList:hover .listItem:not(:hover) {
     opacity: 0.7;
+}
+
+.filesContainer .contentList .listItem:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 10px var(--transparent-dark);
+    border: 2px solid var(--transparent-light);
+    opacity: 1;
 }
 
 .filesContainer .listItem:after {
