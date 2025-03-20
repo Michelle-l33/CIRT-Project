@@ -18,9 +18,9 @@ const Footer = () => {
                 {/*Social Media Icons */}
                 <div className={styles.socialIcons}>
                     <h3>Follow Us</h3>
-                    <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
-                    <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+                    <a href="https://www.facebook.com/utampacrm/" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+                    <a href="https://x.com/utampacrm" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+                    <a href="https://www.instagram.com/utampacrm/" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
                 
                 </div>
 
