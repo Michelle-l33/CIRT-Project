@@ -59,9 +59,8 @@
 - Connecting Stage Management to Database
 - Assisted with setting up AWS connection
 - Submission feature - storing pdfs in aws
-- Populating submissions into editor dashboard (Documents, My Queue, All Active)
-- Populating Gallery and Papers
-- Previews pdfs for Gallery
+- My Queue and All Active population
+- Populating Gallery and Papers and previewing pdfs for gallery
 - Show password feature
 - Modified reviewer assigning to add 2 reviewers to a submission
 
