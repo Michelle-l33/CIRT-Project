@@ -40,6 +40,7 @@
 ### Hanna - Front End/Documentation
 - Footer, Home, and FAQ Pages
 - High-level Design Doc
+- Papers + Gallery Pages
 
 ### Chris - Back End
 - Setting up frontend and backend frameworks
