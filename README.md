@@ -55,4 +55,12 @@
 - Submission Functionality
 - Document Tab Population
 - Editor/Reviewer Commenting Functionality
+- Connecting Stage Management to Database
+- Assisted with setting up AWS connection
+- Submission feature - storing pdfs in aws
+- Populating submissions into editor dashboard (Documents, My Queue, All Active)
+- Populating Gallery and Papers
+- Previews pdfs for Gallery
+- Show password feature
+- Modified reviewer assigning to add 2 reviewers to a submission
 
