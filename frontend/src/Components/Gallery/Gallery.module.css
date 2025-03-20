@@ -179,7 +179,7 @@
 
 .pdfButton {
     background: var(--blue);
-    color: var(--light);
+    color: var(--blue);
     padding: 6px 16px;
     border: none;
     border-radius: 4px;
