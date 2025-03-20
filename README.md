@@ -34,8 +34,8 @@
 - Focus on UX and UI
 
 ### Hien - Front End
-- Working on the HomePage, and DashBoard
-- Working on some Routes
+- Working on the Homepage (FAQ and SearchBar section)
+- Working the Dashboards (All three Views)
 
 ### Hanna - Front End/Documentation
 - Footer, Home, and FAQ Pages
