@@ -49,7 +49,7 @@ const Dashboard = ({component}) => {
     
     return (
 
-        <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose, user}}>
+        <dashBoardContext.Provider value = {{isChecked, handleToggle, isClose, setIsClose, user}}>
                 <div className = {`${styles.dashBoardContainer} ${isChecked ? styles.dark : ''}`}>
                     <Sidebar isEditor = {user.isEditor} isAuthor ={user.isAuthor} isReviewer={user.isReviewer}/>
                     <MainContentNav/>

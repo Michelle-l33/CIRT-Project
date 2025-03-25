@@ -18,6 +18,33 @@
     z-index: 1000;
 }
 
+.mainContent nav .sidebarBtn {
+    border: none;
+    background-color: inherit;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent nav .sidebarBtn svg {
+    font-size: large;
+    font-weight: 600;
+    color: var(--dark);
+    cursor: pointer;
+}
+
+.mainContent nav .sidebarBtn svg:hover {
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.mainContent nav .sidebarBtn svg:active {
+    opacity: 0.2;
+    transition: opacity 0.5s ease;
+}
+
 .mainContent nav::before {
     content: "";
     position: absolute;
