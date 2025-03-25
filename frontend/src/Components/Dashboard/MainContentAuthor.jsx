@@ -128,7 +128,7 @@ const MainContentAuthor = () => {
                             </li>
                         </ul>
                     </div>
-                    <button className={styles.report} onClick={openSubmittionPopUp}><MdUploadFile />Upload a Document</button>                        
+                    <button className={styles.upload} onClick={openSubmittionPopUp}><MdUploadFile />Upload a Document</button>                        
                 </div>
             
                 <ul className={styles.insights}>

@@ -42,7 +42,7 @@
     background-color: var(--transparent-light);
 }
 
-.submissionContainer:hover .submission:not(:hover) {
+.submissionContainer:hover:has(.submission:hover) .submission:not(:hover) {
     filter: blur(3px) saturate(100%) contrast(150%);
     transition: all 0.3s ease;
 }

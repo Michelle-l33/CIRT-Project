@@ -7,6 +7,7 @@
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     margin-bottom: 15px; /* Adds spacing between multiple TrackBars */
     height: calc(100% - 20px);
+    position: relative;
 }
 
 .stepContainer {
@@ -22,6 +23,41 @@
     padding-bottom: 1px;
     border-bottom: 1px dotted var(--dark-grey);
     font-size: 16px;
+}
+
+.trackingContainer .reUpload button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    background: inherit;
+    color: var(--dark);
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.trackingContainer .reUpload button:hover {
+    color: var(--dark-grey);
+}
+
+.trackingContainer .reUpload .submitBtn {
+    color: var(--success);
+}
+
+.trackingContainer .reUpload .submitBtn:hover {
+    color: var(--light-success);
+}
+
+.trackingContainer .reUpload input[type=file] {
+    display: none;
+} 
+
+.trackingContainer .reUpload p {
+    color: var(--primary);
+}
+
+.trackingContainer .reUpload p span {
+    color: var(--dark-grey);
 }
 
 .trackingContainer .carouselContainer .sliddingButton:hover {

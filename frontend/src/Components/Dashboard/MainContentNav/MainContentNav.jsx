@@ -2,6 +2,7 @@ import styles from './MainContentNav.module.css';
 
 import sparLogo from '../../../Asset/Spartans.logo.png'
 import { FaRegBell } from "react-icons/fa";
+import { TiThMenu } from "react-icons/ti";
 
 import { dashBoardContext } from '../Dashboard';
 
@@ -9,7 +10,7 @@ import { useContext } from 'react';
 
 const MainContentNav = () => {
 
-    const {isChecked, handleToggle, isClose, user} = useContext(dashBoardContext);
+    const {isChecked, handleToggle, isClose, setIsClose, user} = useContext(dashBoardContext);
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
 
@@ -17,6 +18,7 @@ const MainContentNav = () => {
         <div className = {mainContentClass}>
 
             <nav>
+                <button className = {styles.sidebarBtn} onClick={() => setIsClose(!isClose)}><TiThMenu/></button>
                 <span> Welcome {user ? user.name : 'Guest'}! </span>
                 
                 <input type = "checkbox"
