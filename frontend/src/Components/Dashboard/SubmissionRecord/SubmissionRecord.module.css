@@ -148,12 +148,12 @@
     transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.contentList:hover .listItem:not(.active),
-.contentList:hover .listItem:not(:hover) {
+.filesContainer .contentList:hover .listItem:not(.active),
+.filesContainer .contentList:hover .listItem:not(:hover) {
     opacity: 0.7;
 }
 
-.filesContainer .contentList .listItem:hover {
+.filesContainer .contentList:hover .listItem:hover {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px var(--transparent-dark);
     border: 2px solid var(--transparent-light);
@@ -253,6 +253,7 @@
 .commentContainer button {
     padding: 7px;
     cursor: pointer;
+    max-height: 75%;
 }
 
 .commentContainer button span {
@@ -483,7 +484,6 @@
 .participateContainer .header button {
     padding: 7px;
     cursor: pointer;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -491,6 +491,7 @@
     border: none;
     background: var(--grey);
     color: var(--dark);
+    max-height: 75%;
 }
 
 .participateContainer .header button:hover {

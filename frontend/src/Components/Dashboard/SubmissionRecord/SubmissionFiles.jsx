@@ -11,7 +11,7 @@ import { useSubmissions } from './SubmissionContext'
 // populates files into editor "document" tab
 
 
-export const Submission = ({firstName, lastName, title, url}) => {
+export const Submission = ({firstName, lastName, title, url, id}) => {
     const handleDownload = () => {
         const link = document.createElement("a");
         link.href = url;
@@ -23,7 +23,7 @@ export const Submission = ({firstName, lastName, title, url}) => {
     return (
         <>
             <h4>{firstName} {lastName}</h4>
-            <Link to="/ArticleView" target="_blank">
+            <Link to= {`/ArticleView/${id}`} target="_blank">
                 <p>{title}</p>
             </Link>
 
@@ -90,7 +90,7 @@ const SubmissionFiles = ({setCurrSubmission}) => {
                         // the title is a placeholder for id
                         className = {`${styles.listItem} ${currentSubmissionId === submission._id? styles.active : ''}`} 
                         onClick = {() => handleSubmissionChange(submission)}>
-                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.document} />
+                        <Submission firstName = {submission.firstName} lastName = {submission.lastName} title = {submission.title} url = {submission.document} id = {submission._id} />
                     </li>
                 )) : (<span>No Submission Found</span>)}
             </ul>
