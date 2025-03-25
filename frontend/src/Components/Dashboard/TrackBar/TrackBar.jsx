@@ -1,6 +1,8 @@
 import styles from "./TrackBar.module.css";
 
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
+
 
 const steps = [
     {
@@ -35,19 +37,23 @@ const TrackBar = ({currentStep}) => {
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
             <h4>For: title sd asnd sd aksdnwn</h4>
-            <ol className = {styles.stepContainer}
-                style = {{"--prog-width": width}}>
-                {steps.map((step, idx) => (
-                    <li key = {idx} className = {styles.stepWrapper}>
-                        <div className = {`${styles.styleStep} ${activeStep >= step.step ? styles.completed : ''}`}>
-                            { activeStep >= step.step ? <IoMdCheckmarkCircleOutline /> : <p>{step.step}</p>}
-                        </div>
-                        <div className = {styles.stepLabel}>
-                            <p>{step.label}</p>
-                        </div>
-                    </li>
-                ))}
-            </ol>
+            <div className = {styles.carouselContainer}>
+                <FaRegArrowAltCircleLeft className={styles.sliddingButton}/>
+                <ol className = {styles.stepContainer}
+                    style = {{"--prog-width": width}}>
+                    {steps.map((step, idx) => (
+                        <li key = {idx} className = {styles.stepWrapper}>
+                            <div className = {`${styles.styleStep} ${activeStep >= step.step ? styles.completed : ''}`}>
+                                { activeStep >= step.step ? <IoMdCheckmarkCircleOutline /> : <p>{step.step}</p>}
+                            </div>
+                            <div className = {styles.stepLabel}>
+                                <p>{step.label}</p>
+                            </div>
+                        </li>
+                    ))}
+                </ol>
+                <FaRegArrowAltCircleRight className={styles.sliddingButton}/>
+            </div>
         </div>
     );
 }
