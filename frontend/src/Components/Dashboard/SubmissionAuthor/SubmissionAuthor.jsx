@@ -76,7 +76,7 @@ const SubmissionAuthorPage = () => {
 
     return (
         <div className={styles.bigContainer}>
-            <form onSubmit = {handleSubmit}>
+            <form className={styles.form} onSubmit = {handleSubmit}>
                 <h1>Submission Area</h1>
                 <div className={styles.boxInput}>
                     <input type="text" onChange={(e)=>setTitle(e.target.value)} required placeholder="Title"/>

@@ -7,6 +7,8 @@ import { MdUploadFile } from "react-icons/md";
 import { IoDocumentOutline } from "react-icons/io5";
 import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
+import { IoMdCloseCircle } from "react-icons/io";
+
 
 import TrackBar from "./TrackBar/TrackBar";
 
@@ -91,7 +93,7 @@ const MainContentAuthor = () => {
         <div className={mainContentClass}>
             <div className={styles.submissionPopUp}>
                 <SubmissionPage />
-                <button onClick={closeSubmittionPopUp}>Close</button>
+                <button className={styles.closeButton} onClick={closeSubmittionPopUp}><IoMdCloseCircle size={32}/></button>
             </div>
 
             <main>

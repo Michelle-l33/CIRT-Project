@@ -207,3 +207,16 @@
 .mainContent .submissionPopUp {
     display: none;
 }
+
+.closeButton {
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    background-color: var(--grey);
+    color: var(--dark);
+    cursor: pointer;
+    padding: 2em;
+    width: 2em;
+    height: 2em;
+}
