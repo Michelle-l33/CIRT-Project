@@ -35,30 +35,42 @@ const TrackBar = ({currentStep, title}) => {
     const totalSteps = steps.length;
     const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
 
-    const { nextSub, prevSub } = useContext(dashBoardAuthorContext);
+    const { nextSub, prevSub, submissionList, currSub } = useContext(dashBoardAuthorContext);
 
 
     return (
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
             <h4>{`For: ${title}`}</h4>
-            <div className = {styles.carouselContainer}>
-                <FaRegArrowAltCircleLeft className={styles.sliddingButton} onClick={() => prevSub()} />
-                <ol className = {styles.stepContainer}
-                    style = {{"--prog-width": width}}>
-                    {steps.map((step, idx) => (
-                        <li key = {idx} className = {styles.stepWrapper}>
-                            <div className = {`${styles.styleStep} ${activeStep >= step.step ? styles.completed : ''}`}>
-                                { activeStep >= step.step ? <IoMdCheckmarkCircleOutline /> : <p>{step.step}</p>}
-                            </div>
-                            <div className = {styles.stepLabel}>
-                                <p>{step.label}</p>
-                            </div>
-                        </li>
-                    ))}
-                </ol>
-                <FaRegArrowAltCircleRight className={styles.sliddingButton} onClick={() => nextSub()}/>
-            </div>
+                
+            <ol className = {styles.stepContainer}
+                style = {{"--prog-width": width}}>
+                {steps.map((step, idx) => (
+                    <li key = {idx} className = {styles.stepWrapper}>
+                        <div className = {`${styles.styleStep} ${activeStep >= step.step ? styles.completed : ''}`}>
+                            { activeStep >= step.step ? <IoMdCheckmarkCircleOutline /> : <p>{step.step}</p>}
+                        </div>
+                        <div className = {styles.stepLabel}>
+                            <p>{step.label}</p>
+                        </div>
+                    </li>
+                ))}
+            </ol>
+            
+            {submissionList.length >= 1 &&
+                <div className={styles.buttons}>
+                    <FaRegArrowAltCircleLeft className={styles.sliddingButton} onClick={() => prevSub()} />
+                        <span className = {styles.indicators}>
+                            {
+                                submissionList.map((_, idx) => (
+                                    <button key = {idx} onClick={null} className={`${styles.indicator} ${currSub === idx? styles.active:""}`}></button>
+                                ))
+                            }
+                        </span>
+                    <FaRegArrowAltCircleRight className={styles.sliddingButton} onClick={() => nextSub()} />
+                </div>
+            }
+
         </div>
     );
 }

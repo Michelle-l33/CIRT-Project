@@ -141,7 +141,7 @@ const MainContentAuthor = () => {
                     </li>
                 </ul>
 
-                <dashBoardAuthorContext.Provider value = {{currSub, nextSub, prevSub}}>
+                <dashBoardAuthorContext.Provider value = {{currSub, nextSub, prevSub, submissionList}}>
                     <div className={styles.bottomData}>
                         <div className={styles.trachBarContainer}>
                         {submissionList.length > 0 ? (
@@ -151,6 +151,7 @@ const MainContentAuthor = () => {
                             //     </div>
                             // ))
                             <TrackBar currentStep={submissionList[currSub].stage} title={submissionList[currSub].title}/>
+            
                         ) : (
                             <p>No submissions found.</p>
                         )}
