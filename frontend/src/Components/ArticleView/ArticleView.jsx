@@ -5,9 +5,34 @@ import { RiArticleLine, RiFullscreenLine } from "react-icons/ri";
 import { PiSidebarSimpleLight } from "react-icons/pi";
 import { MdOutlineZoomIn, MdOutlineZoomOut } from "react-icons/md";
 import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import React from 'react';
+import {useState, useEffect} from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const ArticleViewPage = () => {
+    const {id} = useParams();
+    const [submission, setSubmission] = useState(null);
+    const [loading, setLoading] = useState(true); // Loading state
+    console.log("subID: ",id);
+
+    useEffect(() => {
+        const fetchSubmission = async () => {
+          try {
+            const response = await fetch(`http://localhost:8082/submission/${id}`, {
+              method: "GET",
+            });
+            if (!response.ok) {
+              throw new Error("Failed to fetch submission");
+            }
+            const data = await response.json();
+            setSubmission(data);
+          } catch (error) {
+            console.error("Error fetching submission:", error);
+          }
+        };
+        fetchSubmission();
+      }, [id]);
 
     return (
         <div className={styles.bigContainer}>
@@ -18,7 +43,7 @@ const ArticleViewPage = () => {
                         <RiArticleLine /><span>Journal Article</span>
                     </div>
                     <div className={styles.title}>
-                        Article Title: A sample for this page
+                        <h1>{submission.title}</h1>
                     </div>
                     <div className={styles.contributors}>
                         John Pork, Thiago Silva, Eminem
