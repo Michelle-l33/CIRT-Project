@@ -3,6 +3,8 @@ import styles from "./TrackBar.module.css";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
 
+import { dashBoardAuthorContext } from "../MainContentAuthor";
+import { useContext } from "react";
 
 const steps = [
     {
@@ -33,12 +35,15 @@ const TrackBar = ({currentStep, title}) => {
     const totalSteps = steps.length;
     const width = `${(100 / (totalSteps - 1)) * (activeStep - 1)}%`;
 
+    const { nextSub, prevSub } = useContext(dashBoardAuthorContext);
+
+
     return (
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
-            <h4>For: title sd asnd sd aksdnwn</h4>
+            <h4>{`For: ${title}`}</h4>
             <div className = {styles.carouselContainer}>
-                <FaRegArrowAltCircleLeft className={styles.sliddingButton}/>
+                <FaRegArrowAltCircleLeft className={styles.sliddingButton} onClick={() => prevSub()} />
                 <ol className = {styles.stepContainer}
                     style = {{"--prog-width": width}}>
                     {steps.map((step, idx) => (
@@ -52,7 +57,7 @@ const TrackBar = ({currentStep, title}) => {
                         </li>
                     ))}
                 </ol>
-                <FaRegArrowAltCircleRight className={styles.sliddingButton}/>
+                <FaRegArrowAltCircleRight className={styles.sliddingButton} onClick={() => nextSub()}/>
             </div>
         </div>
     );

@@ -145,10 +145,10 @@
 .mainContent main .bottomData .trachBarContainer {
     flex-grow: 1;
     flex-basis: 500px;
-    max-height: 300px; /* Adjust based on your layout */
+    max-height: 50vh; 
     overflow-y: auto;
     padding-right: 10px; /* Avoid scrollbar overlap */
-    margin-top: 20px;
+    /* margin-top: 20px; */
 } 
 
 .mainContent main .bottomData .comment{
