@@ -5,6 +5,7 @@ const Submission = require("../models/Submission");
 const Comment = require("../models/Comment");
 const router = express.Router();
 const upload = require("../awsConnect");
+const {DeleteObjectCommand}= require("@aws-sdk/client-s3");
 
 
 // Upload Submission
@@ -103,8 +104,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// get all of authors submissions
-router.get("/authorSub/:authorID", async (req, res) => {
+// get all of authors articles
+router.get("/authorArt/:authorID", async (req, res) => {
   try {
     const { authorID } = req.params;
 
@@ -113,6 +114,26 @@ router.get("/authorSub/:authorID", async (req, res) => {
     }
 
     const submission = await Submission.find({authorID,isArticle:true});
+
+    if (!submission) {
+      return res.status(404).json({ message: "No Submissions For This Author" });
+    }
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+//gets author posters
+router.get("/authorPos/:authorID", async (req, res) => {
+  try {
+    const { authorID } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(authorID)){
+      return res.status(400).json({ message: "Invalid author ID" });
+    }
+
+    const submission = await Submission.find({authorID,isPoster:true});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions For This Author" });
@@ -202,6 +223,53 @@ router.get("/myQueue/:editorID",async (req,res)=>{
     res.status(500).json({ error: error.message });
   }
 })
+
+router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
+  try {
+    const { id } = req.params;
+    const newDocument = req.file; // New file
+
+    if (!newDocument) {
+      return res.status(400).json({ error: "File upload failed!" });
+    }
+
+    // Find the existing submission
+    const submission = await Submission.findById(id);
+
+    if (!submission) {
+      return res.status(404).json({ error: "Submission not found" });
+    }
+
+    // Check if the submission already has a document (previous file)
+    if (submission.document) {
+      const oldFileName = submission.document.split("/").pop(); // Extract file name from URL
+
+      // Delete the old file from S3
+      const deleteParams = {
+        Bucket: process.env.AWS_BUCKET_NAME,
+        Key: `uploads/${oldFileName}`,
+      };
+
+      // Delete the old file from S3
+      await s3Client.send(new DeleteObjectCommand(deleteParams));
+      console.log(`Deleted old file: ${oldFileName}`);
+    }
+
+    // Update the submission document URL in the database
+    submission.document = newDocument.location; // Update with the new file URL
+
+    // Save the updated submission
+    await submission.save();
+
+    res.status(200).json({
+      message: "File resubmitted successfully!",
+      fileUrl: newDocument.location,
+    });
+  } catch (error) {
+    console.error("Error during resubmission:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
   
 

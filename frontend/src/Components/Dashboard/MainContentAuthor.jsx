@@ -7,6 +7,8 @@ import { MdUploadFile } from "react-icons/md";
 import { IoDocumentOutline } from "react-icons/io5";
 import { MdOutlineDateRange } from "react-icons/md";
 import { GrNotes } from "react-icons/gr";
+import { IoMdCloseCircle } from "react-icons/io";
+
 
 import TrackBar from "./TrackBar/TrackBar";
 
@@ -48,12 +50,14 @@ const MainContentAuthor = () => {
     const { isClose } = useContext(dashBoardContext);
     const [ currentDate ] = useState(getDate());
     const [submissionList, setSubmissionList] = useState([]);
+    const [posterList, setPosterList] = useState([]);
     const {user} = useUser();
+    
 
     useEffect(()=>{
         const fetchSubmissions = async () =>{
             try{
-                const response = await fetch(`http://localhost:8082/submission/authorSub/${user._id}`, {
+                const response = await fetch(`http://localhost:8082/submission/authorArt/${user._id}`, {
                     method: "GET"
                 })
                 if (!response.ok){
@@ -67,7 +71,6 @@ const MainContentAuthor = () => {
         };
         fetchSubmissions();
     },[user._id]);
-
 
     //Submission Sliding Logics:
 
@@ -85,12 +88,30 @@ const MainContentAuthor = () => {
         }
       };
 
+    useEffect(()=>{
+        const fetchPosters = async () =>{
+            try{
+                const response = await fetch(`http://localhost:8082/submission/authorPos/${user._id}`, {
+                    method: "GET"
+                })
+                if (!response.ok){
+                    throw new Error("Failed to fetch posters");
+                  }
+                  const data = await response.json();
+                  setPosterList(data);
+                }  catch (error) {
+                  console.error("Error fetching posters:", error);
+                }
+        };
+        fetchPosters();
+    },[user._id]);
+
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     return (
         <div className={mainContentClass}>
             <div className={styles.submissionPopUp}>
                 <SubmissionPage />
-                <button onClick={closeSubmittionPopUp}>Close</button>
+                <button className={styles.closeButton} onClick={closeSubmittionPopUp}><IoMdCloseCircle size={32}/></button>
             </div>
 
             <main>
@@ -114,14 +135,14 @@ const MainContentAuthor = () => {
                     <li key='posters'>
                         <ImFilePicture />
                         <span className={styles.info}>
-                            <h3>10</h3>
+                            <h3>{posterList.length}</h3>
                             <span>Num of Posters</span>
                         </span>
                     </li>
                     <li key='articles'>
                         <IoDocumentOutline />
                         <span className={styles.info}>
-                            <h3>10</h3>
+                            <h3>{submissionList.length}</h3>
                             <span>Num of Articles</span>
                         </span>
                     </li>

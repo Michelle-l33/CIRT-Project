@@ -1,7 +1,10 @@
 import React, { useRef, useEffect } from 'react';
 import * as pdfjsLib from 'pdfjs-dist/webpack';
 import styles from './Gallery.module.css';
+import ArticleViewPage from "../ArticleView/ArticleView";
+import { Link } from 'react-router-dom';
 //chat helped with this page
+
 const PosterCard = ({ poster }) => {
   const canvasRef = useRef(null);
 
@@ -49,7 +52,8 @@ const PosterCard = ({ poster }) => {
         <h3>{poster.title}</h3>
         <p className={styles.author}>{poster.author}</p>
         <div className={styles.actions}>
-          <button className={styles.pdfButton}>View Study</button>
+        <Link to={`/Gallery/submission/${poster._id}`} className={styles.pdfButton}>View Study</Link>
+          <button href={`submission/${poster._id}`}className={styles.pdfButton}>View Study</button>
           <button className={styles.detailsButton}>Abstract</button>
         </div>
       </div>

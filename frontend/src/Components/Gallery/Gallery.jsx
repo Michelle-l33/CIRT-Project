@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styles from './Gallery.module.css';
 import PosterCard from './PosterCard';
 import { useSearchParams } from "react-router-dom";
+import { IoMenu } from "react-icons/io5";
 
 const Gallery = () => {
     const [searchParams] = useSearchParams();
@@ -10,6 +11,27 @@ const Gallery = () => {
 
     const [searchQuery, setSearchQuery] = useState(query);
     const [posters, setPosters] = useState([]);
+
+  // Responsive Sidebar
+  const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
+  
+  const toggleSidebar = () => {
+    setIsSidebarOpen(prev => !prev);
+  };
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
+  
+    const handleResize = () => {
+      setIsSidebarOpen(!mediaQuery.matches); // Sidebar closed when <= 768px, open otherwise
+    };
+  
+    handleResize(); // Set initial state based on screen size
+    mediaQuery.addEventListener("change", handleResize);
+  
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, []);
+
 
   // Fetch gallery data
   useEffect(() => {
@@ -58,25 +80,31 @@ const Gallery = () => {
         </div>
       </nav>
 
-      <aside className={styles.sidebar}>
-        <div className={styles.sidebarHeader}>
-          <Link to="/">
-          <img
-            src="/assets/utampa_logo.png"
-            alt="UT Logo"
-            className={styles.logo}
-          />
-          </Link>
-          
-        </div>
-        <nav className={styles.sidebarNav}>
-          <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-          <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-          <Link to="/submit" className={styles.navItem}>Submit Research</Link>
-          <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
-          <Link to="/contact" className={styles.navItem}>Research Support</Link>
-        </nav>
-      </aside>
+      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.show : ''}`}>
+              <button onClick={toggleSidebar} className={`${styles.sidebarToggle} ${isSidebarOpen ? styles.open : ''}`}>
+                <IoMenu size={28} color={"white"} />
+              </button>
+              <div className={styles.sidebarHeader}>
+                <Link to="/">
+                  <img
+                    src="/assets/utampa_logo.png"
+                    alt="UT Logo"
+                    className={styles.logo}
+                  />
+                </Link>
+              </div>
+              {/* <nav className={`${styles.sidebarNav} ${isSidebarOpen ? styles.show : ''}`}> */}
+              {isSidebarOpen && (
+                <nav className={styles.sidebarNav}>
+                  <Link to="/Papers" className={styles.navItem}>All Papers</Link>
+                  <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
+                  <Link to="/submit" className={styles.navItem}>Submit Research</Link>
+                  <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
+                  <Link to="/contact" className={styles.navItem}>Research Support</Link>
+                </nav>
+              )}
+      
+          </aside>
 
       <main className={styles.mainContent}>
         <div className={styles.posterGrid}>
