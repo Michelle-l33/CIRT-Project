@@ -103,8 +103,8 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// get all of authors submissions
-router.get("/authorSub/:authorID", async (req, res) => {
+// get all of authors articles
+router.get("/authorArt/:authorID", async (req, res) => {
   try {
     const { authorID } = req.params;
 
@@ -113,6 +113,26 @@ router.get("/authorSub/:authorID", async (req, res) => {
     }
 
     const submission = await Submission.find({authorID,isArticle:true});
+
+    if (!submission) {
+      return res.status(404).json({ message: "No Submissions For This Author" });
+    }
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+//gets author posters
+router.get("/authorPos/:authorID", async (req, res) => {
+  try {
+    const { authorID } = req.params;
+
+    if(!mongoose.Types.ObjectId.isValid(authorID)){
+      return res.status(400).json({ message: "Invalid author ID" });
+    }
+
+    const submission = await Submission.find({authorID,isPoster:true});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions For This Author" });
