@@ -2,11 +2,11 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 10px 15px;
     background: var(--light-grey);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
     margin-bottom: 15px; /* Adds spacing between multiple TrackBars */
+    height: calc(100% - 20px);
 }
 
 .stepContainer {
@@ -22,7 +22,11 @@
     padding-bottom: 1px;
     border-bottom: 1px dotted var(--dark-grey);
     font-size: 16px;
-    
+}
+
+.trackingContainer .carouselContainer .sliddingButton:hover {
+    opacity: 0.7;
+    cursor: pointer;
 }
 
 .stepWrapper {
@@ -72,7 +76,7 @@
     background: var(--grey);
     height: 4px;
     width: 100%;
-    top: 10%;
+    top: 0;
     transform: translateY(-50%);
     left: 0;
 }
@@ -84,8 +88,45 @@
     background: var(--dark);
     height: 4px;
     width: var(--prog-width, 0);
-    top: 10%;
+    top: 0;
     transition: 0.4s ease;
     transform: translateY(-50%);
     left: 0;
+}
+
+.trackingContainer .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    margin-top: 1rem;
+}
+
+.trackingContainer .buttons .sliddingButton {
+    font-size: 1.5rem;
+}
+
+.trackingContainer .buttons .sliddingButton:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.trackingContainer .buttons .indicators {
+    display: flex;
+}
+
+.trackingContainer .buttons .indicators .indicator {
+    background-color: var(--primary);
+    height: 0.5rem;
+    width: 0.5rem;
+    border-radius: 100%;
+    border: none;
+    outline: none;
+    box-shadow: 0 0 5px var(--transparent-dark);
+    margin: 0 0.2rem;
+    opacity: 0.2;
+}
+
+.trackingContainer .buttons .indicators .indicator.active {
+    opacity: 1;
 }

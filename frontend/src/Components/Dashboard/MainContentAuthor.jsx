@@ -15,9 +15,11 @@ import TrackBar from "./TrackBar/TrackBar";
 import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 
 import { dashBoardContext } from './Dashboard';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, createContext } from 'react';
 import { useUser } from '../Login/UserContext';
 
+
+export const dashBoardAuthorContext = createContext(null);
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
 function getDate() {
@@ -69,6 +71,22 @@ const MainContentAuthor = () => {
         };
         fetchSubmissions();
     },[user._id]);
+
+    //Submission Sliding Logics:
+
+    const [currSub, setCurrSub] = useState(0);
+
+    const nextSub = () => {
+        if (submissionList.length > 0) {
+          setCurrSub((prev) => (prev + 1) % submissionList.length);
+        }
+      };
+      
+    const prevSub = () => {
+        if (submissionList.length > 0) {
+          setCurrSub((prev) => (prev === 0 ? submissionList.length - 1 : prev - 1));
+        }
+      };
 
     useEffect(()=>{
         const fetchPosters = async () =>{
@@ -144,37 +162,41 @@ const MainContentAuthor = () => {
                     </li>
                 </ul>
 
-                <div className={styles.bottomData}>
-                    <div className={styles.trachBarContainer}>
-                    {submissionList.length > 0 ? (
-                        submissionList.map((submission) => (
-                            <div key={submission._id} className={styles.trackItem}>
-                                <TrackBar currentStep={submission.stage} title={submission.title} />
-                            </div>
-                        ))
-                    ) : (
-                        <p>No submissions found.</p>
-                    )}
-                    </div>
-
-                    <div className={styles.comment}>
-                        <div className={styles.header}>
-                            <GrNotes />
-                            <h3>Comments</h3>
+                <dashBoardAuthorContext.Provider value = {{currSub, nextSub, prevSub, submissionList}}>
+                    <div className={styles.bottomData}>
+                        <div className={styles.trachBarContainer}>
+                        {submissionList.length > 0 ? (
+                            // submissionList.map((submission) => (
+                            //     <div key={submission._id} className={styles.trackItem}>
+                            //         <TrackBar currentStep={submission.stage} title={submission.title} />
+                            //     </div>
+                            // ))
+                            <TrackBar currentStep={submissionList[currSub].stage} title={submissionList[currSub].title}/>
+            
+                        ) : (
+                            <p>No submissions found.</p>
+                        )}
                         </div>
 
-                        <ul className={styles.commentList}>
-                            <li>
-                                <p>Hello, hello, baby, you called? I can't hear a thing</p>
-                                <span>- From: Editor</span>
-                            </li>
-                            <li>
-                                <p>I have got no service in the club, you say, say?</p>
-                                <span>- From: Reviewer</span>
-                            </li>
-                        </ul>                                  
+                        <div className={styles.comment}>
+                            <div className={styles.header}>
+                                <GrNotes />
+                                <h3>Comments</h3>
+                            </div>
+
+                            <ul className={styles.commentList}>
+                                <li>
+                                    <p>Hello, hello, baby, you called? I can't hear a thing</p>
+                                    <span>- From: Editor</span>
+                                </li>
+                                <li>
+                                    <p>I have got no service in the club, you say, say?</p>
+                                    <span>- From: Reviewer</span>
+                                </li>
+                            </ul>                                  
+                        </div>
                     </div>
-                </div>
+                </dashBoardAuthorContext.Provider>
             </main>
         </div>
     );
