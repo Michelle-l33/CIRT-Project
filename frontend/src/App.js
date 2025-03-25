@@ -12,6 +12,7 @@ import ArticleView from './Components/ArticleView/ArticleView';
 import Gallery from './Components/Gallery/Gallery';
 import Papers from './Components/Papers/Papers';
 import { dashBoardContext } from './Components/Dashboard/Dashboard';
+import ArticleViewPage from './Components/ArticleView/ArticleView';
 
 
 function App() {
@@ -41,6 +42,7 @@ function App() {
             <Route path="/Dashboard" element={<RedirectDashboard />} />
             <Route path="/Dashboard/*" element={<DashboardRoutes />}/>
           </Route>
+          <Route path = "Gallery/submission/:id" element = {<ArticleViewPage/>}></Route>
         </Routes>
       </Router>
     </UserProvider>

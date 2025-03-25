@@ -2,20 +2,27 @@
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 10px 15px;
+    background: var(--light-grey);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px; /* Adds spacing between multiple TrackBars */
 }
 
 .stepContainer {
     display: flex;
     justify-content: space-between;
-    margin-top: 60px;
+    align-items:center;
+    margin-top: 40px;
     position: relative; 
 }
 
 .trackingContainer h4 {
-    padding-top: 10px;
+    padding-top: 5px;
     padding-bottom: 1px;
     border-bottom: 1px dotted var(--dark-grey);
+    font-size: 16px;
+    
 }
 
 .stepWrapper {
@@ -33,6 +40,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position:relative;
+    top:-20px;
 }
 
 .styleStep * {
@@ -46,9 +55,12 @@
 
 .stepLabel {
     position: absolute;
-    top: 66px;
+    top: 30px;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 14px;
+    text-align: center;
+    width: max-content;
 }
 
 
@@ -60,7 +72,7 @@
     background: var(--grey);
     height: 4px;
     width: 100%;
-    top: 50%;
+    top: 10%;
     transform: translateY(-50%);
     left: 0;
 }
@@ -72,7 +84,7 @@
     background: var(--dark);
     height: 4px;
     width: var(--prog-width, 0);
-    top: 50%;
+    top: 10%;
     transition: 0.4s ease;
     transform: translateY(-50%);
     left: 0;
