@@ -36,13 +36,18 @@
     font-weight: 500;
     color: var(--dark);
     margin-right: auto;
-    font-size: 1.3rem; 
+    font-size: 24px;
+    font-size: 1.3vw;
 }
 
 .homeIcon {
-    width: 28px;
-    height: 28px;
+    width: 3.5dvw;
+    height: 3.5dvh;
     background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b4a6d'%3E%3Cpath d='M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z'/%3E%3C/svg%3E") no-repeat center;
+}
+
+.homeText {
+    font-size: 0.2rem;
 }
 
 .searchContainer {
@@ -79,11 +84,86 @@
     border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
+.sidebarToggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    
+    .galleryContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebarHeader {
+        display: none;
+    }
+
+    .sidebarToggle {
+        background: none;
+        border: none;
+        margin: 10px;
+        margin-bottom: 50px;
+        display: block;
+        transform: translateX(-16px);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebarToggle.open {
+        transform: translateX(164px);
+        transition: transform 0.3s ease;
+    }
+
+    .sidebar {
+        width: 60px;
+        overflow-x: hidden;
+        transition: width 0.3s ease;
+    }
+
+    .sidebar.show {
+        width: 240px;
+        transition: width 0.3s ease;
+    }
+    
+    
+    .sidebarNav {
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        gap: 1rem;
+        width: 100%;
+    }
+    
+    .sidebarNav.show{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .navItem.show {
+        color: var(--dark);
+        background: #ffffff;
+        text-decoration: none;
+        padding: 12px 90px;
+        border-radius: 6px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        box-shadow: 0 2px 8px var(--transparent-dark);
+    }
+    
+    .navItem:hover {
+        background: var(--light);
+        transform: none;
+    }
+    
+    
+}
+
 .logo {
     width: 160px;
     margin: 0 auto 2rem;
     display: block;
-    /*filter: brightness(0) invert(1);*/
 }
 
 .sidebarNav {
