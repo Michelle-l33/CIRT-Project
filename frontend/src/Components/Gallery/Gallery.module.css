@@ -2,10 +2,10 @@
 
 .galleryContainer {
     --light: #f6f6f9;
-    --grey: #eee;
-    --dark: #2b4a6d;
-    --blue: #1976D2;
-    --light-blue: #CFE8FF;
+    --grey: #edf2f4;
+    --dark: #660708;
+    --red: #d90429;
+    --light-red: #e5383b;
     --transparent-light: #ffffffb1;
     --transparent-dark: #00000013;
     
@@ -133,6 +133,13 @@
     overflow: hidden;
     box-shadow: 0 2px 8px var(--transparent-dark);
     transition: transform 0.3s ease;
+    width: 300px; 
+    height: 350px;
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+
 }
 
 .posterCard:hover {
@@ -141,20 +148,21 @@
 }
 
 .posterImage {
-    width: 100%;
-    height: 200px;
+    width: 100%; 
+    height: 225px; 
     object-fit: cover;
-    border-bottom: 2px solid var(--light-blue);
-}
+    border-radius: 8px;
+  }
 
 .posterInfo {
     padding: 1.2rem;
+    
 }
 
 .posterInfo h3 {
     color: var(--dark);
     margin-bottom: 0.5rem;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     font-weight: 500;
 }
 
@@ -171,7 +179,7 @@
 
 .pdfButton {
     background: var(--blue);
-    color: var(--light);
+    color: var(--blue);
     padding: 6px 16px;
     border: none;
     border-radius: 4px;

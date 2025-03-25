@@ -14,7 +14,7 @@ const SubmissionParticipant = () => {
     const [showReviewers, setShowReviewers] = useState(false);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [currentReviewer, setCurrentReviewer] = useState(null); // State to store the current reviewer
+    const [currentReviewers, setCurrentReviewers] = useState([]); // State to store the current reviewer
 
     // Fetch participants and current reviewer from the backend
     useEffect(() => {
@@ -33,10 +33,10 @@ const SubmissionParticipant = () => {
                 const submissionData = await submissionResponse.json();
 
                 // If the submission has a reviewerID, find the reviewer in the participants list
-                if (submissionData.reviewerID) {
-                    const reviewer = participantsData.find((participant) => participant._id === submissionData.reviewerID);
-                    setCurrentReviewer(reviewer);
-                }
+                const assignedReviewers = participantsData.filter((participant) =>
+                    [submissionData.reviewerID1, submissionData.reviewerID2].includes(participant._id)
+                );
+                setCurrentReviewers(assignedReviewers);
             } catch (error) {
                 setError(error.message);
             } finally {
@@ -66,8 +66,10 @@ const SubmissionParticipant = () => {
             console.log('Reviewer assigned successfully:', updatedSubmission);
 
             // Update the current reviewer in the state
-            const reviewer = participants.find((participant) => participant._id === reviewerId);
-            setCurrentReviewer(reviewer);
+            const assignedReviewers = participants.filter((participant) =>
+                [updatedSubmission.reviewerID1, updatedSubmission.reviewerID2].includes(participant._id)
+            );
+            setCurrentReviewers(assignedReviewers);
 
             alert('Reviewer assigned successfully!');
         } catch (error) {
@@ -79,9 +81,8 @@ const SubmissionParticipant = () => {
     // Filter participants to only include reviewers if `showReviewers` is true
     const displayedParticipants = showReviewers
         ? participants.filter((participant) => participant.isReviewer)
-        : currentReviewer
-        ? [currentReviewer] // Show the current reviewer if one exists
-        : []; // Empty array if no reviewer is assigned
+        : currentReviewers;
+        
 
     if (loading) {
         return <div>Loading...</div>;

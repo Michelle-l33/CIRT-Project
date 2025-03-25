@@ -25,7 +25,7 @@ const steps = [
 
 
 //the design is copied and learned from https://www.codevertiser.com/creating-reusable-progress-steps-component-in-reactjs/
-const TrackBar = ({currentStep}) => {
+const TrackBar = ({currentStep, title}) => {
 
     const activeStep = currentStep;
     

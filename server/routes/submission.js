@@ -35,7 +35,8 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       isPoster,
       isArticle,
       abstract,
-      stage: "1",
+      //tags,
+      stage: "1"
     });
 
     await newSubmission.save();
@@ -69,7 +70,7 @@ router.get("/gallery", async (req, res) => {
 // Get All articles
 router.get("/publications", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true}); // finds articles only
+      const articles = await Submission.find({isArticle:true, stage: { $nin: ["1","0","2","3"]}}); // finds articles only
       res.json(articles);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -103,7 +104,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // get all of authors submissions
-router.get("/:authorID", async (req, res) => {
+router.get("/authorSub/:authorID", async (req, res) => {
   try {
     const { authorID } = req.params;
 
@@ -111,7 +112,7 @@ router.get("/:authorID", async (req, res) => {
       return res.status(400).json({ message: "Invalid author ID" });
     }
 
-    const submission = await Submission.find(authorID);
+    const submission = await Submission.find({authorID,isArticle:true});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions For This Author" });
@@ -135,15 +136,25 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
     }
 
     // Find the submission and update the reviewerID field
-    const submission = await Submission.findByIdAndUpdate(
-      submissionId,
-      { reviewerID: reviewerId },
-      { new: true } // Return the updated document
-    );
+    const submission = await Submission.findById(submissionId);
 
     if (!submission) {
       return res.status(404).json({ error: "Submission not found" });
     }
+    if (submission.reviewerID1?.toString() === reviewerId || submission.reviewerID2?.toString() === reviewerId) {
+      return res.status(400).json({ error: "Reviewer is already assigned to this submission" });
+    }
+
+    // Check available reviewer slots
+    if (!submission.reviewerID1) {
+      submission.reviewerID1 = reviewerId;
+    } else if (!submission.reviewerID2) {
+      submission.reviewerID2 = reviewerId;
+    } else {
+      return res.status(400).json({ error: "Both reviewer slots are full" });
+    }
+
+    await submission.save();
 
     res.json(submission);
   } catch (error) {

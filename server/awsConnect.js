@@ -24,6 +24,7 @@ const upload = multer({
     key: function (req, file, cb) {
       cb(null, `uploads/${Date.now()}-${file.originalname}`);
     },
+    contentDisposition: 'inline', // Set the Content-Disposition header to inline
   }),
 });
 

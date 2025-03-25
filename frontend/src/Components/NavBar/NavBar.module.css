@@ -20,8 +20,12 @@
 
 .navLeft img{
     height: 90px;
-    aspect-ratio: 32/9;
+    aspect-ratio: 16/9;
     border-radius: 5px;
+    margin-left: 1.5em;
+    /* height: 90px; 
+    aspect-ratio: 32/9;
+    border-radius: 5px; */
 }
 
 .navRight {
@@ -120,5 +124,5 @@
 }
 
 .hidden {
-  display: none;
+  visibility: hidden;
 }

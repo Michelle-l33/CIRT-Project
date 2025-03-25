@@ -11,7 +11,14 @@ const SearchBar = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        navigate(`/ArticleView?searchQuery=${query}&tab=${tab}`);
+
+        if (tab === "posters"){
+            navigate(`/Gallery?q=${query}`);
+        } else if (tab === "articles") {
+            navigate(`/Papers?q=${query}`);
+        } else {
+            navigate("/")
+        }
     };
 
     return (
