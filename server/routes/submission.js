@@ -104,7 +104,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // get all of authors submissions
-router.get("/:authorID", async (req, res) => {
+router.get("/authorSub/:authorID", async (req, res) => {
   try {
     const { authorID } = req.params;
 
@@ -112,7 +112,7 @@ router.get("/:authorID", async (req, res) => {
       return res.status(400).json({ message: "Invalid author ID" });
     }
 
-    const submission = await Submission.find(authorID);
+    const submission = await Submission.find({authorID,isArticle:true});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions For This Author" });

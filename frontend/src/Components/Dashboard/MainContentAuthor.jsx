@@ -13,7 +13,8 @@ import TrackBar from "./TrackBar/TrackBar";
 import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 
 import { dashBoardContext } from './Dashboard';
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { useUser } from '../Login/UserContext';
 
 
 //geting Dates: https://www.shecodes.io/athena/7466-how-to-get-current-date-in-react
@@ -44,6 +45,26 @@ function submitSubmission() {
 const MainContentAuthor = () => {
     const { isClose } = useContext(dashBoardContext);
     const [ currentDate ] = useState(getDate());
+    const [submissionList, setSubmissionList] = useState([]);
+    const {user} = useUser();
+
+    useEffect(()=>{
+        const fetchSubmissions = async () =>{
+            try{
+                const response = await fetch(`http://localhost:8082/submission/authorSub/${user._id}`, {
+                    method: "GET"
+                })
+                if (!response.ok){
+                    throw new Error("Failed to fetch submissions");
+                  }
+                  const data = await response.json();
+                  setSubmissionList(data);
+                }  catch (error) {
+                  console.error("Error fetching submissions:", error);
+                }
+        };
+        fetchSubmissions();
+    },[user._id]);
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     return (
@@ -103,7 +124,15 @@ const MainContentAuthor = () => {
 
                 <div className={styles.bottomData}>
                     <div className={styles.trachBarContainer}>
-                        <TrackBar currentStep={2} />
+                    {submissionList.length > 0 ? (
+                        submissionList.map((submission) => (
+                            <div key={submission._id} className={styles.trackItem}>
+                                <TrackBar currentStep={submission.stage} title={submission.title} />
+                            </div>
+                        ))
+                    ) : (
+                        <p>No submissions found.</p>
+                    )}
                     </div>
 
                     <div className={styles.comment}>

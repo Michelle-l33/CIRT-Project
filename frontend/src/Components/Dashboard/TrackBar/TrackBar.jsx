@@ -23,7 +23,7 @@ const steps = [
 
 
 //the design is copied and learned from https://www.codevertiser.com/creating-reusable-progress-steps-component-in-reactjs/
-const TrackBar = ({currentStep}) => {
+const TrackBar = ({currentStep, title}) => {
 
     const activeStep = currentStep;
     
@@ -34,7 +34,7 @@ const TrackBar = ({currentStep}) => {
     return (
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
-            <h4>For: title sd asnd sd aksdnwn</h4>
+            <h4>For: {title}</h4>
             <ol className = {styles.stepContainer}
                 style = {{"--prog-width": width}}>
                 {steps.map((step, idx) => (
