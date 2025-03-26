@@ -27,6 +27,7 @@ const ArticleViewPage = () => {
             }
             const data = await response.json();
             setSubmission(data);
+            setLoading(false);
           } catch (error) {
             console.error("Error fetching submission:", error);
           }
@@ -43,20 +44,30 @@ const ArticleViewPage = () => {
                         <RiArticleLine /><span>Journal Article</span>
                     </div>
                     <div className={styles.title}>
-                        <h1>{submission.title}</h1>
+                    <h1>{loading ? "Loading..." : submission?.title || "Title Not Found"}</h1>
                     </div>
                     <div className={styles.contributors}>
-                        John Pork, Thiago Silva, Eminem
+                    <h1>{loading ? "Loading..." : `${submission?.lastName},${submission.firstName}` || "Author Not Found"}</h1>
                     </div>
                 </div>
                 
                 <section className={styles.pdfWrapper}> {/* <Name/> */}
-                    <div className={styles.pdfNavBar}>
+                    {/* <div className={styles.pdfNavBar}>
                         <div className={styles.leftControl}><button><PiSidebarSimpleLight  size={28} color={"white"}/></button><button><MdOutlineZoomIn size={28} color={"white"}/></button><button><MdOutlineZoomOut size={28} color={"white"}/></button></div>
                         <div className={styles.centerControl}><button><FaAngleUp size={28} color={"white"}/></button><button><FaAngleDown size={28} color={"white"}/></button></div>
                         <div className={styles.rightControl}><button><RiFullscreenLine size={28} color={"white"}/></button></div>
-                    </div>
-                    <img src="https://media1.tenor.com/m/yqGDxokI9c4AAAAd/brazilian-luffy-dance.gif" alt="" />
+                    </div> */}
+                    {submission?.document ? (
+                        <iframe 
+                            src={submission.document} 
+                            width="100%" 
+                            height="600px" 
+                            style={{ border: "none" }}
+                        />
+                    ) : (
+                        <p>No PDF available</p>
+                    )}
+                    {/* <img src="https://media1.tenor.com/m/yqGDxokI9c4AAAAd/brazilian-luffy-dance.gif" alt="" /> */}
                 </section>
             </main>
         </div>
