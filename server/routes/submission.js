@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Submission = require("../models/Submission");
 const Comment = require("../models/Comment");
 const router = express.Router();
-const upload = require("../awsConnect");
+const {upload, s3Client} = require("../awsConnect");
 const {DeleteObjectCommand}= require("@aws-sdk/client-s3");
 
 
@@ -257,6 +257,7 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
 
     // Update the submission document URL in the database
     submission.document = newDocument.location; // Update with the new file URL
+    submission.resubmitted = true;
 
     // Save the updated submission
     await submission.save();

@@ -49,8 +49,36 @@ const TrackBar = ({currentStep, title}) => {
 
     };
 
-    const handleSubmitClick = () => {
+    const handleSubmitClick = async() => {
         //change submission logic
+        if (!documents[currSub]) {
+            window.alert("Please upload a file first.");
+            return;
+        }
+    
+        const formData = new FormData();
+        formData.append("document", documents[currSub]); // Attach the uploaded file
+    
+        try {
+            const response = await fetch(`http://localhost:8082/submission/${submissionList[currSub]._id}/resubmit`, {
+                method: "PUT",
+                body: formData,
+                credentials: "include",
+            });
+    
+            const data = await response.json();
+    
+            if (response.ok) {
+                window.alert("File resubmitted successfully!");
+                window.location.reload(); // Reload to reflect changes
+            } else {
+                window.alert(data.error || "Something went wrong!");
+                console.log(data.error);
+            }
+        } catch (error) {
+            console.error("Error during file resubmission:", error);
+            window.alert("Error: " + error.message);
+        }
     }
 
     return (
