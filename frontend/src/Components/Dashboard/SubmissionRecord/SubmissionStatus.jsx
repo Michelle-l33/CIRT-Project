@@ -41,12 +41,12 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "1" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission accepted for review</h3>
+                        <h3>Submission Ready for Review</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button>
-                        <button>Decline submission</button>           
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
                     </div>
               </>}
                     
@@ -58,7 +58,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
-                        <button>Decline submission</button>           
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>           
                     </div>
               </>}
 
@@ -70,7 +70,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>             
-                        <button>Decline submission</button>                
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>                 
                     </div>
               </>}
 
@@ -81,8 +81,8 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Publish the Submission</button>
-                        <button>Decline submission</button>           
+                        <button onClick={() => window.location.reload()}>Publish the Submission</button>
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
                     </div>
               </>}
             

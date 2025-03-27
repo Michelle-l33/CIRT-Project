@@ -18,7 +18,8 @@ const submissionSchema = new mongoose.Schema({
   },
   reviewerID1: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
   reviewerID2: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-  editorID: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+  editorID: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+  resubmitted: {type: Boolean, default: false}
 });
 
 // Create a model
