@@ -23,7 +23,7 @@ export const Submission = ({firstName, lastName, title, url, id}) => {
     return (
         <>
             <h4>{firstName} {lastName}</h4>
-            <Link to= {`/ArticleView/${id}`} target="_blank">
+            <Link to= {`/Gallery/submission/${id}`} target="_blank">
                 <p>{title}</p>
             </Link>
 

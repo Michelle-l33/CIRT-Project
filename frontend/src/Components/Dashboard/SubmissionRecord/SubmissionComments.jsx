@@ -101,7 +101,7 @@ const SubmissionDiscussion = () => {
                 {commentList.map((comment, idx) => 
                     <li key = {idx} className = {styles.listItem}>
                         {/* the code for Comment component is down below */}
-                        <Comment content = {comment.comment} sender = {"Reviewer"}/>
+                        <Comment content = {comment.comment} sender = {"Editor"}/>
                     </li>
                 )}
 
