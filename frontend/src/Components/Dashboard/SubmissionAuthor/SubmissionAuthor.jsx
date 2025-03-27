@@ -15,6 +15,7 @@ const SubmissionAuthorPage = () => {
     const [authorID, setAuthorID] = useState("");
     const [placeholderInput, setPlaceholderInput] = useState("");
     const [loading, setLoading] = useState(false); // Loading state
+    const [abstract, setAbstract] = useState("");
     
 
 
@@ -46,6 +47,7 @@ const SubmissionAuthorPage = () => {
         formData.append("document", document); // Use the document state here
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
+        formData.append("abstract",abstract);
         formData.append("stage", stage);
         formData.append("placeholderInput", placeholderInput); // Conditional Input
 
@@ -103,12 +105,12 @@ const SubmissionAuthorPage = () => {
                 {/* Conditional Input */}
                 {submissionType === "article" && (
                     <div className={styles.boxInput}>
-                        <textarea className={styles.abstractInput} value={placeholderInput} onChange={(e) => setPlaceholderInput(e.target.value)} placeholder="Abstract" />
+                        <textarea className={styles.abstractInput} value={abstract} onChange={(e) => setAbstract(e.target.value)} placeholder="Abstract" />
                     </div>
                 )}
                 {submissionType === "poster" && (
                     <div className={styles.boxInput}>
-                        <textarea className={styles.posterDescription} value={placeholderInput} onChange={(e) => setPlaceholderInput(e.target.value)} placeholder="Description of poster" />
+                        <textarea className={styles.posterDescription} value={abstract} onChange={(e) => setAbstract(e.target.value)} placeholder="Description of poster" />
                     </div>
                 )}
 

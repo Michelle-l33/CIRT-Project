@@ -129,7 +129,7 @@ const Papers = () => {
               </div>
               <div className={styles.actions}>
                 <a 
-                  href={`/assets/papers/${paper.pdf}`} 
+                  href={`/Gallery/submission/${paper._id}`} 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className={styles.pdfButton}
