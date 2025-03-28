@@ -49,7 +49,7 @@ const MyQueue = () => {
     return (
 
           <div className = {styles.tab}>
-            <TabHeader tabHeader="My Asssigned" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
+            <TabHeader tabHeader="My Assigned" submissionList = {submissionList} setFilteredList = {setFilteredList}/>
 
             <ul className = {styles.submissionList}>
               

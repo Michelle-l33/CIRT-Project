@@ -88,6 +88,26 @@ router.get("/publications", async (req, res) => {
     }
   });
 
+  router.get("/unassigned", async (req, res) => {
+    try {
+      const submissions = await Submission.find({isArticle:true, stage: "1"}); // finds articles that are unassigned
+      console.log("Unassigned Submissions:", submissions); // Verify what's being returned
+      res.json(submissions);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  router.get("/archives", async (req, res) => {
+    try {
+      const submissions = await Submission.find({isArticle:true, stage: ["4", "0"] }); // finds articles that are archived
+      console.log("Unassigned Submissions:", submissions); // Verify what's being returned
+      res.json(submissions);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
 // individual submission
 router.get("/:id", async (req, res) => {
   try {
@@ -124,6 +144,7 @@ router.get("/authorArt/:authorID", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 //gets author posters
 router.get("/authorPos/:authorID", async (req, res) => {
   try {
@@ -183,27 +204,7 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
   }
 });
 
-//changes specific submission stage
-router.put("/:id", async (req,res) =>{
-  try {
-    const { id } = req.params;
-    const { stage } = req.body;
 
-    const updatedSubmission = await Submission.findByIdAndUpdate(
-        id,
-        { stage },
-        { new: true } // Return updated document
-    );
-
-    if (!updatedSubmission) {
-        return res.status(404).json({ message: "Submission not found" });
-    }
-
-    res.json(updatedSubmission);
-} catch (error) {
-    res.status(500).json({ error: error.message });
-}
-})
 
 router.get("/myQueue/:editorID",async (req,res)=>{
   try{
@@ -272,7 +273,7 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
   }
 });
 
-  
+
 
 
 module.exports = router;
