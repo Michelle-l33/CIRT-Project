@@ -1,31 +1,31 @@
 import styles from './TabNav.module.css';
 import Submission from "./Submission";
 import TabHeader from './TabHeader';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from "react-router-dom";
+import { CiMenuKebab } from "react-icons/ci";
 
 const Unassigned = () => {
     const [submissionList, setSubmissionList] = useState([]);
     const [filteredList, setFilteredList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [editors, setEditors] = useState([]);
+    const [showEditorDropdown, setShowEditorDropdown] = useState(null);
+    const dropdownRef = useRef(null);
 
+    // Fetch unassigned submissions
     useEffect(() => {
         const fetchUnassigned = async () => {
             try {
                 setIsLoading(true);
                 const response = await fetch('http://localhost:8082/submission/unassigned');
                 
-                if (!response.ok) {
-                    throw new Error('Failed to fetch submissions');
-                }
+                if (!response.ok) throw new Error('Failed to fetch submissions');
                 
                 const data = await response.json();
+                if (!Array.isArray(data)) throw new Error('Unexpected data format');
                 
-                if (!Array.isArray(data)) {
-                    throw new Error('Unexpected data format from API');
-                }
-
                 setSubmissionList(data);
                 setFilteredList(data);
                 setError(null);
@@ -36,9 +36,64 @@ const Unassigned = () => {
                 setIsLoading(false);
             }
         };
-        
         fetchUnassigned();
     }, []);
+
+    // Fetch all editors
+    useEffect(() => {
+        const fetchEditors = async () => {
+            try {
+                const response = await fetch('http://localhost:8082/user/');
+                if (!response.ok) throw new Error('Failed to fetch editors');
+                
+                const data = await response.json();
+                const editorUsers = data.filter(user => user.isEditor);
+                setEditors(editorUsers);
+            } catch (error) {
+                console.error("Error fetching editors:", error);
+            }
+        };
+        fetchEditors();
+    }, []);
+
+    // Handle click outside dropdown
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setShowEditorDropdown(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
+
+    const handleAssignEditor = async (submissionId, editorId) => {
+        try {
+            const response = await fetch(`http://localhost:8082/submission/${submissionId}/assign-editor`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ editorId })
+            });
+
+            if (!response.ok) throw new Error('Failed to assign editor');
+
+            setSubmissionList(prev => prev.map(sub => 
+                sub._id === submissionId ? { ...sub, editorID: editorId } : sub
+            ));
+            setFilteredList(prev => prev.map(sub => 
+                sub._id === submissionId ? { ...sub, editorID: editorId } : sub
+            ));
+            
+            setShowEditorDropdown(null);
+        } catch (error) {
+            console.error("Error assigning editor:", error);
+        }
+    };
 
     const optionList = [
         {
@@ -51,10 +106,7 @@ const Unassigned = () => {
         },
         {
             name: "Assign Editor",
-            function: (submission) => {
-                console.log("Assign editor clicked for", submission._id);
-                // Add your assign editor logic here
-            }
+            function: (submission) => setShowEditorDropdown(submission._id)
         }
     ];
 
@@ -72,11 +124,32 @@ const Unassigned = () => {
             <ul className={styles.submissionList}>
                 {filteredList.length > 0 ? (
                     filteredList.map((submission) => (
-                        <li key={submission._id}>
+                        <li key={submission._id} className={styles.submissionListItem}>
                             <Submission 
                                 submission={submission} 
                                 optionList={optionList}
                             />
+                            
+                            {/* Editor dropdown menu */}
+                            {showEditorDropdown === submission._id && (
+                                <div 
+                                    ref={dropdownRef}
+                                    className={styles.editorDropdown}
+                                >
+                                    <div className={styles.dropdownHeader}>Assign to Editor:</div>
+                                    <ul className={styles.editorList}>
+                                        {editors.map(editor => (
+                                            <li 
+                                                key={editor._id} 
+                                                onClick={() => handleAssignEditor(submission._id, editor._id)}
+                                                className={styles.editorItem}
+                                            >
+                                                {editor.name} ({editor.email})
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                     ))
                 ) : (

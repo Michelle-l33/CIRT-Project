@@ -355,3 +355,42 @@
 .tabNavContainer.close .submissionList .submission .submissionStatus svg {
     display: none;
 }
+
+.submissionListItem {
+    position: relative;
+}
+
+.editorDropdown {
+    position: absolute;
+    right: 20px;
+    top: 50px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    min-width: 250px;
+}
+
+.dropdownHeader {
+    padding: 8px 12px;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    background-color: #f8f8f8;
+}
+
+.editorList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.editorItem {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.editorItem:hover {
+    background-color: #f0f0f0;
+}
