@@ -2,26 +2,13 @@ import styles from './TabNav.module.css';
 import Submission from "./Submission";
 import TabHeader from './TabHeader';
 import { useState, useEffect } from 'react';
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Unassigned = () => {
     const [submissionList, setSubmissionList] = useState([]);
     const [filteredList, setFilteredList] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
-
-    const navigate = useNavigate();
-
-    const optionList = [
-        {
-            name: "View in Detail",
-            function: (id) => navigate(`/submission/${id}`) // Pass submission ID
-        },
-        {
-            name: "Assign Editor",
-            function: (id) => console.log("Assign editor clicked for", id)
-        }
-    ];
 
     useEffect(() => {
         const fetchUnassigned = async () => {
@@ -34,15 +21,13 @@ const Unassigned = () => {
                 }
                 
                 const data = await response.json();
-                console.log("API Response:", data); // Debug what's returned
                 
-                // Verify data is in expected format
                 if (!Array.isArray(data)) {
                     throw new Error('Unexpected data format from API');
                 }
 
                 setSubmissionList(data);
-                setFilteredList(data); // Initialize filtered list with all unassigned
+                setFilteredList(data);
                 setError(null);
             } catch (error) {
                 console.error("Error fetching submissions:", error);
@@ -53,7 +38,25 @@ const Unassigned = () => {
         };
         
         fetchUnassigned();
-    }, []); // Empty dependency array to run once on mount
+    }, []);
+
+    const optionList = [
+        {
+            name: "View in Detail",
+            element: (submission) => (
+                <Link to={`/Gallery/submission/${submission._id}`} target="_blank">
+                    View in Detail
+                </Link>
+            )
+        },
+        {
+            name: "Assign Editor",
+            function: (submission) => {
+                console.log("Assign editor clicked for", submission._id);
+                // Add your assign editor logic here
+            }
+        }
+    ];
 
     if (isLoading) return <div className={styles.loading}>Loading submissions...</div>;
     if (error) return <div className={styles.error}>Error: {error}</div>;
@@ -72,10 +75,7 @@ const Unassigned = () => {
                         <li key={submission._id}>
                             <Submission 
                                 submission={submission} 
-                                optionList={optionList.map(option => ({
-                                    ...option,
-                                    function: () => option.function(submission._id)
-                                }))} 
+                                optionList={optionList}
                             />
                         </li>
                     ))
