@@ -90,7 +90,7 @@ router.get("/publications", async (req, res) => {
 
   router.get("/unassigned", async (req, res) => {
     try {
-      const submissions = await Submission.find({isArticle:true, stage: "1"}); // finds articles that are unassigned
+      const submissions = await Submission.find({isArticle:true, stage: "1", $or: [{ editorID: null }, { editorID: { $exists: false } }]}); // finds articles that are unassigned
       console.log("Unassigned Submissions:", submissions); // Verify what's being returned
       res.json(submissions);
     } catch (error) {
