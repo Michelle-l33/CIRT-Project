@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req,res)=>{
     try{
         
-        const {originalSubmissionID, comment}= req.body;
+        const {originalSubmissionID, comment, commentorID, role}= req.body;
         
         if(!mongoose.Types.ObjectId.isValid(originalSubmissionID)){
           return res.status(400).json({message: "Invalid author ID"});
@@ -26,7 +26,9 @@ router.post("/", async (req,res)=>{
   
         const newComment = new Comment({
           originalSubmissionID,
-          comment
+          comment,
+          role,
+          commentorID
         })
         // Save the new comment to the database
         const savedComment = await newComment.save();

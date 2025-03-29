@@ -1,6 +1,5 @@
 import styles from './MainContentAuthor.module.css';
 import { Link } from "react-router-dom";
-
 import { FaRegSmileWink } from "react-icons/fa";
 import { ImFilePicture } from "react-icons/im";
 import { MdUploadFile } from "react-icons/md";
@@ -17,6 +16,7 @@ import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext, useEffect, createContext } from 'react';
 import { useUser } from '../Login/UserContext';
+
 
 
 export const dashBoardAuthorContext = createContext(null);
@@ -53,7 +53,6 @@ const MainContentAuthor = () => {
     const [posterList, setPosterList] = useState([]);
     const {user} = useUser();
     
-
     useEffect(()=>{
         const fetchSubmissions = async () =>{
             try{
@@ -147,6 +146,7 @@ const MainContentAuthor = () => {
     };
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
+    
     return (
         <div className={mainContentClass}>
             <div className={styles.submissionPopUp}>
@@ -228,7 +228,7 @@ const MainContentAuthor = () => {
                                 {commentList.map((comment, idx) => 
                                     <li key = {idx} className = {styles.listItem}>
                                         {/* the code for Comment component is down below */}
-                                        <Comment content = {comment.comment} sender = {"Editor"}/>
+                                        <Comment content = {comment.comment} sender = {comment.role}/>
                                     </li>
                                 )}
                             </ul>                                  

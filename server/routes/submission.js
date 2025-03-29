@@ -204,8 +204,7 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
   }
 });
 
-
-
+//my Queue 
 router.get("/myQueue/:editorID",async (req,res)=>{
   try{
     const {editorID} = req.params;
@@ -225,6 +224,7 @@ router.get("/myQueue/:editorID",async (req,res)=>{
   }
 })
 
+//reupload
 router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
   try {
     const { id } = req.params;
@@ -269,6 +269,21 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
     });
   } catch (error) {
     console.error("Error during resubmission:", error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+//get all reviewer assignments
+router.get("/reviewerSubs", async (req, res) => {
+  try {
+    const reviewerID = req.user._id; // Assuming you have authentication middleware that provides req.user
+
+    const submissions = await Submission.find({
+      $or: [{ reviewerID1: reviewerID }, { reviewerID2: reviewerID }]
+    });
+
+    res.json(submissions);
+  } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });

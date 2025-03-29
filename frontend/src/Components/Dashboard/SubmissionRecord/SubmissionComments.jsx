@@ -2,6 +2,7 @@ import styles from './SubmissionRecord.module.css';
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { IoIosClose } from "react-icons/io";
+import {useUser} from "../../Login/UserContext";
 
 
 const SubmissionDiscussion = () => {
@@ -13,8 +14,12 @@ const SubmissionDiscussion = () => {
     //const {originalSubmissionID} = useParams(); // pulls ID from URL
     const [loading, setLoading]=useState(true);
     const [commentList, setCommentList] = useState([]);
+    const {user} = useUser();
+    const commentorID = user._id;
+    
+    const role = user.isEditor ? "Editor" : "Reviewer";
 
-
+ // fetches comments
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", originalSubmissionID);
@@ -52,9 +57,9 @@ const SubmissionDiscussion = () => {
             console.error("Submission ID is missing!");
             return;
         }
-        console.log("Submitting comment:", { originalSubmissionID, comment });
+        console.log("Submitting comment:", { originalSubmissionID, comment, commentorID, role });
         try{
-            const commentData = {originalSubmissionID, comment };
+            const commentData = {originalSubmissionID, comment, commentorID, role };
             
             const response = await fetch("http://localhost:8082/comment",{
                 method: "POST",
@@ -101,7 +106,7 @@ const SubmissionDiscussion = () => {
                 {commentList.map((comment, idx) => 
                     <li key = {idx} className = {styles.listItem}>
                         {/* the code for Comment component is down below */}
-                        <Comment content = {comment.comment} sender = {"Editor"}/>
+                        <Comment content = {comment.comment} sender = {role}/>
                     </li>
                 )}
 
