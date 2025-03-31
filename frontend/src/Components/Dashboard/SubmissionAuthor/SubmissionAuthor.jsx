@@ -3,6 +3,7 @@ import styles from './SubmissionAuthor.module.css';
 import { useState } from 'react';
 import {useUser} from '../../Login/UserContext';
 import Cookies from 'js-cookie';
+import CollaboratorsInput from '../CollaboratorsInput/CollaboratorsInput';
 
 const SubmissionAuthorPage = () => {
 
@@ -10,13 +11,13 @@ const SubmissionAuthorPage = () => {
     const [title, setTitle] = useState("");
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
+    const [collaborators, setCollaborators] = useState([]); // Convernt into array
     const [submissionType, setSubmissionType] = useState("");
     const [stage, setStage]= useState("1");
     const [authorID, setAuthorID] = useState("");
     const [placeholderInput, setPlaceholderInput] = useState("");
     const [loading, setLoading] = useState(false); // Loading state
     const [abstract, setAbstract] = useState("");
-    
 
 
     const handleFileChange = (e) => {
@@ -44,6 +45,7 @@ const SubmissionAuthorPage = () => {
         formData.append("title", title);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
+        formData.append("collaborators", collaborators.join(","));
         formData.append("document", document); // Use the document state here
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
@@ -88,6 +90,9 @@ const SubmissionAuthorPage = () => {
                 </div>
                 <div className={styles.boxInput}>
                     <input type="text" onChange={(e)=>setLastName(e.target.value)} required placeholder="Last/alias"/>
+                </div>
+                <div className={styles.boxInput}>
+                    <CollaboratorsInput collaborators={collaborators} setCollaborators={setCollaborators} />
                 </div>
                 <div className={styles.radioInput}>
                     <input type="radio" id="articleRadio" name="submissionType" value="article"
