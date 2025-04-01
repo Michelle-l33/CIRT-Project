@@ -37,7 +37,7 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
 
     const listOfReviewerIcons = [
         { Name: "Current", iconComponent: IoNewspaperOutline, url: "Current" },
-        { Name: "All", iconComponent: RiDashboardHorizontalLine, url: "All" },
+    
         { Name: "User", iconComponent: FaRegUser, url: "#" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];

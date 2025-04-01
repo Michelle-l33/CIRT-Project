@@ -275,12 +275,24 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
 });
 
 //get all reviewer assignments
-router.get("/reviewerSubs", async (req, res) => {
+router.get("/reviewerSubs/:reviewerID", async (req, res) => {
   try {
-    const reviewerID = req.user._id; // Assuming you have authentication middleware that provides req.user
+    const {reviewerID} = req.params; 
+
+    if (!mongoose.Types.ObjectId.isValid(reviewerID)) {
+      return res.status(400).json({ error: "Invalid reviewer ID format" });
+    }
 
     const submissions = await Submission.find({
-      $or: [{ reviewerID1: reviewerID }, { reviewerID2: reviewerID }]
+      $and: [
+        { 
+          $or: [
+            { reviewerID1: reviewerID },
+            { reviewerID2: reviewerID }
+          ] 
+        },
+        { stage: "2" }  // Only submissions in stage 2
+      ]
     });
 
     res.json(submissions);

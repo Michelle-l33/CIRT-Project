@@ -14,7 +14,7 @@ import Archives from '../Dashboard/TabNav/Archives';
 import SubmissionRecord from '../Dashboard/SubmissionRecord/SubmissionRecord';
 import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor';
 import Current from '../Dashboard/ReviewerAssignment/Current';
-import All from '../Dashboard/ReviewerAssignment/All';
+
 
 
 const DashboardRoutes = () => {
@@ -27,7 +27,7 @@ const DashboardRoutes = () => {
                                     component={<MainContentReviewer />}/>}>
                     <Route index element={<Navigate to="Current" replace />}/>
                     <Route path = "Current" element={<Current />} />
-                    <Route path = "All" element={<All />} />
+                    
                 </Route>
 
                 <Route path="Editor" element={<Dashboard 
