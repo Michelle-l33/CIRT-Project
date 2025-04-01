@@ -150,10 +150,6 @@
     margin-right: 3px;
 }
 
-.taskIncomplete.complete .taskTitle svg {
-    color: var(--success);
-}
-
 .taskTitle .taskDescription {
     color: var(--dark);
     padding-left: 10%;

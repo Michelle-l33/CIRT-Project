@@ -148,12 +148,13 @@
     transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.filesContainer .contentList:hover .listItem:not(.active),
-.filesContainer .contentList:hover .listItem:not(:hover) {
-    opacity: 0.7;
+.filesContainer .contentList:has(.listItem.active) .listItem:not(.active),
+.filesContainer .contentList:hover:has(.listItem:hover) .listItem:not(:hover) {
+    opacity: 0.5;
 }
 
-.filesContainer .contentList:hover .listItem:hover {
+.filesContainer .contentList:hover .listItem:hover,
+.filesContainer .contentList:has(.listItem.active) .listItem:hover  {
     transform: translateY(-2px);
     box-shadow: 0px 4px 10px var(--transparent-dark);
     border: 2px solid var(--transparent-light);
