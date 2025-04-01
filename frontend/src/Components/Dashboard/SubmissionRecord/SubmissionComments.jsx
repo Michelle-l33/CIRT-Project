@@ -16,7 +16,6 @@ const SubmissionDiscussion = () => {
     const [commentList, setCommentList] = useState([]);
     const {user} = useUser();
     const commentorID = user._id;
-    
     const role = user.isEditor ? "Editor" : "Reviewer";
 
  // fetches comments

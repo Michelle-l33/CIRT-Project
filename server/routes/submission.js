@@ -25,13 +25,14 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "User ID is required in cookies" });
     }
 
-    const { title, firstName, lastName, isPoster, isArticle, abstract } = req.body;
+    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract } = req.body;
 
     const newSubmission = new Submission({
       authorID,
       title,
       firstName,
       lastName,
+      collaborators,
       document: req.file.location, // S3 file URL
       isPoster,
       isArticle,

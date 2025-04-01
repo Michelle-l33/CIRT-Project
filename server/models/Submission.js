@@ -6,6 +6,7 @@ const submissionSchema = new mongoose.Schema({
   title: { type: String, required: true },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
+  collaborators: {type:[String], default:[]},
   document: { type: String, required: true },
   isPoster: { type: Boolean, default: false },
   isArticle: { type: Boolean, default: false },
