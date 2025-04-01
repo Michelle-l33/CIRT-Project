@@ -11,23 +11,23 @@ import Login from './Components/Login/Login';
 import ArticleView from './Components/ArticleView/ArticleView';
 import Gallery from './Components/Gallery/Gallery';
 import Papers from './Components/Papers/Papers';
-import { dashBoardContext } from './Components/Dashboard/Dashboard';
+// import { dashBoardContext } from './Components/Dashboard/Dashboard';
 import ArticleViewPage from './Components/ArticleView/ArticleView';
 
 
 function App() {
-  // Define the context value
-  const [isChecked, setChecked] = useState(false);
-  const handleToggle = () => {
-    setChecked((prev) => !prev);
-  };
+  // // Define the context value
+  // const [isChecked, setChecked] = useState(false);
+  // const handleToggle = () => {
+  //   setChecked((prev) => !prev);
+  // };
 
-  const contextValue = {
-    isChecked,
-    handleToggle,
-    isClose: false, // You can update this dynamically if needed
-    user: null, // You can update this dynamically if needed
-  }; 
+  // const contextValue = {
+  //   isChecked,
+  //   handleToggle,
+  //   isClose: false, // You can update this dynamically if needed
+  //   user: null, // You can update this dynamically if needed
+  // }; 
   return (
     <>
     <UserProvider>
