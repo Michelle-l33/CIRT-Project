@@ -3,6 +3,9 @@ import React, { useState } from "react";
 import styles from './Login.module.css';
 import Cookies from 'js-cookie';
 import { useUser } from "./UserContext";
+// Icons
+import { PiEyeBold } from "react-icons/pi";
+import { PiEyeClosedBold } from "react-icons/pi";
 
 const LoginPage = () => {
     // State to manage form data
@@ -158,18 +161,31 @@ const LoginPage = () => {
                     <h2>Login</h2>
                     <form onSubmit={handleLoginSubmit}>
                         <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
-                        <input type="text" id="login-email" name="email" placeholder="Email" onChange={(e) => setLoginEmail(e.target.value)} required />
+                        <div className={styles.emailContainer}>
+                            <input type="text" id="login-email" name="email" placeholder="Email" onChange={(e) => setLoginEmail(e.target.value)} required />
+                        </div>
+                        
 
                         <label htmlFor="login-password">Enter your Password:</label>
-                        <input type={showPasswordLogin ? "text" : "password"} id="login-password" name="password" placeholder="Password" onChange={(e) => setLoginPass(e.target.value)} required />
-                        <label>
+                        <div className={styles.passwordContainer}>
                             <input
-                                type="checkbox"
-                                checked={showPasswordLogin}
-                                onChange={togglePasswordVisibilityLogin}
+                                type={showPasswordLogin ? "text" : "password"}
+                                id="login-password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={(e) => setLoginPass(e.target.value)}
+                                required
                             />
-                        Show Password
-                        </label>
+                            <button
+                                type="button"
+                                className={styles.togglePasswordButton}
+                                onClick={togglePasswordVisibilityLogin}
+                                aria-label={showPasswordLogin ? "Hide password" : "Show password"}
+                            >
+                                {showPasswordLogin ? <PiEyeBold size={20}/> : <PiEyeClosedBold size={20}/>}
+                            </button>
+                        </div>
+                    
 
                         <button id="loginButton" type="submit">Log In</button>
                     </form>
@@ -182,13 +198,32 @@ const LoginPage = () => {
                     <h2>Register</h2>
                     <form onSubmit={handleRegisterSubmit}>
                         <label htmlFor="register-username">Enter your Username:</label>
-                        <input type="text" id="register-username" name="username" placeholder="Username" onChange={(e) => setName(e.target.value)} required />
+                        <input
+                            type="text"
+                            id="register-username"
+                            name="username"
+                            placeholder="Username"
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                        />
 
                         <label htmlFor="register-email">Enter your Email:</label>
-                        <input type="email" id="register-email" name="email" placeholder="you@example.com" onChange={(e) => setEmail(e.target.value)} required />
+                        <input
+                            type="email"
+                            id="register-email"
+                            name="email"
+                            placeholder="you@example.com"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
 
                         <label htmlFor="account-type">Account Type:</label>
-                        <select name="account_type" id="account-type" onChange={handleAccountType} required>
+                        <select
+                            name="account_type"
+                            id="account-type"
+                            onChange={handleAccountType}
+                            required
+                        >
                             <option value="none">Select Account Type</option>
                             <option value="public">Personal</option>
                             <option value="author">Author</option>
@@ -197,43 +232,45 @@ const LoginPage = () => {
                         </select>
 
                         <label htmlFor="register-password">Enter your Password:</label>
-                        <input
-                            type={showPasswordRegister ? "text" : "password"}
-                            id="register-password"
-                            name="password"
-                            placeholder="Password"
-                            onChange={(e) => {
-                                setPassword(e.target.value);
-                                validatePassword(e.target.value); // Validate on change
-                            }}
-                            required
-                        />
-                        <label>
+                        <div className={styles.passwordContainer}>
                             <input
-                                type="checkbox"
-                                checked={showPasswordRegister}
-                                onChange={togglePasswordVisibilityRegister}
+                                type={showPasswordRegister ? "text" : "password"}
+                                id="register-password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    validatePassword(e.target.value); // Validate on change
+                                }}
+                                required
                             />
-                        Show Password
-                        </label>
+                            <button
+                                type="button"
+                                className={styles.togglePasswordButton}
+                                onClick={togglePasswordVisibilityRegister}
+                                aria-label={showPasswordRegister ? "Hide password" : "Show password"}
+                            >
+                                {showPasswordRegister ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
+                            </button>
+                        </div>
 
                         {/* Password Requirements List */}
                         <div className={styles.passwordRequirements}>
                             <p>Password Requirements:</p>
                             <ul>
-                                <li style={{ color: passwordRequirements.minLength ? 'green' : 'red' }}>
+                                <li style={{ color: passwordRequirements.minLength ? "green" : "red" }}>
                                     At least 8 characters long
                                 </li>
-                                <li style={{ color: passwordRequirements.hasUppercase ? 'green' : 'red' }}>
+                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "red" }}>
                                     At least one uppercase letter
                                 </li>
-                                <li style={{ color: passwordRequirements.hasLowercase ? 'green' : 'red' }}>
+                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "red" }}>
                                     At least one lowercase letter
                                 </li>
-                                <li style={{ color: passwordRequirements.hasNumber ? 'green' : 'red' }}>
+                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "red" }}>
                                     At least one number
                                 </li>
-                                <li style={{ color: passwordRequirements.hasSpecialChar ? 'green' : 'red' }}>
+                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "red" }}>
                                     At least one special character
                                 </li>
                             </ul>

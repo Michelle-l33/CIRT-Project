@@ -4,6 +4,31 @@
     box-sizing: border-box;
 }
 
+.bigContainer{
+    --light: #f6f6f9;
+    --grey: #eee;
+    --dark-grey: #939292;
+    --dark: #363949;
+    --danger: #6F42C1;
+    --light-danger: #BFA2E6;
+    --warning: #FBC02D;
+    --light-warning: #FFF2C6;
+    --success: #388E3C;
+    --light-success: #BBF7D0;
+    --blue: #1976D2;
+    --light-blue: #CFE8FF;
+    --orange: #FD7E14;
+    --light-orange: #fddfc3e9;
+    --transparent-light: #ffffff82;
+    --transparent-dark: #00000013;
+    --pink: #f9d6e7;
+    --peach: #FFE4CF;
+    --lime: #FFFDD7;
+    background: var(--grey);
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
 .bigContainer {
     display: grid;
     grid-template-rows: auto auto 1fr; /* Navbar, Title, Content */
@@ -36,6 +61,7 @@
     font-size: 1.5em;
     font-weight: bold;
     text-align: left;
+    text-decoration: underline;
 }
 
 .contributors {
@@ -43,7 +69,7 @@
     padding: 0.5em 1em;
     font-size: 1em;
     text-align: left;
-    text-decoration: underline;
+    /* text-decoration: underline; */
 }
 
 .pdfWrapper {
@@ -103,10 +129,62 @@
     width: 40em;
 }
 
+.abstractContainer {
+    padding: 0.5em 1em;
+}
+
+.abstractContainer > article {
+    padding: 0.5em 1em;
+    font-size: 1em;
+    text-align: left;
+}
+
+.abstractToggle {
+    background-color: var(--light);
+    border: none;
+}
+
+.abstractToggle > :nth-child(2) {
+    display: none;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
     .contentWrapper {
-        grid-template-columns: 1fr; /* Stack sidebar & PDF on small screens */
+        grid-template-columns: 1fr; /* Stack abstract & PDF on small screens */
+    }
+
+    .abstractContainer > button {
+        background-color: var(--light);
+        border: none;
+        cursor: pointer;
+    }
+
+    .abstractContainer > article {
+        background-color: var(--transparent-light);
+        border-radius: 10px;
+        border: solid 5px var(--transparent-dark);
+    }
+
+    .abstractToggle {
+        background: none;
+        border: none;
+        margin: 10px;
+        display: flex;
+        flex-direction: flex-end;
+        transition: transform 0.3s ease;
+    }
+
+
+    .abstract {
+        width: 60px;
+        overflow-x: hidden;
+        transition: width 0.3s ease;
+    }
+
+    .abstract.show {
+        height: 240px;
+        transition: width 0.3s ease;
     }
 }

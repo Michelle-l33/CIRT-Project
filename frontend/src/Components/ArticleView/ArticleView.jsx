@@ -9,7 +9,8 @@ import {useUser} from "../Login/UserContext";
 import React from 'react';
 import {useState, useEffect} from 'react';
 import { useParams } from 'react-router-dom';
-
+import { RiArrowDownSLine } from "react-icons/ri";
+import { RiArrowUpSLine } from "react-icons/ri";
 
 const ArticleViewPage = () => {
     const {id} = useParams();
@@ -17,6 +18,26 @@ const ArticleViewPage = () => {
     const [loading, setLoading] = useState(true); // Loading state
     const {user} = useUser();
     console.log("subID: ",id);
+
+    // Responsive Abstract
+    const [isAbstractOpen, setisAbstractOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
+    
+      const toggleAbstract = () => {
+        setisAbstractOpen(prev => !prev);
+      };
+    
+      useEffect(() => {
+        const mediaQuery = window.matchMedia("(max-width: 768px)");
+      
+        const handleResize = () => {
+          setisAbstractOpen(!mediaQuery.matches); // Sidebar closed when <= 768px, open otherwise
+        };
+      
+        handleResize(); // Set initial state based on screen size
+        mediaQuery.addEventListener("change", handleResize);
+      
+        return () => mediaQuery.removeEventListener("change", handleResize);
+      }, []);
 
     useEffect(() => {
         const fetchSubmission = async () => {
@@ -61,10 +82,22 @@ const ArticleViewPage = () => {
                       )}
                     </h2>
                     </div>
-                    <div> {/* ADDED ABSTRACT SECTION HERE */}
-                      <h3>Abstract</h3>
+
+                    <div className={styles.abstractContainer}> 
+                      <button><h3>Abstract</h3></button>
                       <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
                     </div>
+                    {/* Abstract */}
+                          <aside className={`${styles.abstractContainer} ${isAbstractOpen ? styles.show : ''}`}>
+                            <button onClick={toggleAbstract} className={`${styles.abstractToggle} ${isAbstractOpen ? styles.open : ''}`}>
+                              <h3>Abstract</h3>
+                              {isAbstractOpen ? <RiArrowUpSLine  size={28} color="black"/> : <RiArrowDownSLine  size={28} color="black"/>}
+                            </button>
+                            {isAbstractOpen && (
+                              <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
+                            )}
+                    
+                        </aside>
 
                 </div>
                 
