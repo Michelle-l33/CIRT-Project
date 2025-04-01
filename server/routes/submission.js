@@ -284,9 +284,14 @@ router.get("/reviewerSubs/:reviewerID", async (req, res) => {
     }
 
     const submissions = await Submission.find({
-      $or: [
-        { reviewerID1: reviewerID },
-        { reviewerID2: reviewerID }
+      $and: [
+        { 
+          $or: [
+            { reviewerID1: reviewerID },
+            { reviewerID2: reviewerID }
+          ] 
+        },
+        { stage: "2" }  // Only submissions in stage 2
       ]
     });
 
