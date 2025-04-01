@@ -57,5 +57,20 @@ router.post("/", async (req,res)=>{
     }
   });
 
+  // retrieve comments of specific reviewer
+  router.get("/:reviewerID", async (req, res) => {
+    try {
+      const { reviewerID } = req.params; // Get the submissionID from the URL parameter
+  
+      // Find comments where the submissionID matches the provided ID
+      const comments = await Comment.find({ $or: [{ reviewerID1: reviewerID }, { reviewerID2: reviewerID }]});
+  
+      console.log("Fetched Comments:", comments); // Debugging line
+      res.json(comments); // Send the fetched comments as a JSON response
+    } catch (error) {
+      res.status(500).json({ error: error.message }); // Send an error response if there's a failure
+    }
+  });
+
   module.exports = router;
     

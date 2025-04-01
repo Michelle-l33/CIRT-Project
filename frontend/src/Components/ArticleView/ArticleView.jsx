@@ -50,7 +50,16 @@ const ArticleViewPage = () => {
                     <h1>{loading ? "Loading..." : submission?.title || "Title Not Found"}</h1>
                     </div>
                     <div className={styles.contributors}>
-                    <h1>{loading ? "Loading..." : user?.isReviewer ? "REDACTED" :`${submission?.lastName},${submission.firstName}` || "Author Not Found"}</h1>
+                    <h1>{loading ? "Loading..." : user?.isReviewer ? "REDACTED" :`${submission?.lastName}, ${submission.firstName}` || "Author Not Found"}</h1>
+                    </div>
+                    <div className={styles.contributors}>
+                    <h2>
+                      {loading ? "Loading..." : submission?.collaborators?.length > 0 ? (
+                        `Collaborators: ${submission.collaborators.join(", ")}` // Display as comma-separated list
+                      ) : (
+                        ""
+                      )}
+                    </h2>
                     </div>
                     <div> {/* ADDED ABSTRACT SECTION HERE */}
                       <h3>Abstract</h3>
