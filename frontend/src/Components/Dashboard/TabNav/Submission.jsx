@@ -2,7 +2,7 @@ import styles from './TabNav.module.css';
 import { FaRegCircle } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GiFrozenRing } from "react-icons/gi";
-
+import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const getStepStatus = (currentStep) => {
@@ -35,51 +35,55 @@ const getStepStatus = (currentStep) => {
     }
 }
 
-//detecting click anywhere https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
-
 const Submission = ({submission, optionList}) => {
-    
     const { stepTitle, statusClass } = getStepStatus(submission.stage);
-
-    const [ isOptionClicked, setOptionClicked ] = useState(false);
-
+    const [isOptionClicked, setOptionClicked] = useState(false);
     const dropdownRef = useRef(null);
 
     const handleClickOutside = useCallback((event) => {
         if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
             setOptionClicked(false);
         }
-      }, [dropdownRef, setOptionClicked])
+    }, [dropdownRef, setOptionClicked]);
 
     useEffect(() => {
-      document.addEventListener("click", handleClickOutside);
-      return () => {
-        document.removeEventListener("click", handleClickOutside);
-      };
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
     }, [handleClickOutside]);
 
     return (
-        <div className = {styles.submission}>
-
+        <div className={styles.submission}>
             <GiFrozenRing />
 
-            <div className = {styles.submissionDes}>
+            <div className={styles.submissionDes}>
                 <h4>{submission.firstName} {submission.lastName}</h4>
-                <p>{submission.title}</p>
+                <Link to={`/Gallery/submission/${submission._id}`} target="_blank">
+                    <p>{submission.title}</p>
+                </Link>
             </div>
                     
-            <div className = {statusClass}> 
+            <div className={statusClass}> 
                 <FaRegCircle />
-                  
                 <span>{stepTitle}</span>
             </div>
             
-            <CiMenuKebab ref = {dropdownRef} onClick = {() => setOptionClicked(!isOptionClicked)}/>
-            <div className = {`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
-                {/* <span>Option 1</span>
-                <span>Assign a reviewer</span> */}
+            <CiMenuKebab 
+                ref={dropdownRef} 
+                onClick={() => setOptionClicked(!isOptionClicked)}
+            />
+            
+            <div className={`${styles.submissionOption} ${isOptionClicked ? styles.show : ''}`}>
                 {optionList.map((option) => (
-                    <button onClick = {option.function} key = {option.name}>{option.name}</button>))}
+                    option.element ? (
+                        <div key={option.name}>{option.element(submission)}</div>
+                    ) : (
+                        <button onClick={() => option.function(submission)} key={option.name}>
+                            {option.name}
+                        </button>
+                    )
+                ))}
             </div>
         </div>
     );

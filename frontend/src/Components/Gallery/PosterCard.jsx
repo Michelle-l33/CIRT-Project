@@ -52,8 +52,7 @@ const PosterCard = ({ poster }) => {
         <h3>{poster.title}</h3>
         <p className={styles.author}>{poster.author}</p>
         <div className={styles.actions}>
-        <Link to={`/Gallery/submission/${poster._id}`} className={styles.pdfButton}>View Study</Link>
-          <button href={`submission/${poster._id}`}className={styles.pdfButton}>View Study</button>
+          <Link to={`/Gallery/submission/${poster._id}`} className={styles.pdfButton}>View Study</Link>
           <button className={styles.detailsButton}>Abstract</button>
         </div>
       </div>

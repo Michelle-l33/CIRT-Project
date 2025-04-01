@@ -8,6 +8,7 @@ import { useSubmissionsDispatch } from './SubmissionContext'
 const SubmissionStatus = ( {currSubmission} ) => {
 
     const [ currentStep, setCurrentStep ] = useState("0");
+    const [ loading, setLoading] = useState(false);
 
     const { updateSubmissionStage } = useSubmissionsDispatch();
 
@@ -28,10 +29,16 @@ const SubmissionStatus = ( {currSubmission} ) => {
 
     const handleUpdateStage = async (newStage) => {
         if (!currSubmission) return;
+        setLoading(true);
 
-        await updateSubmissionStage(currSubmission, newStage);
-        
-        setCurrentStep(newStage);
+        try {
+            await updateSubmissionStage(currSubmission, newStage);
+            setCurrentStep(newStage);
+        } catch (error) {
+            console.error("Error updating stage:", error);
+        } finally {
+            setLoading(false); // Set loading to false after the operation
+        }
     };
 
 
@@ -41,12 +48,12 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "1" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission accepted for review</h3>
+                        <h3>Submission Ready for Review</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button>
-                        <button>Decline submission</button>           
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
                     </div>
               </>}
                     
@@ -58,7 +65,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
-                        <button>Decline submission</button>           
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>           
                     </div>
               </>}
 
@@ -70,7 +77,10 @@ const SubmissionStatus = ( {currSubmission} ) => {
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>             
-                        <button>Decline submission</button>                
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>                 
+                    </div>
+                    <div>
+                        <h3>{loading ? "Loading..." : currSubmission.resubmitted ? "Author Has Resubmitted!": "Waiting For Author"}</h3>
                     </div>
               </>}
 
@@ -81,8 +91,8 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button>Publish the Submission</button>
-                        <button>Decline submission</button>           
+                        <button onClick={() => window.location.reload()}>Publish the Submission</button>
+                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
                     </div>
               </>}
             

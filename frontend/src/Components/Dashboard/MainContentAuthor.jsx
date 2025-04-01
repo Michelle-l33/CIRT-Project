@@ -1,6 +1,5 @@
 import styles from './MainContentAuthor.module.css';
 import { Link } from "react-router-dom";
-
 import { FaRegSmileWink } from "react-icons/fa";
 import { ImFilePicture } from "react-icons/im";
 import { MdUploadFile } from "react-icons/md";
@@ -17,6 +16,7 @@ import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 import { dashBoardContext } from './Dashboard';
 import { useState, useContext, useEffect, createContext } from 'react';
 import { useUser } from '../Login/UserContext';
+
 
 
 export const dashBoardAuthorContext = createContext(null);
@@ -53,7 +53,6 @@ const MainContentAuthor = () => {
     const [posterList, setPosterList] = useState([]);
     const {user} = useUser();
     
-
     useEffect(()=>{
         const fetchSubmissions = async () =>{
             try{
@@ -106,7 +105,48 @@ const MainContentAuthor = () => {
         fetchPosters();
     },[user._id]);
 
+    const [commentList, setCommentList] = useState([]);
+    const [loading, setLoading]=useState(true);
+
+
+    const fetchComments = async () => {
+        try {
+            console.log("Fetching for: ", currSub._id);
+            const response = await fetch(`http://localhost:8082/comment/${submissionList[currSub]._id}`,{
+                method: "GET"
+            })
+            if (!response.ok) {
+                throw new Error("Failed to fetch comments");
+            }
+    
+            const comments = await response.json();
+            setCommentList(comments);
+            console.log("Comments",commentList);
+        } catch (error) {
+            console.error("Error fetching comments:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+    useEffect(()=>{
+        fetchComments();
+    },[currSub]);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    const Comment = ({content, sender}) => {
+        return(
+            <>
+                <p>{content}</p>
+                <span>{`From: ${sender}`}</span>
+            </>
+        );
+    };
+
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
+    
     return (
         <div className={mainContentClass}>
             <div className={styles.submissionPopUp}>
@@ -185,14 +225,12 @@ const MainContentAuthor = () => {
                             </div>
 
                             <ul className={styles.commentList}>
-                                <li>
-                                    <p>Hello, hello, baby, you called? I can't hear a thing</p>
-                                    <span>- From: Editor</span>
-                                </li>
-                                <li>
-                                    <p>I have got no service in the club, you say, say?</p>
-                                    <span>- From: Reviewer</span>
-                                </li>
+                                {commentList.map((comment, idx) => 
+                                    <li key = {idx} className = {styles.listItem}>
+                                        {/* the code for Comment component is down below */}
+                                        <Comment content = {comment.comment} sender = {comment.role}/>
+                                    </li>
+                                )}
                             </ul>                                  
                         </div>
                     </div>

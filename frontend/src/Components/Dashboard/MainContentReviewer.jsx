@@ -22,7 +22,7 @@ const MainContentReviewer = () => {
                 </div>
 
                 <div className={styles.content}>
-                    <Outlet />
+                <Outlet />
                 </div>
                 
                 

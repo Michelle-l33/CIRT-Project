@@ -1,0 +1,45 @@
+.chipContainer {
+    display: block;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    min-height: 40px;
+    align-items: center;
+}
+
+.chip {
+    display: flex;
+    align-items: center;
+    background-color: #e0f7fa;
+    padding: 5px 10px;
+    border-radius: 15px;
+    border-color: #005a506a;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 14px;
+    color: #00796b;
+    margin: 5px 0;
+}
+
+.avatar {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.removeButton {
+    background: transparent;
+    border: none;
+    color: red;
+    cursor: pointer;
+    margin-left: 6px;
+    font-size: 14px;
+}
+
+.input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    padding: 5px;
+}

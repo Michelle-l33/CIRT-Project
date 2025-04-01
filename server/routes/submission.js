@@ -4,7 +4,7 @@ const User = require("../models/User");
 const Submission = require("../models/Submission");
 const Comment = require("../models/Comment");
 const router = express.Router();
-const upload = require("../awsConnect");
+const {upload, s3Client} = require("../awsConnect");
 const {DeleteObjectCommand}= require("@aws-sdk/client-s3");
 
 
@@ -25,13 +25,14 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "User ID is required in cookies" });
     }
 
-    const { title, firstName, lastName, isPoster, isArticle, abstract } = req.body;
+    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract } = req.body;
 
     const newSubmission = new Submission({
       authorID,
       title,
       firstName,
       lastName,
+      collaborators,
       document: req.file.location, // S3 file URL
       isPoster,
       isArticle,
@@ -88,6 +89,26 @@ router.get("/publications", async (req, res) => {
     }
   });
 
+  router.get("/unassigned", async (req, res) => {
+    try {
+      const submissions = await Submission.find({isArticle:true, stage: "1", $or: [{ editorID: null }, { editorID: { $exists: false } }]}); // finds articles that are unassigned
+      console.log("Unassigned Submissions:", submissions); // Verify what's being returned
+      res.json(submissions);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
+  router.get("/archives", async (req, res) => {
+    try {
+      const submissions = await Submission.find({isArticle:true, stage: ["4", "0"] }); // finds articles that are archived
+      console.log("Unassigned Submissions:", submissions); // Verify what's being returned
+      res.json(submissions);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
+
 // individual submission
 router.get("/:id", async (req, res) => {
   try {
@@ -124,6 +145,7 @@ router.get("/authorArt/:authorID", async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
+
 //gets author posters
 router.get("/authorPos/:authorID", async (req, res) => {
   try {
@@ -183,28 +205,7 @@ router.put("/:submissionId/assign-reviewer", async (req, res) => {
   }
 });
 
-//changes specific submission stage
-router.put("/:id", async (req,res) =>{
-  try {
-    const { id } = req.params;
-    const { stage } = req.body;
-
-    const updatedSubmission = await Submission.findByIdAndUpdate(
-        id,
-        { stage },
-        { new: true } // Return updated document
-    );
-
-    if (!updatedSubmission) {
-        return res.status(404).json({ message: "Submission not found" });
-    }
-
-    res.json(updatedSubmission);
-} catch (error) {
-    res.status(500).json({ error: error.message });
-}
-})
-
+//my Queue 
 router.get("/myQueue/:editorID",async (req,res)=>{
   try{
     const {editorID} = req.params;
@@ -224,6 +225,7 @@ router.get("/myQueue/:editorID",async (req,res)=>{
   }
 })
 
+//reupload
 router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
   try {
     const { id } = req.params;
@@ -257,6 +259,7 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
 
     // Update the submission document URL in the database
     submission.document = newDocument.location; // Update with the new file URL
+    submission.resubmitted = true;
 
     // Save the updated submission
     await submission.save();
@@ -271,7 +274,22 @@ router.put("/:id/resubmit", upload.single("document"), async (req, res) => {
   }
 });
 
-  
+//get all reviewer assignments
+router.get("/reviewerSubs", async (req, res) => {
+  try {
+    const reviewerID = req.user._id; // Assuming you have authentication middleware that provides req.user
+
+    const submissions = await Submission.find({
+      $or: [{ reviewerID1: reviewerID }, { reviewerID2: reviewerID }]
+    });
+
+    res.json(submissions);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
 
 
 module.exports = router;

@@ -25,7 +25,10 @@ const upload = multer({
       cb(null, `uploads/${Date.now()}-${file.originalname}`);
     },
     contentDisposition: 'inline', // Set the Content-Disposition header to inline
+    contentType: function (req, file, cb) {
+      cb(null, 'application/pdf');  // Force the Content-Type to 'application/pdf'
+    },
   }),
 });
 
-module.exports = upload;
+module.exports = {upload, s3Client};

@@ -128,14 +128,7 @@ const Papers = () => {
                 <p className={styles.author}>{paper.author}</p>
               </div>
               <div className={styles.actions}>
-                <a 
-                  href={`/assets/papers/${paper.pdf}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={styles.pdfButton}
-                >
-                  View PDF
-                </a>
+                <Link to= {`/Gallery/submission/${paper._id}`} className={styles.pdfButton}>View Article</Link>
               </div>
             </article>
           ))}
