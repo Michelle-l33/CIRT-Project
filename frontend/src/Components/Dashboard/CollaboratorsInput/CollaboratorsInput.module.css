@@ -30,7 +30,7 @@
 .removeButton {
     background: transparent;
     border: none;
-    color: red;
+    color: var(--primary);
     cursor: pointer;
     margin-left: 6px;
     font-size: 14px;
