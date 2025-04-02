@@ -204,6 +204,10 @@
     margin-left: auto;
 }
 
+.mainContent .comment .commentList .noComment {
+    margin: 10px;
+}
+
 .mainContent.close{
     width: calc(100% - 60px);
     left: 60px;
