@@ -1,6 +1,246 @@
+.taskContent {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap-reverse;
+    gap: 20px;
+}
+
+.taskContent .right {
+    /* max-width: calc(100% - 65vw); */
+    min-width: 250px;
+    flex: 1;
+}
+
+.taskContent .right .header h3 {
+    color: var(--primary);
+    font-weight: 1000;
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+.taskContent .right .header span {
+    display: block;
+    color: var(--dark-grey);
+    margin: 15px 0;
+}
+
+.taskContent .right .editorList {
+    display: grid;
+    row-gap: 10px;
+}
+
+.taskContent .right .editorList .editorItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--dark);
+    padding: 5px;
+    border: 1px solid var(--transparent-dark);
+    border-radius: 20px;
+}
+
+.taskContent .right .editorList .editorItem .icon {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    font-size: 36px;
+}
+
+.taskContent .right .editorList .editorItem .name {
+    margin-left: 20px;
+}
+
+.taskContent .left {
+    display: grid;
+    min-width: 45vw;
+    /* max-width: 60vw; */
+    grid-template-rows: 1fr 2fr;
+    flex: 2;
+}
+
+.taskContent .left .dateIntro {
+    display: flex;
+    gap: 20px;
+    max-height: 30vh;
+}
+
+.taskContent .left .dateIntro .date .calendar {
+    display: flex;
+    min-width: 180px;
+    width: calc(45vw*0.45);
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    background: var(--light);
+    height: 100%;
+    backdrop-filter: blur(15px);
+    padding: 0;
+    -webkit-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    -moz-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+}
+
+.taskContent .left .date .month {
+    color: var(--light);
+    background-color: var(--primary);
+    width: 100%;
+    /* font-size: 1.6em; */
+    font-size: clamp(1.2em, 3vw, 1.6em);
+    text-align: center;
+    font-weight: 400;
+    padding: 5px 0;
+    border-radius: 10px 10px 0 0 ;
+} 
+
+.taskContent .left .date .dateName {
+    color: var(--dark);
+    /* font-size: 1.2em; */
+    font-size: clamp(1em, 1.5vw, 1.2em);
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.taskContent .left .date .dateNumber {
+    color: var(--dark);
+    /* font-size: 5em; */
+    font-size: clamp(3em, 6vw, 5em);
+    font-weight: 600;
+}
+
+.taskContent .left .date .year {
+    color: var(--dark);
+    /* font-size: 1.2 em; */
+    font-size: clamp(1em, 1.5vw, 1.2em);
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.taskContent .left .dateIntro .greeting {
+    border-radius: 10px;
+    width: calc(100% - 45vw * 0.45 - 20px);
+    /* min-width: 150px; */
+    background-color: var(--light);
+    -webkit-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    -moz-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    position: relative;
+    overflow: hidden; 
+}
+
+.taskContent .left .dateIntro .greeting::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: var(--primary);
+    right: 0;
+    bottom: -40px;
+    clip-path: ellipse(70% 50% at 80% 90%);
+    z-index: 1;
+}
+
+/* the heart is from https://codepen.io/yochans/pen/gOmZbpd */
+.taskContent .left .dateIntro .greeting::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+	height: 24px;
+    background-color: var(--primary);
+    right: 0;
+    top: 30%;
+    clip-path: path("M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z");
+    transform: scale(5) translateX(-100%) rotate(-30deg);
+    animation: float 1.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: scale(5) translateX(-100%) rotate(-30deg) translateY(0);
+    }
+    50% {
+        transform: scale(5) translateX(-100%) rotate(-30deg) translateY(-2px);
+    }
+}
+
+
+/* Individual eye */
+.eyes {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    right: 0;
+}
+
+.eyes .eye {
+    position: absolute;
+    width: 15%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--dark-grey);
+    clip-path: polygon(0 30%, 0 35%, 45% 50%, 0 60%, 0 65%, 50% 65%, 100% 55%, 100% 60%, 50% 55%, 100% 35%, 100% 30%, 50% 45%);
+    animation: blink 3s infinite ease-in-out;
+}
+
+/* Left eye position */
+.eyes .eye:first-child {
+    bottom: 10px;
+    left: 30%;
+    z-index: 2;
+    transform: rotate(-30deg);
+}
+
+/* Right eye position */
+.eyes .eye:last-child {
+    bottom: 30px;
+    right: 10%;
+    z-index: 2;
+    transform: rotate(5deg);
+}
+
+
+@keyframes blink {
+    0%, 100% {
+        clip-path: polygon(0 30%, 0 40%, 45% 50%, 0 60%, 0 70%, 50% 60%, 100% 70%, 100% 60%, 55% 51%, 100% 40%, 100% 30%, 50% 40%);
+    }
+    50% {
+        clip-path: polygon(0 48%, 0 52%, 50% 54%, 100% 52%, 100% 48%, 50% 46%);
+    }
+}
+
+.taskContent .left .greeting .hello {
+    min-width: 200px;
+    max-width: 50%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    color: var(--dark);
+    position: relative;
+    z-index: 3;
+}
+
+.taskContent .left .greeting .hello h3 {
+    margin: 10px 0;
+}
+
+.taskContent .left .greeting .hello p {
+    margin: 5px 0;
+}
+
+.taskContent .left .greeting .hello span {
+    margin: 0;
+    margin-top: 20px;
+}
+
+.taskContent .left .dateIntro .calendar * {
+    display: block;
+}
+
 .taskListEd{
     width: 100%;
-    max-height: 75vh;
     overflow-y: auto;
     background-color: var(--light);
     border-radius: 15px;
@@ -22,7 +262,7 @@
     margin-bottom: 45px;
     color: var(--dark);
     padding: 10px;
-    box-shadow: var(--dark-grey) 0px 20px 10px -10px;
+    box-shadow: var(--dark-grey) 0px 10px 10px -10px;
     border-bottom: 2px solid var(--dark-grey);
 }
 
@@ -31,84 +271,8 @@
     font-size: 30px;
 }
 
-.taskListEd .taskForm {
-    position: absolute;
-    background-color: #ffd6e5;
-    top: 0;
-    left: 50%;
-    margin: 0;
-    z-index: 4;
-    opacity: 0;
-    display: none;
-    transform: translate(-50%, 40%);
-    transition: all 0.5s ease-in-out;
-    width: 80%;
-    height: 50vh;
-    border-radius: 10px;
-    grid-template-rows: 1fr 4fr;
-    padding: 5px;
-}
-
-.taskListEd .taskForm > h4 {
-    width: fit-content;
-    height: fit-content;
-    margin: auto;
-    display: block;
-    font-size: clamp(1rem, 2.5vw, 2rem);
-}
-
-.taskListEd .taskForm > form {
-    display: grid;
-    grid-template-rows: 2fr 8fr 1fr;
-    padding: 10px;
-    row-gap: 10px; 
-}
-.taskListEd .taskForm > form * {
-    font-size: 1rem;
-}
-
 /* button styling copied from https://getcssscan.com/css-buttons-examples */
-.taskListEd .taskForm > form button {
-    background-color: var(--dark);
-  border: 1px solid transparent;
-  border-radius: .75rem;
-  box-sizing: border-box;
-  color: var(--light);
-  cursor: pointer;
-  text-align: center;
-  text-decoration-thickness: auto;
-  transition-duration: .2s;
-  transition-property: background-color,border-color,color,fill,stroke;
-  transition-timing-function: cubic-bezier(.4, 0, 0.2, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  width: auto;
-  position: static;
-}
-.taskListEd .taskForm > form button:hover {
-    background-color: var(--dark-grey);
-}
 
-.taskListEd .taskForm > form button:focus {
-    box-shadow: none;
-    outline: 2px solid transparent;
-    outline-offset: 2px;
-}
-
-.taskListEd .closeBtn {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
-    height: 20px;
-    border-radius: 3px;
-}
-
-.taskListEd .taskForm.show {
-    opacity: 1;
-    display: grid;
-}
 
 .taskIncomplete {
     width: 100%;
@@ -129,10 +293,6 @@
     left: 0;
     border-radius: 10px 0 0 10px;
     background-color: #d0012a74;
-}
-
-.taskIncomplete.complete:before {
-    background-color: #388e3c87;
 }
 
 .taskIncomplete .taskTitle {
