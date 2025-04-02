@@ -206,11 +206,6 @@ const MainContentAuthor = () => {
                     <div className={styles.bottomData}>
                         <div className={styles.trachBarContainer}>
                         {submissionList.length > 0 ? (
-                            // submissionList.map((submission) => (
-                            //     <div key={submission._id} className={styles.trackItem}>
-                            //         <TrackBar currentStep={submission.stage} title={submission.title} />
-                            //     </div>
-                            // ))
                             <TrackBar currentStep={submissionList[currSub].stage} title={submissionList[currSub].title}/>
             
                         ) : (
@@ -225,12 +220,12 @@ const MainContentAuthor = () => {
                             </div>
 
                             <ul className={styles.commentList}>
-                                {commentList.map((comment, idx) => 
+                            {commentList.length >0 ?  (commentList.map((comment, idx) => 
                                     <li key = {idx} className = {styles.listItem}>
                                         {/* the code for Comment component is down below */}
                                         <Comment content = {comment.comment} sender = {comment.role}/>
                                     </li>
-                                )}
+                                )) : <span className = {styles.noComment}>No Comment: Abracadabra, abracadabra</span>}
                             </ul>                                  
                         </div>
                     </div>
