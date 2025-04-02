@@ -2,13 +2,61 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap-reverse;
+    gap: 20px;
+}
+
+.taskContent .right {
+    /* max-width: calc(100% - 65vw); */
+    min-width: 250px;
+    flex: 1;
+}
+
+.taskContent .right .header h3 {
+    color: var(--primary);
+    font-weight: 1000;
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+.taskContent .right .header span {
+    display: block;
+    color: var(--dark-grey);
+    margin: 15px 0;
+}
+
+.taskContent .right .editorList {
+    display: grid;
+    row-gap: 10px;
+}
+
+.taskContent .right .editorList .editorItem {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: var(--dark);
+    padding: 5px;
+    border: 1px solid var(--transparent-dark);
+    border-radius: 20px;
+}
+
+.taskContent .right .editorList .editorItem .icon {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+    font-size: 36px;
+}
+
+.taskContent .right .editorList .editorItem .name {
+    margin-left: 20px;
 }
 
 .taskContent .left {
     display: grid;
     min-width: 45vw;
-    max-width: 60vw;
+    /* max-width: 60vw; */
     grid-template-rows: 1fr 2fr;
+    flex: 2;
 }
 
 .taskContent .left .dateIntro {
@@ -19,6 +67,7 @@
 
 .taskContent .left .dateIntro .date .calendar {
     display: flex;
+    min-width: 180px;
     width: calc(45vw*0.45);
     justify-content: space-between;
     align-items: center;
@@ -71,10 +120,93 @@
 .taskContent .left .dateIntro .greeting {
     border-radius: 10px;
     width: calc(100% - 45vw * 0.45 - 20px);
+    /* min-width: 150px; */
     background-color: var(--light);
     -webkit-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
     -moz-box-shadow: 0px -1px 33px -3px var(--transparent-dark);
     box-shadow: 0px -1px 33px -3px var(--transparent-dark);
+    position: relative;
+    overflow: hidden; 
+}
+
+.taskContent .left .dateIntro .greeting::after {
+    content: "";
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: var(--primary);
+    right: 0;
+    bottom: -40px;
+    clip-path: ellipse(70% 50% at 80% 90%);
+    z-index: 1;
+}
+
+/* the heart is from https://codepen.io/yochans/pen/gOmZbpd */
+.taskContent .left .dateIntro .greeting::before {
+    content: "";
+    position: absolute;
+    width: 24px;
+	height: 24px;
+    background-color: var(--primary);
+    right: 0;
+    top: 30%;
+    clip-path: path("M12 4.248c-3.148-5.402-12-3.825-12 2.944 0 4.661 5.571 9.427 12 15.808 6.43-6.381 12-11.147 12-15.808 0-6.792-8.875-8.306-12-2.944z");
+    transform: scale(5) translateX(-100%) rotate(-30deg);
+    animation: float 1.5s ease-in-out infinite;
+    z-index: 1;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: scale(5) translateX(-100%) rotate(-30deg) translateY(0);
+    }
+    50% {
+        transform: scale(5) translateX(-100%) rotate(-30deg) translateY(-2px);
+    }
+}
+
+
+/* Individual eye */
+.eyes {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    right: 0;
+}
+
+.eyes .eye {
+    position: absolute;
+    width: 15%;
+    aspect-ratio: 1 / 1;
+    background-color: var(--dark-grey);
+    clip-path: polygon(0 30%, 0 35%, 45% 50%, 0 60%, 0 65%, 50% 65%, 100% 55%, 100% 60%, 50% 55%, 100% 35%, 100% 30%, 50% 45%);
+    animation: blink 3s infinite ease-in-out;
+}
+
+/* Left eye position */
+.eyes .eye:first-child {
+    bottom: 10px;
+    left: 30%;
+    z-index: 2;
+    transform: rotate(-30deg);
+}
+
+/* Right eye position */
+.eyes .eye:last-child {
+    bottom: 30px;
+    right: 10%;
+    z-index: 2;
+    transform: rotate(5deg);
+}
+
+
+@keyframes blink {
+    0%, 100% {
+        clip-path: polygon(0 30%, 0 40%, 45% 50%, 0 60%, 0 70%, 50% 60%, 100% 70%, 100% 60%, 55% 51%, 100% 40%, 100% 30%, 50% 40%);
+    }
+    50% {
+        clip-path: polygon(0 48%, 0 52%, 50% 54%, 100% 52%, 100% 48%, 50% 46%);
+    }
 }
 
 .taskContent .left .greeting .hello {
@@ -86,6 +218,8 @@
     justify-content: space-between;
     align-items: flex-start;
     color: var(--dark);
+    position: relative;
+    z-index: 3;
 }
 
 .taskContent .left .greeting .hello h3 {
@@ -128,7 +262,7 @@
     margin-bottom: 45px;
     color: var(--dark);
     padding: 10px;
-    box-shadow: var(--dark-grey) 0px 20px 10px -10px;
+    box-shadow: var(--dark-grey) 0px 10px 10px -10px;
     border-bottom: 2px solid var(--dark-grey);
 }
 

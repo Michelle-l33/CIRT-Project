@@ -410,15 +410,15 @@
 }
 
 .contentList .listItem:nth-child(3n+1) span:after {
-    background-color: var(--pink)
+    background-color: var(--pink);
 }
 
 .contentList .listItem:nth-child(3n+2) span:after {
-    background-color: var(--peach)
+    background-color: var(--peach);
 }
 
 .contentList .listItem:nth-child(3n+3) span:after {
-    background-color: var((--lime))
+    background-color: var(--lime);
 }
 
 

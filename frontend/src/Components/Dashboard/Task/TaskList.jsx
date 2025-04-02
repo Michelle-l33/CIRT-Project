@@ -3,6 +3,7 @@ import { MdAddTask } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
 import { dashBoardContext } from '../Dashboard';
+import { PiFinnTheHumanThin } from "react-icons/pi";
 
 const taskList = [
     {   
@@ -57,7 +58,16 @@ const TaskPage = () => {
                     <h3>Your Editor colleagues</h3>
                     <span>Gotta Catch Them All!</span>
                 </div>
-            </div>
+
+            <ul className={styles.editorList}>
+                {editors.map((editor, index) => (
+                        <li key={index} className={styles.editorItem}>
+                            <span className={styles.icon}><PiFinnTheHumanThin /></span>
+                            <span className={styles.name}>{editor.name}</span>
+                        </li>
+                    ))}
+            </ul>
+        </div>
 
             <div className = {styles.left}>
 
@@ -68,6 +78,10 @@ const TaskPage = () => {
                     </div>
 
                     <div className = {styles.greeting}>
+                        <div className={styles.eyes}>
+                            <div className={styles.eye}></div>
+                            <div className={styles.eye}></div>
+                        </div>
                         <div className = {styles.hello}>
                             <h3>{`Hello ${user.name}`}</h3>
                             <p>Don't forget to hydrate and stay healthy!</p>
