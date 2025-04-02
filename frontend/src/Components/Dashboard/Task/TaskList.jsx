@@ -147,7 +147,7 @@ const Today = () => {
 
     let month;
 
-    switch (today.getMonth()) {
+    switch (today.getMonth() + 1) {
         case 1: {
             month = "January";
             break;
