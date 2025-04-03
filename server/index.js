@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 8082;
 const corsOptions = {
   origin: ['http://localhost:3000', 'https://cirt-project.vercel.app'],  // Allowed origins
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'User-Agent', 'Accept', 'Referer'], 
   credentials: true,  // Allow cookies to be sent with requests
 };
 
