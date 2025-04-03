@@ -59,7 +59,6 @@ const LoginPage = () => {
                 },
                 body: JSON.stringify(userData),
                 mode: 'cors',
-                credentials: 'include',
             });
 
             const data = await response.json();
