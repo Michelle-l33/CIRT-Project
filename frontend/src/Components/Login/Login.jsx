@@ -70,7 +70,7 @@ const LoginPage = () => {
                 setTimeout(() => {
                     setAlertMessage('');
                 }, 3000);
-                navigate("/Dashboard");
+                window.location.href = "/Dashboard";
             } else {
                 window.alert("Invalid Credentials. Please Try Again!");
                 console.log(data.error);
