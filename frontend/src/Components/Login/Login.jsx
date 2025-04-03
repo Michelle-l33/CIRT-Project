@@ -50,11 +50,7 @@ const LoginPage = () => {
         const userData = { email: loginEmail, password: loginPassword };
 
         try {
-            const baseUrl = window.location.hostname === 'localhost' 
-            ? 'http://localhost:8082'  // For local testing
-            : 'https://cirt-project-server.vercel.app/';  // Replace with your deployed server URL
-
-            const response = await fetch(`${baseUrl}/user/login`, {
+            const response = await fetch("https://cirt-project-server.vercel.app//user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
