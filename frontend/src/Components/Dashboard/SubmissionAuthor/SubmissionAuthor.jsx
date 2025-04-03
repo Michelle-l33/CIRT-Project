@@ -55,7 +55,7 @@ const SubmissionAuthorPage = () => {
 
 
         try{
-            const response = await fetch("http://localhost:8082/submission/upload", {
+            const response = await fetch("https://cirt-project-server.vercel.app/submission/upload", {
                 method: "POST",
                 body: formData,
                 credentials: 'include',

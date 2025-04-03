@@ -3,6 +3,18 @@ const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const router = express.Router();
 
+// CORS middleware for specific routes
+const applyCORS = (req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://cirt-project.vercel.app");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+};
+
+// Apply to all user routes
+router.use(applyCORS);
+
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -82,35 +94,6 @@ router.get("/:id", async (req, res) => {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Server error" });
 }
-});
-
-// Assign editor to submission
-router.patch('/:id/assign-editor', async (req, res) => {
-  try {
-      const { id } = req.params;
-      const { editorId } = req.body;
-
-      // Verify editor exists
-      const editor = await User.findById(editorId);
-      if (!editor || !editor.isEditor) {
-          return res.status(400).json({ error: "Invalid editor" });
-      }
-
-      const updatedSubmission = await Submission.findByIdAndUpdate(
-          id,
-          { editorID: editorId, stage: "2" }, // Also move to stage 2 (under review)
-          { new: true }
-      );
-
-      if (!updatedSubmission) {
-          return res.status(404).json({ error: "Submission not found" });
-      }
-
-      res.json(updatedSubmission);
-  } catch (error) {
-      console.error("Error assigning editor:", error);
-      res.status(500).json({ error: "Server error" });
-  }
 });
 
 

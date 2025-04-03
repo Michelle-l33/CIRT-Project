@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
 
   const fetchUserData = async (userID) => {
     try {
-      const response = await fetch(`http://localhost:8082/user/${userID}`);
+      const response = await fetch(`https://cirt-project-server.vercel.app/user/${userID}`);
       const userData = await response.json();
       
       if (response.ok) {

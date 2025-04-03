@@ -19,7 +19,7 @@ const Unassigned = () => {
         const fetchUnassigned = async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch('http://localhost:8082/submission/unassigned');
+                const response = await fetch('https://cirt-project-server.vercel.app/submission/unassigned');
                 
                 if (!response.ok) throw new Error('Failed to fetch submissions');
                 
@@ -43,7 +43,7 @@ const Unassigned = () => {
     useEffect(() => {
         const fetchEditors = async () => {
             try {
-                const response = await fetch('http://localhost:8082/user/');
+                const response = await fetch('https://cirt-project-server.vercel.app/user/');
                 if (!response.ok) throw new Error('Failed to fetch editors');
                 
                 const data = await response.json();
@@ -72,28 +72,32 @@ const Unassigned = () => {
 
     const handleAssignEditor = async (submissionId, editorId) => {
         try {
-            const response = await fetch(`http://localhost:8082/submission/${submissionId}/assign-editor`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ editorId })
-            });
-
-            if (!response.ok) throw new Error('Failed to assign editor');
-
-            setSubmissionList(prev => prev.map(sub => 
-                sub._id === submissionId ? { ...sub, editorID: editorId } : sub
-            ));
-            setFilteredList(prev => prev.map(sub => 
-                sub._id === submissionId ? { ...sub, editorID: editorId } : sub
-            ));
-            
-            setShowEditorDropdown(null);
+          const response = await fetch(`https://cirt-project-server.vercel.app/submission/${submissionId}/assign-editor`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ editorId })
+          });
+      
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to assign editor');
+          }
+      
+          // Update state - removed stage change
+          setSubmissionList(prev => prev.map(sub => 
+            sub._id === submissionId ? { ...sub, editorID: editorId } : sub
+          ));
+          setFilteredList(prev => prev.map(sub => 
+            sub._id === submissionId ? { ...sub, editorID: editorId } : sub
+          ));
+          
+          setShowEditorDropdown(null);
         } catch (error) {
-            console.error("Error assigning editor:", error);
+          console.error("Error assigning editor:", error.message);
         }
-    };
+      };
 
     const optionList = [
         {
@@ -132,18 +136,11 @@ const Unassigned = () => {
                             
                             {/* Editor dropdown menu */}
                             {showEditorDropdown === submission._id && (
-                                <div 
-                                    ref={dropdownRef}
-                                    className={styles.editorDropdown}
-                                >
+                                <div ref={dropdownRef} className={styles.editorDropdown}>
                                     <div className={styles.dropdownHeader}>Assign to Editor:</div>
                                     <ul className={styles.editorList}>
                                         {editors.map(editor => (
-                                            <li 
-                                                key={editor._id} 
-                                                onClick={() => handleAssignEditor(submission._id, editor._id)}
-                                                className={styles.editorItem}
-                                            >
+                                            <li key={editor._id} onClick={() => handleAssignEditor(submission._id, editor._id)} className={styles.editorItem}>
                                                 {editor.name} ({editor.email})
                                             </li>
                                         ))}

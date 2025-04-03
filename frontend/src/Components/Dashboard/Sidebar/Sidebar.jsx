@@ -22,23 +22,22 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
     const location = useLocation();
 
     const listOfEditorIcons = [
-        {Name: "Task", iconComponent: FaTasks, url: "Task"},
-        {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
-        {Name: "Document", iconComponent: GrDocument, url: "DocumentTab"},
-        {Name: "User", iconComponent: FaRegUser, url: "#"},
+        {Name: "Task", iconComponent: FaTasks, url: "/Dashboard/Editor/Task"},
+        {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "/Dashboard/Editor/TabNav"},
+        {Name: "Document", iconComponent: GrDocument, url: "/Dashboard/Editor/DocumentTab"},
+        {Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User"},
         {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
     ]
 
     const listOfAuthorIcons = [
-        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "" },
-        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Dashboard/Author" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     const listOfReviewerIcons = [
-        { Name: "Current", iconComponent: IoNewspaperOutline, url: "Current" },
-    
-        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "Current", iconComponent: IoNewspaperOutline, url: "/Dashboard/Reviewer/Current" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 

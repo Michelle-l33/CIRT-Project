@@ -50,7 +50,7 @@ const LoginPage = () => {
         const userData = { email: loginEmail, password: loginPassword };
 
         try {
-            const response = await fetch("http://localhost:8082/user/login", {
+            const response = await fetch("https://cirt-project-server.vercel.app/user/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -96,12 +96,13 @@ const LoginPage = () => {
         const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer };
 
         try {
-            const response = await fetch("http://localhost:8082/user/register", {
+            const response = await fetch("https://cirt-project-server.vercel.app/user/register", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(userData),
+                credentials: 'include',
             });
 
             const data = await response.json();

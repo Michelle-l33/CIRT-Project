@@ -5,65 +5,6 @@ const SubmissionsContext = createContext(null);
 
 const SubmissionsDispatchContext = createContext(null);
 
-// const initialSubmisssions = [
-//     {   authorID: 457,
-//         title: "sdhdsahd dhgs sda",
-//         firstName: "Smith",
-//         lastName: "John",
-//         document: "url",
-//         isPoster: false,
-//         isArticle: true,
-//         abstract: "shdsag fjbfh aegdashds aydgsayds sfdasds dgfafgds sdgvasgd asgdahdvagsdsadv",
-//         stage: 1,
-//     },
-//     {
-//         authorID: 458,
-//         title: "sdhdsahd dhgs sda",
-//         firstName: "Taylor",
-//         lastName: "John",
-//         document: "url",
-//         isPoster: false,
-//         isArticle: true,
-//         abstract: "shdsag fjbfh aegdashds aydgsayds sfdasds dgfafgds sdgvasgd asgdahdvagsdsadv",
-//         stage: 2,
-//     },
-//     {
-//         authorID: 459,
-//         title: "sdhdsahd dhgs sda",
-//         firstName: "Haha",
-//         lastName: "John",
-//         document: "url",
-//         isPoster: false,
-//         isArticle: true,
-//         abstract: "shdsag fjbfh aegdashds aydgsayds sfdasds dgfafgds sdgvasgd asgdahdvagsdsadv",
-//         stage: 3,
-//     },
-//     {
-//         authorID: 412,
-//         title: "sdhdsahd dhgs sda",
-//         firstName: "Abulu",
-//         lastName: "John",
-//         document: "url",
-//         isPoster: false,
-//         isArticle: true,
-//         abstract: "shdsag fjbfh aegdashds aydgsayds sfdasds dgfafgds sdgvasgd asgdahdvagsdsadv",
-//         stage: 4,
-//     },
-//     {
-//         authorID: 723,
-//         title: "sdhdsahd dhgs sda",
-//         firstName: "Kimberly",
-//         lastName: "John",
-//         document: "url",
-//         isPoster: false,
-//         isArticle: true,
-//         abstract: "shdsag fjbfh aegdashds aydgsayds sfdasds dgfafgds sdgvasgd asgdahdvagsdsadv",
-//         stage: 5,
-//     },
-
-
-// ]
-
 
 
 export function SubmissionsProvider( {children} ) {
@@ -77,7 +18,7 @@ export function SubmissionsProvider( {children} ) {
     startTransition( () => {
         const fetchSubmissions = async () => {
             try {
-                const response = await fetch(`http://localhost:8082/submission/myQueue/${user._id}`,{
+                const response = await fetch(`https://cirt-project-server.vercel.app/submission/myQueue/${user._id}`,{
                     method: "GET"
                 })
                 if (!response.ok) {
@@ -100,7 +41,7 @@ export function SubmissionsProvider( {children} ) {
     }
     const updateSubmissionStage = async (submission, newStage) => {
         try {
-            const response = await fetch(`http://localhost:8082/submission/${submission._id}`, {
+            const response = await fetch(`https://cirt-project-server.vercel.app/submission/${submission._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
