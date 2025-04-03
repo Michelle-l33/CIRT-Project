@@ -1,5 +1,14 @@
 import styles from './UserTab.module.css'
 
+
+const userInfo = {
+    name: "Helooooooo World",
+    email: "Doyou@Missme",
+    password: "sdnjasdnasd"
+}
+
+
+
 const UserTab = () => {
 
     return (

@@ -47,7 +47,8 @@ const DashboardRoutes = () => {
                     </Route>
                 </Route>
             <Route path="/SubmissionAuthor" element={<SubmissionAuthorPage />} />
-            <Route path="/User" element={<UserTab />}></Route>
+            <Route path="/User" element={<Dashboard 
+                                component={<UserTab />}/>}></Route>
         </Routes>
     )
 }
