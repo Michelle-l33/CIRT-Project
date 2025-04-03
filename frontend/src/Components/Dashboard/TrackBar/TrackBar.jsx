@@ -60,7 +60,7 @@ const TrackBar = ({currentStep, title}) => {
         formData.append("document", documents[currSub]); // Attach the uploaded file
     
         try {
-            const response = await fetch(`http://localhost:3000/submission/${submissionList[currSub]._id}/resubmit`, {
+            const response = await fetch(`http://localhost:8082/submission/${submissionList[currSub]._id}/resubmit`, {
                 method: "PUT",
                 body: formData,
                 credentials: "include",

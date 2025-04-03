@@ -42,7 +42,7 @@ const ArticleViewPage = () => {
     useEffect(() => {
         const fetchSubmission = async () => {
           try {
-            const response = await fetch(`http://localhost:3000/submission/${id}`, {
+            const response = await fetch(`http://localhost:8082/submission/${id}`, {
               method: "GET",
             });
             if (!response.ok) {

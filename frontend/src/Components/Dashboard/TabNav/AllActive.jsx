@@ -11,7 +11,7 @@ const AllActive = () => {
   useEffect(() => {
     const fetchAllActive = async () => {
       try {
-        const response = await fetch("http://localhost:3000/submission/unpublished", {
+        const response = await fetch("http://localhost:8082/submission/unpublished", {
           method: "GET"
         });
         if (!response.ok) {

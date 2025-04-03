@@ -39,7 +39,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("http://localhost:3000/submission/gallery", {
+        const response = await fetch("http://localhost:8082/submission/gallery", {
           method: "GET",
         });
         if (!response.ok) {
