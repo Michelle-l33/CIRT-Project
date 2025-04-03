@@ -82,22 +82,25 @@ const ArticleViewPage = () => {
                       )}
                     </h2>
                     </div>
-
-                    <div className={styles.abstractContainer}> 
-                      <button><h3>Abstract</h3></button>
-                      <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
-                    </div>
-                    {/* Abstract */}
-                          <aside className={`${styles.abstractContainer} ${isAbstractOpen ? styles.show : ''}`}>
-                            <button onClick={toggleAbstract} className={`${styles.abstractToggle} ${isAbstractOpen ? styles.open : ''}`}>
-                              <h3>Abstract</h3>
-                              {isAbstractOpen ? <RiArrowUpSLine  size={28} color="black"/> : <RiArrowDownSLine  size={28} color="black"/>}
-                            </button>
-                            {isAbstractOpen && (
-                              <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
-                            )}
+                      {window.innerWidth > 758 && (
+                          <div className={styles.abstractContainer}> 
+                          <h3>Abstract</h3>
+                          <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
+                        </div>
+                      )}
                     
-                        </aside>
+                    {/* Abstract */}
+                  {window.innerWidth <= 758 && (
+                    <aside className={`${styles.abstractContainer} ${isAbstractOpen ? styles.show : ''}`}>
+                      <button onClick={toggleAbstract} className={`${styles.abstractToggle} ${isAbstractOpen ? styles.open : ''}`}>
+                        <h3>Abstract</h3>
+                        {isAbstractOpen ? <RiArrowUpSLine size={24} color="black" /> : <RiArrowDownSLine size={24} color="black" />}
+                      </button>
+                      {isAbstractOpen && (
+                        <article>{loading ? "Loading..." : submission?.abstract || "Abstract Not Available"}</article>
+                      )}
+                    </aside>
+                  )}
 
                 </div>
                 
