@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import * as pdfjsLib from 'pdfjs-dist/webpack';
-import styles from './Gallery.module.css';
-import ArticleViewPage from "../ArticleView/ArticleView";
+import styles from './PosterCard.module.css';
+import ArticleViewPage from '../../ArticleView/ArticleView';
 import { Link } from 'react-router-dom';
 //chat helped with this page
 
