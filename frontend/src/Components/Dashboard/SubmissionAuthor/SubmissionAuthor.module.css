@@ -24,6 +24,12 @@
 }
 
 /* Input Styles */
+.boxInput {
+  text-align: left;
+  font-weight: 700;
+  font-size: 16px
+}
+
 .boxInput input {
   border: 2px solid transparent;
   width: 15em;

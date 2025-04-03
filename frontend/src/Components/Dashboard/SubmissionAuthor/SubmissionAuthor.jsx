@@ -3,7 +3,7 @@ import styles from './SubmissionAuthor.module.css';
 import { useState } from 'react';
 import {useUser} from '../../Login/UserContext';
 import Cookies from 'js-cookie';
-import CollaboratorsInput from '../CollaboratorsInput/CollaboratorsInput';
+import ChipInput from '../ChipInput/ChipInput';
 
 const SubmissionAuthorPage = () => {
 
@@ -12,6 +12,7 @@ const SubmissionAuthorPage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [collaborators, setCollaborators] = useState([]); // Convernt into array
+    const [tags, setTags] = useState([]); // Convernt into array
     const [submissionType, setSubmissionType] = useState("");
     const [stage, setStage]= useState("1");
     const [authorID, setAuthorID] = useState("");
@@ -46,6 +47,7 @@ const SubmissionAuthorPage = () => {
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
         formData.append("collaborators", collaborators.join(","));
+        formData.append("tags", tags.join(","));
         formData.append("document", document); // Use the document state here
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
@@ -92,7 +94,12 @@ const SubmissionAuthorPage = () => {
                     <input type="text" onChange={(e)=>setLastName(e.target.value)} required placeholder="Last/alias"/>
                 </div>
                 <div className={styles.boxInput}>
-                    <CollaboratorsInput collaborators={collaborators} setCollaborators={setCollaborators} />
+                    Collaborators
+                    <ChipInput chip={collaborators} setChip={setCollaborators} />
+                </div>
+                <div className={styles.boxInput}>
+                    Tags
+                    <ChipInput chip={tags} setChip={setTags} />
                 </div>
                 <div className={styles.radioInput}>
                     <input type="radio" id="articleRadio" name="submissionType" value="article"
