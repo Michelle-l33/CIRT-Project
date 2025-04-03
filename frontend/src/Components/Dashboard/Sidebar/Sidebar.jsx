@@ -25,20 +25,20 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
         {Name: "Task", iconComponent: FaTasks, url: "Task"},
         {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "TabNav"},
         {Name: "Document", iconComponent: GrDocument, url: "DocumentTab"},
-        {Name: "User", iconComponent: FaRegUser, url: "#"},
+        {Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User"},
         {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
     ]
 
     const listOfAuthorIcons = [
         { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "" },
-        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     const listOfReviewerIcons = [
         { Name: "Current", iconComponent: IoNewspaperOutline, url: "Current" },
     
-        { Name: "User", iconComponent: FaRegUser, url: "#" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
         { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 

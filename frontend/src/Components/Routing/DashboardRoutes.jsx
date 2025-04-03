@@ -14,7 +14,7 @@ import Archives from '../Dashboard/TabNav/Archives';
 import SubmissionRecord from '../Dashboard/SubmissionRecord/SubmissionRecord';
 import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor';
 import Current from '../Dashboard/ReviewerAssignment/Current';
-
+import UserTab from '../Dashboard/UserTab/UserTab';
 
 
 const DashboardRoutes = () => {
@@ -47,6 +47,7 @@ const DashboardRoutes = () => {
                     </Route>
                 </Route>
             <Route path="/SubmissionAuthor" element={<SubmissionAuthorPage />} />
+            <Route path="/User" element={<UserTab />}></Route>
         </Routes>
     )
 }
