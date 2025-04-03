@@ -46,7 +46,7 @@ const Papers = () => {
   useEffect(()=>{
     const fetchPapers = async ()=>{
       try{
-        const response = await fetch("http://localhost:8082/submission/publications",{
+        const response = await fetch("https://cirt-project-server.vercel.app/submission/publications",{
           method:"GET"
         })
         if(!response.ok){
@@ -54,12 +54,13 @@ const Papers = () => {
         }
         const data = await response.json();
         setPapers(data);
-        console.log("Papers: ", papers);
+        
       } catch (error){
         console.error("Error fetching papers:", error);
       }
     }
     fetchPapers();
+    console.log("Papers: ", papers);
   },[]);
 
   // Filter papers based on search query

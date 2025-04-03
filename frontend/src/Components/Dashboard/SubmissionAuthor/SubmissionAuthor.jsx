@@ -19,6 +19,7 @@ const SubmissionAuthorPage = () => {
     const [placeholderInput, setPlaceholderInput] = useState("");
     const [loading, setLoading] = useState(false); // Loading state
     const [abstract, setAbstract] = useState("");
+    const {user} = useUser();
 
 
     const handleFileChange = (e) => {
@@ -37,30 +38,32 @@ const SubmissionAuthorPage = () => {
         const isPoster = submissionType === "poster";
         const isArticle = submissionType === "article";
 
-        const userID = Cookies.get('userID');
-        if (!userID){
+        const authorID = user._id;
+        console.log("sdijwoij ", authorID);
+        if (!authorID){
             return window.alert("You must be logged in to submit an article.");
         } 
         const formData = new FormData();
-        formData.append("authorID", userID); // Make sure authorID is included
+        formData.append("authorID", authorID); // Make sure authorID is included
         formData.append("title", title);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
         formData.append("collaborators", collaborators.join(","));
-        formData.append("tags", tags.join(","));
         formData.append("document", document); // Use the document state here
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
         formData.append("abstract",abstract);
+        formData.append("tags", tags.join(","));
         formData.append("stage", stage);
         formData.append("placeholderInput", placeholderInput); // Conditional Input
 
 
         try{
-            const response = await fetch("http://localhost:8082/submission/upload", {
+            const response = await fetch("https://cirt-project-server.vercel.app/submission/upload", {
                 method: "POST",
                 body: formData,
                 credentials: 'include',
+                mode: 'cors',
                 
             });
             const data = await response.json();

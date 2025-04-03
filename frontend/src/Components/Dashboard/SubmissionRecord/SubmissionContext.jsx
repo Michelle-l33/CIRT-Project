@@ -18,7 +18,7 @@ export function SubmissionsProvider( {children} ) {
     startTransition( () => {
         const fetchSubmissions = async () => {
             try {
-                const response = await fetch(`http://localhost:8082/submission/myQueue/${user._id}`,{
+                const response = await fetch(`https://cirt-project-server.vercel.app/submission/myQueue/${user._id}`,{
                     method: "GET"
                 })
                 if (!response.ok) {
@@ -41,12 +41,13 @@ export function SubmissionsProvider( {children} ) {
     }
     const updateSubmissionStage = async (submission, newStage) => {
         try {
-            const response = await fetch(`http://localhost:8082/submission/${submission._id}`, {
+            const response = await fetch(`https://cirt-project-server.vercel.app/submission/${submission._id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ stage: newStage }),
+                mode: 'cors',
             });
 
             if (!response.ok) {

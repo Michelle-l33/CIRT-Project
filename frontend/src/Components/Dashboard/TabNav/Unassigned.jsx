@@ -19,7 +19,7 @@ const Unassigned = () => {
         const fetchUnassigned = async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch('http://localhost:8082/submission/unassigned');
+                const response = await fetch('https://cirt-project-server.vercel.app/submission/unassigned');
                 
                 if (!response.ok) throw new Error('Failed to fetch submissions');
                 
@@ -43,7 +43,7 @@ const Unassigned = () => {
     useEffect(() => {
         const fetchEditors = async () => {
             try {
-                const response = await fetch('http://localhost:8082/user/');
+                const response = await fetch('https://cirt-project-server.vercel.app/user/');
                 if (!response.ok) throw new Error('Failed to fetch editors');
                 
                 const data = await response.json();
@@ -72,12 +72,13 @@ const Unassigned = () => {
 
     const handleAssignEditor = async (submissionId, editorId) => {
         try {
-          const response = await fetch(`http://localhost:8082/submission/${submissionId}/assign-editor`, {
+          const response = await fetch(`https://cirt-project-server.vercel.app/submission/${submissionId}/assign-editor`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ editorId })
+            body: JSON.stringify({ editorId }),
+            mode: 'cors',
           });
       
           if (!response.ok) {

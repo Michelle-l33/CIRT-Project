@@ -41,7 +41,6 @@ const Gallery = () => {
       try {
         const response = await fetch("https://cirt-project-server.vercel.app/submission/gallery", {
           method: "GET",
-          mode: 'cors',
         });
         if (!response.ok) {
           throw new Error("Failed to fetch gallery");
@@ -53,6 +52,7 @@ const Gallery = () => {
       }
     };
     fetchGallery();
+    console.log("Posters: ", posters);
   }, []);
 
   // Filter posters based on search query

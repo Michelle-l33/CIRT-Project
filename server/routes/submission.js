@@ -17,15 +17,14 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "File upload failed!" });
     }
 
-    const authorID = req.cookies.userID;  // Retrieve userID from cookies
-
+    const {authorID} = req.body;
 
     // Check if authorID is provided in the cookies
     if (!authorID) {
       return res.status(400).json({ error: "User ID is required in cookies" });
     }
 
-    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract } = req.body;
+    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract, tags } = req.body;
 
     const newSubmission = new Submission({
       authorID,
@@ -37,7 +36,7 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       isPoster,
       isArticle,
       abstract,
-      //tags,
+      tags,
       stage: "1"
     });
 
