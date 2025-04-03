@@ -37,7 +37,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("http://localhost:8082/submission/gallery", {
+        const response = await fetch("https://cirt-project-server.vercel.app/submission/gallery", {
           method: "GET",
         });
         if (!response.ok) {

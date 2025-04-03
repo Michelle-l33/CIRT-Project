@@ -50,7 +50,7 @@ const SubmissionParticipant = () => {
     // Handle "Assign Reviewer" button click
     const handleAssignReviewer = async (reviewerId) => {
         try {
-            const response = await fetch(`http://localhost:8082/submission/${originalSubmissionID}/assign-reviewer`, {
+            const response = await fetch(`https://cirt-project-server.vercel.app/submission/${originalSubmissionID}/assign-reviewer`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
