@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Gallery.module.css';
-import PosterCard from './PosterCard';
+import PosterCard from './PosterCard/PosterCard';
+import Sidebar from './Sidebar/Sidebar';
+import TopNav from './TopNav/TopNav';
 import { useSearchParams } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 
@@ -64,54 +66,16 @@ const Gallery = () => {
 
   return (
     <div className={styles.galleryContainer}>
-      <nav className={styles.topNav}>
-        <Link to="/" className={styles.homeLink}>
-          <span className={styles.homeIcon}></span>
-          <span>Criminology Institute for Research and Training Repository</span>
-        </Link>
-        <div className={styles.searchContainer}>
-          <input
-            type="text"
-            placeholder="Search research posters..."
-            className={styles.searchInput}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-      </nav>
-
-      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.show : ''}`}>
-              <button onClick={toggleSidebar} className={`${styles.sidebarToggle} ${isSidebarOpen ? styles.open : ''}`}>
-                <IoMenu size={28} color={"white"} />
-              </button>
-              <div className={styles.sidebarHeader}>
-                <Link to="/">
-                  <img
-                    src="/assets/utampa_logo.png"
-                    alt="UT Logo"
-                    className={styles.logo}
-                  />
-                </Link>
-              </div>
-              {/* <nav className={`${styles.sidebarNav} ${isSidebarOpen ? styles.show : ''}`}> */}
-              {isSidebarOpen && (
-                <nav className={styles.sidebarNav}>
-                  <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-                  <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-                  <Link to="/submit" className={styles.navItem}>Submit Research</Link>
-                  <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
-                  <Link to="/contact" className={styles.navItem}>Research Support</Link>
-                </nav>
-              )}
-      
-          </aside>
+      <TopNav searchQuery={searchQuery} setSearchQuery={setSearchQuery} />  
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <main className={styles.mainContent}>
+      <h2 className={styles.pageTitle}>All Research Posters</h2> 
         <div className={styles.posterGrid}>
-          {filteredPosters.map((poster) => (
-            <PosterCard key={poster._id} poster={poster} />
-          ))}
-        </div>
+  {filteredPosters.map((poster) => (
+    <PosterCard key={poster._id} poster={poster} />
+  ))}
+</div>
       </main>
     </div>
   );

@@ -1,0 +1,72 @@
+/* PosterCard.module.css */
+
+.posterCard {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+  }
+  
+  .posterCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .posterImage {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+  }
+  
+  .posterInfo h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  
+  .author {
+    color: #888;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+  
+  .buttonGroup {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+  
+  button {
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+  }
+  
+  .pdfButton {
+    background: var(--blue);
+    color: var(--light);
+    border: none;
+  }
+  
+  .pdfButton:hover {
+    background: #1565c0;
+  }
+  
+  .detailsButton {
+    background: transparent;
+    border: 1px solid var(--blue);
+    color: var(--blue);
+  }
+  
+  .detailsButton:hover {
+    background: var(--blue);
+    color: var(--light);
+  }
