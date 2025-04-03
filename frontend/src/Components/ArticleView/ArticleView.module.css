@@ -137,6 +137,9 @@
     padding: 0.5em 1em;
     font-size: 1em;
     text-align: left;
+    background-color: var(--transparent-light);
+    border-radius: 10px;
+    border: solid 5px var(--transparent-dark);
 }
 
 .abstractToggle {
@@ -186,5 +189,9 @@
     .abstract.show {
         height: 240px;
         transition: width 0.3s ease;
+    }
+    .abstractToggle > :nth-child(2) {
+        display: flex;
+        transform: translateY(-0.1em);
     }
 }
