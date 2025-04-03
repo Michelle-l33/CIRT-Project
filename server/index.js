@@ -30,9 +30,9 @@ app.get("/", (req, res) => {
 });
 
 //Routes
-app.use("/user", require("./api/user"));
-app.use("/submission", require("./api/submission"));
-app.use("/comment", require("./api/comment"));
+app.use("/user", require("./routes/user"));
+app.use("/submission", require("./routes/submission"));
+app.use("/comment", require("./routes/comment"));
 
 // Start server
 app.listen(PORT, () => {
