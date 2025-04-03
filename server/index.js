@@ -7,12 +7,11 @@ require ("dotenv").config();
 const PORT = process.env.PORT || 8082;
 
 // Middleware
-app.use(cors({
-    origin: ['http://localhost:3000','https://cirt-project.vercel.app'],
-    methods: ['GET','POST','PUT', 'DELETE'],
-    credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
-}));
+const corsOptions = {
+  origin: ['http://localhost:3000', 'https://cirt-project.vercel.app'],  // Allowed origins
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,  // Allow cookies to be sent with requests
+};
 
 app.use(cors(corsOptions));
 app.use(express.json()); // Allows parsing of JSON requests
