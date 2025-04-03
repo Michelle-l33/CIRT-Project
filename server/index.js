@@ -26,8 +26,13 @@ app.use(cookieParser());
 
 // Example API route
 app.get("/", (req, res) => {
-  res.send("Backend is running yayy!");
+  res.send("Backend is running yayy tstttt!");
 });
+
+app.get("/user", (req, res) => {
+  res.json({ message: "User route is working!" });
+});
+
 
 //Routes
 app.use("/user", require("./routes/user"));
