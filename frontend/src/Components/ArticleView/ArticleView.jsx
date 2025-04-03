@@ -42,7 +42,7 @@ const ArticleViewPage = () => {
     useEffect(() => {
         const fetchSubmission = async () => {
           try {
-            const response = await fetch(`https://cirt-project-server.vercel.app/submission/${id}`, {
+            const response = await fetch(`http://localhost:3000/submission/${id}`, {
               method: "GET",
             });
             if (!response.ok) {

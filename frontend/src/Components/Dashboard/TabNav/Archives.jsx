@@ -23,7 +23,7 @@ const Archives = () => {
         const fetchArchives = async () => {
             try {
                 setIsLoading(true);
-                const response = await fetch('https://cirt-project-server.vercel.app/submission/archives');
+                const response = await fetch('http://localhost:3000/submission/archives');
                 
                 if (!response.ok) {
                     throw new Error('Failed to fetch submissions');

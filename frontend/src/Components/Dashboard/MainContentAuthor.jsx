@@ -56,7 +56,7 @@ const MainContentAuthor = () => {
     useEffect(()=>{
         const fetchSubmissions = async () =>{
             try{
-                const response = await fetch(`https://cirt-project-server.vercel.app/submission/authorArt/${user._id}`, {
+                const response = await fetch(`http://localhost:3000/submission/authorArt/${user._id}`, {
                     method: "GET"
                 })
                 if (!response.ok){
@@ -90,7 +90,7 @@ const MainContentAuthor = () => {
     useEffect(()=>{
         const fetchPosters = async () =>{
             try{
-                const response = await fetch(`https://cirt-project-server.vercel.app/submission/authorPos/${user._id}`, {
+                const response = await fetch(`http://localhost:3000/submission/authorPos/${user._id}`, {
                     method: "GET"
                 })
                 if (!response.ok){
@@ -112,7 +112,7 @@ const MainContentAuthor = () => {
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", currSub._id);
-            const response = await fetch(`https://cirt-project-server.vercel.app/comment/${submissionList[currSub]._id}`,{
+            const response = await fetch(`http://localhost:3000/comment/${submissionList[currSub]._id}`,{
                 method: "GET"
             })
             if (!response.ok) {

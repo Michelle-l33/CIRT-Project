@@ -14,7 +14,7 @@ const MyQueue = () => {
     useEffect(() => {
       const fetchMyQueue = async () => {
         try { 
-          const response = await fetch(`https://cirt-project-server.vercel.app/submission/myQueue/${user._id}`, {
+          const response = await fetch(`http://localhost:3000/submission/myQueue/${user._id}`, {
             method: "GET"
           });
           if (!response.ok) {

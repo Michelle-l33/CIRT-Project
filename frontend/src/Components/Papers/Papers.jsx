@@ -46,7 +46,7 @@ const Papers = () => {
   useEffect(()=>{
     const fetchPapers = async ()=>{
       try{
-        const response = await fetch("https://cirt-project-server.vercel.app/submission/publications",{
+        const response = await fetch("http://localhost:3000/submission/publications",{
           method:"GET"
         })
         if(!response.ok){

@@ -80,7 +80,7 @@ const Current = () => {
     
     const fetchSubmissions = async () => {
         try {
-            const response = await fetch(`https://cirt-project-server.vercel.app/submission/reviewerSubs/${user._id}`,{
+            const response = await fetch(`http://localhost:3000/submission/reviewerSubs/${user._id}`,{
                 method: "GET"
             })
             if (!response.ok) {

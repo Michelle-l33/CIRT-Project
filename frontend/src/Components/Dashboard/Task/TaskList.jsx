@@ -34,7 +34,7 @@ const TaskPage = () => {
     useEffect(() => {
         const fetchEditors = async () => {
             try {
-                const response = await fetch('https://cirt-project-server.vercel.app/user/');
+                const response = await fetch('http://localhost:3000/user/');
                 if (!response.ok) throw new Error('Failed to fetch editors');
                 
                 const data = await response.json();

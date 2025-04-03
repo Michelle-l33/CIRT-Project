@@ -22,7 +22,7 @@ const SubmissionDiscussion = () => {
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", originalSubmissionID);
-            const response = await fetch(`https://cirt-project-server.vercel.app/comment/${originalSubmissionID}`,{
+            const response = await fetch(`http://localhost:3000/comment/${originalSubmissionID}`,{
                 method: "GET"
             })
             if (!response.ok) {
@@ -60,7 +60,7 @@ const SubmissionDiscussion = () => {
         try{
             const commentData = {originalSubmissionID, comment, commentorID, role };
             
-            const response = await fetch("https://cirt-project-server.vercel.app/comment",{
+            const response = await fetch("http://localhost:3000/comment",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
