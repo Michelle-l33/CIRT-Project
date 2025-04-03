@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 8082;
 
 // Middleware
 app.use(cors({
-    origin: ['http://localhost:3000'],
+    origin: ['http://localhost:3000','https://cirt-project.vercel.app/'],
     methods: ['GET','POST','PUT', 'DELETE'],
     credentials: true
 }));
