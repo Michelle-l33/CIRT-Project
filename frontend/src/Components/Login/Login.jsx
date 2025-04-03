@@ -6,6 +6,7 @@ import { useUser } from "./UserContext";
 // Icons
 import { PiEyeBold } from "react-icons/pi";
 import { PiEyeClosedBold } from "react-icons/pi";
+import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
     // State to manage form data
@@ -23,6 +24,7 @@ const LoginPage = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [showPasswordRegister, setShowPasswordRegister] = useState(false);
     const [showPasswordLogin, setShowPasswordLogin] = useState(false);
+    const navigate = useNavigate();
 
     // State for password requirements
     const [passwordRequirements, setPasswordRequirements] = useState({
@@ -67,7 +69,7 @@ const LoginPage = () => {
                 setTimeout(() => {
                     setAlertMessage('');
                 }, 3000);
-                window.location.href = "/Dashboard";
+                navigate("/Dashboard");
             } else {
                 window.alert("Invalid Credentials. Please Try Again!");
                 console.log(data.error);
