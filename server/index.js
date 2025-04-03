@@ -16,6 +16,7 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
+
 app.use(express.json()); // Allows parsing of JSON requests
 connectDB();
 
