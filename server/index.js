@@ -29,9 +29,7 @@ app.get("/", (req, res) => {
   res.send("Backend is running yayy tstttt!");
 });
 
-app.get("/user", (req, res) => {
-  res.json({ message: "User route is working!" });
-});
+
 
 
 //Routes
