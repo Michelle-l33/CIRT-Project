@@ -10,8 +10,11 @@ const PORT = process.env.PORT || 8082;
 app.use(cors({
     origin: ['http://localhost:3000','https://cirt-project.vercel.app'],
     methods: ['GET','POST','PUT', 'DELETE'],
-    credentials: true
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization'],
 }));
+
+app.use(cors(corsOptions));
 app.use(express.json()); // Allows parsing of JSON requests
 connectDB();
 
