@@ -9,34 +9,34 @@
         ],
         "routes": [
           {
-            "src": "api/user/(.*)",  
+            "src": "/user/(.*)",  
             "headers": {
               "Access-Control-Allow-Credentials": "true",
               "Access-Control-Allow-Origin": "*", 
               "Access-Control-Allow-Methods": "GET, OPTIONS, PATCH, DELETE, POST, PUT",
               "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
             },
-            "dest": "/api/user.js"
+            "dest": "/user.js"
           },
           {
-            "src": "api/submission/(.*)", 
+            "src": "/submission/(.*)", 
             "headers": {
               "Access-Control-Allow-Credentials": "true",
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET, OPTIONS, PATCH, DELETE, POST, PUT",
               "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
             },
-            "dest": "/api/submission.js"
+            "dest": "/submission.js"
           },
           {
-            "src": "api/comment/(.*)", 
+            "src": "/comment/(.*)", 
             "headers": {
               "Access-Control-Allow-Credentials": "true",
               "Access-Control-Allow-Origin": "*",
               "Access-Control-Allow-Methods": "GET, OPTIONS, PATCH, DELETE, POST, PUT",
               "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version"
             },
-            "dest": "/api/comment.js"
+            "dest": "/comment.js"
           }
         ]
       }
