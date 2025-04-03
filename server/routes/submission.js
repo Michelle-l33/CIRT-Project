@@ -301,6 +301,34 @@ router.get("/reviewerSubs/:reviewerID", async (req, res) => {
   }
 });
 
+// Assign an editor to a submission
+router.post("/:submissionId/assign-editor", async (req, res) => {
+  try {
+    const { submissionId } = req.params;
+    const { editorId } = req.body;
+
+    // Validate editor exists and is an editor
+    const editor = await User.findById(editorId);
+    if (!editor || !editor.isEditor) {
+      return res.status(400).json({ error: "Invalid editor" });
+    }
+
+    const submission = await Submission.findByIdAndUpdate(
+      submissionId,
+      { editorID: editorId }, // Removed stage update
+      { new: true }
+    );
+
+    if (!submission) {
+      return res.status(404).json({ error: "Submission not found" });
+    }
+
+    res.json(submission);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 
