@@ -63,7 +63,7 @@ const SubDetail = ({submission, setIsOpen}) => {
         try{
             const commentData = {originalSubmissionID, comment, commentorID, role };
             
-            const response = await fetch("https://cirt-project-server.vercel.app/comment",{
+            const response = await fetch("https://cirt-project-server.vercel.app/comment/",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

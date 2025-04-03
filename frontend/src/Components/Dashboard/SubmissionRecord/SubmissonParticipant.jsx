@@ -21,7 +21,7 @@ const SubmissionParticipant = () => {
         const fetchData = async () => {
             try {
                 // Fetch all participants
-                const participantsResponse = await fetch('https://cirt-project-server.vercel.app/user');
+                const participantsResponse = await fetch('https://cirt-project-server.vercel.app/user/');
                 if (!participantsResponse.ok) {
                     throw new Error('Failed to fetch participants');
                 }
