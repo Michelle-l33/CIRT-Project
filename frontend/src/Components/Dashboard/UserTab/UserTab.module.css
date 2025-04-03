@@ -1,0 +1,42 @@
+.userTabContainer {
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.userTabContainer .bigContaner {
+    width: calc(100% - 40px);
+    margin: 20px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    padding: 20px;
+}
+
+.userTabContainer .userRight .header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.userTabContainer .userRight .header .userName {
+    color: var(--primary);
+}
+
+.userTabContainer .userLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.userTabContainer .userLeft .logo {
+    display: block;
+    object-fit: contain;
+}
+
+.userTabContainer.close {
+    width: calc(100% - 60px);
+    left: 60px;
+    height: fit-content;
+}
