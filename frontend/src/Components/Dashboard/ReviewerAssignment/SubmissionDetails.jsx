@@ -37,11 +37,7 @@ const SubDetail = ({submission, setIsOpen}) => {
         }
     };
     useEffect(()=>{
-<<<<<<< HEAD
         
-=======
-        originalSubmissionID = queryParams.get('submission');
->>>>>>> 98b58e0 (Update SubmissionDetails.jsx)
         fetchComments();
     },[originalSubmissionID]);
 
