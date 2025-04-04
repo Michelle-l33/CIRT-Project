@@ -3,7 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import styles from "./ReviewerAssignment.module.css"
 import SubDetail from "./SubmissionDetails";
 import { useUser } from "../../Login/UserContext";
-import { useLocation } from "react-router-dom";
+
 
 // const listOfSubmission = [
 //     {
@@ -73,18 +73,16 @@ const Current = () => {
     //     return `${month}/${day}`;
     // }
 
-    const location = useLocation();
-    const queryParams = new URLSearchParams(location.search);
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [currSubmission, setCurrSubmission] = useState(null);
     const [submissionList, setSubmissionList] = useState([]);
     const {user} = useUser();
-    const originalSubmissionID = queryParams.get('submission');
+
     
     const fetchSubmissions = async () => {
         try {
-            const response = await fetch(`https://cirt-project-server.vercel.app/submission/reviewerSubs/${user._id}/${originalSubmissionID}`,{
+            const response = await fetch(`https://cirt-project-server.vercel.app/submission/reviewerSubs/${user._id}`,{
                 method: "GET"
             })
             if (!response.ok) {

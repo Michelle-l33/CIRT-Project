@@ -20,7 +20,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", user._id);
-            const response = await fetch(`https://cirt-project-server.vercel.app/comment/reviewer/${user._id}`,{
+            const response = await fetch(`https://cirt-project-server.vercel.app/comment/reviewer/${user._id}/${originalSubmissionID}`,{
                 method: "GET"
             })
             if (!response.ok) {
