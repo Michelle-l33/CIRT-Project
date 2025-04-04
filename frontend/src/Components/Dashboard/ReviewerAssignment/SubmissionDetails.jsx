@@ -16,7 +16,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     const originalSubmissionID = queryParams.get('submission');
     const [ searchParams, setSearchParams ] = useSearchParams();
    
-    //fetches comments
+    
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", user._id);
@@ -39,7 +39,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     useEffect(()=>{
         
         fetchComments();
-    },[originalSubmissionID]);
+    },[submission]);
 
     const Comment = ({content, sender}) => {
         return(
