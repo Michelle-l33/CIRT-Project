@@ -43,7 +43,6 @@ const SubmissionParticipant = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [originalSubmissionID]);
 
