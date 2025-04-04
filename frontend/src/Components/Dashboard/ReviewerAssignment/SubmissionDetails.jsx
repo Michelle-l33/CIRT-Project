@@ -39,7 +39,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     useEffect(()=>{
         
         fetchComments();
-    },[submission]);
+    },[originalSubmissionID]);
 
     const Comment = ({content, sender}) => {
         return(
