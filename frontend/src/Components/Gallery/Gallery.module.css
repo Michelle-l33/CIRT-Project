@@ -23,6 +23,7 @@
     grid-area: main;
     padding: 2rem;
     overflow-y: auto;
+    min-width: 0;
 }
 
 .pageTitle {

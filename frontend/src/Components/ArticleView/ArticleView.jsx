@@ -1,10 +1,7 @@
 import SearchBar from "./SearchBar/SearchBar"
 import styles from './ArticleView.module.css';
 // import { useState } from 'react';
-import { RiArticleLine, RiFullscreenLine } from "react-icons/ri";
-import { PiSidebarSimpleLight } from "react-icons/pi";
-import { MdOutlineZoomIn, MdOutlineZoomOut } from "react-icons/md";
-import { FaAngleUp, FaAngleDown } from "react-icons/fa";
+import { RiArticleLine } from "react-icons/ri";
 import {useUser} from "../Login/UserContext";
 import React from 'react';
 import {useState, useEffect} from 'react';

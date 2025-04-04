@@ -3,7 +3,7 @@ import styles from './SubmissionAuthor.module.css';
 import { useState } from 'react';
 import {useUser} from '../../Login/UserContext';
 import Cookies from 'js-cookie';
-import CollaboratorsInput from '../CollaboratorsInput/CollaboratorsInput';
+import ChipInput from '../ChipInput/ChipInput';
 
 const SubmissionAuthorPage = () => {
 
@@ -12,12 +12,14 @@ const SubmissionAuthorPage = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [collaborators, setCollaborators] = useState([]); // Convernt into array
+    const [tags, setTags] = useState([]); // Convernt into array
     const [submissionType, setSubmissionType] = useState("");
     const [stage, setStage]= useState("1");
     const [authorID, setAuthorID] = useState("");
     const [placeholderInput, setPlaceholderInput] = useState("");
     const [loading, setLoading] = useState(false); // Loading state
     const [abstract, setAbstract] = useState("");
+    const {user} = useUser();
 
 
     const handleFileChange = (e) => {
@@ -36,12 +38,13 @@ const SubmissionAuthorPage = () => {
         const isPoster = submissionType === "poster";
         const isArticle = submissionType === "article";
 
-        const userID = Cookies.get('userID');
-        if (!userID){
+        const authorID = user._id;
+        console.log("sdijwoij ", authorID);
+        if (!authorID){
             return window.alert("You must be logged in to submit an article.");
         } 
         const formData = new FormData();
-        formData.append("authorID", userID); // Make sure authorID is included
+        formData.append("authorID", authorID); // Make sure authorID is included
         formData.append("title", title);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
@@ -50,6 +53,7 @@ const SubmissionAuthorPage = () => {
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
         formData.append("abstract",abstract);
+        formData.append("tags", tags.join(","));
         formData.append("stage", stage);
         formData.append("placeholderInput", placeholderInput); // Conditional Input
 
@@ -59,6 +63,7 @@ const SubmissionAuthorPage = () => {
                 method: "POST",
                 body: formData,
                 credentials: 'include',
+                mode: 'cors',
                 
             });
             const data = await response.json();
@@ -92,7 +97,12 @@ const SubmissionAuthorPage = () => {
                     <input type="text" onChange={(e)=>setLastName(e.target.value)} required placeholder="Last/alias"/>
                 </div>
                 <div className={styles.boxInput}>
-                    <CollaboratorsInput collaborators={collaborators} setCollaborators={setCollaborators} />
+                    Collaborators
+                    <ChipInput chip={collaborators} setChip={setCollaborators} />
+                </div>
+                <div className={styles.boxInput}>
+                    Tags
+                    <ChipInput chip={tags} setChip={setTags} />
                 </div>
                 <div className={styles.radioInput}>
                     <input type="radio" id="articleRadio" name="submissionType" value="article"

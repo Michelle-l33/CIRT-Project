@@ -20,7 +20,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     const fetchComments = async () => {
         try {
             console.log("Fetching for: ", user._id);
-            const response = await fetch(`https://cirt-project-server.vercel.app/comment/reviewer/${user._id}`,{
+            const response = await fetch(`https://cirt-project-server.vercel.app/comment/reviewer/${user._id}/${originalSubmissionID}`,{
                 method: "GET"
             })
             if (!response.ok) {
@@ -38,7 +38,7 @@ const SubDetail = ({submission, setIsOpen}) => {
     };
     useEffect(()=>{
         fetchComments();
-    },[submission]);
+    },[originalSubmissionID]);
 
     const Comment = ({content, sender}) => {
         return(
@@ -63,12 +63,13 @@ const SubDetail = ({submission, setIsOpen}) => {
         try{
             const commentData = {originalSubmissionID, comment, commentorID, role };
             
-            const response = await fetch("https://cirt-project-server.vercel.app/comment",{
+            const response = await fetch("https://cirt-project-server.vercel.app/comment/",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(commentData),
+                mode: 'cors',
             });
 
             const data = await response.json();

@@ -54,12 +54,13 @@ const Papers = () => {
         }
         const data = await response.json();
         setPapers(data);
-        console.log("Papers: ", papers);
+        
       } catch (error){
         console.error("Error fetching papers:", error);
       }
     }
     fetchPapers();
+    console.log("Papers: ", papers);
   },[]);
 
   // Filter papers based on search query

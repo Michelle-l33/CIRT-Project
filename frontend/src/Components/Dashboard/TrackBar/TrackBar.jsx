@@ -64,6 +64,7 @@ const TrackBar = ({currentStep, title}) => {
                 method: "PUT",
                 body: formData,
                 credentials: "include",
+                mode: 'cors',
             });
     
             const data = await response.json();

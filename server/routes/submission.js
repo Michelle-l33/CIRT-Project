@@ -17,15 +17,14 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "File upload failed!" });
     }
 
-    const authorID = req.cookies.userID;  // Retrieve userID from cookies
-
+    const {authorID} = req.body;
 
     // Check if authorID is provided in the cookies
     if (!authorID) {
       return res.status(400).json({ error: "User ID is required in cookies" });
     }
 
-    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract } = req.body;
+    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract, tags } = req.body;
 
     const newSubmission = new Submission({
       authorID,
@@ -37,7 +36,7 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       isPoster,
       isArticle,
       abstract,
-      //tags,
+      tags,
       stage: "1"
     });
 
@@ -326,6 +325,35 @@ router.post("/:submissionId/assign-editor", async (req, res) => {
     res.json(submission);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.put('/:id', async (req, res) => {
+  const { id } = req.params; // Get the submission ID from the URL parameter
+  const { stage } = req.body; // Get the new stage value from the request body
+
+  try {
+
+    console.log("Received PUT request for submission ID:", id);
+    console.log("New stage:", stage);
+      // Find the submission by ID
+      const submission = await Submission.findById(id);
+
+      if (!submission) {
+          return res.status(404).json({ message: 'Submission not found' });
+      }
+
+      // Update the stage of the submission
+      submission.stage = stage;
+
+      // Save the updated submission
+      const updatedSubmission = await submission.save();
+
+      // Return the updated submission
+      res.status(200).json(updatedSubmission);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error updating submission stage' });
   }
 });
 

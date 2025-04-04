@@ -77,7 +77,8 @@ const Unassigned = () => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ editorId })
+            body: JSON.stringify({ editorId }),
+            mode: 'cors',
           });
       
           if (!response.ok) {

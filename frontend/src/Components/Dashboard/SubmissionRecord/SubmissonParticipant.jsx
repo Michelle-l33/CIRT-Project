@@ -21,7 +21,7 @@ const SubmissionParticipant = () => {
         const fetchData = async () => {
             try {
                 // Fetch all participants
-                const participantsResponse = await fetch('http://localhost:8082/user');
+                const participantsResponse = await fetch('https://cirt-project-server.vercel.app/user/');
                 if (!participantsResponse.ok) {
                     throw new Error('Failed to fetch participants');
                 }
@@ -29,7 +29,7 @@ const SubmissionParticipant = () => {
                 setParticipants(participantsData);
 
                 // Fetch the current submission to get the reviewerID
-                const submissionResponse = await fetch(`http://localhost:8082/submission/${originalSubmissionID}`);
+                const submissionResponse = await fetch(`https://cirt-project-server.vercel.app/submission/${originalSubmissionID}`);
                 const submissionData = await submissionResponse.json();
 
                 // If the submission has a reviewerID, find the reviewer in the participants list
@@ -43,7 +43,6 @@ const SubmissionParticipant = () => {
                 setLoading(false);
             }
         };
-
         fetchData();
     }, [originalSubmissionID]);
 
@@ -56,6 +55,7 @@ const SubmissionParticipant = () => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ reviewerId }),
+                mode: 'cors',
             });
 
             if (!response.ok) {

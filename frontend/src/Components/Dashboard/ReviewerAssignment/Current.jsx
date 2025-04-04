@@ -4,6 +4,7 @@ import styles from "./ReviewerAssignment.module.css"
 import SubDetail from "./SubmissionDetails";
 import { useUser } from "../../Login/UserContext";
 
+
 // const listOfSubmission = [
 //     {
 //         title: "1 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
@@ -66,17 +67,18 @@ import { useUser } from "../../Login/UserContext";
 
 
 const Current = () => {
-    function getDate(date) {
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        return `${month}/${day}`;
-    }
+    // function getDate(date) {
+    //     const month = date.getMonth() + 1;
+    //     const day = date.getDate();
+    //     return `${month}/${day}`;
+    // }
 
     const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [currSubmission, setCurrSubmission] = useState(null);
     const [submissionList, setSubmissionList] = useState([]);
     const {user} = useUser();
+
     
     const fetchSubmissions = async () => {
         try {

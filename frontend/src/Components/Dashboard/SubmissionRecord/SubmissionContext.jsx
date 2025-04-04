@@ -34,7 +34,7 @@ export function SubmissionsProvider( {children} ) {
             }
         };
         fetchSubmissions();
-    })}, []);
+    })}, [user._id]);
 
     if (isPending) {
         return <div>Loading...</div>;
@@ -47,6 +47,7 @@ export function SubmissionsProvider( {children} ) {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({ stage: newStage }),
+                mode: 'cors',
             });
 
             if (!response.ok) {

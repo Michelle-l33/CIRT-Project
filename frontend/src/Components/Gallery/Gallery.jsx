@@ -52,6 +52,7 @@ const Gallery = () => {
       }
     };
     fetchGallery();
+    console.log("Posters: ", posters);
   }, []);
 
   // Filter posters based on search query
