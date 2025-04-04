@@ -328,6 +328,35 @@ router.post("/:submissionId/assign-editor", async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  const { id } = req.params; // Get the submission ID from the URL parameter
+  const { stage } = req.body; // Get the new stage value from the request body
+
+  try {
+
+    console.log("Received PUT request for submission ID:", id);
+    console.log("New stage:", stage);
+      // Find the submission by ID
+      const submission = await Submission.findById(id);
+
+      if (!submission) {
+          return res.status(404).json({ message: 'Submission not found' });
+      }
+
+      // Update the stage of the submission
+      submission.stage = stage;
+
+      // Save the updated submission
+      const updatedSubmission = await submission.save();
+
+      // Return the updated submission
+      res.status(200).json(updatedSubmission);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Error updating submission stage' });
+  }
+});
+
 
 
 

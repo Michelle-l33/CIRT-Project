@@ -34,7 +34,7 @@ export function SubmissionsProvider( {children} ) {
             }
         };
         fetchSubmissions();
-    })}, []);
+    })}, [user._id]);
 
     if (isPending) {
         return <div>Loading...</div>;
