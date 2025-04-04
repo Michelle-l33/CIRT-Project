@@ -13,6 +13,7 @@ import Gallery from './Components/Gallery/Gallery';
 import Papers from './Components/Papers/Papers';
 // import { dashBoardContext } from './Components/Dashboard/Dashboard';
 import ArticleViewPage from './Components/ArticleView/ArticleView';
+import SearchResults from './Components/Gallery/SearchResults/SearchResults';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
           <Route path="/ArticleView" element={<ArticleView />} />
           <Route path="/Gallery" element={<Gallery />} />
           <Route path="/Papers" element={<Papers />} />
+          <Route path="/search" element={<SearchResults />} />
           <Route path="/Dashboard" element = {<ProtectedRoutes />}>
             <Route path="/Dashboard" element={<RedirectDashboard />} />
             <Route path="/Dashboard/*" element={<DashboardRoutes />}/>

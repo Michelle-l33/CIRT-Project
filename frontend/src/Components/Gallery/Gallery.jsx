@@ -70,7 +70,7 @@ const Gallery = () => {
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <main className={styles.mainContent}>
-      <h2 className={styles.pageTitle}>All Research Posters</h2> 
+ 
         <div className={styles.posterGrid}>
   {filteredPosters.map((poster) => (
     <PosterCard key={poster._id} poster={poster} />

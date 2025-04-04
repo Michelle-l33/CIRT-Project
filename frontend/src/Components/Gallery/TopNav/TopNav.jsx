@@ -1,23 +1,39 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styles from './TopNav.module.css';
 
-const TopNav = ({ searchQuery, setSearchQuery }) => {
+const TopNav = () => {
+  const [localQuery, setLocalQuery] = useState('');
+  const navigate = useNavigate();
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      navigate(`/search?query=${encodeURIComponent(localQuery)}`);
+    }
+  };
+
   return (
     <nav className={styles.topNav}>
       <Link to="/" className={styles.homeLink}>
         <span className={styles.homeIcon}></span>
-        <span>Criminology Institute for Research and Training Repository</span>
       </Link>
-      <div className={styles.searchContainer}>
+      <span className={styles.pageTitle}>Criminology Institute for Research and Training Repository</span>
+      <form
+        className={styles.searchContainer}
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate(`/search?query=${encodeURIComponent(localQuery)}`);
+        }}
+      >
         <input
           type="text"
           placeholder="Search research posters..."
           className={styles.searchInput}
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={localQuery}
+          onChange={(e) => setLocalQuery(e.target.value)}
+          autoFocus
         />
-      </div>
+      </form>
     </nav>
   );
 };

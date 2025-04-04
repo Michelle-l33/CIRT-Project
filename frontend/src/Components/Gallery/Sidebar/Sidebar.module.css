@@ -5,6 +5,7 @@
     padding: 2rem 1.5rem;
     box-shadow: 2px 0 8px var(--transparent-dark);
     transition: width 0.3s ease;
+
     z-index: 10; /* Make sure sidebar stays above content */
   }
   

@@ -1,0 +1,131 @@
+:root {
+  --red: #d90429;
+  --light-gray: #f6f6f6;
+  --dark: #333;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  padding: 2rem;
+  background-color: #fff;
+  min-height: 100vh;
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--red);
+  margin-bottom: 1rem;
+}
+
+.queryText {
+  font-size: 1rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.queryHighlight {
+  color: var(--red);
+  font-weight: 600;
+}
+
+.filterInfo {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.filterTag {
+  background-color: var(--light-gray);
+  padding: 0.4rem 0.8rem;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 1.2rem;
+  box-shadow: 0 2px 5px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  color: var(--red);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.cardSummary {
+  font-size: 0.95rem;
+  color: var(--dark);
+  margin-bottom: 1rem;
+}
+
+.viewLink {
+  align-self: flex-start;
+  background-color: var(--red);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  border-radius: 0.4rem;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+}
+
+.viewLink:hover {
+  background-color: #b40320;
+}
+
+.noResults {
+  font-size: 1rem;
+  color: var(--dark);
+  text-align: center;
+}
+
+.searchInput {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  flex: 1;
+}
+
+.filtersContainer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  background-color: #f9f9f9;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  border: 1px solid #ddd;
+}
+
+.filterSelect {
+  padding: 0.6rem;
+  border: 1px solid #ddd;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  background-color: #fff;
+  cursor: pointer;
+}

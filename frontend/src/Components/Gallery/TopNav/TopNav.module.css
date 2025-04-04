@@ -1,13 +1,12 @@
 .topNav {
-    grid-area: topnav;
-    background: var(--light);
     display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    border-bottom: 1px solid var(--transparent-light);
+    flex-wrap: wrap;
     align-items: center;
-    margin-left: 240px; /* Push topnav to the right */
-    z-index: 5; /* Ensure it stays above content */
+    gap: 1rem;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
   }
   .homeLink {
     text-decoration: none;
@@ -23,12 +22,16 @@
   .homeIcon {
     width: 36px;
     height: 36px;
-    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232b4a6d'%3E%3Cpath d='M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z'/%3E%3C/svg%3E") no-repeat center;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d90429'%3E%3Cpath d='M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z'/%3E%3C/svg%3E") no-repeat center;
     background-size: contain;
   }
   
   .searchContainer {
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
   }
   
   .searchInput {
@@ -44,8 +47,16 @@
   
   .searchInput:focus {
     outline: none;
-    border-color: var(--blue);
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(217, 4, 41, 0.25);
+  }
+  .pageTitle {
+    flex-grow: 1;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-align: left;
+    margin-right: auto;
   }
   @media (max-width: 600px) {
     .topNav {

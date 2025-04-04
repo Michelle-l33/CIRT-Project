@@ -1,15 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 .galleryContainer {
-  --light: #f6f6f9;
-  --grey: #edf2f4;
-  --dark: #660708;
-  --red: #d90429;
-  --light-red: #e5383b;
-  --transparent-light: #ffffffb1;
-  --transparent-dark: #00000013;
-
-  .galleryContainer {
+    --light: #f6f6f9;
+    --grey: #edf2f4;
+    --dark: #660708;
+    --red: #d90429;
+    --light-red: #e5383b;
+    --transparent-light: #ffffffb1;
+    --transparent-dark: #00000013;
+  
     display: grid;
     grid-template-columns: 240px 1fr; 
     grid-template-rows: 70px 1fr; 
@@ -19,7 +18,6 @@
     min-height: 100vh;
     overflow: hidden;
   }
-}
 
 .mainContent {
     grid-area: main;
@@ -27,10 +25,10 @@
     overflow-y: auto;
 }
 
-  .pageTitle {
+.pageTitle {
     font-size: 1.6rem;
     font-weight: 600;
-    color: var(--dark);
+    color: var(--red);
     margin-bottom: 1.5rem;
 }
 
