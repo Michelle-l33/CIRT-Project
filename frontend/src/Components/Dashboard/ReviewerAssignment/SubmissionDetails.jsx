@@ -9,12 +9,12 @@ const SubDetail = ({submission, setIsOpen}) => {
     const queryParams = new URLSearchParams(location.search);
     const {user} = useUser();
     const [commentList, setCommentList] = useState([]);
-    const [loading,setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
     const [comment, setComment] = useState("");
     const commentorID = user._id;
     const role = user.isEditor ? "Editor" : "Reviewer";
     const originalSubmissionID = queryParams.get('submission');
-    const [ searchParams, setSearchParams ] = useSearchParams();
+    // const [ searchParams, setSearchParams ] = useSearchParams();
    
     
     const fetchComments = async () => {
@@ -90,25 +90,20 @@ const SubDetail = ({submission, setIsOpen}) => {
 
     };
 
-    const handleSubmissionChange = (submission) => {
-        // navigate(`?submissionId=${submission._id}`);
-        //setCurrSubmission(submission);
-        setSearchParams({ submissionId: submission._id });
-    }
-
     return(
         <div className = {styles.commentContainer}>                
             <div className = {styles.header}>
                 <h3>Submission Comments</h3>
+                <a href={`/gallery/submission/${originalSubmissionID}`}>View Article</a>
             </div>
 
             <ul className = {styles.contentList}>
-                {commentList.map((comment, idx) => 
+                {commentList.length >0 ? (commentList.map((comment, idx) => 
                     <li key = {idx} className = {styles.listItem}>
                         {/* the code for Comment component is down below */}
                         <Comment content = {comment.comment} sender = {comment.role}/>
                     </li>
-                )}
+                )) : <span className={styles.noComment}>No Comment</span>}
             </ul>
             
             <div className = {styles.commentForm}>
@@ -118,11 +113,11 @@ const SubDetail = ({submission, setIsOpen}) => {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Write your comment..."/>
-                    <button>
+                    <button className = {styles.submitBtn}>
                         Submit
                     </button>
                 </form>
-                <button  onClick = {() => setIsOpen(null)}>X</button>
+                <button className={styles.closeBtn} onClick = {() => setIsOpen(null)}>&#215;</button>
              </div>
         </div>
     )

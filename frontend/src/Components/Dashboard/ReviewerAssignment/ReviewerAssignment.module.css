@@ -1,6 +1,6 @@
 .currentAssignemt .listHeader, .currentAssignemt .submissionContainer .submission {
     display: grid;
-    grid-template-columns: 3fr 1fr 1fr 1fr;
+    grid-template-columns: 3fr 1fr;
     border-radius: 5px;
     color: var(--light);
     gap: 5px;
@@ -9,6 +9,7 @@
 
 .currentAssignemt {
     position: relative;
+    z-index: 1;
 }
 
 .currentAssignemt .listHeader li {
@@ -51,10 +52,104 @@
     position: absolute;
     top: 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    min-height: 65vh;
+    display: grid;
     height: 100%;
     background-color: var(--light);
+    z-index: 2;
+    padding: 58px 20px 20px 20px;
+}
+
+.currentAssignemt .commentContainer .header {
+    display: flex;
+    justify-content: space-around;
+}
+
+.currentAssignemt .commentContainer .header h3 {
+    color: var(--dark);
+}
+
+.currentAssignemt .commentContainer .header a {
+    display: block;
+    margin-left: auto;
+    color: var(--primary);
+}
+
+.currentAssignemt .commentContainer h4 {
+    color: var(--dark);
+}
+
+.currentAssignemt .commentForm textarea {
+    width: 100%;
+    height: 20vh;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid var(--transparent-dark);
+    border-radius: 5px;
+    resize: none;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+    color: var(--dark);
+    font-weight: 500;
+    box-sizing: border-box;
+    background: var(--light);
+}
+
+.currentAssignemt .commentForm textarea:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+}
+
+.currentAssignemt .commentForm .closeBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 50%;
+    background-color: var(--transparent-dark);
+    color: var(--dark);
+}
+
+.currentAssignemt .commentForm .submitBtn {
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    padding: 5px;
+}
+
+.currentAssignemt .commentForm .closeBtn:hover{
+    background-color: var(--light-primary);
+    color: var(--light);
+}
+
+.currentAssignemt .contentList {
+    display: grid;
+    grid-auto-rows: auto;
+    row-gap: 5px;
+    max-height: 30vh;
+    overflow-y: auto;
+    padding: 5px 0;
+}
+
+.currentAssignemt .contentList .listItem {
+    background-color: var(--light);
+    color: var(--dark);
+    border-radius: 10px;
+    box-shadow: var(--grey) 0px 2px 5px 0px, var(--dark) 0px 1px 1px 0px;
+    padding: 10px;
+    display: flex;
+    row-gap: 5px;
+    margin: 0;
+    position: relative;
+    width: 100%;
+    height: fit-content;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.currentAssignemt .contentList .noComment {
+    color: var(--dark);
 }

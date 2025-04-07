@@ -5,75 +5,9 @@ import SubDetail from "./SubmissionDetails";
 import { useUser } from "../../Login/UserContext";
 
 
-// const listOfSubmission = [
-//     {
-//         title: "1 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-23"),
-//         editorFName: "John",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-27"),
-//     },
-//     {
-//         title: "2 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-24"),
-//         editorFName: "Jack",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-27"),
-//     },
-//     {
-//         title: "3 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-23"),
-//         editorFName: "Jay",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-25"),
-//     },
-//     {
-//         title: "4 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-26"),
-//         editorFName: "Jacky",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-27"),
-//     },
-//     {
-//         title: "5 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-21"),
-//         editorFName: "Jishy",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-27"),
-//     },
-//     {
-//         title: "6 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-26"),
-//         editorFName: "Jojo",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-24"),
-//     },
-//     {
-//         title: "6 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-26"),
-//         editorFName: "Jojo",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-24"),
-//     },
-//     {
-//         title: "6 fsdfh sdjgfdfh dfhgs asdgasf sdfhg",
-//         dateAssigned: new Date("2025-10-26"),
-//         editorFName: "Jojo",
-//         editorLName: "Smith",
-//         dueDate: new Date("2025-10-24"),
-//     },
-
-// ]
-
-
 const Current = () => {
-    // function getDate(date) {
-    //     const month = date.getMonth() + 1;
-    //     const day = date.getDate();
-    //     return `${month}/${day}`;
-    // }
 
-    const [searchParams, setSearchParams] = useSearchParams();
+    // const [searchParams, setSearchParams] = useSearchParams();
     const navigate = useNavigate();
     const [currSubmission, setCurrSubmission] = useState(null);
     const [submissionList, setSubmissionList] = useState([]);
@@ -117,7 +51,6 @@ const Current = () => {
             <ul className={styles.listHeader}>
                 <li>Title</li>
                 <li>Editor</li>
-                <li>Closer Look</li>
             </ul>
 
             <ul className = {styles.submissionContainer}>
@@ -125,7 +58,6 @@ const Current = () => {
                     <li className = {styles.submission} key = {idx} onClick={() => handleSubmissionClick(sub)}>
                         <h4>{sub.title}</h4>
                         <p>{sub.firstName +" "+ sub.lastName}</p>
-                        <a href={`/gallery/submission/${sub._id}`} >View Article</a>
                     </li>
                 ))}
             </ul>
