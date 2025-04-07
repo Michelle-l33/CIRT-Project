@@ -58,6 +58,7 @@
     background-color: var(--light);
     z-index: 2;
     padding: 58px 20px 20px 20px;
+    border-radius: 5px;
 }
 
 .currentAssignemt .commentContainer .header {

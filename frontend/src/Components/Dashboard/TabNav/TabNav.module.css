@@ -272,6 +272,7 @@
 
 .submissionList .submission .submissionStatus + svg:hover {
     background-color: var(--dark-grey);
+    cursor: pointer;
 }
 
 .submissionList .submission .submissionOption {
@@ -308,6 +309,45 @@
     background-color: var(--dark-grey);
 }
 
+
+.submissionListItem {
+    position: relative;
+}
+
+.submissionList .submissionListItem .editorDropdown {
+    position: relative;
+    background: var(--light);
+    left: 50%;
+    transform: translateY(-32px) translateX(50%);
+    border: 1px solid var(--transparent-light);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px var(--transparent-dark);
+    z-index: 100;
+    max-width: 250px;
+}
+
+.dropdownHeader {
+    padding: 8px 12px;
+    font-weight: bold;
+    border-bottom: 1px solid var(--light);
+    background-color: var(--light);
+}
+
+.editorList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.editorItem {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.editorItem:hover {
+    background-color: var(--transparent-dark);
+}
 
 /* this part is for dealing with small width */
 .tabNavContainer.close {
@@ -350,43 +390,4 @@
 }
 .tabNavContainer.close .submissionList .submission .submissionStatus svg {
     display: none;
-}
-
-.submissionListItem {
-    position: relative;
-}
-
-.submissionList .submissionListItem .editorDropdown {
-    position: relative;
-    background: var(--light);
-    left: 50%;
-    transform: translateY(-32px) translateX(50%);
-    border: 1px solid var(--transparent-light);
-    border-radius: 4px;
-    box-shadow: 0 2px 8px var(--transparent-dark);
-    z-index: 100;
-    max-width: 250px;
-}
-
-.dropdownHeader {
-    padding: 8px 12px;
-    font-weight: bold;
-    border-bottom: 1px solid var(--light);
-    background-color: var(--light);
-}
-
-.editorList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.editorItem {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.editorItem:hover {
-    background-color: var(--transparent-dark);
 }

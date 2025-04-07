@@ -59,9 +59,9 @@ const Submission = ({submission, optionList}) => {
 
             <div className={styles.submissionDes}>
                 <h4>{submission.firstName} {submission.lastName}</h4>
-                <Link to={`/Gallery/submission/${submission._id}`} target="_blank">
-                    <p>{submission.title}</p>
-                </Link>
+                {/* <Link to={`/Gallery/submission/${submission._id}`} target="_blank"> */}
+                <p>{submission.title}</p>
+                {/* </Link> */}
             </div>
                     
             <div className={statusClass}> 
