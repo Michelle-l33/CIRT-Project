@@ -33,7 +33,8 @@ const TaskPage = () => {
         return(
         
             <ul className = {styles.taskList}>
-                {taskList.length >0 ? (taskList.map((task) =>
+                {taskList.length >0 ? (taskList.map((task) => 
+                {console.log("taskID: ", task._id)},
                     <li key = {task._id}>
                         <Reminder task = {task}/>
                     </li>)
@@ -52,7 +53,7 @@ const TaskPage = () => {
                 <div className = {styles.taskTitle}>
                     <MdAddTask />
                     <p>Author just Resubmitted</p>
-                    <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
+                    <p className = {styles.taskDescription}>{` Author: ${task.firstName} ${task.lastName} \n Title: "${task.title}"`}</p>
                 </div>
                 <div className = {styles.taskButtons}>
                     <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task._id}`)}>View in Detail</button>
