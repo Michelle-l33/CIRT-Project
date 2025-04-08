@@ -38,7 +38,7 @@ const TaskPage = () => {
                     <li key = {task._id}>
                         <Reminder task = {task}/>
                     </li>)
-                ) : (<span>Nooooooo Task! Yay!</span>)}
+                ) : (<span>Noooo Task! Yay!</span>)}
             </ul>
         
         );
