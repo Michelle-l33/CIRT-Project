@@ -38,8 +38,7 @@ const TaskPage = () => {
                 if (!response.ok) throw new Error('Failed to fetch tasks');
                 
                 const data = await response.json();
-                const tasks = data.filter(user => user.isEditor);
-                setTaskList(tasks);
+                setTaskList(data);
             } catch (error) {
                 console.error("Error fetching tasks:", error);
             }
@@ -47,14 +46,14 @@ const TaskPage = () => {
         fetchTasks();
     }, []);
 
-    console.log(taskList)
+    console.log("tasks",taskList)
 
     const TaskList = () => {
         return(
         
             <ul className = {styles.taskList}>
                 {taskList.length >0 ? (taskList.map((task) =>
-                    <li key = {task.id}>
+                    <li key = {task._id}>
                         <Reminder task = {task}/>
                     </li>)
                 ) : (<span>Nooooooo Task! Yay!</span>)}
@@ -63,6 +62,23 @@ const TaskPage = () => {
         );
     }
 
+    const Reminder = ( {task} ) => {
+
+        const navigate = useNavigate();
+    
+        return (
+            <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
+                <div className = {styles.taskTitle}>
+                    <MdAddTask />
+                    <p>Author just Resubmitted</p>
+                    <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
+                </div>
+                <div className = {styles.taskButtons}>
+                    <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
+                </div>
+            </div>
+        );
+    };
 
 // Fetch all editors
     useEffect(() => {
@@ -155,23 +171,23 @@ export default TaskPage;
 //     );
 // }
 
-const Reminder = ( {task} ) => {
+// const Reminder = ( {task} ) => {
 
-    const navigate = useNavigate();
+//     const navigate = useNavigate();
 
-    return (
-        <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
-            <div className = {styles.taskTitle}>
-                <MdAddTask />
-                <p>Author just Resubmitted</p>
-                <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
-            </div>
-            <div className = {styles.taskButtons}>
-                <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
-            </div>
-        </div>
-    );
-};
+//     return (
+//         <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
+//             <div className = {styles.taskTitle}>
+//                 <MdAddTask />
+//                 <p>Author just Resubmitted</p>
+//                 <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
+//             </div>
+//             <div className = {styles.taskButtons}>
+//                 <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
+//             </div>
+//         </div>
+//     );
+// };
 
 
 const Today = () => {
