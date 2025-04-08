@@ -201,25 +201,27 @@ const LoginPage = () => {
                     <h2>Register</h2>
                     <form onSubmit={handleRegisterSubmit}>
                         <label htmlFor="register-username">Enter your Username:</label>
-                        <input
-                            type="text"
-                            id="register-username"
-                            name="username"
-                            placeholder="Username"
-                            onChange={(e) => setName(e.target.value)}
-                            required
-                        />
-
+                        <div className={styles.emailContainer}>
+                            <input
+                                type="text"
+                                id="register-username"
+                                name="username"
+                                placeholder="Username"
+                                onChange={(e) => setName(e.target.value)}
+                                required
+                            />
+                        </div>
                         <label htmlFor="register-email">Enter your Email:</label>
-                        <input
-                            type="email"
-                            id="register-email"
-                            name="email"
-                            placeholder="you@example.com"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-
+                        <div className={styles.emailContainer}>
+                            <input
+                                type="email"
+                                id="register-email"
+                                name="email"
+                                placeholder="you@example.com"
+                                onChange={(e) => setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
                         <label htmlFor="account-type">Account Type:</label>
                         <select
                             name="account_type"
@@ -261,19 +263,19 @@ const LoginPage = () => {
                         <div className={styles.passwordRequirements}>
                             <p>Password Requirements:</p>
                             <ul>
-                                <li style={{ color: passwordRequirements.minLength ? "green" : "red" }}>
+                                <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
                                     At least 8 characters long
                                 </li>
-                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "red" }}>
+                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
                                     At least one uppercase letter
                                 </li>
-                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "red" }}>
+                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
                                     At least one lowercase letter
                                 </li>
-                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "red" }}>
+                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
                                     At least one number
                                 </li>
-                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "red" }}>
+                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
                                     At least one special character
                                 </li>
                             </ul>
