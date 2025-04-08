@@ -19,7 +19,7 @@ const NavBar = ({isLoggedIn}) => {
             </div>
 
             <div className = {styles.navRight}>
-                <Link to="/Login" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> Login </Link>
+                <Link to="/Dashboard" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> My Account </Link>
             </div>
         </nav>
     );

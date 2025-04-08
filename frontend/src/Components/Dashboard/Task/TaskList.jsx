@@ -5,30 +5,61 @@ import { useState, useEffect, useContext } from 'react';
 import { dashBoardContext } from '../Dashboard';
 import { PiFinnTheHumanThin } from "react-icons/pi";
 
-const taskList = [
-    {   
-        id: "67e577b2ae7a730c6b462c1a",
-        firstName: "sda",
-        lastName: 'fasfds',
-        title: "asdanjdasd sdbs",
-    },
-
-    {   
-        id: "67e577cfae7a730c6b462c22",
-        firstName: "sda",
-        lastName: 'fasfds',
-        title: "asdanjdasd sdbs",
-    },
-];
-
-
 
 const TaskPage = () => {
 
     const [editors, setEditors] = useState([]);
-
     const { user } = useContext(dashBoardContext);
+    const [taskList, setTaskList] = useState([]);
     
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await fetch(`https://cirt-project-server.vercel.app/submission/tasks/${user._id}`);
+                if (!response.ok) throw new Error('Failed to fetch tasks');
+                
+                const data = await response.json();
+                setTaskList(data);
+            } catch (error) {
+                console.error("Error fetching tasks:", error);
+            }
+        };
+        fetchTasks();
+    }, []);
+
+    console.log("tasks",taskList)
+
+    const TaskList = () => {
+        return(
+        
+            <ul className = {styles.taskList}>
+                {taskList.length >0 ? (taskList.map((task) =>
+                    <li key = {task._id}>
+                        <Reminder task = {task}/>
+                    </li>)
+                ) : (<span>Nooooooo Task! Yay!</span>)}
+            </ul>
+        
+        );
+    }
+
+    const Reminder = ( {task} ) => {
+
+        const navigate = useNavigate();
+    
+        return (
+            <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
+                <div className = {styles.taskTitle}>
+                    <MdAddTask />
+                    <p>Author just Resubmitted</p>
+                    <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
+                </div>
+                <div className = {styles.taskButtons}>
+                    <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task._id}`)}>View in Detail</button>
+                </div>
+            </div>
+        );
+    };
 
 // Fetch all editors
     useEffect(() => {
@@ -107,37 +138,37 @@ const TaskPage = () => {
 export default TaskPage;
 
 
-const TaskList = () => {
-    return(
+// const TaskList = () => {
+//     return(
     
-        <ul className = {styles.taskList}>
-            {taskList.length >0 ? (taskList.map((task) =>
-                <li key = {task.id}>
-                    <Reminder task = {task}/>
-                </li>)
-            ) : (<span>Nooooooo Task! Yay!</span>)}
-        </ul>
+//         <ul className = {styles.taskList}>
+//             {taskList.length >0 ? (taskList.map((task) =>
+//                 <li key = {task.id}>
+//                     <Reminder task = {task}/>
+//                 </li>)
+//             ) : (<span>Nooooooo Task! Yay!</span>)}
+//         </ul>
     
-    );
-}
+//     );
+// }
 
-const Reminder = ( {task} ) => {
+// const Reminder = ( {task} ) => {
 
-    const navigate = useNavigate();
+//     const navigate = useNavigate();
 
-    return (
-        <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
-            <div className = {styles.taskTitle}>
-                <MdAddTask />
-                <p>Author just Resubmitted</p>
-                <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
-            </div>
-            <div className = {styles.taskButtons}>
-                <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
-            </div>
-        </div>
-    );
-};
+//     return (
+//         <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
+//             <div className = {styles.taskTitle}>
+//                 <MdAddTask />
+//                 <p>Author just Resubmitted</p>
+//                 <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
+//             </div>
+//             <div className = {styles.taskButtons}>
+//                 <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
+//             </div>
+//         </div>
+//     );
+// };
 
 
 const Today = () => {
