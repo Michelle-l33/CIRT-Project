@@ -66,4 +66,7 @@
 - Populating Gallery and Papers and previewing pdfs for gallery
 - Show password feature
 - Modified reviewer assigning to add 2 reviewers to a submission
+- Populated Tasks -> Editor Dashboard
+- Deployed Website
+- Reviewer Dashboard Functionality
 
