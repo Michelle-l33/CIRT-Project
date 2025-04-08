@@ -5,25 +5,6 @@ import { useState, useEffect, useContext } from 'react';
 import { dashBoardContext } from '../Dashboard';
 import { PiFinnTheHumanThin } from "react-icons/pi";
 
-// const taskList = [
-//     {   
-//         id: "67e577b2ae7a730c6b462c1a",
-//         firstName: "sda",
-//         lastName: 'fasfds',
-//         title: "asdanjdasd sdbs",
-//     },
-
-//     {   
-//         id: "67e577cfae7a730c6b462c22",
-//         firstName: "sda",
-//         lastName: 'fasfds',
-//         title: "asdanjdasd sdbs",
-//     },
-// ];
-
-
-
-
 
 const TaskPage = () => {
 
@@ -74,7 +55,7 @@ const TaskPage = () => {
                     <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
                 </div>
                 <div className = {styles.taskButtons}>
-                    <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
+                    <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task._id}`)}>View in Detail</button>
                 </div>
             </div>
         );
