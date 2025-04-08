@@ -39,7 +39,7 @@ const RedirectDashboard = () => {
     if (isEditor) return <Navigate to="Editor" replace />;
     if (isAuthor) return <Navigate to="Author" replace />;
     if (isReviewer) return <Navigate to="Reviewer" replace />;
-    return <Navigate to="/" replace />;
+    return <Navigate to="/Login" replace />;
 };
 
 export default RedirectDashboard;
