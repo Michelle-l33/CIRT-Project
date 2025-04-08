@@ -11,7 +11,7 @@ const NavBar = ({isLoggedIn}) => {
     const location = useLocation();
 
     return( // html goes in the return()
-        <nav className={styles.navBar}>
+        <nav className={styles.navBar} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div className = {styles.navLeft}>
                 <Link to="/"> 
                     <img src = {logo} alt = "Logo"/>
