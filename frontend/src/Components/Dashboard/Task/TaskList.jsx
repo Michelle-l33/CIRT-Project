@@ -34,7 +34,7 @@ const TaskPage = () => {
     useEffect(() => {
         const fetchTasks = async () => {
             try {
-                const response = await fetch('https://cirt-project-server.vercel.app/submission/tasks');
+                const response = await fetch(`https://cirt-project-server.vercel.app/submission/tasks/${user._id}`);
                 if (!response.ok) throw new Error('Failed to fetch tasks');
                 
                 const data = await response.json();
@@ -47,7 +47,21 @@ const TaskPage = () => {
         fetchTasks();
     }, []);
 
-    console.log(tasks)
+    console.log(taskList)
+
+    const TaskList = () => {
+        return(
+        
+            <ul className = {styles.taskList}>
+                {taskList.length >0 ? (taskList.map((task) =>
+                    <li key = {task.id}>
+                        <Reminder task = {task}/>
+                    </li>)
+                ) : (<span>Nooooooo Task! Yay!</span>)}
+            </ul>
+        
+        );
+    }
 
 
 // Fetch all editors
@@ -127,19 +141,19 @@ const TaskPage = () => {
 export default TaskPage;
 
 
-const TaskList = () => {
-    return(
+// const TaskList = () => {
+//     return(
     
-        <ul className = {styles.taskList}>
-            {taskList.length >0 ? (taskList.map((task) =>
-                <li key = {task.id}>
-                    <Reminder task = {task}/>
-                </li>)
-            ) : (<span>Nooooooo Task! Yay!</span>)}
-        </ul>
+//         <ul className = {styles.taskList}>
+//             {taskList.length >0 ? (taskList.map((task) =>
+//                 <li key = {task.id}>
+//                     <Reminder task = {task}/>
+//                 </li>)
+//             ) : (<span>Nooooooo Task! Yay!</span>)}
+//         </ul>
     
-    );
-}
+//     );
+// }
 
 const Reminder = ( {task} ) => {
 

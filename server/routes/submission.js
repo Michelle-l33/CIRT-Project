@@ -359,11 +359,15 @@ router.put('/:id', async (req, res) => {
 });
 
 //get all resubmitted articles for task population for editors
-router.get("/tasks", async (req, res) => {
+router.get("/tasks/:editorID", async (req, res) => {
   try {
-    const articles = await Submission.find({isArticle:true, stage: "3", resubmitted: true}); // finds articles that are unpublished
-    console.log("Fetched tasks:", articles); // Debugging line
-    res.json(articles);
+    const {editorID} = req.params;
+    if(!mongoose.Types.ObjectId.isValid(editorID)){
+      return res.status(400).json({ message: "Invalid editor ID" });
+    }
+    const tasks = await Submission.find({editorID, isArticle:true, stage: "3", resubmitted:true}); // finds articles that are unpublished
+    console.log("Fetched tasks:", tasks); // Debugging line
+    res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
