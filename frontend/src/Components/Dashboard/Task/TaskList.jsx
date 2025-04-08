@@ -5,30 +5,50 @@ import { useState, useEffect, useContext } from 'react';
 import { dashBoardContext } from '../Dashboard';
 import { PiFinnTheHumanThin } from "react-icons/pi";
 
-const taskList = [
-    {   
-        id: "67e577b2ae7a730c6b462c1a",
-        firstName: "sda",
-        lastName: 'fasfds',
-        title: "asdanjdasd sdbs",
-    },
+// const taskList = [
+//     {   
+//         id: "67e577b2ae7a730c6b462c1a",
+//         firstName: "sda",
+//         lastName: 'fasfds',
+//         title: "asdanjdasd sdbs",
+//     },
 
-    {   
-        id: "67e577cfae7a730c6b462c22",
-        firstName: "sda",
-        lastName: 'fasfds',
-        title: "asdanjdasd sdbs",
-    },
-];
+//     {   
+//         id: "67e577cfae7a730c6b462c22",
+//         firstName: "sda",
+//         lastName: 'fasfds',
+//         title: "asdanjdasd sdbs",
+//     },
+// ];
+
+
 
 
 
 const TaskPage = () => {
 
     const [editors, setEditors] = useState([]);
-
     const { user } = useContext(dashBoardContext);
+    const [taskList, setTaskList] = useState([]);
     
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try {
+                const response = await fetch('https://cirt-project-server.vercel.app/submission/tasks');
+                if (!response.ok) throw new Error('Failed to fetch tasks');
+                
+                const data = await response.json();
+                const tasks = data.filter(user => user.isEditor);
+                setTaskList(tasks);
+            } catch (error) {
+                console.error("Error fetching tasks:", error);
+            }
+        };
+        fetchTasks();
+    }, []);
+
+    console.log(tasks)
+
 
 // Fetch all editors
     useEffect(() => {

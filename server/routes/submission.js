@@ -24,7 +24,7 @@ router.post("/upload", upload.single("document"), async (req, res) => {
       return res.status(400).json({ error: "User ID is required in cookies" });
     }
 
-    const { title, firstName, lastName,collaborators, isPoster, isArticle, abstract, tags } = req.body;
+    const { title, firstName, lastName, collaborators, isPoster, isArticle, abstract, tags } = req.body;
 
     const newSubmission = new Submission({
       authorID,
@@ -328,6 +328,7 @@ router.post("/:submissionId/assign-editor", async (req, res) => {
   }
 });
 
+//stage managing
 router.put('/:id', async (req, res) => {
   const { id } = req.params; // Get the submission ID from the URL parameter
   const { stage } = req.body; // Get the new stage value from the request body
@@ -356,6 +357,18 @@ router.put('/:id', async (req, res) => {
       res.status(500).json({ message: 'Error updating submission stage' });
   }
 });
+
+//get all resubmitted articles for task population for editors
+router.get("/tasks", async (req, res) => {
+  try {
+    const articles = await Submission.find({isArticle:true, stage: "3", resubmitted: true}); // finds articles that are unpublished
+    console.log("Fetched tasks:", articles); // Debugging line
+    res.json(articles);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 
