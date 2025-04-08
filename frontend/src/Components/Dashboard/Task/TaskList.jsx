@@ -34,8 +34,8 @@ const TaskPage = () => {
         
             <ul className = {styles.taskList}>
                 {taskList.length >0 ? (taskList.map((task) => 
-                {console.log("taskID: ", task._id)},
-                    <li key = {task._id}>
+                {console.log("taskID: ", task.id)},
+                    <li key = {task.id}>
                         <Reminder task = {task}/>
                     </li>)
                 ) : (<span>Noooo Task! Yay!</span>)}
