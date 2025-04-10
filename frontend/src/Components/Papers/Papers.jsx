@@ -12,6 +12,7 @@ const Papers = () => {
   const [papers, setPapers] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);  
+  const [loading, setLoading] = useState(true);
   
  
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
@@ -50,11 +51,17 @@ const Papers = () => {
         
       } catch (error){
         console.error("Error fetching papers:", error);
+      }finally{
+        setLoading(false);
       }
     }
     fetchPapers();
     console.log("Papers: ", papers);
   },[page, searchQuery]);
+
+  if (isLoading) {
+    return <div>Loading papers...</div>;
+  }
 
   // Filter papers based on search query
   // const filteredPapers = papers.filter(paper => {
