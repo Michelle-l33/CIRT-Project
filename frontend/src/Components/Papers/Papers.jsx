@@ -10,10 +10,13 @@ const Papers = () => {
   const query = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(query);
   const [papers, setPapers] = useState([]);
+<<<<<<< Updated upstream
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);  
   
  
+=======
+>>>>>>> Stashed changes
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
 
   const toggleSidebar = () => {
@@ -99,7 +102,6 @@ const Papers = () => {
             />
           </Link>
         </div>
-        {/* <nav className={`${styles.sidebarNav} ${isSidebarOpen ? styles.show : ''}`}> */}
         {isSidebarOpen && (
           <nav className={styles.sidebarNav}>
             <Link to="/Papers" className={styles.navItem}>All Papers</Link>
@@ -109,7 +111,6 @@ const Papers = () => {
             <Link to="/contact" className={styles.navItem}>Research Support</Link>
           </nav>
         )}
-
     </aside>
 
       {/* Main Content */}
@@ -117,12 +118,24 @@ const Papers = () => {
         <div className={styles.papersList}>
           {papers.map(paper => (
             <article key={paper.id} className={styles.paperItem}>
-              <div className={styles.paperInfo}>
-                <h3>{paper.title}</h3>
-                <p className={styles.author}>{paper.author}</p>
+              <div className={styles.paperLeft}>
+                <input type="checkbox" className={styles.paperCheckbox} />
+                <div className={styles.paperMeta}>
+                  <span className={styles.paperLabel}>JOURNAL ARTICLE</span>
+                  <h3 className={styles.paperTitle}>{paper.title}</h3>
+                  <p className={styles.paperAuthor}>
+                    {paper.firstName} {paper.lastName}
+                  </p>
+                  <p className={styles.paperJournalInfo}>
+                    <em>The CIRT Journal of Research, Vol. 1, No. 1 (2025), pp. {paper.pages || 'xx-xx'}</em>
+                  </p>
+                  <p className={styles.paperAbstract}>
+                    {paper.abstract ? `${paper.abstract.substring(0, 200)}...` : "No preview available."}
+                  </p>
+                </div>
               </div>
-              <div className={styles.actions}>
-                <Link to= {`/Gallery/submission/${paper._id}`} className={styles.pdfButton}>View Article</Link>
+              <div className={styles.paperActions}>
+                <Link to={`/Gallery/submission/${paper._id}`} className={styles.downloadBtn}>View Article</Link>
               </div>
             </article>
           ))}

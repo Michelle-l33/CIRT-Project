@@ -26,10 +26,10 @@ const Gallery = () => {
     const mediaQuery = window.matchMedia("(max-width: 768px)");
   
     const handleResize = () => {
-      setIsSidebarOpen(!mediaQuery.matches); // Sidebar closed when <= 768px, open otherwise
+      setIsSidebarOpen(!mediaQuery.matches); 
     };
   
-    handleResize(); // Set initial state based on screen size
+    handleResize(); 
     mediaQuery.addEventListener("change", handleResize);
   
     return () => mediaQuery.removeEventListener("change", handleResize);
@@ -59,6 +59,7 @@ const Gallery = () => {
   }, [page,searchQuery]);
 
   // Filter posters based on search query
+<<<<<<< Updated upstream
   // const filteredPosters = posters.filter((poster) => {
   //   //const searchLower = searchQuery.toLowerCase();
   //   return (
@@ -67,6 +68,16 @@ const Gallery = () => {
   //     poster.lastName.toLowerCase().includes(searchLower)
   //   );
   // });
+=======
+  const filteredPosters = Array.isArray(posters) ? posters.filter((poster) => {
+    const searchLower = searchQuery.toLowerCase();
+    return (
+      poster.title.toLowerCase().includes(searchLower) ||
+      poster.firstName.toLowerCase().includes(searchLower) ||
+      poster.lastName.toLowerCase().includes(searchLower)
+    );
+  }) : [];
+>>>>>>> Stashed changes
 
   return (
     <div className={styles.galleryContainer}>

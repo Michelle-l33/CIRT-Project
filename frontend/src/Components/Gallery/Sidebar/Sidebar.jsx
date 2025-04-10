@@ -17,25 +17,25 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </button>
 
       <div className={styles.sidebarHeader}>
-        <Link to="/">
-          <img
-            src="/assets/utampa_logo.png"
-            alt="UT Logo"
-            className={styles.logo}
-          />
+        <Link to="/home" className={styles.logo}>
+          <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+            <path d="..."></path>
+          </svg>
+          <div className={styles.logoName}>
+            <span className={styles.logoBlack}>CI</span><span className={styles.logoRed}>RT</span>
+          </div>
         </Link>
       </div>
 
       {isOpen && (
         <nav className={styles.sidebarNav}>
-          <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-          <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-          <Link to={user ? "#" : "/login"} className={styles.navItem}>
-            Submit Research
-            {/* TODO: If user is logged in, route to submission form */}
-          </Link>
-          <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
-          <Link to="/contact" className={styles.navItem}>Research Support</Link>
+          <Link to="/home" className={styles.navItem}>About Us</Link>
+          <Link to="/task" className={styles.navItem}>Task</Link>
+          <Link to="/tabnav" className={styles.navItem}>TabNav</Link>
+          <Link to="/document" className={styles.navItem}>Document</Link>
+          <Link to="/user" className={styles.navItem}>User</Link>
+          <Link to="/setting" className={styles.navItem}>Setting</Link>
+          <Link to="/logout" className={styles.navItem}>Logout</Link>
         </nav>
       )}
     </aside>
