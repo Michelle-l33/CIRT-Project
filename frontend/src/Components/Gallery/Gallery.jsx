@@ -41,7 +41,7 @@ const Gallery = () => {
     const fetchGallery = async () => {
       try {
         const searchLower = searchQuery.toLowerCase();
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchQuery}`, {
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchLower}`, {
           method: "GET",
         });
         if (!response.ok) {
@@ -56,7 +56,7 @@ const Gallery = () => {
     };
     fetchGallery();
     console.log("Posters: ", posters);
-  }, [page]);
+  }, [page,searchQuery]);
 
   // Filter posters based on search query
   // const filteredPosters = posters.filter((poster) => {

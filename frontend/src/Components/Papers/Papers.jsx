@@ -38,7 +38,7 @@ const Papers = () => {
     const fetchPapers = async ()=>{
       try{
         const searchLower = searchQuery.toLowerCase();
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/publications?page=${page}&q=${searchQuery}`,{
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/publications?page=${page}&q=${searchLower}`,{
           method:"GET"
         })
         if(!response.ok){
@@ -54,7 +54,7 @@ const Papers = () => {
     }
     fetchPapers();
     console.log("Papers: ", papers);
-  },[]);
+  },[page, searchQuery]);
 
   // Filter papers based on search query
   // const filteredPapers = papers.filter(paper => {
