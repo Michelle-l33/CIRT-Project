@@ -62,12 +62,23 @@ router.get('/', async (req, res) => {
 router.get("/gallery", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit || 2);
+    const limit = 2;
     const skip = (page-1)*limit;
+    const query = req.query.q || "";
 
+    const searchFilter = {
+      isPoster:true,
+      $or: [
+        { title: { $regex: query, $options: "i" } },
+        { firstName: { $regex: query, $options: "i" } },
+        { lastName: { $regex: query, $options: "i" } },
+        { tags: { $regex: query, $options: "i" } },
+      ]
+    }
+  
     const [posters,total] = await Promise.all([
-      Submission.find({isPoster:true}).skip(skip).limit(limit), //finds posters only
-      Submission.countDocuments({isPoster:true}),
+      Submission.find(searchFilter).skip(skip).limit(limit), //finds posters only
+      Submission.countDocuments(searchFilter),
     ])
     const totalPages = Math.ceil(total/limit);
     res.json({
@@ -84,8 +95,33 @@ router.get("/gallery", async (req, res) => {
 // Get All articles
 router.get("/publications", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true, stage: { $nin: ["1","0","2","3"]}}); // finds articles only
-      res.json(articles);
+      const page = parseInt(req.query.page) || 1;
+      const limit = 2;
+      const skip = (page-1)*limit;
+      const query = req.query.q || "";
+
+      const searchFilter = {
+        isArticle:true,
+        stage: { $nin: ["1","0","2","3"]},
+        $or: [
+          { title: { $regex: query, $options: "i" } },
+          { firstName: { $regex: query, $options: "i" } },
+          { lastName: { $regex: query, $options: "i" } },
+          { tags: { $regex: query, $options: "i" } },
+        ]
+      }
+
+      const [articles,total] = await Promise.all([
+        Submission.find(searchFilter).skip(skip).limit(limit), // finds articles only
+        Submission.countDocuments(searchFilter),
+      ])
+    
+      res.json({
+        currentPage: page,
+        totalPages,
+        totalPapers: total,
+        papers
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

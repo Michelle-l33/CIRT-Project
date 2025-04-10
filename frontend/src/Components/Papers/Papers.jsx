@@ -8,21 +8,12 @@ const Papers = () => {
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
-  
   const [searchQuery, setSearchQuery] = useState(query);
   const [papers, setPapers] = useState([]);
-  // Dummy data for papers
-  // const papers = [
-  //   { id: 1, title: "AI in Healthcare Research", author: "Dr. Smith", pdf: 'pdf1.pdf' },
-  //   { id: 2, title: "Marine Biology Study", author: "Dr. Johnson", pdf: 'pdf2.pdf' },
-  //   { id: 3, title: "Urban Development Analysis", author: "Dr. Williams", pdf: 'pdf3.pdf' },
-  //   { id: 4, title: "Quantum Computing Advancements", author: "Dr. Brown", pdf: 'pdf4.pdf' },
-  //   { id: 5, title: "Climate Change Impact", author: "Dr. Davis", pdf: 'pdf5.pdf' },
-  //   { id: 6, title: "Neuroscience Breakthroughs", author: "Dr. Wilson", pdf: 'pdf6.pdf' }
-  // ];
-  // const sidebarNav = document.querySelector('.sidebarNav');
-  // const sidebar = document.querySelector('.sidebar');
-  // const navItem = document.querySelectorAll('.navItem');
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);  
+  
+ 
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
 
   const toggleSidebar = () => {
@@ -46,14 +37,16 @@ const Papers = () => {
   useEffect(()=>{
     const fetchPapers = async ()=>{
       try{
-        const response = await fetch("https://cirt-project-server.vercel.app/submission/publications",{
+        const searchLower = searchQuery.toLowerCase();
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/publications?page=${page}&q=${searchQuery}`,{
           method:"GET"
         })
         if(!response.ok){
           throw new Error ("Failed to fetch papers");
         }
         const data = await response.json();
-        setPapers(data);
+        setPapers(data.papers);
+        setTotalPages(data.totalPages);
         
       } catch (error){
         console.error("Error fetching papers:", error);
@@ -64,14 +57,14 @@ const Papers = () => {
   },[]);
 
   // Filter papers based on search query
-  const filteredPapers = papers.filter(paper => {
-    const searchLower = searchQuery.toLowerCase();
-    return (
-      paper.title.toLowerCase().includes(searchLower) ||
-      paper.firstName.toLowerCase().includes(searchLower) ||
-      paper.lastName.toLowerCase().includes(searchLower)
-    );
-  });
+  // const filteredPapers = papers.filter(paper => {
+  //   const searchLower = searchQuery.toLowerCase();
+  //   return (
+  //     paper.title.toLowerCase().includes(searchLower) ||
+  //     paper.firstName.toLowerCase().includes(searchLower) ||
+  //     paper.lastName.toLowerCase().includes(searchLower)
+  //   );
+  // });
 
   return (
     <div className={styles.papersContainer}>
@@ -122,7 +115,7 @@ const Papers = () => {
       {/* Main Content */}
       <main className={styles.mainContent}>
         <div className={styles.papersList}>
-          {filteredPapers.map(paper => (
+          {papers.map(paper => (
             <article key={paper.id} className={styles.paperItem}>
               <div className={styles.paperInfo}>
                 <h3>{paper.title}</h3>
@@ -133,6 +126,23 @@ const Papers = () => {
               </div>
             </article>
           ))}
+        </div>
+        <div className={styles.pagination}>
+          <button
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1}
+          >
+            Previous
+          </button>
+
+          <span>Page {page} of {totalPages}</span>
+
+          <button
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages}
+          >
+            Next
+          </button>
         </div>
       </main>
     </div>

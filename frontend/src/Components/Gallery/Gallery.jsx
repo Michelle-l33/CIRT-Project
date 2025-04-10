@@ -40,7 +40,8 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&limit=2`, {
+        const searchLower = searchQuery.toLowerCase();
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchQuery}`, {
           method: "GET",
         });
         if (!response.ok) {
@@ -58,14 +59,14 @@ const Gallery = () => {
   }, [page]);
 
   // Filter posters based on search query
-  const filteredPosters = posters.filter((poster) => {
-    const searchLower = searchQuery.toLowerCase();
-    return (
-      poster.title.toLowerCase().includes(searchLower) ||
-      poster.firstName.toLowerCase().includes(searchLower) ||
-      poster.lastName.toLowerCase().includes(searchLower)
-    );
-  });
+  // const filteredPosters = posters.filter((poster) => {
+  //   //const searchLower = searchQuery.toLowerCase();
+  //   return (
+  //     poster.title.toLowerCase().includes(searchLower) ||
+  //     poster.firstName.toLowerCase().includes(searchLower) ||
+  //     poster.lastName.toLowerCase().includes(searchLower)
+  //   );
+  // });
 
   return (
     <div className={styles.galleryContainer}>
@@ -75,7 +76,7 @@ const Gallery = () => {
       <main className={styles.mainContent}>
  
         <div className={styles.posterGrid}>
-  {filteredPosters.map((poster) => (
+  {posters.map((poster) => (
     <PosterCard key={poster._id} poster={poster} />
   ))}
 </div>
