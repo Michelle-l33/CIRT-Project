@@ -59,7 +59,7 @@ const Papers = () => {
     console.log("Papers: ", papers);
   },[page, searchQuery]);
 
-  if (isLoading) {
+  if (loading) {
     return <div>Loading papers...</div>;
   }
 
