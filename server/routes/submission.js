@@ -61,8 +61,21 @@ router.get('/', async (req, res) => {
 // Get All posters
 router.get("/gallery", async (req, res) => {
   try {
-    const posters = await Submission.find({isPoster:true}); //finds posters only
-    res.json(posters);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit || 16);
+    const skip = (page-1)*limit;
+
+    const [posters,total] = await Promise.all([
+      Submission.find({isPoster:true}).skip(skip).limit(limit), //finds posters only
+      Submission.countDocuments({isPoster:true}),
+    ])
+    const totalPages = Math.ceil(total/limit);
+    res.json({
+      currentPage: page,
+      totalPages,
+      totalPosters: total,
+      posters
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -77,6 +90,7 @@ router.get("/publications", async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+  
 //get all unpublished articles
   router.get("/unpublished", async (req, res) => {
     try {

@@ -10,9 +10,10 @@ import { IoMenu } from "react-icons/io5";
 const Gallery = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get("q") || "";
-
     const [searchQuery, setSearchQuery] = useState(query);
     const [posters, setPosters] = useState([]);
+    const [page, setPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
   // Responsive Sidebar
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
@@ -39,21 +40,22 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch("https://cirt-project-server.vercel.app/submission/gallery", {
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&limit=16`, {
           method: "GET",
         });
         if (!response.ok) {
           throw new Error("Failed to fetch gallery");
         }
         const data = await response.json();
-        setPosters(data);
+        setPosters(data.posters);
+        setTotalPages(data.totalPages);
       } catch (error) {
         console.error("Error fetching gallery:", error);
       }
     };
     fetchGallery();
     console.log("Posters: ", posters);
-  }, []);
+  }, [page]);
 
   // Filter posters based on search query
   const filteredPosters = posters.filter((poster) => {
@@ -77,6 +79,23 @@ const Gallery = () => {
     <PosterCard key={poster._id} poster={poster} />
   ))}
 </div>
+<div className={styles.pagination}>
+    <button
+      onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+      disabled={page === 1}
+    >
+      Previous
+    </button>
+
+    <span>Page {page} of {totalPages}</span>
+
+    <button
+      onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+      disabled={page === totalPages}
+    >
+      Next
+    </button>
+  </div>
       </main>
     </div>
   );
