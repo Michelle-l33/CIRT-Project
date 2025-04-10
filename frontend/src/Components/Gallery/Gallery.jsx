@@ -40,7 +40,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchGallery = async () => {
       try {
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&limit=16`, {
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&limit=2`, {
           method: "GET",
         });
         if (!response.ok) {
