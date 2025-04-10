@@ -10,14 +10,11 @@ const Papers = () => {
   const query = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(query);
   const [papers, setPapers] = useState([]);
-<<<<<<< Updated upstream
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);  
   const [loading, setLoading] = useState(true);
   
  
-=======
->>>>>>> Stashed changes
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
 
   const toggleSidebar = () => {
