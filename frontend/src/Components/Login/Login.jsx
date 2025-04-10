@@ -25,6 +25,7 @@ const LoginPage = () => {
     const [showPasswordRegister, setShowPasswordRegister] = useState(false);
     const [showPasswordLogin, setShowPasswordLogin] = useState(false);
     const navigate = useNavigate();
+    const [formVisibility, setFormVisibility] = useState(true);
 
     // State for password requirements
     const [passwordRequirements, setPasswordRequirements] = useState({
@@ -144,6 +145,9 @@ const LoginPage = () => {
     setShowPasswordLogin(!showPasswordLogin);
     };
 
+    const toggleFormVisibility = () => {
+        setFormVisibility(prev => !prev);
+    };
 
 
     return (
@@ -160,7 +164,8 @@ const LoginPage = () => {
 
             <div className={styles.accounts}>
                 {/* Login Form */}
-                <div className={styles.login}>
+                {formVisibility && (
+                    <div className={styles.login}>
                     <h2>Login</h2>
                     <form onSubmit={handleLoginSubmit}>
                         <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
@@ -192,12 +197,22 @@ const LoginPage = () => {
 
                         <button id="loginButton" type="submit">Log In</button>
                     </form>
+                    {/* Button to toggle to Register form */}
+                    <p>
+                            Don't have an account? 
+                            <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
+                                Create Account
+                            </button>
+                        </p>
                 </div>
+                )}
+                
 
-                <div className={styles.divider}></div>
+                {/* <div className={styles.divider}></div> */}
 
                 {/* Register Form */}
-                <div className={styles.register}>
+                {!formVisibility && (
+                    <div className={styles.register}>
                     <h2>Register</h2>
                     <form onSubmit={handleRegisterSubmit}>
                         <label htmlFor="register-username">Enter your Username:</label>
@@ -283,7 +298,16 @@ const LoginPage = () => {
 
                         <button id="registerButton" type="submit">Create Account</button>
                     </form>
+                    {/* Button to toggle to Login form */}
+                    <p>
+                            Already have an account? 
+                            <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
+                                Login
+                            </button>
+                        </p>
                 </div>
+                )}
+                
             </div>
         </div>
     );
