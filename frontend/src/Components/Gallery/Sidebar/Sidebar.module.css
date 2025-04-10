@@ -99,3 +99,11 @@
       display: block;
     }
   }
+
+.logoBlack {
+  color: black;
+}
+
+.logoRed {
+  color: var(--primary);
+}

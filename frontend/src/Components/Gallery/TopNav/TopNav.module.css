@@ -69,3 +69,69 @@
       width: 100%;
     }
   }
+  
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo {
+  width: 35px;
+  height: 35px;
+}
+
+.brand {
+  font-weight: 700;
+  font-size: 20px;
+  color: #c32127;
+}
+
+.centerSection {
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+}
+
+.rightSection {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.notificationWrapper {
+  position: relative;
+}
+
+.bell {
+  position: relative;
+  font-size: 18px;
+}
+
+.badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #6b46c1;
+  color: white;
+  font-size: 10px;
+  padding: 2px 6px;
+  border-radius: 12px;
+}
+
+.redDot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #c32127;
+  border-radius: 50%;
+  top: 0;
+  left: -12px;
+}
+
+.profileIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
