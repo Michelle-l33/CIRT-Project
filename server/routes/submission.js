@@ -116,6 +116,7 @@ router.get("/publications", async (req, res) => {
         Submission.countDocuments(searchFilter),
       ])
     
+      const totalPages = Math.ceil(total/limit);
       res.json({
         currentPage: page,
         totalPages,
