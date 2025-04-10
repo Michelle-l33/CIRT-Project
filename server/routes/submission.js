@@ -120,7 +120,7 @@ router.get("/publications", async (req, res) => {
         currentPage: page,
         totalPages,
         totalPapers: total,
-        papers
+        articles
       });
     } catch (error) {
       res.status(500).json({ error: error.message });
