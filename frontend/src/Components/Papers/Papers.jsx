@@ -45,7 +45,7 @@ const Papers = () => {
           throw new Error ("Failed to fetch papers");
         }
         const data = await response.json();
-        setPapers(data.papers);
+        setPapers(data.articles);
         setTotalPages(data.totalPages);
         
       } catch (error){
