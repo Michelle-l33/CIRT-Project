@@ -1,5 +1,6 @@
 import styles from './SearchBar.module.css';
-import { BsSearchHeart } from "react-icons/bs";
+import { BsSearchHeart, BsFillHouseDoorFill  } from "react-icons/bs";
+
 import { useNavigate } from "react-router-dom";
 import { useState } from 'react';
 
@@ -25,6 +26,15 @@ const SearchBar = () => {
     <form className={styles.searchContainer} onSubmit={handleSubmit}>
         <div className={styles.headerOptions}>
             <div className={styles.tabOptions}>
+                <div>
+                    <button 
+                        type="button"
+                        className={`${styles.radioLabel} ${tab === "home" ? styles.active : ""}`}
+                        onClick={() => navigate("/")}
+                    >
+                        <BsFillHouseDoorFill size={24}/>
+                    </button>
+                </div>
                 <div>
                     <input 
                         type="radio" 
