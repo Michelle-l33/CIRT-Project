@@ -18,9 +18,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       <div className={styles.sidebarHeader}>
         <Link to="/home" className={styles.logo}>
-          <svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-            <path d="..."></path>
-          </svg>
+          <img src="/assets/utampa_logo.png" className={styles.logo} alt="Logo" />
           <div className={styles.logoName}>
             <span className={styles.logoBlack}>CI</span><span className={styles.logoRed}>RT</span>
           </div>
@@ -29,13 +27,10 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       {isOpen && (
         <nav className={styles.sidebarNav}>
+          <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
+          <Link to="/Papers" className={styles.navItem}>All Papers</Link>
+          <Link to="/submit" className={styles.navItem}>Submit Research</Link>
           <Link to="/home" className={styles.navItem}>About Us</Link>
-          <Link to="/task" className={styles.navItem}>Task</Link>
-          <Link to="/tabnav" className={styles.navItem}>TabNav</Link>
-          <Link to="/document" className={styles.navItem}>Document</Link>
-          <Link to="/user" className={styles.navItem}>User</Link>
-          <Link to="/setting" className={styles.navItem}>Setting</Link>
-          <Link to="/logout" className={styles.navItem}>Logout</Link>
         </nav>
       )}
     </aside>

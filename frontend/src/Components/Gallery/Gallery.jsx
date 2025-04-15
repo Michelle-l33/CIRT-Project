@@ -41,7 +41,7 @@ const Gallery = () => {
     const fetchGallery = async () => {
       try {
         const searchLower = searchQuery.toLowerCase();
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchLower}`, {
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/posters?page=${page}&q=${searchLower}`, {
           method: "GET",
         });
         if (!response.ok) {
@@ -50,23 +50,13 @@ const Gallery = () => {
         const data = await response.json();
         setPosters(data.posters);
         setTotalPages(data.totalPages);
+        console.log("Posters: ", data.posters);
       } catch (error) {
         console.error("Error fetching gallery:", error);
       }
     };
     fetchGallery();
-    console.log("Posters: ", posters);
   }, [page,searchQuery]);
-
-  // Filter posters based on search query
-  // const filteredPosters = posters.filter((poster) => {
-  //   //const searchLower = searchQuery.toLowerCase();
-  //   return (
-  //     poster.title.toLowerCase().includes(searchLower) ||
-  //     poster.firstName.toLowerCase().includes(searchLower) ||
-  //     poster.lastName.toLowerCase().includes(searchLower)
-  //   );
-  // });
 
   return (
     <div className={styles.galleryContainer}>
@@ -80,7 +70,8 @@ const Gallery = () => {
     <PosterCard key={poster._id} poster={poster} />
   ))}
 </div>
-<div className={styles.pagination}>
+{totalPages > 1 && (
+  <div className={styles.pagination}>
     <button
       onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
       disabled={page === 1}
@@ -97,6 +88,7 @@ const Gallery = () => {
       Next
     </button>
   </div>
+)}
       </main>
     </div>
   );
