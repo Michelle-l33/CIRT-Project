@@ -129,7 +129,7 @@ const SubmissionAuthorPage = () => {
                     </div>
                 )}
 
-                <div className={styles.uploadInput}><input type="file" onChange={handleFileChange} /></div>
+                <div className={styles.uploadInput}><input type="file" accept="application/pdf" onChange={handleFileChange} /></div>
                 {document && <p>Uploaded file: <span>{document.name}</span></p>}
                 <button type="submit" className={styles.submitButton}>Submit</button>
             </form>
