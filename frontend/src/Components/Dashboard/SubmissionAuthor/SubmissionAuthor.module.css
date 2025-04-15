@@ -133,3 +133,28 @@
       resize: none;
   }
 }
+
+.tagGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.tagButton {
+  background: #eee;
+  border: none;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.tagButton:hover {
+  background: #ddd;
+}
+
+.selected {
+  background: var(--primary);
+  color: white;
+}

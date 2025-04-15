@@ -20,6 +20,12 @@ const SubmissionAuthorPage = () => {
     const [loading, setLoading] = useState(false); // Loading state
     const [abstract, setAbstract] = useState("");
     const {user} = useUser();
+    const predefinedTags = [
+        "Corrections", "Courts/Sentencing", "White Collar Crime", "Mental Health",
+        "Victimology", "Criminal Theory", "Statistics/Methodology",
+        "Policing", "Crime Prevention", "Policy"
+      ];
+    const [selectedTags, setSelectedTags] = useState([]);
 
 
     const handleFileChange = (e) => {
@@ -43,6 +49,7 @@ const SubmissionAuthorPage = () => {
         if (!authorID){
             return window.alert("You must be logged in to submit an article.");
         } 
+        const allTags = [...new Set([...tags, ...selectedTags])];
         const formData = new FormData();
         formData.append("authorID", authorID); // Make sure authorID is included
         formData.append("title", title);
@@ -53,7 +60,7 @@ const SubmissionAuthorPage = () => {
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
         formData.append("abstract",abstract);
-        formData.append("tags", tags.join(","));
+        formData.append("tags", allTags.join(","));
         formData.append("stage", stage);
         formData.append("placeholderInput", placeholderInput); // Conditional Input
 
@@ -103,6 +110,24 @@ const SubmissionAuthorPage = () => {
                 <div className={styles.boxInput}>
                     Tags
                     <ChipInput chip={tags} setChip={setTags} />
+                    <div className={styles.tagGrid}>
+                        {predefinedTags.map((tag) => (
+                        <button
+                            key={tag}
+                            type="button"
+                            className={`${styles.tagButton} ${selectedTags.includes(tag) ? styles.selected : ""}`}
+                            onClick={() => {
+                            setSelectedTags((prev) =>
+                                prev.includes(tag)
+                                ? prev.filter((t) => t !== tag)
+                                : [...prev, tag]
+                            );
+                            }}
+                        >
+                            {tag}
+                        </button>
+                        ))}
+                    </div>
                 </div>
                 <div className={styles.radioInput}>
                     <input type="radio" id="articleRadio" name="submissionType" value="article"

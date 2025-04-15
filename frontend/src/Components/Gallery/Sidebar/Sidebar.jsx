@@ -17,7 +17,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
       </button>
 
       <div className={styles.sidebarHeader}>
-        <Link to="/home" className={styles.logo}>
+        <Link to="/" className={styles.logo}>
           <img src="/assets/utampa_logo.png" className={styles.logo} alt="Logo" />
           <div className={styles.logoName}>
             <span className={styles.logoBlack}>CI</span><span className={styles.logoRed}>RT</span>
