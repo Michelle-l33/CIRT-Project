@@ -46,8 +46,9 @@ const ChipInput = ({ chip = [], setChip = () => {} }) => { // Default chip to an
                     value={inputValue}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
-                    placeholder="Enter to list"
+                    placeholder="Hit Enter to Add"
                     className={styles.input}
+                    maxLength={60}
                 />
             </div>
             {(chip || []).map((name, index) => ( // Added fallback to prevent errors
