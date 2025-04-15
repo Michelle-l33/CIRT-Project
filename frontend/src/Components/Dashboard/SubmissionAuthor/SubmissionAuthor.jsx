@@ -95,13 +95,13 @@ const SubmissionAuthorPage = () => {
             <form className={styles.form} onSubmit = {handleSubmit}>
                 <h1>Submission Area</h1>
                 <div className={styles.boxInput}>
-                    <input type="text" onChange={(e)=>setTitle(e.target.value)} maxLength={150} required placeholder="Title"/>
+                    <input type="text" onChange={(e)=>setTitle(e.target.value)} maxLength={100} required placeholder="Title"/>
                 </div>
                 <div className={styles.boxInput}>
-                    <input type="text" onChange={(e)=>setFirstName(e.target.value)} maxLength={150} required placeholder="First/alias"/>
+                    <input type="text" onChange={(e)=>setFirstName(e.target.value)} maxLength={100} required placeholder="First/alias"/>
                 </div>
                 <div className={styles.boxInput}>
-                    <input type="text" onChange={(e)=>setLastName(e.target.value)} maxLength={150} required placeholder="Last/alias"/>
+                    <input type="text" onChange={(e)=>setLastName(e.target.value)} maxLength={100} required placeholder="Last/alias"/>
                 </div>
                 <div className={styles.boxInput}>
                     Collaborators
