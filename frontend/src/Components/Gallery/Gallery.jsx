@@ -41,7 +41,7 @@ const Gallery = () => {
     const fetchGallery = async () => {
       try {
         const searchLower = searchQuery.toLowerCase();
-        const response = await fetch(`https://cirt-project-server.vercel.app/submission/posters?page=${page}&q=${searchLower}`, {
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchLower}`, {
           method: "GET",
         });
         if (!response.ok) {

@@ -6,10 +6,14 @@ const TopNav = () => {
   const [localQuery, setLocalQuery] = useState('');
   const navigate = useNavigate();
 
-  const handleKeyDown = (e) => {
-    if (e.key === 'Enter') {
-      navigate(`/search?query=${encodeURIComponent(localQuery)}`);
-    }
+  // const handleKeyDown = (e) => {
+  //   if (e.key === 'Enter') {
+  //     navigate(`/search?query=${encodeURIComponent(localQuery)}`);
+  //   }
+  // };
+
+  const handleChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -29,8 +33,8 @@ const TopNav = () => {
           type="text"
           placeholder="Search research posters..."
           className={styles.searchInput}
-          value={localQuery}
-          onChange={(e) => setLocalQuery(e.target.value)}
+          value={searchQuery}
+          onChange={handleChange}
           autoFocus
         />
       </form>
