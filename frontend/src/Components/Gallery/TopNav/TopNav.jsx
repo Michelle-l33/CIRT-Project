@@ -3,15 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import styles from './TopNav.module.css';
 
 const TopNav = ({searchQuery, setSearchQuery}) => {
-  const [localQuery, setLocalQuery] = useState('');
-  const navigate = useNavigate();
-
-  // const handleKeyDown = (e) => {
-  //   if (e.key === 'Enter') {
-  //     navigate(`/search?query=${encodeURIComponent(localQuery)}`);
-  //   }
-  // };
-
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };

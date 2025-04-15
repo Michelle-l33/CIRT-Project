@@ -29,7 +29,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         <nav className={styles.sidebarNav}>
           <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
           <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-          <Link to="/submit" className={styles.navItem}>Submit Research</Link>
+          <Link to="/Dashboard" className={styles.navItem}>Submit Research</Link>
           <Link to="/home" className={styles.navItem}>About Us</Link>
         </nav>
       )}
