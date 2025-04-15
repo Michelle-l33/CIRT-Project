@@ -28,6 +28,8 @@
 .taskContent .right .editorList {
     display: grid;
     row-gap: 10px;
+    max-height: 60vh;
+    overflow-y: scroll;
 }
 
 .taskContent .right .editorList .editorItem {
@@ -53,7 +55,7 @@
 
 .taskContent .left {
     display: grid;
-    min-width: 45vw;
+    min-width: 60vw;
     /* max-width: 60vw; */
     grid-template-rows: 1fr 2fr;
     flex: 2;
@@ -68,7 +70,7 @@
 .taskContent .left .dateIntro .date .calendar {
     display: flex;
     min-width: 180px;
-    width: calc(45vw*0.45);
+    width: calc(60vw*0.45);
     justify-content: space-between;
     align-items: center;
     flex-direction: column;
@@ -119,7 +121,7 @@
 
 .taskContent .left .dateIntro .greeting {
     border-radius: 10px;
-    width: calc(100% - 45vw * 0.45 - 20px);
+    width: calc(100% - 60vw * 0.45 - 20px);
     /* min-width: 150px; */
     background-color: var(--light);
     -webkit-box-shadow: 0px -1px 33px -3px var(--transparent-dark);

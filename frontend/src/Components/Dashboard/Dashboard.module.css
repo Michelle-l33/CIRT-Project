@@ -5,9 +5,6 @@
     --dark: #c0c0c0;
     --transparent-light: #0b0b0b6d;
     --transparent-dark: #FFFFFF80;
-    --pink: #2a3a2f;
-    --peach: #3b2f3a;
-    --lime: #3c2f33;
 }
 
 .dashBoardContainer{
@@ -27,9 +24,6 @@
     --light-orange: #fddfc3e9;
     --transparent-light: #ffffff82;
     --transparent-dark: #00000013;
-    --pink: #f9d6e7;
-    --peach: #FFE4CF;
-    --lime: #FFFDD7;
     background: var(--grey);
     overflow-x: hidden;
     min-height: 100vh;

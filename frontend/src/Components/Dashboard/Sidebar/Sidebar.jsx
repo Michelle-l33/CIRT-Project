@@ -26,19 +26,19 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
         {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "/Dashboard/Editor/TabNav"},
         {Name: "Document", iconComponent: GrDocument, url: "/Dashboard/Editor/DocumentTab"},
         {Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User"},
-        {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
+        // {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
     ]
 
     const listOfAuthorIcons = [
         { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Dashboard/Author" },
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
-        { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
+        // { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     const listOfReviewerIcons = [
         { Name: "Current", iconComponent: IoNewspaperOutline, url: "/Dashboard/Reviewer/Current" },
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
-        { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
+        // { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     let listOfIcon;
@@ -74,7 +74,7 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
 
     return (
         <div className = {sidebarClass}>
-            <Link to = "#" className = {styles.logo}>
+            <Link to = "/" className = {styles.logo}>
                 <GiDiceTwentyFacesTwenty/>
                 <div className = {styles.logoName}><span>CI</span>RT</div>
             </Link>

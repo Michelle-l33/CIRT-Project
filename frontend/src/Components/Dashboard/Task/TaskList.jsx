@@ -138,39 +138,6 @@ const TaskPage = () => {
 export default TaskPage;
 
 
-// const TaskList = () => {
-//     return(
-    
-//         <ul className = {styles.taskList}>
-//             {taskList.length >0 ? (taskList.map((task) =>
-//                 <li key = {task.id}>
-//                     <Reminder task = {task}/>
-//                 </li>)
-//             ) : (<span>Nooooooo Task! Yay!</span>)}
-//         </ul>
-    
-//     );
-// }
-
-// const Reminder = ( {task} ) => {
-
-//     const navigate = useNavigate();
-
-//     return (
-//         <div className = {`${styles.taskIncomplete} ${task.isComplete ? styles.complete:''}`}>
-//             <div className = {styles.taskTitle}>
-//                 <MdAddTask />
-//                 <p>Author just Resubmitted</p>
-//                 <p className = {styles.taskDescription}>{`This author ${task.firstName} ${task.lastName} just resubmitted. The title is ${task.title}`}</p>
-//             </div>
-//             <div className = {styles.taskButtons}>
-//                 <button onClick={() => navigate(`/Dashboard/Editor/DocumentTab?submissionId=${task.id}`)}>View in Detail</button>
-//             </div>
-//         </div>
-//     );
-// };
-
-
 const Today = () => {
     
     const today = new Date();

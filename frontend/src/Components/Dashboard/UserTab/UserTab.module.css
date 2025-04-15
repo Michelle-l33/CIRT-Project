@@ -31,6 +31,12 @@
     color: var(--dark);
 }
 
+.userTabContainer .userRight .header button:hover {
+    color: var(--danger);
+    background-color: var(--light-danger);
+    border-color: var(--danger);
+}
+
 .userTabContainer .userRight .emailContainer {
     margin: 20px 0;
 }

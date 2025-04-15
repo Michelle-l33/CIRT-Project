@@ -48,7 +48,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "1" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission Ready for Review</h3>
+                        <h3>Ready For Review</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
@@ -60,7 +60,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "2" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission sent to reviewers</h3>
+                        <h3>Sent To Reviewers</h3>
                     </div>
 
                     <div className = {styles.statusAction}>
@@ -72,22 +72,20 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "3" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission Comments Sent To Author  </h3>
+                        <h3>Sent To Author</h3>
+                        <span className={styles.authorResubmit}>{loading ? "Loading..." : currSubmission.resubmitted ? "Resubmitted!": "Waiting"}</span>
                     </div>
 
                     <div className = {styles.statusAction}>
                         <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>             
                         <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>                 
                     </div>
-                    <div>
-                        <h3>{loading ? "Loading..." : currSubmission.resubmitted ? "Author Has Resubmitted!": "Waiting For Author"}</h3>
-                    </div>
               </>}
 
                 {currentStep === "4" && <>
 
                     <div className = {styles.header}>
-                        <h3>Submission Approved</h3>
+                        <h3>Approved</h3>
                     </div>
 
                     <div className = {styles.statusAction}>

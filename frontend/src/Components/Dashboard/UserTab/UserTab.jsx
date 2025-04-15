@@ -37,8 +37,6 @@ const UserTab = () => {
                             <span>{user.email}</span>}
                     </div>
 
-                    <button>Should there be a Delete Button here?</button>
-
                     {/* <div className = {styles.pwContainer}>
                         <h3>Your password</h3>
                         <span>{user.password}</span>

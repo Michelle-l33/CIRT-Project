@@ -160,7 +160,7 @@ const MainContentAuthor = () => {
                         <h1>Dashboard Author</h1>
                         <ul className={styles.smallStuff}>
                             <li>
-                                <Link to="#">New articles </Link>
+                                <Link to="/Papers"> View articles </Link>
                             </li>
                             /
                             <li>
