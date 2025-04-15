@@ -1,12 +1,13 @@
 .topNav {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 1rem;
     justify-content: space-between;
     padding: 1rem 2rem;
     background-color: #fff;
     border-bottom: 1px solid #eee;
+    overflow:visible;
   }
   .homeLink {
     text-decoration: none;
@@ -17,6 +18,7 @@
     color: var(--dark);
     margin-right: auto;
     font-size: 1.25rem;
+    flex-shrink: 0;
   }
   
   .homeIcon {
@@ -27,8 +29,9 @@
   }
   
   .searchContainer {
+    flex: 1 1 auto;
     width: 100%;
-    max-width: 400px;
+    max-width: 350px;
     flex-grow: 1;
     display: flex;
     justify-content: flex-end;
@@ -43,6 +46,7 @@
     background: var(--light);
     color: var(--dark);
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    min-width: 0;
   }
   
   .searchInput:focus {
@@ -51,12 +55,15 @@
     box-shadow: 0 0 0 2px rgba(217, 4, 41, 0.25);
   }
   .pageTitle {
-    flex-grow: 1;
+    flex: 1 1 auto;
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--primary);
     text-align: left;
     margin-right: auto;
+    min-width: 200px;
+    white-space: normal;
+    overflow:visible;
   }
   @media (max-width: 600px) {
     .topNav {
@@ -67,6 +74,11 @@
   
     .searchContainer {
       width: 100%;
+      flex-shrink: 0;
+      width: 100%;
+      max-width: 300px;
+      display: flex;
+      justify-content: flex-end;
     }
   }
   

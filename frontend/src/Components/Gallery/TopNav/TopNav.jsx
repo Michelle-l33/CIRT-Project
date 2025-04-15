@@ -24,10 +24,6 @@ const TopNav = ({searchQuery, setSearchQuery}) => {
       <span className={styles.pageTitle}>Criminology Institute for Research and Training Repository</span>
       <form
         className={styles.searchContainer}
-        onSubmit={(e) => {
-          e.preventDefault();
-          navigate(`/search?query=${encodeURIComponent(localQuery)}`);
-        }}
       >
         <input
           type="text"
