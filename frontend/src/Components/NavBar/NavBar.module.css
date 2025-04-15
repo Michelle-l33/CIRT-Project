@@ -5,11 +5,11 @@
     z-index: 1000;
     background-color: black;
     align-items: center;
-    -webkit-box-shadow: 4px 10px 5px 0 var(--primary);
-    -moz-box-shadow: 4px 10px 5px 0px var(--primary);
-    box-shadow: 1px 6px 5px 5px var(--primary); 
+    /* -webkit-box-shadow: 4px 10px 5px 0 var(--primary);
+    -moz-box-shadow: 4px 10px 5px 0px var(--primary);*/
+    box-shadow: 1px 1px 1px 1px rgb(168, 168, 168);  
     width: auto;
-    height: 110px;
+    height: 70px;
     padding: 0 20px;
 }
 
@@ -17,12 +17,22 @@
   display: flex;
   align-items: center;
 }
+.navLeft span{
+  color:#f6f6f9;
+  align-content: flex-start;
+  text-transform: uppercase;
+  flex:1 1 auto;
+  min-width: 200px;
+    white-space: normal;
+    overflow:visible;
+}
 
 .navLeft img{
-    height: 90px;
+    height: 50px;
+    width:67px;
     aspect-ratio: 16/9;
     border-radius: 5px;
-    margin-left: 1.5em;
+    margin-left: 0.5em;
     /* height: 90px; 
     aspect-ratio: 32/9;
     border-radius: 5px; */
@@ -35,10 +45,9 @@
     flex-grow: 1;
 }
 
-
 /* styling copy from https://ui-buttons.web.app/double-diagonal */
 
-.navRight a,
+/* .navRight a,
 .navRight a *,
 .navRight a :after,
 .navRight a :before,
@@ -121,8 +130,125 @@
 
 .navRight a:hover:after {
   --progress: -100%;
-}
+} */
 
 .hidden {
   visibility: hidden;
+}
+
+/* From Uiverse.io by TISEPSE */ 
+.navButtons{
+  display:flex;
+  justify-content: flex-end;
+  align-items: center;
+
+}
+.navButtons a {
+  position: relative;
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid var(--primary);
+  text-transform: uppercase;
+  color: #fefefe;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.navButtons a::before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: calc(100% - 12px);
+  background-color: #000000;
+  transition: 0.1s ease-in-out;
+  transform: scaleY(1);
+}
+
+.navButtons a:hover::before {
+  transform: scaleY(0);
+}
+
+.navButtons a::after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: -2px;
+  height: calc(100% + 4px);
+  width: calc(100% - 12px);
+  background-color: #000000;
+  transition: 0.1s ease-in-out;
+  transform: scaleX(1);
+  transition-delay: 0.1s;
+}
+
+.navButtons a:hover::after {
+  transform: scaleX(0);
+}
+
+.navButtons a span {
+  position: relative;
+  z-index: 3;
+}
+
+.navButtons button {
+  background-color: none;
+  text-decoration: none;
+  background-color: #000000;
+  border: none;
+}
+
+
+/* hamburger icon */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: white;
+  cursor: pointer;
+}
+
+/* DROPDOWN MENU (hidden by default) */
+.dropdownMenu {
+  display: none;
+  position: absolute;
+  top: 70px; /* adjust if needed */
+  right: 20px;
+  background-color: black;
+  border: 1px solid var(--primary);
+  padding: 0.5rem 1rem;
+  flex-direction: column;
+  z-index: 999;
+  width: 200px;
+  border-radius: 8px;
+}
+
+.dropdownMenu button {
+  background: none;
+  border: none;
+  margin: 0.4rem 0;
+  text-align: left;
+}
+
+.dropdownMenu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 15px;
+}
+
+.dropdownMenu.show {
+  display: flex;
+}
+
+/* MOBILE RESPONSIVE BEHAVIOR */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+  }
+
+  .navButtons {
+    display: none;
+  }
 }

@@ -67,12 +67,12 @@ const homePage = () => {
     <div>
       <header>
         <NavBar isLoggedIn={false} />
-        <DropDownBar dropDownList={dropDownList} />
+        
       </header>
 
       <main>
+        <SearchBar /> 
         <FAQ />
-        <SearchBar />
         <Gallery listOfPictureInfos ={listOfPictureInfos}/>
         <Footer />
       </main>

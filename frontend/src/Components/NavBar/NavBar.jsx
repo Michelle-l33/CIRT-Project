@@ -4,10 +4,11 @@ import PropTypes from 'prop-types';
 
 import { Link } from "react-router-dom";
 import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
 const NavBar = ({isLoggedIn}) => {
     //javascript funcs go here
-
+    const[menuOpen,setMenuOpen] = useState(false);
     const location = useLocation();
 
     return( // html goes in the return()
@@ -15,12 +16,33 @@ const NavBar = ({isLoggedIn}) => {
             <div className = {styles.navLeft}>
                 <Link to="/"> 
                     <img src = {logo} alt = "Logo"/>
-                </Link>             
+                </Link>  
+                <span>Criminology Institute For Research And Training</span>           
+            </div>
+            
+            {/* Hamburger icon (shown on small screens) */}
+            <div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+                ☰ 
             </div>
 
-            <div className = {styles.navRight}>
-                <Link to="/Dashboard" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> My Account </Link>
+            {/* Dropdown Menu */}
+            <div className={`${styles.dropdownMenu} ${menuOpen ? styles.show : ''}`}>
+                <button><a href="/Gallery"><span>Posters</span></a></button>
+                <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
+
+            <div className={styles.navButtons}>
+                <button><a href="/Gallery"><span>Posters</span></a></button>
+                <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><Link to="/Dashboard"><span>My Account</span></Link></button>
+            </div>
+
+
+
+            {/* <div className = {styles.navRight}>
+                <Link to="/Dashboard" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> My Account </Link>
+            </div> */}
         </nav>
     );
 };
