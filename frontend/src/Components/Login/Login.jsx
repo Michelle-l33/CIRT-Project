@@ -181,6 +181,7 @@ const LoginPage = () => {
                                 name="password"
                                 placeholder="Password"
                                 onChange={(e) => setLoginPass(e.target.value)}
+                                maxLength={25}
                                 required
                             />
                             <button
@@ -222,6 +223,7 @@ const LoginPage = () => {
                                 name="username"
                                 placeholder="Username"
                                 onChange={(e) => setName(e.target.value)}
+                                maxLength={50}
                                 required
                             />
                         </div>
@@ -233,6 +235,7 @@ const LoginPage = () => {
                                 name="email"
                                 placeholder="you@example.com"
                                 onChange={(e) => setEmail(e.target.value)}
+                                maxLength={50}
                                 required
                             />
                         </div>
@@ -257,6 +260,7 @@ const LoginPage = () => {
                                 id="register-password"
                                 name="password"
                                 placeholder="Password"
+                                maxLength={25}
                                 onChange={(e) => {
                                     setPassword(e.target.value);
                                     validatePassword(e.target.value); // Validate on change
