@@ -27,7 +27,7 @@ export const Submission = ({firstName, lastName, title, url, id}) => {
                 <p>{title}</p>
             </Link>
 
-            <button onClick={handleDownload}>Download</button>
+            <button className={styles.subDownload} onClick={handleDownload}>Download</button>
         </>
     );
 };

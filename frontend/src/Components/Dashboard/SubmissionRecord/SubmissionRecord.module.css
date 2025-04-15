@@ -1,6 +1,11 @@
 .docTabContainer {
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: minmax(450px, 3fr) minmax(180px, 1fr);
+}
+
+.docTabContainer.close {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
 }
 
 .header {
@@ -79,7 +84,7 @@
 .contentList {
     display: grid;
     grid-auto-rows: auto;
-    row-gap: 20px;
+    row-gap: 10px;
     max-height: 45vh;
     overflow-y: auto;
     padding: 5px 0;
@@ -96,6 +101,9 @@
 }
 
 /* this part is for styling for the submission files */
+.filesContainer {
+    min-height: 35vh;
+}
 
 .filesContainer .listItem {
     z-index: 1;
@@ -103,18 +111,6 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
     position: relative;
     color: var(--dark);
-}
-
-.contentList .listItem:nth-child(3n+1) {
-    background-color: var(--pink);
-}
-
-.contentList .listItem:nth-child(3n+2) {
-    background-color: var(--peach);
-}
-  
-.contentList .listItem:nth-child(3n) {
-    background-color: var(--lime);
 }
 
 .contentList .listItem:last-child {
@@ -128,6 +124,15 @@
     transition: transform 0.3s ease, padding-left 0.3s ease, clip-path 0.3s ease;
     overflow: hidden;
     position: relative;
+    background-color: var(--light-success);
+}
+
+.filesContainer .listItem.active .subDownload {
+    background-color: var(--transparent-light);
+}
+
+.filesContainer .listItem.active .subDownload:hover {
+    color: var(--dark);
 }
 
 .filesContainer .listItem.active::before {
@@ -159,6 +164,7 @@
     box-shadow: 0px 4px 10px var(--transparent-dark);
     border: 2px solid var(--transparent-light);
     opacity: 1;
+    background-color: var(--light-success);
 }
 
 .filesContainer .listItem:after {
@@ -181,7 +187,7 @@
     transition: 0s;
 }
 
-.filesContainer .listItem button {
+.filesContainer .listItem .subDownload {
     color: var(--primary);
     background-color: var(--light-primary);
     border-radius: 3px;
@@ -194,21 +200,21 @@
     z-index: 2;
 }
 
-.filesContainer .listItem button:hover {
+.filesContainer .listItem .subDownload:hover {
     color: var(--light);
     background-color: var(--primary);
 }
 
-.filesContainer .listItem button:focus {
+.filesContainer .listItem .subDownload:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
 }
 
 .filesContainer .listItem a {
-    color: var(--dark-grey);
+    color: var(--dark);
     position: relative;
     transition: color 0.3s ease;
-    font-weight: 550;
+    font-weight: 400;
     z-index: 2;
 }
 
@@ -249,6 +255,7 @@
 
 .commentContainer {
     position: relative;
+    min-height: 35vh;
 }
 
 .commentContainer button {
@@ -360,7 +367,6 @@
     color: var(--light);
 }
 
-
 .commentContainer .commentForm.show {
     display: block;
     opacity: 1;
@@ -368,7 +374,8 @@
 
 .commentContainer .contentList {
     padding: 10px 0;
-    max-height: 60vh;
+    max-height: 45vh;
+    overflow-y: scroll;
 }
 
 .commentContainer .contentList .listItem {
@@ -410,15 +417,15 @@
 }
 
 .contentList .listItem:nth-child(3n+1) span:after {
-    background-color: var(--pink);
+    background-color: var(--light-warning);
 }
 
 .contentList .listItem:nth-child(3n+2) span:after {
-    background-color: var(--peach);
+    background-color: var(--light-blue);
 }
 
 .contentList .listItem:nth-child(3n+3) span:after {
-    background-color: var(--lime);
+    background-color: var(--light-orange);
 }
 
 
@@ -432,6 +439,34 @@
 
 .noStatus {
     color: var(--dark)
+}
+
+.statusContainer .header {
+    position: relative;
+}
+
+.statusContainer .header .authorResubmit {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1rem;
+    transform: translate(24px, -50%);
+    z-index: 1;
+    padding: 5px;
+    color: var(--light);
+}
+
+.statusContainer .header .authorResubmit::before{
+    content: "";
+    width: 100%;
+    height: 100%;
+    right: 0;
+    top: 0;
+    transform: translateY(5px);
+    position: absolute;
+    background-color: var(--primary);
+    clip-path: polygon(0% 0%, 100% 0%, 100% 75%, 75% 75%, 75% 100%, 50% 75%, 0% 75%);
+    z-index: -1;
 }
 
 .statusContainer .statusAction {
@@ -517,7 +552,6 @@
     padding: 5px;
     color: var(--dark);
     box-shadow: 0 2px 4px var(--transparent-dark);
-
 }
 
 .participateContainer .participateList li button {

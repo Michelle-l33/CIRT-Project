@@ -28,10 +28,10 @@ const MainContentNav = () => {
                 hidden/>
                 <label htmlFor = "themeToggle" className = {styles.themeToggle}></label>
 
-                <a href = "#" className = {styles.notif}>
+                {/* <a href = "#" className = {styles.notif}>
                     <FaRegBell />
                     <span className = {styles.count}> 12 </span>
-                </a>
+                </a> */}
                 
                 <a href = "" className = {styles.profile}>
                     <img src = {sparLogo} alt = "Spartan Logo"/>

@@ -2,7 +2,6 @@ import styles from './TabNav.module.css';
 import { FaRegCircle } from "react-icons/fa6";
 import { CiMenuKebab } from "react-icons/ci";
 import { GiFrozenRing } from "react-icons/gi";
-import { Link } from "react-router-dom";
 import { useState, useEffect, useRef, useCallback } from 'react';
 
 const getStepStatus = (currentStep) => {
@@ -59,9 +58,7 @@ const Submission = ({submission, optionList}) => {
 
             <div className={styles.submissionDes}>
                 <h4>{submission.firstName} {submission.lastName}</h4>
-                {/* <Link to={`/Gallery/submission/${submission._id}`} target="_blank"> */}
                 <p>{submission.title}</p>
-                {/* </Link> */}
             </div>
                     
             <div className={statusClass}> 
@@ -69,7 +66,7 @@ const Submission = ({submission, optionList}) => {
                 <span>{stepTitle}</span>
             </div>
             
-            <CiMenuKebab 
+            <CiMenuKebab className = {styles.optionSVG}
                 ref={dropdownRef} 
                 onClick={() => setOptionClicked(!isOptionClicked)}
             />

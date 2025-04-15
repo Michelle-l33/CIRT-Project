@@ -53,7 +53,7 @@ const TabHeader = ( { tabHeader, submissionList, setFilteredList } ) => {
                 <TabSearchBar search = {search} setSearch = {setSearch}/>
                 {/* FilterButton component is defined down below */}
                 <FilterButton categories = {categories} selectedCategory = {selectedCategory} setSelectedCategory = {setSelectedCategory}/>
-                <button >New Submission</button>  
+                {/* <button >New Submission</button>   */}
 
             </div>
         </div>
