@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from './TopNav.module.css';
 
-const TopNav = () => {
+const TopNav = ({searchQuery, setSearchQuery}) => {
   const [localQuery, setLocalQuery] = useState('');
   const navigate = useNavigate();
 
