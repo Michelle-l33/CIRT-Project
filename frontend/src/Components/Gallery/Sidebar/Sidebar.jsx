@@ -1,39 +1,67 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { GiDiceTwentyFacesTwenty } from 'react-icons/gi';
+import { RiLogoutCircleLine } from 'react-icons/ri';
 import { IoMenu } from 'react-icons/io5';
+import {
+  FaImages,      // Icon for "All Posters"
+  FaFileAlt,     // Icon for "All Papers"
+  FaEdit,        // Icon for "Submit Research"
+  FaInfoCircle   // Icon for "About Us"
+} from 'react-icons/fa';
 import styles from './Sidebar.module.css';
 import { useUser } from '../../Login/UserContext';
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { user } = useUser();
-  
+  const location = useLocation();
+
+  const isActive = (path) => {
+    return location.pathname.includes(path);
+  };
+
   return (
-    <aside className={`${styles.sidebar} ${isOpen ? styles.show : ''}`}>
-      <button
-        onClick={toggleSidebar}
-        className={`${styles.sidebarToggle} ${isOpen ? styles.open : ''}`}
-      >
-        <IoMenu size={28} color={"white"} />
-      </button>
-
-      <div className={styles.sidebarHeader}>
-        <Link to="/" className={styles.logo}>
-          <img src="/assets/utampa_logo.png" className={styles.logo} alt="Logo" />
-          <div className={styles.logoName}>
-            <span className={styles.logoBlack}>CI</span><span className={styles.logoRed}>RT</span>
-          </div>
-        </Link>
+    <div className={`${styles.sideBar} ${isOpen ? '' : styles.close}`}>
+      <div className={styles.topSection}>
+        <button onClick={toggleSidebar} className={styles.toggleButton}>
+          <IoMenu size={24} />
+        </button>
       </div>
-
-      {isOpen && (
-        <nav className={styles.sidebarNav}>
-          <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-          <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-          <Link to="/Dashboard" className={styles.navItem}>Submit Research</Link>
-          <Link to="/home" className={styles.navItem}>About Us</Link>
-        </nav>
-      )}
-    </aside>
+      
+      <Link to="/" className={styles.logo}>
+        <GiDiceTwentyFacesTwenty />
+        <div className={styles.logoName}>
+          <span>CI</span>RT
+        </div>
+      </Link>
+      
+      <ul className={styles.sideMenu}>
+        <li className={isActive('/Gallery') ? styles.active : ''}>
+          <Link to="/Gallery">
+            <FaImages />
+            <span>All Posters</span>
+          </Link>
+        </li>
+        <li className={isActive('/Papers') ? styles.active : ''}>
+          <Link to="/Papers">
+            <FaFileAlt />
+            <span>All Papers</span>
+          </Link>
+        </li>
+        <li className={isActive('/Dashboard') ? styles.active : ''}>
+          <Link to="/Dashboard">
+            <FaEdit />
+            <span>Submit Research</span>
+          </Link>
+        </li>
+        <li className={isActive('/home') ? styles.active : ''}>
+          <Link to="/home">
+            <FaInfoCircle />
+            <span>About Us</span>
+          </Link>
+        </li>
+      </ul>
+    </div>
   );
 };
 

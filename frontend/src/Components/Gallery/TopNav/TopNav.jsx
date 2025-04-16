@@ -1,30 +1,37 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React from 'react';
 import styles from './TopNav.module.css';
+import utampaLogo from '../../../Asset/Spartans.logo.png'; 
 
-const TopNav = ({searchQuery, setSearchQuery}) => {
+const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen }) => {
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
   return (
-    <nav className={styles.topNav}>
-      <Link to="/" className={styles.homeLink}>
-        <span className={styles.homeIcon}></span>
-      </Link>
-      <span className={styles.pageTitle}>Criminology Institute for Research and Training Repository</span>
-      <form
-        className={styles.searchContainer}
-      >
-        <input
-          type="text"
-          placeholder="Search research posters..."
-          className={styles.searchInput}
-          value={searchQuery}
-          onChange={handleChange}
-          autoFocus
+    <nav className={`${styles.topNav} ${!isSidebarOpen ? styles.collapsed : ''}`}>
+      <div className={styles.centerSection}>
+        <span className={styles.welcomeMessage}>
+          Welcome to the Gallery Repository!
+        </span>
+      </div>
+
+
+      <div className={styles.rightSection}>
+        <div className={styles.searchContainer}>
+          <input
+            type="text"
+            placeholder="Search research posters..."
+            className={styles.searchInput}
+            value={searchQuery}
+            onChange={handleChange}
+          />
+        </div>
+        <img 
+          src={utampaLogo} 
+          alt="University of Tampa Logo" 
+          className={styles.utampaLogo}
         />
-      </form>
+      </div>
     </nav>
   );
 };

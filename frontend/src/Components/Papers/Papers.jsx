@@ -63,16 +63,6 @@ const Papers = () => {
     return <div>Loading papers...</div>;
   }
 
-  // Filter papers based on search query
-  // const filteredPapers = papers.filter(paper => {
-  //   const searchLower = searchQuery.toLowerCase();
-  //   return (
-  //     paper.title.toLowerCase().includes(searchLower) ||
-  //     paper.firstName.toLowerCase().includes(searchLower) ||
-  //     paper.lastName.toLowerCase().includes(searchLower)
-  //   );
-  // });
-
   return (
     <div className={styles.papersContainer}>
       {/* Top Navigation */}
@@ -145,21 +135,23 @@ const Papers = () => {
           ))}
         </div>
         <div className={styles.pagination}>
-          <button
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1}
-          >
-            Previous
-          </button>
+          <div className={styles.paginationContent}>
+            <button
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+            >
+              Previous
+            </button>
 
-          <span>Page {page} of {totalPages}</span>
+            <span>Page {page} of {totalPages}</span>
 
-          <button
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={page === totalPages}
-          >
-            Next
-          </button>
+            <button
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={page === totalPages}
+            >
+              Next
+            </button>
+          </div>
         </div>
       </main>
     </div>
