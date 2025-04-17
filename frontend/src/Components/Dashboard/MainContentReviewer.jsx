@@ -18,7 +18,7 @@ const MainContentReviewer = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Dashboard Reviewer - What should be on here?</h1>                
+                    <h1>Reviewer Dashboard</h1>                
                 </div>
 
                 <div className={styles.content}>

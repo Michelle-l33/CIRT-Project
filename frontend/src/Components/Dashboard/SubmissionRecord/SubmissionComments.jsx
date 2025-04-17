@@ -143,7 +143,10 @@ const ButtonWithCommentForm = ({ comment, setComment, handleCommentSubmit }) => 
                 <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)} // Update the comment state
-                placeholder="Write your comment..."/>
+                placeholder="Write your comment..."
+                maxLength={300}
+                />
+               
                 <button>
                     Submit
                 </button>

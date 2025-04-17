@@ -112,7 +112,8 @@ const SubDetail = ({submission, setIsOpen}) => {
                     <textarea 
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Write your comment..."/>
+                    placeholder="Write your comment..."
+                    maxLength={300}/>
                     <button className = {styles.submitBtn}>
                         Submit
                     </button>

@@ -170,7 +170,7 @@ const LoginPage = () => {
                     <form onSubmit={handleLoginSubmit}>
                         <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
                         <div className={styles.emailContainer}>
-                            <input type="text" id="login-email" name="email" placeholder="Email" onChange={(e) => setLoginEmail(e.target.value)} required />
+                            <input type="text" id="login-email" name="email" placeholder="Email" onChange={(e) => setLoginEmail(e.target.value)} maxLength={50} required />
                         </div>
                         
 
