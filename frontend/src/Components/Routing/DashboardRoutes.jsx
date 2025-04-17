@@ -1,5 +1,5 @@
-
 import { Route, Routes, Navigate } from 'react-router-dom';
+import ProtectedRoutes from './ProtectedRoutes';
 
 import Dashboard from '../Dashboard/Dashboard';
 import MainContentAuthor from '../Dashboard/MainContentAuthor';
@@ -21,29 +21,38 @@ const DashboardRoutes = () => {
     return (
         <Routes>
             <Route path="/Dashboard"/>
-                <Route path="Author" element={<Dashboard 
-                                    component={<MainContentAuthor />}/>}/>
-                <Route path="Reviewer" element={<Dashboard 
-                                    component={<MainContentReviewer />}/>}>
-                    <Route index element={<Navigate to="Current" replace />}/>
-                    <Route path = "Current" element={<Current />} />
-                    
+
+                <Route element={<ProtectedRoutes role="Author" />}>
+                    <Route path="Author" element={
+                        <Dashboard component={<MainContentAuthor />} />
+                    } />
                 </Route>
 
-                <Route path="Editor" element={<Dashboard 
-                                    component={<MainContentEditor />}/>}>
-                <Route index element={<Navigate to="Task" replace />}/>
-            
-                    <Route path="TabNav" element={<TabNav />}>
-                        <Route index element={<Navigate to="MyQueue" replace />}  />
-                        <Route path="MyQueue" element={<MyQueue />} />
-                        <Route path="AllActive" element={<AllActive />} />
-                        <Route path="Unassigned" element={<Unassigned />} />
-                        <Route path="Archives" element={<Archives />} />
+                <Route element={<ProtectedRoutes role="Reviewer" />}>
+                    <Route path="Reviewer" element={<Dashboard 
+                                        component={<MainContentReviewer />}/>}>
+                        <Route index element={<Navigate to="Current" replace />}/>
+                        <Route path = "Current" element={<Current />} />
+                        
                     </Route>
-                    <Route path="Task" element={<TaskPage />} />
-                    <Route path="DocumentTab" element={<SubmissionRecord />}>
-                        <Route path=":id"></Route>
+                </Route>
+                
+                <Route element={<ProtectedRoutes role="Editor" />}>
+                    <Route path="Editor" element={<Dashboard 
+                                        component={<MainContentEditor />}/>}>
+                    <Route index element={<Navigate to="Task" replace />}/>
+                
+                        <Route path="TabNav" element={<TabNav />}>
+                            <Route index element={<Navigate to="MyQueue" replace />}  />
+                            <Route path="MyQueue" element={<MyQueue />} />
+                            <Route path="AllActive" element={<AllActive />} />
+                            <Route path="Unassigned" element={<Unassigned />} />
+                            <Route path="Archives" element={<Archives />} />
+                        </Route>
+                        <Route path="Task" element={<TaskPage />} />
+                        <Route path="DocumentTab" element={<SubmissionRecord />}>
+                            <Route path=":id"></Route>
+                        </Route>
                     </Route>
                 </Route>
             <Route path="/SubmissionAuthor" element={<SubmissionAuthorPage />} />
