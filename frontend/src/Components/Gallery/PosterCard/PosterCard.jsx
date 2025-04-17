@@ -6,9 +6,7 @@ import { Link } from 'react-router-dom';
 
 const PosterCard = ({ poster }) => {
   const canvasRef = useRef(null);
-  const displayTags = poster.tags?.length
-    ? poster.tags
-    : ["Policing", "Mental Health"]; // fallback while backend is unfinished
+  const displayTags = poster.tags?.length ? poster.tags: []; // fallback while backend is unfinished
   console.log("Rendering tags for:", poster.title, poster.tags);
   // Render PDF thumbnail on canvas
   useEffect(() => {
