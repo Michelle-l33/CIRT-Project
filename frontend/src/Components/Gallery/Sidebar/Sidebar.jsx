@@ -54,8 +54,8 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
             <span>Submit Research</span>
           </Link>
         </li>
-        <li className={isActive('/home') ? styles.active : ''}>
-          <Link to="/home">
+        <li className={isActive('/AboutUs') ? styles.active : ''}>
+          <Link to="/AboutUs">
             <FaInfoCircle />
             <span>About Us</span>
           </Link>
