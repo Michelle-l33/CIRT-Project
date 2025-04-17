@@ -25,7 +25,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    /* background-color: white; */
     border-style: solid;
     border-radius: 10px;
     border-color: var(--primary);
@@ -218,10 +218,20 @@ accounts > input:focus, select:focus {
     border-radius: 10px;
     border-style: solid;
     margin: 10px;
-    border-color: #5c98ff;
-    background-color: #4470fe;
+    border-color: var(--primary);
+    background-color:var(--primary);
     font-weight: 600;
     color: #edf2f4;
 }
+
+.footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    position: relative;
+    bottom:0;
+    left:0;
+    width: 100%;
+    z-index: 100;
+  }
 
 

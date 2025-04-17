@@ -1,4 +1,5 @@
 import NavBar from '../NavBar/NavBar';
+import Footer from '../HomePage/Footer/Footer';
 import React, { useState } from "react";
 import styles from './Login.module.css';
 import Cookies from 'js-cookie';
@@ -312,6 +313,10 @@ const LoginPage = () => {
                 )}
                 
             </div>
+
+            <footer className={styles.footer}>
+                <Footer />
+            </footer>
         </div>
     );
 };
