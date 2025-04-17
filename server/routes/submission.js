@@ -62,7 +62,7 @@ router.get('/', async (req, res) => {
 router.get("/gallery", async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
-    const limit = 2;
+    const limit = 20;
     const skip = (page-1)*limit;
     const query = req.query.q || "";
 
@@ -96,7 +96,7 @@ router.get("/gallery", async (req, res) => {
 router.get("/publications", async (req, res) => {
     try {
       const page = parseInt(req.query.page) || 1;
-      const limit = 2;
+      const limit = 20;
       const skip = (page-1)*limit;
       const query = req.query.q || "";
 
