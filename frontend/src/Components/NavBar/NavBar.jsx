@@ -29,12 +29,14 @@ const NavBar = ({isLoggedIn}) => {
             <div className={`${styles.dropdownMenu} ${menuOpen ? styles.show : ''}`}>
                 <button><a href="/Gallery"><span>Posters</span></a></button>
                 <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><a href="/AboutUs"><span>About Us</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
 
             <div className={styles.navButtons}>
                 <button><a href="/Gallery"><span>Posters</span></a></button>
                 <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><a href="/AboutUs"><span>About Us</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
 

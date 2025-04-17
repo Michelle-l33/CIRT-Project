@@ -1,0 +1,194 @@
+
+.AboutUs {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+}
+
+.mainPic {
+    position: relative;
+    height: 70vh;
+    overflow: hidden;
+    margin-top: 0px; /* Ensures no weird spacing */
+  }
+  
+  .mainPic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Fade effect at bottom of image */
+  .mainPic::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, white 100%);
+    pointer-events: none;
+  }
+
+  .sidebar{
+    display: flex;
+    flex-direction: column;
+    max-width: 250px;
+    padding: 20px;
+    align-items: center;
+
+  }
+  .sidebar button{
+    width:200px;
+    margin:5px;
+    background-color: whitesmoke;
+    background-color: #ffffff;
+    border: 1px solid #d1d5db;
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+    transition: all 0.2s ease-in-out;
+  }
+
+  .sidebar button:hover {
+    background-color: #f6b8b8;
+    border-color: var(--primary);
+  }
+
+  .sidebar button span {
+    display: block;
+  }
+
+  .contactCard {
+    margin-top: 30px;
+    padding: 16px 20px;
+    background-color: #f9f9f9;
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+  
+  .contactCard h3 {
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #333;
+  }
+  
+  .contactCard a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  
+  .contactCard a:hover {
+    text-decoration: underline;
+  }
+  
+  
+ 
+  .contentSection{
+    display: flex;
+    flex:1;
+    flex-direction: row;
+    gap:20px;
+    padding-top: 30px;
+
+    justify-items: center;
+    padding:20px;
+  }
+
+  .facultyList {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .facultyList h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #e5383b;
+    padding-bottom: 8px;
+  }
+  
+  .member {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+  }
+  
+  .member a:hover{
+    color:var(--primary);
+  }
+  
+  .member h3 {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  
+  .member p {
+    margin: 4px 0;
+  }
+
+  .intro {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+    color: #000000;
+    font-size: 1rem;
+  }
+  .intro a:hover{
+    color:var(--primary)
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #000000;
+    border-bottom: 2px solid #e5383b;
+    padding-bottom: 4px;
+  }
+  
+  .functions {
+    
+    padding: 24px;
+    border-radius: 10px;
+    color: #000000;
+  }
+  
+  .functions ol {
+    padding-left: 20px;
+    margin-top: 12px;
+  }
+  
+  .functions li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .info p {
+    padding: 10px;
+  }
+
+  .footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    position: relative;
+    bottom:0;
+    left:0;
+    width: 100%;
+    z-index: 100;
+  }
+  
+  
+
+  

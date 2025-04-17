@@ -10,9 +10,9 @@ const Footer = () => {
                 {/*Contact Info*/}
                 <div className={styles.contactInfo}>
                     <h3>Contact Us</h3>
-                    <p><FaMapMarkerAlt />404 W Kennedy St, Tampa, Fl</p>
-                    <p><FaPhone/> (813) 360-5544</p>
-                    <p><FaEnvelope /> contact@cirt.org</p>
+                    <p><FaMapMarkerAlt />401 W Kennedy Blvd, Tampa, Fl</p>
+                    <p><FaPhone/> (813) 253-3333</p>
+                    <p><FaEnvelope /> bdulisse@ut.edu</p>
                 </div>
 
                 {/*Social Media Icons */}

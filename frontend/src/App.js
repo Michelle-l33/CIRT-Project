@@ -14,6 +14,7 @@ import Papers from './Components/Papers/Papers';
 // import { dashBoardContext } from './Components/Dashboard/Dashboard';
 import ArticleViewPage from './Components/ArticleView/ArticleView';
 import SearchResults from './Components/Gallery/SearchResults/SearchResults';
+import AboutUs from './Components/AboutUs/AboutUs';
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
             <Route path="/Dashboard/*" element={<DashboardRoutes />}/>
           </Route>
           <Route path = "Gallery/submission/:id" element = {<ArticleViewPage/>}></Route>
+          <Route path="/AboutUs" element={<AboutUs />} />
         </Routes>
       </Router>
     </UserProvider>
