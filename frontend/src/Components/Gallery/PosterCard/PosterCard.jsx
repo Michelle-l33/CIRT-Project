@@ -3,11 +3,13 @@ import * as pdfjsLib from 'pdfjs-dist/webpack';
 import styles from './PosterCard.module.css';
 import ArticleViewPage from '../../ArticleView/ArticleView';
 import { Link } from 'react-router-dom';
-//chat helped with this page
 
 const PosterCard = ({ poster }) => {
   const canvasRef = useRef(null);
-
+  const displayTags = poster.tags?.length
+    ? poster.tags
+    : ["Policing", "Mental Health"]; // fallback while backend is unfinished
+  console.log("Rendering tags for:", poster.title, poster.tags);
   // Render PDF thumbnail on canvas
   useEffect(() => {
     const renderThumbnail = async () => {
@@ -45,18 +47,22 @@ const PosterCard = ({ poster }) => {
   }, [poster.document]);
 
   return (
-    <article className={styles.posterCard}>
-      {/* Canvas for PDF thumbnail */}
-      <canvas ref={canvasRef} className={styles.posterImage} />
-      <div className={styles.posterInfo}>
-        <h3>{poster.title}</h3>
-        <p className={styles.author}>{poster.author}</p>
-        <div className={styles.actions}>
-          <Link to={`/Gallery/submission/${poster._id}`} className={styles.pdfButton}>View Study</Link>
-          <button className={styles.detailsButton}>Abstract</button>
+    <Link to={`/Gallery/submission/${poster._id}`} className={styles.cardLink}>
+      <article className={styles.posterCard}>
+        <canvas ref={canvasRef} className={styles.posterImage} />
+        <div className={styles.posterInfo}>
+          <h3>{poster.title}</h3>
+          <p className={styles.author}>{poster.author}</p>
+          <div className={styles.tags}>
+            {displayTags.map((tag, index) => (
+              <span key={index} className={styles.tag}>
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };
 

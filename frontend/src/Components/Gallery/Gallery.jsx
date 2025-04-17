@@ -14,6 +14,7 @@ const Gallery = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
+  const [selectedTags, setSelectedTags] = useState([]);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
@@ -47,21 +48,66 @@ const Gallery = () => {
     fetchGallery();
   }, [page, searchQuery]);
 
+  const sampleCategories = [
+    "Corrections",
+    "Courts/Sentencing",
+    "White Collar Crime",
+    "Mental Health",
+    "Victimology",
+    "Criminal Theory",
+    "Statistics/Methodology",
+    "Policing",
+    "Crime Prevention",
+    "Policy"
+  ];
+
+  const postersWithCategories = posters.map(poster => ({
+    ...poster,
+    tags: poster.tags || [
+      sampleCategories[Math.floor(Math.random() * sampleCategories.length)],
+      sampleCategories[Math.floor(Math.random() * sampleCategories.length)]
+    ]
+  }));
+  
+  const filteredPosters = selectedTags.length
+    ? postersWithCategories.filter(p =>
+        selectedTags.every(tag => p.tags?.includes(tag))
+      )
+    : postersWithCategories;
+
   return (
     <div className={`${styles.galleryContainer} ${isSidebarOpen ? '' : styles.sidebarClosed}`}>
       <TopNav 
         searchQuery={searchQuery} 
         setSearchQuery={setSearchQuery} 
-        toggleSidebar={toggleSidebar} 
+        toggleSidebar={toggleSidebar}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        sampleCategories={sampleCategories}
       />
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       <main className={styles.mainContent}>
         
-        {posters.length > 0 ? (
+          {postersWithCategories.length > 0 ? (
           <>
+            <div className={styles.tagFilter}>
+              {sampleCategories.map((tag) => (
+                <button
+                  key={tag}
+                  className={`${styles.tagFilterBtn} ${selectedTags.includes(tag) ? styles.active : ''}`}
+                  onClick={() => {
+                    setSelectedTags(prev =>
+                      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+                    );
+                  }}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
             <div className={styles.posterGrid}>
-              {posters.map((poster) => (
+              {filteredPosters.map((poster) => (
                 <PosterCard key={poster._id} poster={poster} />
               ))}
             </div>

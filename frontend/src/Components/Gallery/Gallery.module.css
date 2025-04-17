@@ -137,3 +137,34 @@
     gap: 1rem;
   }
 }
+
+.tagFilter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tagFilterBtn {
+  padding: 6px 12px;
+  border: 1px solid var(--primary);
+  border-radius: 20px;
+  background-color: white;
+  color: var(--primary);
+  font-size: 0.8rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.tagFilterBtn:hover {
+  background-color: var(--light-danger);
+  color: white;
+  border-color: var(--light-danger);
+}
+
+.tagFilterBtn.active {
+  background-color: var(--primary);
+  color: white;
+  border-color: var(--primary);
+}

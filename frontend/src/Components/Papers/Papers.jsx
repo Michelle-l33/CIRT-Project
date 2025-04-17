@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Papers.module.css';
 import { useSearchParams } from "react-router-dom";
@@ -13,6 +13,35 @@ const Papers = () => {
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);  
   const [loading, setLoading] = useState(true);
+  
+  const sampleCategories = [
+    "Corrections",
+    "Courts/Sentencing",
+    "White Collar Crime",
+    "Mental Health",
+    "Victimology",
+    "Criminal Theory",
+    "Statistics/Methodology",
+    "Policing",
+    "Crime Prevention",
+    "Policy"
+  ];
+  
+  const [selectedTags, setSelectedTags] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const searchRef = useRef(null);
+  
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   
  
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768); // Sidebar is open on larger screens
@@ -59,6 +88,12 @@ const Papers = () => {
     console.log("Papers: ", papers);
   },[page, searchQuery]);
 
+  const filteredPapers = selectedTags.length
+    ? papers.filter(paper =>
+        selectedTags.every(tag => paper.tags?.includes(tag))
+      )
+    : papers;
+
   if (loading) {
     return <div>Loading papers...</div>;
   }
@@ -71,14 +106,36 @@ const Papers = () => {
           <span className={styles.homeIcon}></span>
           <span>Criminology Institute for Research and Training Repository</span>
         </Link>
-        <div className={styles.searchContainer}>
+        <div className={styles.searchContainer} ref={searchRef}>
           <input 
             type="text" 
             placeholder="Search research papers..." 
             className={styles.searchInput}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
+            onFocus={() => setIsDropdownOpen(true)}
           />
+          {isDropdownOpen && (
+            <div className={styles.tagDropdownPanel}>
+              {sampleCategories.map((tag) => (
+                <label key={tag} className={styles.tagOption}>
+                  <input
+                    type="checkbox"
+                    value={tag}
+                    checked={selectedTags.includes(tag)}
+                    onChange={() => {
+                      if (selectedTags.includes(tag)) {
+                        setSelectedTags(selectedTags.filter(t => t !== tag));
+                      } else {
+                        setSelectedTags([...selectedTags, tag]);
+                      }
+                    }}
+                  />
+                  {tag}
+                </label>
+              ))}
+            </div>
+          )}
         </div>
       </nav>
 
@@ -110,7 +167,7 @@ const Papers = () => {
       {/* Main Content */}
       <main className={styles.mainContent}>
         <div className={styles.papersList}>
-          {papers.map(paper => (
+          {filteredPapers.map(paper => (
             <article key={paper.id} className={styles.paperItem}>
               <div className={styles.paperLeft}>
                 <input type="checkbox" className={styles.paperCheckbox} />
@@ -120,9 +177,11 @@ const Papers = () => {
                   <p className={styles.paperAuthor}>
                     {paper.firstName} {paper.lastName}
                   </p>
-                  <p className={styles.paperJournalInfo}>
-                    <em>The CIRT Journal of Research, Vol. 1, No. 1 (2025), pp. {paper.pages || 'xx-xx'}</em>
-                  </p>
+                  <div className={styles.tags}>
+                    {(paper.tags?.length ? paper.tags : ["Policy", "Mental Health"]).map((tag, index) => (
+                      <span key={index} className={styles.tag}>{tag}</span>
+                    ))}
+                  </div>
                   <p className={styles.paperAbstract}>
                     {paper.abstract ? `${paper.abstract.substring(0, 200)}...` : "No preview available."}
                   </p>

@@ -235,20 +235,20 @@
     gap: 0.8rem;
 }
 
-.pdfButton {
-    background: var(--blue);
-    color: var(--light);
-    padding: 6px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: background 0.2s ease;
-    text-decoration: none;
+.downloadBtn {
+  background-color: transparent;
+  color: var(--dark);
+  padding: 8px 16px;
+  border: 1px solid var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
 }
-
-.pdfButton:hover {
-    background: #1565c0;
+.downloadBtn:hover {
+  background-color: var(--dark);
+  color: white;
 }
 
 .paperItem {
@@ -318,17 +318,6 @@
     gap: 8px;
   }
   
-  .downloadBtn {
-    background-color: #841515;
-    color: white;
-    padding: 8px 16px;
-    border: none;
-    text-decoration: none;
-    font-weight: 500;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
   .saveBtn,
   .citeBtn {
     background: white;
@@ -378,4 +367,67 @@
 .paginationContent span {
   font-size: 0.95rem;
   color: #333;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 0.5rem;
+}
+
+.tag {
+  background-color: #f2f2f2;
+  color: #222;
+  font-size: 0.7rem;
+  font-weight: 500;
+  padding: 2px 10px;
+  border-radius: 14px;
+  border: 1px solid #dcdcdc;
+  text-transform: capitalize;
+}
+
+/* Dropdown Tag Filter Styles */
+.searchContainer {
+  position: relative;
+  width: 400px;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 20px;
+  border: 1px solid var(--transparent-light);
+  border-radius: 25px;
+  font-size: 0.95rem;
+  background: var(--light);
+  color: var(--dark);
+  transition: border-color 0.2s ease;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--dark);
+  box-shadow: 0 0 0 3px rgba(102, 7, 8, 0.2);
+}
+
+.tagDropdownPanel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+  background: white;
+  border: 1px solid var(--grey);
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.tagOption {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--dark);
+  cursor: pointer;
 }
