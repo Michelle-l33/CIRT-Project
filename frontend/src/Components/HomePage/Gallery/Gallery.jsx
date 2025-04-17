@@ -65,7 +65,7 @@ const Gallery = ( {listOfPictureInfos} ) => {
 
     return( // html goes in the return()
         <div className = {styles.galleryContainer}>
-            <h1>Gallery</h1>
+            <h1>Highlights</h1>
             <div className = {`${styles.bigPictureContainer} ${isMobile ? styles.mobile : ''}`}>
                 <button onClick={handlePrevClick} className = {styles.button}>
                     <span>&#8592;</span>
