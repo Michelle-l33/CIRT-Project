@@ -3,6 +3,7 @@
     grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
     column-gap: 4rem;
     padding: 15px 4rem;
+    font-family: 'Poppins', sans-serif;
 }
 
 .cirtIntro .wordsContainer {
