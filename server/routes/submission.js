@@ -73,6 +73,7 @@ router.get("/gallery", async (req, res) => {
         { firstName: { $regex: query, $options: "i" } },
         { lastName: { $regex: query, $options: "i" } },
         { tags: { $regex: query, $options: "i" } },
+        { collaborators: { $regex: query, $options: "i" } },
       ]
     }
   
@@ -108,6 +109,7 @@ router.get("/publications", async (req, res) => {
           { firstName: { $regex: query, $options: "i" } },
           { lastName: { $regex: query, $options: "i" } },
           { tags: { $regex: query, $options: "i" } },
+          { collaborators: { $regex: query, $options: "i" } },
         ]
       }
 
