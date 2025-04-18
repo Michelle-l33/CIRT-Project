@@ -55,12 +55,12 @@ const SubmissionAuthorPage = () => {
         formData.append("title", title);
         formData.append("firstName", firstName);
         formData.append("lastName", lastName);
-        formData.append("collaborators", collaborators.join(","));
+        collaborators.forEach((c) => formData.append("collaborators[]", c));
         formData.append("document", document); // Use the document state here
         formData.append("isPoster", isPoster);
         formData.append("isArticle", isArticle);
         formData.append("abstract",abstract);
-        formData.append("tags", allTags.join(","));
+        allTags.forEach((tag) => formData.append("tags[]", tag));
         formData.append("stage", stage);
         formData.append("placeholderInput", placeholderInput); // Conditional Input
 

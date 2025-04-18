@@ -1,4 +1,5 @@
 import SearchBar from "./SearchBar/SearchBar"
+import NavBar from '../NavBar/NavBar';
 import styles from './ArticleView.module.css';
 // import { useState } from 'react';
 import { RiArticleLine } from "react-icons/ri";
@@ -57,6 +58,7 @@ const ArticleViewPage = () => {
 
     return (
         <div className={styles.bigContainer}>
+            <NavBar/>
             <SearchBar className={styles.searchBar}/>
             <main>
                 <div className={styles.articleInformation}>
