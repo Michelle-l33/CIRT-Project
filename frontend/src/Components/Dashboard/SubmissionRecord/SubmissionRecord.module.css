@@ -111,6 +111,8 @@
     transition: background-color 0.3s ease, transform 0.2s ease;
     position: relative;
     color: var(--dark);
+    max-height: 200px;
+    overflow-y: scroll;
 }
 
 .contentList .listItem:last-child {
