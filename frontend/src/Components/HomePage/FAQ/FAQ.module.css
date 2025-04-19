@@ -83,3 +83,14 @@
     border: transparent;
     border-radius: 10px;
 }
+
+@media screen and (max-width: 768px) {
+    .cirtIntro {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .cirtIntro .imgContainer img {
+        object-fit: cover;
+    }
+}

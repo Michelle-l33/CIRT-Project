@@ -99,7 +99,6 @@
     flex-direction: row;
     gap:20px;
     padding-top: 30px;
-
     justify-items: center;
     padding:20px;
   }
@@ -190,5 +189,9 @@
   }
   
   
-
+@media screen and (max-width: 512px) {
+  .AboutUs .contentSection {
+    flex-wrap: wrap;
+  }
+}
   
