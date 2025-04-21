@@ -109,28 +109,52 @@ const MainContentAuthor = () => {
     const [loading, setLoading]=useState(true);
 
 
-    const fetchComments = async () => {
-        try {
-            console.log("Fetching for: ", currSub._id);
-            const response = await fetch(`https://cirt-project-server.vercel.app/comment/${submissionList[currSub]._id}`,{
-                method: "GET"
-            })
-            if (!response.ok) {
-                throw new Error("Failed to fetch comments");
-            }
+    // const fetchComments = async () => {
+
+    //     try {
+    //         console.log("Fetching for: ", currSub._id);
+    //         const response = await fetch(`https://cirt-project-server.vercel.app/comment/${submissionList[currSub]._id}`,{
+    //             method: "GET"
+    //         })
+    //         if (!response.ok) {
+    //             throw new Error("Failed to fetch comments");
+    //         }
     
-            const comments = await response.json();
-            setCommentList(comments);
-            console.log("Comments",commentList);
-        } catch (error) {
-            console.error("Error fetching comments:", error);
-        } finally {
-            setLoading(false);
-        }
-    };
+    //         const comments = await response.json();
+    //         setCommentList(comments);
+    //         console.log("Comments",commentList);
+    //     } catch (error) {
+    //         console.error("Error fetching comments:", error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
     useEffect(()=>{
+        const fetchComments = async () => {
+
+            try {
+                setLoading(true);
+                const currId = submissionList[currSub]._id;
+                console.log("Fetching for: ", currId);
+                //console.log("Fetching for: ", currSub._id);
+                const response = await fetch(`https://cirt-project-server.vercel.app/comment/${currId}`,{
+                    method: "GET"
+                })
+                if (!response.ok) {
+                    throw new Error("Failed to fetch comments");
+                }
+        
+                const comments = await response.json();
+                setCommentList(comments);
+                console.log("Comments",commentList);
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
         fetchComments();
-    },[currSub]);
+    },[currSub,submissionList]);
 
     if (loading) {
         return <div>Loading...</div>;
