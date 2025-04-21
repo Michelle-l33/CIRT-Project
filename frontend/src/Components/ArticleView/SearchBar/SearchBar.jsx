@@ -26,16 +26,17 @@ const SearchBar = () => {
     <form className={styles.searchContainer} onSubmit={handleSubmit}>
         <div className={styles.headerOptions}>
             <div className={styles.tabOptions}>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <button 
                         type="button"
                         className={`${styles.radioLabel} ${tab === "home" ? styles.active : ""}`}
                         onClick={() => navigate("/")}
+                        style={{ height: '40px', width: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
                     >
-                        <BsFillHouseDoorFill size={24}/>
+                        <BsFillHouseDoorFill size={29}/>
                     </button>
                 </div>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input 
                         type="radio" 
                         id="articleRadio"
@@ -43,10 +44,11 @@ const SearchBar = () => {
                         value="articles"
                         checked={tab === "articles"}
                         onChange={(e) => setTab(e.target.value)} 
+                        style={{ height: '40px', width: '40px' }}
                     />
                     <label htmlFor="articleRadio" className={`${styles.radioLabel} ${tab === "articles" ? styles.active : ""}`}>Article</label>
                 </div>
-                <div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
                     <input 
                         type="radio" 
                         id="posterRadio"
@@ -54,6 +56,7 @@ const SearchBar = () => {
                         value="posters"
                         checked={tab === "posters"}
                         onChange={(e) => setTab(e.target.value)}  
+                        style={{ height: '40px', width: '40px' }}
                     />
                     <label htmlFor="posterRadio" className={`${styles.radioLabel} ${tab === "posters" ? styles.active : ""}`}>Poster</label>
                 </div>

@@ -5,7 +5,7 @@
     background: var(--light);
     width: 230px;
     height: 100%;
-    z-index: 2000;
+    z-index: 999;
     overflow-x: hidden;
     scrollbar-width: none;
     transition: all 0.3s ease;

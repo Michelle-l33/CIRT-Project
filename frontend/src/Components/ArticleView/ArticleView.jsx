@@ -1,5 +1,6 @@
 import SearchBar from "./SearchBar/SearchBar"
 import NavBar from '../NavBar/NavBar';
+import SideBar from '../Gallery/Sidebar/Sidebar';
 import styles from './ArticleView.module.css';
 // import { useState } from 'react';
 import { RiArticleLine } from "react-icons/ri";
@@ -56,12 +57,15 @@ const ArticleViewPage = () => {
         fetchSubmission();
       }, [id]);
 
+
     return (
         <div className={styles.bigContainer}>
             <NavBar/>
             <SearchBar className={styles.searchBar}/>
-            <main>
                 <div className={styles.articleInformation}>
+                    {/* <div className={styles.sideBar}>
+                      <SideBar/>
+                    </div> */}
                     <div className={styles.categoryTag}>
                         <RiArticleLine /><span>{loading ? "Loading": submission.isPoster ? "Poster" : "Article"}</span>
                     </div>
@@ -80,6 +84,14 @@ const ArticleViewPage = () => {
                         ""
                       )}
                     </h2>
+                    </div>
+                    <div className={styles.articleTags}>
+                        {/* ** INSERT PLACEHOLDER TAGS HERE** */}
+                        <h4>{loading ? "Loading..." : submission?.tags?.length > 0 ? (
+                          `Tags: ${submission.tags.join(", ")}` // Display as comma-separated list
+                        ) : (
+                          ""
+                        )}</h4>
                     </div>
                       {window.innerWidth > 758 && (
                           <div className={styles.abstractContainer}> 
@@ -121,7 +133,6 @@ const ArticleViewPage = () => {
                     )}
                     {/* <img src="https://media1.tenor.com/m/yqGDxokI9c4AAAAd/brazilian-luffy-dance.gif" alt="" /> */}
                 </section>
-            </main>
         </div>
     );
 };

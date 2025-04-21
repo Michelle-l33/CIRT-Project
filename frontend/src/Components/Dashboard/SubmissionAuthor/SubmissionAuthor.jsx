@@ -110,7 +110,8 @@ const SubmissionAuthorPage = () => {
                 <div className={styles.boxInput}>
                     Tags
                     <ChipInput chip={tags} setChip={setTags} />
-                    <div className={styles.tagGrid}>
+                </div>
+                <div className={styles.tagGrid}>
                         {predefinedTags.map((tag) => (
                         <button
                             key={tag}
@@ -128,7 +129,6 @@ const SubmissionAuthorPage = () => {
                         </button>
                         ))}
                     </div>
-                </div>
                 <div className={styles.radioInput}>
                     <input type="radio" id="articleRadio" name="submissionType" value="article"
                         checked={submissionType === "article"}

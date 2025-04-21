@@ -51,6 +51,10 @@
     padding: 3em 0.5em;
 }
 
+.sideBar {
+    width: 300px;
+}
+
 .categoryTag {
     padding: 0.5em 1em;
 }
@@ -73,12 +77,8 @@
 }
 
 .pdfWrapper {
-    background-color: #303030;
-    /* padding: 1em; */
     text-align: center;
-    min-height: 400px;
-    max-width: 800px;
-    margin: 0 auto;
+    margin: 0 20dvw;
 }
 
 .pdfNavBar {

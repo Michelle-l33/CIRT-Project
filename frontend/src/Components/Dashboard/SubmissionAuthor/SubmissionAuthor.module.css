@@ -49,6 +49,17 @@
   background-color: white;
 }
 
+.radioInput {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+}
+
+.radioInput > * {
+  margin: 0 10px;
+}
+
 .commentsContainer {
     display: flex;
     justify-content: center; /* y axis */
