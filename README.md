@@ -64,9 +64,10 @@
 - Submission feature - storing pdfs in aws
 - My Queue and All Active population
 - Populating Gallery and Papers and previewing pdfs for gallery
-- Show password feature
 - Modified reviewer assigning to add 2 reviewers to a submission
 - Populated Tasks -> Editor Dashboard
 - Deployed Website
 - Reviewer Dashboard Functionality
+- Author Dashboard Functionality
+- About Us Page
 
