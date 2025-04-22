@@ -197,6 +197,11 @@ const LoginPage = () => {
                     
 
                         <button id="loginButton" type="submit">Log In</button>
+
+                        <p className={styles.forgotPassword}>
+                            <a href="/forgot-password">Forgot Password?</a>
+                        </p>
+                        
                     </form>
                     {/* Button to toggle to Register form */}
                     <p>

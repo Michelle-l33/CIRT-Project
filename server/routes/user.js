@@ -2,16 +2,26 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const router = express.Router();
+const crypto = require('node:crypto');
+const nodemailer = require('nodemailer');
 
+// Configure email transporter (add this at the top)
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
 // Register User
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password,isPublic, isAuthor, isEditor, isReviewer } = req.body;
+    const { name, email, password, isPublic, isAuthor, isEditor, isReviewer } = req.body;
 
     const lowerEmail = email.toLowerCase();
-    
-    const existingUser = await User.findOne({ email:lowerEmail });
+
+    const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already registered." });
     }
@@ -19,9 +29,9 @@ router.post("/register", async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ name, email:lowerEmail, password: hashedPassword,isPublic, isAuthor, isEditor, isReviewer });
+    const newUser = new User({ name, email: lowerEmail, password: hashedPassword, isPublic, isAuthor, isEditor, isReviewer });
     await newUser.save();
-    
+
     res.status(201).json({ message: "User registered successfully!" });
   } catch (error) {
     res.status(400).json({ error: error.message });
@@ -29,34 +39,34 @@ router.post("/register", async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-    try {
-      const { email, password } = req.body;
-      const lowerEmail = email.toLowerCase();
-  
-      // Find user by email
-      const user = await User.findOne({ email: lowerEmail });
-      if (!user) {
-        return res.status(404).json({ message: 'User not found.' });
-      }
-      console.log(user.password)
-      console.log(password)
-      //check if pass matches
-      const isMatch = await bcrypt.compare(password, user.password);
-      
-      if (!isMatch) {
-        console.log("fe")
-        res.status(401).json({ message: 'Incorrect password.' });
-      } else{
-          res.status(200).json(user);
-      }
-      
-    } catch (err) {
-      res.status(400).json({ 
-        message: 'Error during login', 
-        error: err.message 
-      });
+  try {
+    const { email, password } = req.body;
+    const lowerEmail = email.toLowerCase();
+
+    // Find user by email
+    const user = await User.findOne({ email: lowerEmail });
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
     }
-  });
+    console.log(user.password)
+    console.log(password)
+    //check if pass matches
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      console.log("fe")
+      res.status(401).json({ message: 'Incorrect password.' });
+    } else {
+      res.status(200).json(user);
+    }
+
+  } catch (err) {
+    res.status(400).json({
+      message: 'Error during login',
+      error: err.message
+    });
+  }
+});
 
 // Get All Users
 router.get("/", async (req, res) => {
@@ -74,14 +84,72 @@ router.get("/:id", async (req, res) => {
     const user = await User.findById(userId).select("-password"); // Exclude password
 
     if (!user) {
-        return res.status(404).json({ error: "User not found" });
+      return res.status(404).json({ error: "User not found" });
     }
 
     res.json(user);
-} catch (error) {
+  } catch (error) {
     console.error("Error fetching user:", error);
     res.status(500).json({ error: "Server error" });
-}
+  }
+});
+
+// Forgot Password Route
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({ error: 'No user with that email exists' });
+    }
+
+    // Token generation logic
+    const token = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    // Email sending logic
+    const resetUrl = `https://cirt-project.vercel.app/reset-password/${token}`;
+    const mailOptions = {
+      to: user.email,
+      from: process.env.EMAIL_USER,
+      subject: 'Password Reset',
+      text: `Password reset link:\n\n${resetUrl}`
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Reset email sent' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+
+// Reset Password Route
+router.post('/reset-password/:token', async (req, res) => {
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired token' });
+    }
+
+    // Validate password meets requirements (similar to your register validation)
+    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    user.password = hashedPassword;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    await user.save();
+
+    res.status(200).json({ message: 'Password updated successfully' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;
