@@ -1,6 +1,6 @@
 .sideBar {
     position: fixed;
-    top: 0;
+    top: 60px;
     left: 0;
     background: var(--light);
     width: 230px;
@@ -10,6 +10,7 @@
     scrollbar-width: none;
     transition: all 0.3s ease;
     padding: 0;
+    
 }
 
 .sideBar::-webkit-scrollbar {
@@ -96,8 +97,12 @@
 }
 
 .sideBar .sideMenu li.active {
-    background: var(--grey);
+    /* background: var(--grey); */
     position: relative;
+    border: 2px solid var(--primary);
+    padding: 10px;          /* restore comfortable padding inside the border */
+    background-color: var(--light); /* keep bg consistent */
+    border-radius: 48px;    /* match your rounded style */
 }
 
 .sideBar .sideMenu li.active::before {
@@ -108,7 +113,7 @@
     border-radius: 50%;
     top: -40px;
     right: 0;
-    box-shadow: 20px 20px 0 var(--grey);
+    /* box-shadow: 20px 20px 0 var(--grey); */
     z-index: -1;
 }
 
@@ -120,7 +125,7 @@
     border-radius: 50%;
     bottom: -40px;
     right: 0;
-    box-shadow: 20px -20px 0 var(--grey);
+    /* box-shadow: 20px -20px 0 var(--grey); */
     z-index: -1;
 }
 

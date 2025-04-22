@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TopNav.module.css';
 import utampaLogo from '../../../Asset/Spartans.logo.png'; 
+import { Link } from 'react-router-dom';
 
 const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setSelectedTags, sampleCategories }) => {
   const handleChange = (e) => {
@@ -10,6 +11,13 @@ const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setS
   return (
     <nav className={`${styles.topNav} ${!isSidebarOpen ? styles.collapsed : ''}`}>
       <div className={`${styles.centerSection} ${!isSidebarOpen ? styles.expandedTitle : ''}`}>
+        <Link to="/">
+        <img 
+          src={utampaLogo} 
+          alt="University of Tampa Logo" 
+          className={styles.utampaLogo}
+        />
+        </Link>
         <span className={styles.welcomeMessage}>
           Criminology Institute for Research and Training Repository
         </span>
@@ -25,11 +33,7 @@ const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setS
             onChange={handleChange}
           />
         </div>
-        <img 
-          src={utampaLogo} 
-          alt="University of Tampa Logo" 
-          className={styles.utampaLogo}
-        />
+        
       </div>
     </nav>
   );

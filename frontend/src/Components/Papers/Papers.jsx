@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Papers.module.css';
 import { useSearchParams } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
+import Sidebar from '../Gallery/Sidebar/Sidebar';
+import TopNav from '../Gallery/TopNav/TopNav';
 
 const Papers = () => {
 
@@ -99,39 +101,18 @@ const Papers = () => {
   }
 
   return (
-    <div className={styles.papersContainer}>
-      {/* Top Navigation */}
-      <nav className={styles.topNav}>
-        <Link to="/" className={styles.homeLink}>
-          <span>Criminology Institute for Research and Training Repository</span>
-        </Link>
-        <div className={styles.searchContainer} ref={searchRef}>
-          <input 
-            type="text" 
-            placeholder="Search research papers..." 
-            className={styles.searchInput}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-        </div>
-      </nav>
+    <div className={`${styles.papersContainer} ${!isSidebarOpen ? styles.sidebarClosed : ''}`} >
+      <TopNav 
+        searchQuery={searchQuery} 
+        setSearchQuery={setSearchQuery} 
+        toggleSidebar={toggleSidebar}
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        sampleCategories={sampleCategories}
+      />
 
       {/* Sidebar */}
-      <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.show : ''}`}>
-        <div className={styles.topSection}>
-          <button onClick={toggleSidebar} className={`${styles.sidebarToggle} ${isSidebarOpen ? styles.open : ''}`}>
-            <IoMenu size={28} color={"white"} />
-          </button>
-        </div>
-        {isSidebarOpen && (
-          <nav className={styles.sidebarNav}>
-            <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-            <Link to="/Papers" className={styles.navItem}>All Papers</Link>
-            <Link to="/Dashboard" className={styles.navItem}>Submit Research</Link>
-            <Link to="/AboutUs" className={styles.navItem}>About Us</Link>
-          </nav>
-        )}
-      </aside>
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
 
       {/* Main Content */}
       <main className={styles.mainContent}>
