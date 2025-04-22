@@ -103,7 +103,6 @@ const Papers = () => {
       {/* Top Navigation */}
       <nav className={styles.topNav}>
         <Link to="/" className={styles.homeLink}>
-          <span className={styles.homeIcon}></span>
           <span>Criminology Institute for Research and Training Repository</span>
         </Link>
         <div className={styles.searchContainer} ref={searchRef}>
@@ -113,59 +112,46 @@ const Papers = () => {
             className={styles.searchInput}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onFocus={() => setIsDropdownOpen(true)}
           />
-          {isDropdownOpen && (
-            <div className={styles.tagDropdownPanel}>
-              {sampleCategories.map((tag) => (
-                <label key={tag} className={styles.tagOption}>
-                  <input
-                    type="checkbox"
-                    value={tag}
-                    checked={selectedTags.includes(tag)}
-                    onChange={() => {
-                      if (selectedTags.includes(tag)) {
-                        setSelectedTags(selectedTags.filter(t => t !== tag));
-                      } else {
-                        setSelectedTags([...selectedTags, tag]);
-                      }
-                    }}
-                  />
-                  {tag}
-                </label>
-              ))}
-            </div>
-          )}
         </div>
       </nav>
 
       {/* Sidebar */}
       <aside className={`${styles.sidebar} ${isSidebarOpen ? styles.show : ''}`}>
-        <button onClick={toggleSidebar} className={`${styles.sidebarToggle} ${isSidebarOpen ? styles.open : ''}`}>
-          <IoMenu size={28} color={"white"} />
-        </button>
-        <div className={styles.sidebarHeader}>
-          <Link to="/">
-            <img
-              src="/assets/utampa_logo.png"
-              alt="UT Logo"
-              className={styles.logo}
-            />
-          </Link>
+        <div className={styles.topSection}>
+          <button onClick={toggleSidebar} className={`${styles.sidebarToggle} ${isSidebarOpen ? styles.open : ''}`}>
+            <IoMenu size={28} color={"white"} />
+          </button>
         </div>
         {isSidebarOpen && (
           <nav className={styles.sidebarNav}>
-            <Link to="/Papers" className={styles.navItem}>All Papers</Link>
             <Link to="/Gallery" className={styles.navItem}>All Posters</Link>
-            <Link to="/submit" className={styles.navItem}>Submit Research</Link>
-            <Link to="/guides" className={styles.navItem}>Author Guidelines</Link>
-            <Link to="/contact" className={styles.navItem}>Research Support</Link>
+            <Link to="/Papers" className={styles.navItem}>All Papers</Link>
+            <Link to="/Dashboard" className={styles.navItem}>Submit Research</Link>
+            <Link to="/AboutUs" className={styles.navItem}>About Us</Link>
           </nav>
         )}
-    </aside>
+      </aside>
 
       {/* Main Content */}
       <main className={styles.mainContent}>
+        <div className={styles.tagFilter}>
+          {sampleCategories.map((tag) => (
+            <button
+              key={tag}
+              className={`${styles.tagFilterBtn} ${selectedTags.includes(tag) ? styles.active : ''}`}
+              onClick={() => {
+                setSelectedTags(prev =>
+                  prev.includes(tag)
+                    ? prev.filter(t => t !== tag)
+                    : [...prev, tag]
+                );
+              }}
+            >
+              {tag}
+            </button>
+          ))}
+        </div>
         <div className={styles.papersList}>
           {filteredPapers.map(paper => (
             <article key={paper.id} className={styles.paperItem}>

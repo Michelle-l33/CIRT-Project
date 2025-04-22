@@ -9,7 +9,7 @@
     overflow-x: hidden;
     scrollbar-width: none;
     transition: all 0.3s ease;
-    padding: 20px 0;
+    padding: 0;
 }
 
 .sideBar::-webkit-scrollbar {
@@ -18,16 +18,41 @@
 
 .sideBar.close {
     width: 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.sideBar.close .sideMenu li span {
+    display: none;
+}
+
+.sideBar.close .sideMenu li a {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 0;
+}
+
+.linkContent {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-start;
 }
 
 .toggleButton {
-    position: absolute;
-    top: 20px;
-    background: none;
-    border: none;
-    color: var(--dark);
-    cursor: pointer;
-    z-index: 3000;
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: none;
+  border: none;
+  color: var(--dark);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
 }
 
 .sideBar .logo {
@@ -57,7 +82,7 @@
 
 .sideBar .sideMenu {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 70px;
     padding: 0;
     list-style: none;
 }
@@ -123,16 +148,10 @@
     color: var(--success);
 }
 
-.sideBar.close .sideMenu li a {
-    width: calc(48px - (4px * 2));
-    transition: all 0.3s ease;
-}
-
 .sideBar .sideMenu li a svg {
-    min-width: calc(60px - ((4px + 6px) * 2));
-    display: flex;
-    font-size: 1.6rem;
-    justify-content: center;
+  font-size: 1.6rem;
+  display: block;
+  margin: 0 auto;
 }
 
 .sideBar .sideMenu li button.logout {
@@ -158,28 +177,20 @@
 
 
 @media (max-width: 768px) {
-    .sideBar {
-        width: 60px;
-    }
-    
-    .sideBar.close {
-        width: 0;
-        overflow: hidden;
-    }
-    
-    .toggleButton {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 3000;
-        right: auto;
-    }
+  .sideBar {
+    width: 60px;
+  }
+
+  .sideBar.close {
+    width: 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 .topSection {
-    display: flex;
-    justify-content: flex-start; 
-    padding-left: 1rem;
-    padding-top: 1rem;
-    width: 100%;
-    position: relative;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
 }

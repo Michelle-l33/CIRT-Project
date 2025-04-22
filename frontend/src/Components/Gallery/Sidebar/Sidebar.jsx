@@ -27,37 +27,37 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
           <IoMenu size={24} />
         </button>
       </div>
-      
-      <Link to="/" className={styles.logo}>
-        <GiDiceTwentyFacesTwenty />
-        <div className={styles.logoName}>
-          <span>CI</span>RT
-        </div>
-      </Link>
-      
       <ul className={styles.sideMenu}>
         <li className={isActive('/Gallery') ? styles.active : ''}>
           <Link to="/Gallery">
-            <FaImages />
-            <span>All Posters</span>
+            <div className={styles.linkContent}>
+              <FaImages />
+              <span>All Posters</span>
+            </div>
           </Link>
         </li>
         <li className={isActive('/Papers') ? styles.active : ''}>
           <Link to="/Papers">
-            <FaFileAlt />
-            <span>All Papers</span>
+            <div className={styles.linkContent}>
+              <FaFileAlt />
+              <span>All Papers</span>
+            </div>
           </Link>
         </li>
         <li className={isActive('/Dashboard') ? styles.active : ''}>
           <Link to="/Dashboard">
-            <FaEdit />
-            <span>Submit Research</span>
+            <div className={styles.linkContent}>
+              <FaEdit />
+              <span>Submit Research</span>
+            </div>
           </Link>
         </li>
         <li className={isActive('/AboutUs') ? styles.active : ''}>
           <Link to="/AboutUs">
-            <FaInfoCircle />
-            <span>About Us</span>
+            <div className={styles.linkContent}>
+              <FaInfoCircle />
+              <span>About Us</span>
+            </div>
           </Link>
         </li>
       </ul>
