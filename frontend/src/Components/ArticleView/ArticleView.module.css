@@ -9,21 +9,8 @@
     --grey: #eee;
     --dark-grey: #939292;
     --dark: #363949;
-    --danger: #6F42C1;
-    --light-danger: #BFA2E6;
-    --warning: #FBC02D;
-    --light-warning: #FFF2C6;
-    --success: #388E3C;
-    --light-success: #BBF7D0;
-    --blue: #1976D2;
-    --light-blue: #CFE8FF;
-    --orange: #FD7E14;
-    --light-orange: #fddfc3e9;
     --transparent-light: #ffffff82;
     --transparent-dark: #00000013;
-    --pink: #f9d6e7;
-    --peach: #FFE4CF;
-    --lime: #FFFDD7;
     background: var(--grey);
     overflow-x: hidden;
     min-height: 100vh;
@@ -41,39 +28,50 @@
     background-color: #f4f4f4;
 }
 
-
 .articleInformation {
-    border-top: #1d1d1d;
-    border-style: solid;
     border-left: none;
     border-right: none;
     border-bottom: none;
-    padding: 3em 0.5em;
+    padding: 3em 3em;
 }
 
-.sideBar {
-    width: 300px;
+.bigContainer .searchBarContainer{
+    padding: 0.5em 1em;
+    background-color: #ffffff3a;
+    border-top: 1px solid var(--dark-grey);
+    border-bottom: 1px solid var(--dark-grey);
+    border-radius: 5px;
+}
+
+.articleTags {
+    margin-bottom: 10px;
 }
 
 .categoryTag {
-    padding: 0.5em 1em;
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .title {
-    grid-area: title;
-    padding: 0.5em 1em;
+    grid-area: "title";
     font-size: 1.5em;
     font-weight: bold;
     text-align: left;
     text-decoration: underline;
+    margin: 0;
 }
 
 .contributors {
     grid-area: title;
-    padding: 0.5em 1em;
     font-size: 1em;
     text-align: left;
-    /* text-decoration: underline; */
+}
+
+.contributors h2 {
+    margin-top: 10px;
+    font-size: 1em;
+    font-weight: normal;
 }
 
 .pdfWrapper {
@@ -87,9 +85,6 @@
     display: grid;
     grid-template-columns: 0.4fr 1.2fr 0.4fr;
     grid-area: "left" "center" "right";
-    /* display: flex;
-    justify-content: space-between;
-    align-items: center; */
 }
 
 .pdfNavBar > * > button {
@@ -130,11 +125,10 @@
 }
 
 .abstractContainer {
-    padding: 0.5em 1em;
+    margin-top: 20px;
 }
 
 .abstractContainer > article {
-    padding: 0.5em 1em;
     font-size: 1em;
     text-align: left;
     background-color: var(--transparent-light);
