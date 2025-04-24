@@ -41,8 +41,8 @@ router.post('/login', async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'User not found.' });
     }
-    console.log(user.password)
-    console.log(password)
+    // console.log(user.password)
+    // console.log(password)
     //check if pass matches
     const isMatch = await bcrypt.compare(password, user.password);
 
@@ -158,9 +158,10 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-router.post('/update-profile', async(req,res) =>{
+router.post('/update-profile/:id', async(req,res) =>{
 try{
-  const {userID,newName, newEmail} = req.body;
+  const userID = req.params.id;
+  const {newName, newEmail} = req.body;
   const user = await User.findById(userID);
   if (!user) {
     return res.status(404).json({ error: "User not found." });

@@ -12,7 +12,7 @@ const UserTab = () => {
     const handleUpdateProfile = async (e) =>{
         e.preventDefault();
         try{
-            const response = await fetch("https://cirt-project-server.vercel.app/user/update-profile",{
+            const response = await fetch(`https://cirt-project-server.vercel.app/user/update-profile/${user._id}`,{
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
