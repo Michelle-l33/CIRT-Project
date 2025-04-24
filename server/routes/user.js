@@ -158,7 +158,7 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-router.post('update-profile', async(req,res) =>{
+router.post('/update-profile', async(req,res) =>{
 try{
   const {userID,newName, newEmail} = req.body;
   const user = await User.findById(userID);
