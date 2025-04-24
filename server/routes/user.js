@@ -5,14 +5,7 @@ const router = express.Router();
 const crypto = require('node:crypto');
 const nodemailer = require('nodemailer');
 
-// Configure email transporter (add this at the top)
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -105,15 +98,27 @@ router.post('/forgot-password', async (req, res) => {
     }
 
     // Token generation logic
-    const token = crypto.randomBytes(20).toString('hex');
-    user.resetPasswordToken = token;
-    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpiration = Date.now() + 3600000; // 1 hour expiration
+
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = resetTokenExpiration;
     await user.save();
 
+
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+
     // Email sending logic
-    const resetUrl = `https://cirt-project.vercel.app/reset-password/${token}`;
+    const resetUrl = `https://cirt-project.vercel.app/user/reset-password/token=${resetToken}`;
     const mailOptions = {
-      to: user.email,
+      to: email,
       from: process.env.EMAIL_USER,
       subject: 'Password Reset',
       text: `Password reset link:\n\n${resetUrl}`
@@ -128,10 +133,11 @@ router.post('/forgot-password', async (req, res) => {
 
 
 // Reset Password Route
-router.post('/reset-password/:token', async (req, res) => {
+router.post('/reset-password', async (req, res) => {
+  const { token, newPassword } = req.body;
   try {
     const user = await User.findOne({
-      resetPasswordToken: req.params.token,
+      resetPasswordToken: token,
       resetPasswordExpires: { $gt: Date.now() }
     });
 
@@ -140,7 +146,7 @@ router.post('/reset-password/:token', async (req, res) => {
     }
 
     // Validate password meets requirements (similar to your register validation)
-    const hashedPassword = await bcrypt.hash(req.body.password, 10);
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
     user.password = hashedPassword;
     user.resetPasswordToken = undefined;
     user.resetPasswordExpires = undefined;
