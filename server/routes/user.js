@@ -116,7 +116,7 @@ router.post('/forgot-password', async (req, res) => {
     });
 
     // Email sending logic
-    const resetUrl = `https://cirt-project.vercel.app/user/reset-password?token=${resetToken}`;
+    const resetUrl = `https://cirt-project.vercel.app/reset-password?token=${resetToken}`;
     const mailOptions = {
       to: email,
       from: process.env.EMAIL_USER,
