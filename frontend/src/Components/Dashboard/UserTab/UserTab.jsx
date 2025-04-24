@@ -16,7 +16,7 @@ const UserTab = () => {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    userId: user._id,
+                    userID: user._id,
                     newName: newName,     // can be empty string if unchanged
                     newEmail: newEmail,   // can be empty string if unchanged
                 })
