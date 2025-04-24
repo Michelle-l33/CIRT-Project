@@ -9,6 +9,7 @@
     flex-direction: column;
     justify-content: space-between;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
+    height: 450px;
   }
   
   .posterCard:hover {
@@ -76,6 +77,7 @@
   flex-wrap: wrap;
   gap: 8px;
   margin-top: 1rem;
+  overflow-x: scroll;
 }
 
 .tag {

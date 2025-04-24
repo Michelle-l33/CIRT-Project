@@ -12,7 +12,7 @@ import {
 import styles from './Sidebar.module.css';
 import { useUser } from '../../Login/UserContext';
 
-const Sidebar = ({ isOpen, toggleSidebar }) => {
+const Sidebar = ({ isOpen, toggleSidebar,onSelectTab,isPosterTab }) => {
   const { user } = useUser();
   const location = useLocation();
 
@@ -28,21 +28,21 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
         </button>
       </div>
       <ul className={styles.sideMenu}>
-        <li className={isActive('/Gallery') ? styles.active : ''}>
-          <Link to="/Gallery">
+        <li className={isPosterTab ? styles.active : ''}>
+        <button onClick={() => onSelectTab(true)} className={styles.linkBtn}>
             <div className={styles.linkContent}>
               <FaImages />
               <span>All Posters</span>
             </div>
-          </Link>
+        </button>
         </li>
-        <li className={isActive('/Papers') ? styles.active : ''}>
-          <Link to="/Papers">
+        <li className={!isPosterTab ? styles.active : ''}>
+        <button onClick={() => onSelectTab(false)} className={styles.linkBtn}>
             <div className={styles.linkContent}>
               <FaFileAlt />
               <span>All Papers</span>
             </div>
-          </Link>
+          </button>
         </li>
         <li className={isActive('/Dashboard') ? styles.active : ''}>
           <Link to="/Dashboard">

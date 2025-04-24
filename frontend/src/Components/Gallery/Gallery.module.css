@@ -168,3 +168,9 @@
   color: white;
   border-color: var(--primary);
 }
+
+.papersList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

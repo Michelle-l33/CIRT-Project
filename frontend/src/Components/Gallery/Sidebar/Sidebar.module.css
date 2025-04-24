@@ -129,7 +129,11 @@
     z-index: -1;
 }
 
-.sideBar .sideMenu li a {
+.sideBar .sideMenu li button{
+    border:none;
+}
+
+.sideBar .sideMenu li a, .sideBar .sideMenu li button {
     width: 100%;
     height: 100%;
     background: var(--light);
@@ -145,11 +149,11 @@
     padding-left: 10px;
 }
 
-.sideBar .sideMenu li a:hover {
+.sideBar .sideMenu li a:hover,.sideBar .sideMenu li button:hover {
     color: var(--success);
 }
 
-.sideBar .sideMenu li.active a {
+.sideBar .sideMenu li.active a, .sideBar .sideMenu li.active button {
     color: var(--success);
 }
 

@@ -5,16 +5,20 @@ import PosterCard from './PosterCard/PosterCard';
 import Sidebar from './Sidebar/Sidebar';
 import TopNav from './TopNav/TopNav';
 import { IoMenu } from 'react-icons/io5';
+import PaperCard from './PosterCard/PaperCard';
 
 const Gallery = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(query);
   const [posters, setPosters] = useState([]);
+  const [papers, setPapers] = useState([]);
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [isPosterTab, setIsPosterTab] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(prev => !prev);
@@ -30,23 +34,38 @@ const Gallery = () => {
   }, []);
 
   useEffect(() => {
-    const fetchGallery = async () => {
+    const fetchData = async () => {
+      setLoading(true);
+      const searchLower = searchQuery.toLowerCase();
+      const endpoint = isPosterTab
+        ? `gallery`
+        : `publications`;
+
       try {
-        const searchLower = searchQuery.toLowerCase();
-        const response = await fetch(
-          `https://cirt-project-server.vercel.app/submission/gallery?page=${page}&q=${searchLower}`,
-          { method: "GET" }
-        );
-        if (!response.ok) throw new Error("Failed to fetch gallery");
+        const response = await fetch(`https://cirt-project-server.vercel.app/submission/${endpoint}?page=${page}&q=${searchLower}`);
+        if (!response.ok) throw new Error(`Failed to fetch ${isPosterTab ? 'posters' : 'papers'}`);
         const data = await response.json();
-        setPosters(data.posters);
+
+        if (isPosterTab) {
+          setPosters(data.posters.map(poster => ({
+            ...poster,
+            tags: poster.tags || [
+              sampleCategories[Math.floor(Math.random() * sampleCategories.length)],
+              sampleCategories[Math.floor(Math.random() * sampleCategories.length)]
+            ]
+          })));
+        } else {
+          setPapers(data.articles);
+        }
         setTotalPages(data.totalPages);
       } catch (error) {
-        console.error("Error fetching gallery:", error);
+        console.error("Error fetching data:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    fetchGallery();
-  }, [page, searchQuery]);
+    fetchData();
+  }, [page, searchQuery, isPosterTab]);
 
   const sampleCategories = [
     "Corrections",
@@ -69,75 +88,75 @@ const Gallery = () => {
     ]
   }));
   
-  const filteredPosters = selectedTags.length
-    ? postersWithCategories.filter(p =>
-        selectedTags.every(tag => p.tags?.includes(tag))
+  const filteredItems = selectedTags.length
+    ? (isPosterTab ? posters : papers).filter(item =>
+        selectedTags.every(tag => item.tags?.includes(tag))
       )
-    : postersWithCategories;
+    : (isPosterTab ? posters : papers);
 
-  return (
-    <div className={`${styles.galleryContainer} ${isSidebarOpen ? '' : styles.sidebarClosed}`}>
-      <TopNav 
-        searchQuery={searchQuery} 
-        setSearchQuery={setSearchQuery} 
-        toggleSidebar={toggleSidebar}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-        sampleCategories={sampleCategories}
-      />
-      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
-
-      <main className={styles.mainContent}>
-        
-          {postersWithCategories.length > 0 ? (
-          <>
-            <div className={styles.tagFilter}>
-              {sampleCategories.map((tag) => (
-                <button
-                  key={tag}
-                  className={`${styles.tagFilterBtn} ${selectedTags.includes(tag) ? styles.active : ''}`}
-                  onClick={() => {
-                    setSelectedTags(prev =>
-                      prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
-                    );
-                  }}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-            <div className={styles.posterGrid}>
-              {filteredPosters.map((poster) => (
-                <PosterCard key={poster._id} poster={poster} />
-              ))}
-            </div>
-            
-            {totalPages > 1 && (
-              <div className={styles.pagination}>
-                <button
-                  onClick={() => setPage(prev => Math.max(prev - 1, 1))}
-                  disabled={page === 1}
-                >
-                  Previous
-                </button>
-                <span>Page {page} of {totalPages}</span>
-                <button
-                  onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
-                  disabled={page === totalPages}
-                >
-                  Next
-                </button>
-              </div>
-            )}
-          </>
-        ) : (
-          <div className={styles.noResults}>
-            No posters found matching your search.
+    return (
+      <div className={`${styles.galleryContainer} ${isSidebarOpen ? '' : styles.sidebarClosed}`}>
+        <TopNav 
+          searchQuery={searchQuery} 
+          setSearchQuery={setSearchQuery} 
+          toggleSidebar={toggleSidebar}
+          selectedTags={selectedTags}
+          setSelectedTags={setSelectedTags}
+          sampleCategories={sampleCategories}
+        />
+  
+        <Sidebar 
+          isOpen={isSidebarOpen} 
+          toggleSidebar={toggleSidebar} 
+          onSelectTab={setIsPosterTab} 
+          isPosterTab={isPosterTab}
+        />
+  
+        <main className={styles.mainContent}>
+          <div className={styles.tagFilter}>
+            {sampleCategories.map((tag) => (
+              <button
+                key={tag}
+                className={`${styles.tagFilterBtn} ${selectedTags.includes(tag) ? styles.active : ''}`}
+                onClick={() => {
+                  setSelectedTags(prev =>
+                    prev.includes(tag) ? prev.filter(t => t !== tag) : [...prev, tag]
+                  );
+                }}
+              >
+                {tag}
+              </button>
+            ))}
           </div>
-        )}
-      </main>
-    </div>
-  );
-};
+  
+          {loading ? (
+            <div>Loading {isPosterTab ? 'posters' : 'papers'}...</div>
+          ) : filteredItems.length > 0 ? (
+            <>
+              <div className={isPosterTab ? styles.posterGrid : styles.papersList}>
+                {isPosterTab ? (
+                  filteredItems.map(poster => <PosterCard key={poster._id} poster={poster} />)
+                ) : (
+                  filteredItems.map(paper => <PaperCard key = {paper._id} paper={paper}/>)
+                )}
+              </div>
+              {totalPages > 1 && (
+                <div className={styles.pagination}>
+                  <button onClick={() => setPage(prev => Math.max(prev - 1, 1))} disabled={page === 1}>Previous</button>
+                  <span>Page {page} of {totalPages}</span>
+                  <button onClick={() => setPage(prev => Math.min(prev + 1, totalPages))} disabled={page === totalPages}>Next</button>
+                </div>
+              )}
+            </>
+          ) : (
+            <div className={styles.noResults}>
+              No {isPosterTab ? 'posters' : 'papers'} found matching your search.
+            </div>
+          )}
+        </main>
+      </div>
+    );
+  };
+  
 
 export default Gallery;
