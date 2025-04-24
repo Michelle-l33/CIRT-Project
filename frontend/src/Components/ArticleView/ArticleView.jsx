@@ -60,31 +60,11 @@ const ArticleViewPage = () => {
 
     return (
         <div className={styles.bigContainer}>
-            <NavBar/>
-            <SearchBar className={styles.searchBar}/>
+                <NavBar/>
+                <div className={styles.searchBarContainer}>
+                    <SearchBar/>
+                </div>
                 <div className={styles.articleInformation}>
-                    {/* <div className={styles.sideBar}>
-                      <SideBar/>
-                    </div> */}
-                    <div className={styles.categoryTag}>
-                        <RiArticleLine /><span>{loading ? "Loading": submission.isPoster ? "Poster" : "Article"}</span>
-                    </div>
-                    <div className={styles.title}>
-
-                    <h1>{loading ? "Loading..." : submission?.title || "Title Not Found"}</h1>
-                    </div>
-                    <div className={styles.contributors}>
-                    <h1>{loading ? "Loading..." : user?.isReviewer ? "REDACTED" :`${submission?.lastName}, ${submission.firstName}` || "Author Not Found"}</h1>
-                    </div>
-                    <div className={styles.contributors}>
-                    <h2>
-                      {loading ? "Loading..." : submission?.collaborators?.length > 0 ? (
-                        `Collaborators: ${submission.collaborators.join(", ")}` // Display as comma-separated list
-                      ) : (
-                        ""
-                      )}
-                    </h2>
-                    </div>
                     <div className={styles.articleTags}>
                         {/* ** INSERT PLACEHOLDER TAGS HERE** */}
                         <h4>{loading ? "Loading..." : submission?.tags?.length > 0 ? (
@@ -93,6 +73,28 @@ const ArticleViewPage = () => {
                           ""
                         )}</h4>
                     </div>
+
+                    <div className={styles.categoryTag}>
+                        <RiArticleLine /><span>{loading ? "Loading": submission.isPoster ? "Poster" : "Article"}</span>
+                    </div>
+                    <div className={styles.title}>
+                      <h1>{loading ? "Loading..." : submission?.title || "Title Not Found"}</h1>
+                    </div>
+
+                    <div className={styles.contributors}>
+                      <h1>{loading ? "Loading..." : user?.isReviewer ? "REDACTED" :`${submission?.lastName}, ${submission.firstName}` || "Author Not Found"}</h1>
+                    </div>
+                    
+                    <div className={styles.contributors}>
+                      <h2>
+                        {loading ? "Loading..." : submission?.collaborators?.length > 0 ? (
+                          `Collaborators: ${submission.collaborators.join(", ")}` // Display as comma-separated list
+                        ) : (
+                          ""
+                        )}
+                      </h2>
+                    </div>
+                    
                       {window.innerWidth > 758 && (
                           <div className={styles.abstractContainer}> 
                           <h3>Abstract</h3>

@@ -25,7 +25,6 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     margin: 0;
-    text-align: center;
     cursor: pointer;
     border-radius: 0;
     padding-block: 1px;
@@ -33,7 +32,8 @@
     text-transform: none;
     text-indent: 0px;
     text-shadow: none;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
     box-sizing: border-box;
     padding: 5px;
     transition: background-color 0.3s ease, transform 0.8s ease;
