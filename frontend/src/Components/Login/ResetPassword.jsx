@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,useLocation } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 import Footer from '../HomePage/Footer/Footer';
 import styles from './Login.module.css';
