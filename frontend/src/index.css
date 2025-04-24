@@ -1,10 +1,16 @@
 :root {
   --primary: #d90429;
   --light-primary:#ff313167;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 a:-webkit-any-link {
   color: #363949;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 body {
