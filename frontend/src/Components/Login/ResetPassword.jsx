@@ -5,19 +5,21 @@ import Footer from '../HomePage/Footer/Footer';
 import styles from './Login.module.css';
 
 const ResetPassword = () => {
-    const [password, setPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
-    const { token } = useParams();
     const navigate = useNavigate();
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+    const token = queryParams.get('token');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await fetch(`https://cirt-project-server.vercel.app/user/reset-password/${token}`, {
+            const response = await fetch(`https://cirt-project-server.vercel.app/user/reset-password`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ password }) // Ensure no typos here
+                body: JSON.stringify({ token, newPassword }) // Ensure no typos here
             });
 
             if (!response.ok) {
@@ -42,12 +44,13 @@ const ResetPassword = () => {
                 <div className={styles.login}>
                     <h2>Set New Password</h2>
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="password">New Password:</label>
+                        <label htmlFor="newPassword">New Password:</label>
                         <div className={styles.passwordContainer}>
                             <input
                                 type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                id="newPassword"
+                                value={newPassword}
+                                onChange={(e) => setNewPassword(e.target.value)}
                                 required
                             />
                         </div>
