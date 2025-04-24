@@ -17,7 +17,7 @@ const UserTab = () => {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
                     userID: user._id,
-                    newName: newName,     // can be empty string if unchanged
+                    newName: newName.toUpperCase(),     // can be empty string if unchanged
                     newEmail: newEmail,   // can be empty string if unchanged
                 }),
                 mode: 'cors',

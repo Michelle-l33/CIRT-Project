@@ -256,6 +256,10 @@
     row-gap: 20px;
 }
 
+.taskListEd .taskList span {
+   padding-left: 20px;
+}
+
 .taskListEd .taskHeader {
     display: flex;
     justify-content: space-between;

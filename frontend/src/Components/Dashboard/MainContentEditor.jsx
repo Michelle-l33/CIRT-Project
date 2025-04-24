@@ -18,7 +18,7 @@ const MainContentEditor = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Dashboard Editor - A work In Progress</h1>                
+                    <h1>Editor Dashboard</h1>                
                 </div>
 
                 <div className={styles.content}>

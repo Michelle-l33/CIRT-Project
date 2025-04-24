@@ -37,7 +37,7 @@ const TaskPage = () => {
                     <li key = {task._id}>
                         <Reminder task = {task}/>
                     </li>)
-                ) : (<span>Noooo Task! Yay!</span>)}
+                ) : (<span>No Tasks! Yay!</span>)}
             </ul>
         
         );
@@ -123,7 +123,7 @@ const TaskPage = () => {
 
                 <div className = {styles.taskListEd}>
                     <div className = {styles.taskHeader}>
-                        <h2>Task for the Editor</h2>
+                        <h2>Reminders</h2>
                     </div>
                     <TaskList />
                 </div>
