@@ -19,9 +19,11 @@ const UserTab = () => {
                     userID: user._id,
                     newName: newName,     // can be empty string if unchanged
                     newEmail: newEmail,   // can be empty string if unchanged
-                })
+                }),
+                mode: 'cors',
             })
             const data = await response.json();
+            console.log(data);
             if (response.ok) {
                 alert("Profile updated!");
                 window.location.reload(); // or update state if you're managing it
