@@ -16,30 +16,35 @@
     gap: 20px;
 }
 
-.userTabContainer .userRight .header {
+.userTabContainer .userRight .userBtn {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    
+    padding: 0;
+    margin: 0;
+    padding-top: 20px;
+    gap: 5px;
 }
 
-.userTabContainer .userRight .header .userName {
+.userTabContainer .userRight .userBtn .userName {
     color: var(--primary);
 }
 
-.userTabContainer .userRight .header button {
+.userTabContainer .userRight .userBtn button {
     display: inline-block;
-    margin:5px;
     padding: 5px;
     background-color: inherit;
     background-color: inherit;
     color: var(--dark);
 }
 
-.userTabContainer .userRight .header button:hover {
+.userTabContainer .userRight .userBtn button:hover {
     color: var(--danger);
     background-color: var(--light-danger);
     border-color: var(--danger);
+}
+
+.userTabContainer .userRight .userBtn button * {
+    color: var(--dark);
 }
 
 .userTabContainer .userRight .emailContainer {

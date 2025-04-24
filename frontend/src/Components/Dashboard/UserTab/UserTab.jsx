@@ -80,14 +80,11 @@ const UserTab = () => {
                     </div>
                 }
 
-                    <div className = {styles.header}>
-                        <div>
+                    <div className = {styles.userBtn}>
                             <button onClick={() => setIsEditMode(!isEditMode)}>
                                 {isEditMode ? "Stop Editting" : "Edit Profile"}
                             </button>
-                            <button ><a href="/forgot-password">Change Password</a></button>
-                        </div>
-                        
+                            <button><a href="/forgot-password">Change Password</a></button>
                     </div>
                 </div>
             </div>
