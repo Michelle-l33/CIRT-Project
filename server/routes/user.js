@@ -171,17 +171,18 @@ try{
   if (newEmail && newEmail.toLowerCase() !== user.email) {
     const lowerEmail = newEmail.toLowerCase();
     const existingUser = await User.findOne({ email: lowerEmail });
-    if (existingUser && existingUser._id.toString() !== userId) {
+    if (existingUser && existingUser._id.toString() !== userID) {
       return res.status(400).json({ error: "Email is already in use." });
     }
     user.email = lowerEmail;
+  }
     if (newName && newName !== user.name) {
       user.name = newName;
     }
 
     await user.save();
     res.status(200).json({ message: "Profile updated successfully." });
-  } 
+   
 }  catch (error) {
   res.status(500).json({ error: error.message });
 }
