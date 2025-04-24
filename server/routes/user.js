@@ -158,4 +158,32 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
+router.post('update-profile', async(req,res) =>{
+try{
+  const {userID,newName, newEmail} = req.body;
+  const user = await User.findById(userID);
+  if (!user) {
+    return res.status(404).json({ error: "User not found." });
+  }
+
+  // If new email is provided and different from current
+  if (newEmail && newEmail.toLowerCase() !== user.email) {
+    const lowerEmail = newEmail.toLowerCase();
+    const existingUser = await User.findOne({ email: lowerEmail });
+    if (existingUser && existingUser._id.toString() !== userId) {
+      return res.status(400).json({ error: "Email is already in use." });
+    }
+    user.email = lowerEmail;
+    if (newName && newName !== user.name) {
+      user.name = newName;
+    }
+
+    await user.save();
+    res.status(200).json({ message: "Profile updated successfully." });
+  } 
+}  catch (error) {
+  res.status(500).json({ error: error.message });
+}
+});
+
 module.exports = router;

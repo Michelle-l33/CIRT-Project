@@ -4,6 +4,7 @@
     left: 230px;
     transition: all 0.3s ease;
     color: var(--dark);
+   
 }
 
 .userTabContainer .bigContaner {
@@ -12,11 +13,14 @@
     display: grid;
     grid-template-columns: 1fr 5fr;
     padding: 20px;
+    gap: 20px;
 }
 
 .userTabContainer .userRight .header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
+    
 }
 
 .userTabContainer .userRight .header .userName {
@@ -24,7 +28,8 @@
 }
 
 .userTabContainer .userRight .header button {
-    display: block;
+    display: inline-block;
+    margin:5px;
     padding: 5px;
     background-color: inherit;
     background-color: inherit;
@@ -41,7 +46,7 @@
     margin: 20px 0;
 }
 
-.userTabContainer .userRight .emailContainer input {
+.userTabContainer .userRight input {
     margin: 10px 0;
     font-size: inherit;
     width: 50%;
@@ -51,6 +56,7 @@
     border-radius: 20px;
     border: 1px solid var(--dark);
     padding: 2px;
+    text-align:center;
 }
 
 .userTabContainer .userRight .emailContainer input:focus {
@@ -65,13 +71,28 @@
     align-items: center;
 }
 
-.userTabContainer .userLeft .logo {
+.userTabContainer .userLeft img {
     display: block;
     object-fit: contain;
+    max-width: 150px;
+
 }
 
 .userTabContainer.close {
     width: calc(100% - 60px);
     left: 60px;
     height: fit-content;
+}
+
+.inputRow {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.inputRow h4 {
+    margin: 0;
+    white-space: nowrap;
 }

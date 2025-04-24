@@ -1,6 +1,6 @@
 import styles from './MainContentNav.module.css';
 
-import sparLogo from '../../../Asset/Spartans.logo.png'
+import sparLogo from '../../../Asset/spartanLogo.png'
 import { FaRegBell } from "react-icons/fa";
 import { TiThMenu } from "react-icons/ti";
 

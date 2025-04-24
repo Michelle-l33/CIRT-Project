@@ -17,7 +17,7 @@ const LoginPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isPublic, setIsPublic] = useState(false);
-    const [isAuthor, setIsAuthor] = useState(false);
+    const [isAuthor, setIsAuthor] = useState(true);
     const [isEditor, setIsEditor] = useState(false);
     const [isReviewer, setIsReviewer] = useState(false);
     const [loginEmail, setLoginEmail] = useState("");
@@ -245,7 +245,7 @@ const LoginPage = () => {
                                 required
                             />
                         </div>
-                        <label htmlFor="account-type">Account Type:</label>
+                        {/* <label htmlFor="account-type">Account Type:</label>
                         <select
                             name="account_type"
                             id="account-type"
@@ -257,7 +257,7 @@ const LoginPage = () => {
                             <option value="author">Author</option>
                             <option value="editor">Editor</option>
                             <option value="reviewer">Reviewer</option>
-                        </select>
+                        </select> */}
 
                         <label htmlFor="register-password">Enter your Password:</label>
                         <div className={styles.passwordContainer}>
