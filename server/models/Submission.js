@@ -25,7 +25,7 @@ const submissionSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   }
-});
+}, {timestamps: true });
 
 // Create a model
 const Submission = mongoose.model("Submission", submissionSchema);

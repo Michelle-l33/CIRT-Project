@@ -430,7 +430,7 @@ router.get("/tasks/:editorID", async (req, res) => {
 route.get("/recent-submissions",async (req,res) => {
   try {
     const posters = await Submission.find({ isPoster: true })
-      .sort({ date: -1 }) // Use your custom date field
+      .sort({ createdAt: -1 }) // Use your custom date field
       .limit(5); // Show the latest 5 posters
 
     res.json(posters);
