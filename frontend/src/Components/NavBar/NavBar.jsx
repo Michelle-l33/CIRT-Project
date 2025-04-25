@@ -17,7 +17,7 @@ const NavBar = ({isLoggedIn}) => {
                 <Link to="/"> 
                     <img src = {logo} alt = "Logo"/>
                 </Link>  
-                <span>Criminology Institute For Research And Training</span>           
+                {/* <span>Criminology Institute For Research And Training</span>            */}
             </div>
             
             {/* Hamburger icon (shown on small screens) */}
@@ -27,16 +27,16 @@ const NavBar = ({isLoggedIn}) => {
 
             {/* Dropdown Menu */}
             <div className={`${styles.dropdownMenu} ${menuOpen ? styles.show : ''}`}>
-                <button><a href="/Gallery"><span>Posters</span></a></button>
-                <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><a href="/"><span>Home</span></a></button>
                 <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><a href="/Gallery"><span>Database</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
 
             <div className={styles.navButtons}>
-                <button><a href="/Gallery"><span>Posters</span></a></button>
-                <button><a href="/Papers"><span>Journals</span></a></button>
+                <button><a href="/"><span>Home</span></a></button>
                 <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><a href="/Gallery"><span>Database</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
 

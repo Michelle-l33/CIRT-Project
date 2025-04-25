@@ -1,0 +1,26 @@
+/* Featured.module.css */
+.featuredContainer {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    margin: 2rem auto;
+  }
+  
+  .featuredContainer h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+    text-align: center;
+  }
+  
+  .posterCard {
+    margin-bottom: 1.5rem;
+    transition: transform 0.2s ease;
+  }
+  
+  .posterCard:hover {
+    transform: scale(1.02);
+  }
+  

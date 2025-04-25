@@ -1,7 +1,7 @@
 import styles from './SearchBar.module.css';
 
 import SearchBar from '../../ArticleView/SearchBar/SearchBar';
-import river from '../../../Asset/river.jpg';
+import ladyjustice from '../../../Asset/ladyjustice.jpg';
 
 const SearchBarHome =() => {
     //javascript funcs go here
@@ -9,12 +9,13 @@ const SearchBarHome =() => {
 
         <div className = {styles.bigContainer}>
             <h2 className = {styles.searchHeading}>Criminology Institute For Research And Training</h2>
-
+            
             <div className = {styles.searchContainer}>
                 <SearchBar />
             </div>
+            
 
-            <img className = {styles.searchPic} src={river} />
+            
         </div>
     );
 };

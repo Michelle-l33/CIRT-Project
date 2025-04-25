@@ -6,6 +6,7 @@ const Comment = require("../models/Comment");
 const router = express.Router();
 const {upload, s3Client} = require("../awsConnect");
 const {DeleteObjectCommand}= require("@aws-sdk/client-s3");
+const { route } = require("./user");
 
 
 // Upload Submission
@@ -423,6 +424,18 @@ router.get("/tasks/:editorID", async (req, res) => {
     res.json(tasks);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+route.get("/recent-submissions",async (req,res) => {
+  try {
+    const posters = await Submission.find({ isPoster: true })
+      .sort({ date: -1 }) // Use your custom date field
+      .limit(5); // Show the latest 5 posters
+
+    res.json(posters);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch recent posters" });
   }
 });
 

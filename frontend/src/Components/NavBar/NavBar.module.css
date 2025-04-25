@@ -10,7 +10,7 @@
     box-shadow: 1px 1px 1px 1px rgb(168, 168, 168);  
     width: auto;
     height: 70px;
-    padding: 0 20px;
+    padding: 0 15px;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -140,23 +140,35 @@
 /* From Uiverse.io by TISEPSE */ 
 .navButtons{
   display:flex;
-  justify-content: flex-end;
-  align-items: center;
+  /* justify-content: flex-end;
+  align-items: center; */
+  margin:0px;
 
 }
 .navButtons a {
-  position: relative;
-  display: inline-block;
-  padding: 8px 16px;
-  border: 1px solid var(--primary);
-  text-transform: uppercase;
+  /* position: relative; */
+  /* display: inline-block; */
+  /* padding: 4px 10px; */
+  /* border: 1px solid var(--primary); */
+  /* text-transform: uppercase; */
   color: #fefefe;
   text-decoration: none;
   font-weight: 300;
   font-size: 15px;
+  margin: 0 px;
 }
 
-.navButtons a::before {
+.navButtons a:hover {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-underline-offset: 4px;
+
+}
+
+
+
+
+/* .navButtons a::before {
   content: '';
   position: absolute;
   top: 6px;
@@ -166,9 +178,9 @@
   background-color: #000000;
   transition: 0.1s ease-in-out;
   transform: scaleY(1);
-}
+} */
 
-.navButtons a:hover::before {
+/* .navButtons a:hover::before {
   transform: scaleY(0);
 }
 
@@ -187,7 +199,7 @@
 
 .navButtons a:hover::after {
   transform: scaleX(0);
-}
+} */
 
 .navButtons a span {
   position: relative;
@@ -200,6 +212,7 @@
   background-color: #000000;
   border: none;
 }
+
 
 
 /* hamburger icon */

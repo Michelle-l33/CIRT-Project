@@ -5,11 +5,7 @@ import DropDownBar from '../DropDownBar/DropDownBar';
 import SearchBar from './SearchBar/SearchBar';
 import FAQ from './FAQ/FAQ';
 import Footer from './Footer/Footer';
-
-import beidou from '../../Asset/montreal.avif';
-import clorinde from '../../Asset/clean.avif';
-import navia from '../../Asset/posters.avif';
-import ningguang from '../../Asset/talent.avif';
+import Featured from './Featured/Featured';
 
 import poster1 from '../../Asset/poster1.jpg'
 import poster2 from '../../Asset/poster2.jpg'
@@ -76,7 +72,8 @@ const homePage = () => {
 
       <main>
         <SearchBar /> 
-        <FAQ />
+        <Featured />
+        {/* <FAQ /> */}
         <Gallery listOfPictureInfos ={listOfPictureInfos}/>
         <Footer />
       </main>
