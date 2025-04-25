@@ -162,6 +162,18 @@ router.get("/publications", async (req, res) => {
     }
   });
 
+  router.get("/featured",async (req,res) => {
+    try {
+      const posters = await Submission.find({ isPoster: true })
+        .sort({ createdAt: -1 }) // Use your custom date field
+        .limit(5); // Show the latest 5 posters
+  
+      res.json(posters);
+    } catch (error) {
+      res.status(500).json({ error: "Failed to fetch recent posters" });
+    }
+  });
+
 // individual submission
 router.get("/:id", async (req, res) => {
   try {
@@ -427,17 +439,7 @@ router.get("/tasks/:editorID", async (req, res) => {
   }
 });
 
-router.get("/featured",async (req,res) => {
-  try {
-    const posters = await Submission.find({ isPoster: true })
-      .sort({ createdAt: -1 }) // Use your custom date field
-      .limit(5); // Show the latest 5 posters
 
-    res.json(posters);
-  } catch (error) {
-    res.status(500).json({ error: "Failed to fetch recent posters" });
-  }
-});
 
 
 
