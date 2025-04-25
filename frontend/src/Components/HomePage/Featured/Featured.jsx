@@ -9,7 +9,7 @@ const Featured = () => {
     useEffect(()=>{
         const fetchFeatured = async()=>{
             try{
-                const response = await fetch("https://cirt-project-server.vercel.app/submission/recent-submissions",{
+                const response = await fetch("https://cirt-project-server.vercel.app/submission/featured",{
                     method: "GET"
                 })
                 if (!response.ok) {

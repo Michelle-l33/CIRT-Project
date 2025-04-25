@@ -427,7 +427,7 @@ router.get("/tasks/:editorID", async (req, res) => {
   }
 });
 
-router.get("/recent-submissions",async (req,res) => {
+router.get("/featured",async (req,res) => {
   try {
     const posters = await Submission.find({ isPoster: true })
       .sort({ createdAt: -1 }) // Use your custom date field
