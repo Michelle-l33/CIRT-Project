@@ -27,37 +27,23 @@
     scroll-snap-type: x mandatory;
   }
   
-  h2 {
-    font-size: 1.8rem;
+  .header h2 {
+    font-size: 1.4rem;
     margin-bottom: 1.5rem;
     color: #000000;
     text-align: center;
-  }
-
-.header:before {
-    width: 28px;
-    height: 5px;
-    display: block;
-    content: "";
-    position: absolute;
-    bottom: 15px;
-    left: 50%;
-    margin-left: -14px;
-    background-color: var(--primary);
-}
-
-  .header:after {
-    width: 100px;
-    height: 1px;
-    display: block;
-    content: "";
     position: relative;
-    margin-top: 25px;
-    left: 50%;
-    bottom: 17px;
-    margin-left: -50px;
-    background-color: var(--primary);
-}
+    
+  }
+  .header h2::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 3px;
+    background-color: red;
+    margin: 8px auto 0 auto; /* centers the line */
+    border-radius: 2px;
+  }
 
   
   .posterCard {

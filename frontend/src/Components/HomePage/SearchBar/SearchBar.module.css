@@ -76,7 +76,7 @@
     align-items: center;
     justify-content: center;
     font-weight: 600;
-    font-size: clamp(1.5rem, 2.8vw, 5.5rem);
+    font-size: clamp(1.6rem, 2.8vw, 5.5rem);
     line-height: 1.2;
     letter-spacing: 1px;
     padding: 0;
