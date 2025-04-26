@@ -154,7 +154,7 @@ const MainContentAuthor = () => {
             }
         };
         fetchComments();
-    },[currSub,submissionList]);
+    },[currSub, submissionList]);
 
     if (loading) {
         return <div>Loading...</div>;

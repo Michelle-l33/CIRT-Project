@@ -1,0 +1,25 @@
+.mainContent {
+    position: relative;
+    width: calc(100% - 230px);
+    left: 230px;
+    transition: all 0.3s ease;
+}
+
+.mainContent main {
+    width: 100%;
+    padding: 36px 24px;
+    max-height: calc(100vh - 56px);
+}
+
+.mainContent .header h1 {
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: var(--dark);
+}
+
+.mainContent.close {
+    width: calc(100% - 60px);
+    left: 60px;
+    height: fit-content;
+}

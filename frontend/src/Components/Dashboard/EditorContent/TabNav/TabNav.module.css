@@ -115,9 +115,9 @@
 
 .tabHeader .submissionOption {
     width: auto;
-    right: 10%;
+    right: 20px;
     top: 100%;
-    z-index: 4;
+    z-index: 100;
     grid-template-columns: minmax(150px, fit-content);
     padding: 3px 0;
     row-gap: 2px;
@@ -326,8 +326,9 @@
     border: 1px solid var(--transparent-light);
     border-radius: 4px;
     box-shadow: 0 2px 8px var(--transparent-dark);
-    z-index: 100;
+    z-index: 5;
     max-width: 250px;
+    overflow-x: scroll;
 }
 
 .dropdownHeader {
@@ -363,10 +364,6 @@
 .tabNavContainer.close .tabNav * {
     width: 100%;
     align-items: center;
-}
-
-.tabNavContainer.close .tab .tabHeader {
-    overflow-x: auto;
 }
 
 .tabNavContainer.close .submissionList .submission {
