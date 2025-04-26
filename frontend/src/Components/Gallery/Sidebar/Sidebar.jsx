@@ -10,10 +10,8 @@ import {
   FaInfoCircle   // Icon for "About Us"
 } from 'react-icons/fa';
 import styles from './Sidebar.module.css';
-import { useUser } from '../../Login/UserContext';
 
 const Sidebar = ({ isOpen, toggleSidebar,onSelectTab,isPosterTab }) => {
-  const { user } = useUser();
   const location = useLocation();
 
   const isActive = (path) => {

@@ -3,9 +3,25 @@ import { BsSearchHeart } from "react-icons/bs";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
+
+import User from "./User";
+
 import { useState } from "react";
 
 const UserList = () => {
+
+    const listOfUsers = [ {
+            _id: "123",
+            name: "Anna",
+            email: "fronzen@disney.com"
+        }, 
+        {   
+            _id: "456",
+            name: "Elsa",
+            email: "fronzen2@disney.com"
+        }, 
+    ]
+
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -16,7 +32,6 @@ const UserList = () => {
         <div className= {styles.adminContent}>
             <div className = {styles.tabHeader}>
                     <h3>List of User</h3>
-
                     <div className = {styles.left}>
 
                         <form onSubmit = {(event) => event.preventDefault()}>
@@ -41,8 +56,21 @@ const UserList = () => {
                             <button onClick={() => setPage(prev => Math.min(prev + 1, totalPages))} disabled={page === totalPages}><GrNext /></button>
                         </div>
                     )}
-
             </div>
+            
+            <section>
+                
+                <ul className={styles.userListHeader}>
+                    <li>Name</li>
+                    <li>Email</li>
+                </ul>
+
+                <ul className={styles.userList}>
+                    {
+                        listOfUsers.map((oneUser) => (<User key={oneUser._id} user = {oneUser}/>))
+                    }
+                </ul>
+            </section>
     </div>
     )
 }
@@ -57,15 +85,13 @@ const AddUserBtn = () => {
                 <h4>Add User</h4>
                 
                 {/* the code for UserForm is defined down below */}
-                {isOpen && <UserForm onClose={() => setIsOpen(false)} />}
-
-                <button className={styles.closeBtn} onClick = {() => setIsOpen(null)}>&#215;</button>
+                {isOpen && <AddUserForm onClose={() => setIsOpen(false)} />}
             </div>
         </div>
     )
 }
 
-const UserForm = ({ onClose }) => {
+const AddUserForm = ({ onClose }) => {
     return (
         <>
             <form className={styles.userForm}>
