@@ -10,6 +10,8 @@
     justify-content: space-between;
     transition: box-shadow 0.3s ease, transform 0.3s ease;
     height: 450px;
+    width: 100%;
+    max-width: 100%;
   }
   
   .posterCard:hover {
@@ -19,9 +21,10 @@
   
   .posterImage {
     width: 100%;
-    height: auto;
+    height: 300px;
     border-radius: 8px;
     margin-bottom: 1rem;
+    object-fit: cover;
   }
   
   .posterInfo h3 {
@@ -29,6 +32,14 @@
     font-weight: 600;
     color: var(--dark);
     margin-bottom: 0.5rem;
+    width: 100%; /* Ensure the title takes up the full available width */
+    overflow: hidden; /* Hide any text that overflows */
+    text-overflow: ellipsis; /* Add an ellipsis ("...") at the end of the truncated text */
+    white-space: nowrap; /* Prevent the text from wrapping to the next line */
+  }
+  .posterInfo {
+    flex-grow: 1;
+    overflow: scroll;
   }
   
   .author {
@@ -87,4 +98,6 @@
   padding: 4px 10px;
   border-radius: 12px;
   border: 1px solid #ccc;
+  max-width: 150px;
+  overflow: hidden;
 }

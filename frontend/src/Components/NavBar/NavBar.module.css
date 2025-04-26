@@ -46,9 +46,6 @@
     flex-grow: 1;
 }
 
-/* styling copy from https://ui-buttons.web.app/double-diagonal */
-
-/* .navRight a,
 .navRight a *,
 .navRight a :after,
 .navRight a :before,
@@ -131,26 +128,18 @@
 
 .navRight a:hover:after {
   --progress: -100%;
-} */
-
+} 
 .hidden {
   visibility: hidden;
 }
 
-/* From Uiverse.io by TISEPSE */ 
 .navButtons{
   display:flex;
-  /* justify-content: flex-end;
-  align-items: center; */
   margin:0px;
 
 }
 .navButtons a {
-  /* position: relative; */
-  /* display: inline-block; */
-  /* padding: 4px 10px; */
-  /* border: 1px solid var(--primary); */
-  /* text-transform: uppercase; */
+
   color: #fefefe;
   text-decoration: none;
   font-weight: 300;
@@ -165,41 +154,6 @@
 
 }
 
-
-
-
-/* .navButtons a::before {
-  content: '';
-  position: absolute;
-  top: 6px;
-  left: -2px;
-  width: calc(100% + 4px);
-  height: calc(100% - 12px);
-  background-color: #000000;
-  transition: 0.1s ease-in-out;
-  transform: scaleY(1);
-} */
-
-/* .navButtons a:hover::before {
-  transform: scaleY(0);
-}
-
-.navButtons a::after {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: -2px;
-  height: calc(100% + 4px);
-  width: calc(100% - 12px);
-  background-color: #000000;
-  transition: 0.1s ease-in-out;
-  transform: scaleX(1);
-  transition-delay: 0.1s;
-}
-
-.navButtons a:hover::after {
-  transform: scaleX(0);
-} */
 
 .navButtons a span {
   position: relative;
@@ -266,3 +220,4 @@
     display: none;
   }
 }
+

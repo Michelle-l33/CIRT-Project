@@ -2,8 +2,10 @@ import React from 'react';
 import styles from './TopNav.module.css';
 import utampaLogo from '../../../Asset/Spartans.logo.png'; 
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setSelectedTags, sampleCategories }) => {
+  const[menuOpen,setMenuOpen] = useState(false);
   const handleChange = (e) => {
     setSearchQuery(e.target.value);
   };
@@ -19,7 +21,7 @@ const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setS
         />
         </Link>
         <span className={styles.welcomeMessage}>
-          Criminology Institute for Research and Training Repository
+          CIRT Database
         </span>
       </div>
 
@@ -32,6 +34,24 @@ const TopNav = ({ searchQuery, setSearchQuery, isSidebarOpen, selectedTags, setS
             value={searchQuery}
             onChange={handleChange}
           />
+        </div>
+        {/* Hamburger icon (shown on small screens) */}
+        <div className={styles.hamburger} onClick={() => setMenuOpen(!menuOpen)}>
+                ☰ 
+            </div>
+
+            {/* Dropdown Menu */}
+            <div className={`${styles.dropdownMenu} ${menuOpen ? styles.show : ''}`}>
+                <button><a href="/"><span>Home</span></a></button>
+                <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><a href="/Gallery"><span>Database</span></a></button>
+                <button><Link to="/Dashboard"><span>My Account</span></Link></button>
+            </div>
+        <div className={styles.navButtons}>
+                <button><a href="/"><span>Home</span></a></button>
+                <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><a href="/Gallery"><span>Database</span></a></button>
+                <button><Link to="/Dashboard"><span>My Account</span></Link></button>
         </div>
         
       </div>

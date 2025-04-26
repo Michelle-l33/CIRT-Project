@@ -1,23 +1,44 @@
 /* Featured.module.css */
+.container{
+    padding: 20px;
+}
+
 .featuredContainer {
-    padding: 2rem;
+    display: flex;
+    overflow-x: auto;
+    gap:16px;
+    padding: 20px ;
     background-color: #f9f9f9;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    max-width: 1200px;
-    margin: 2rem auto;
+    scroll-padding-left: 10px;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .featuredContainer::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
   }
   
-  .featuredContainer h2 {
+  .featuredContainer {
+    scroll-snap-type: x mandatory;
+  }
+  
+  h2 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #333;
+    color: #000000;
     text-align: center;
+
   }
+
   
   .posterCard {
+    flex: 0 0 280px; /* fixed width for cards */
     margin-bottom: 1.5rem;
     transition: transform 0.2s ease;
+    scroll-snap-align: start;
   }
   
   .posterCard:hover {

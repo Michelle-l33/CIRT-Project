@@ -25,13 +25,18 @@ const Featured = () => {
         fetchFeatured();
     },[]);
     return (
-        <div className={styles.featuredContainer}>
-            <h2>Recent Posters!</h2>
-      {posters.map((poster) => (
-        <div key={poster._id} className={styles.posterCard}>
-          <PosterCard key={poster._id} poster={poster} />
+    <div className={styles.container}>
+      
+        <div className={styles.header}>
+            <h2>Latest Contributions</h2>
         </div>
-      ))}
+        <div className={styles.featuredContainer}>
+            {posters.map((poster) => (
+                <div key={poster._id} className={styles.posterCard}>
+                    <PosterCard key={poster._id} poster={poster} />
+                </div>
+            ))}
+        </div>
     </div>
     );
 };

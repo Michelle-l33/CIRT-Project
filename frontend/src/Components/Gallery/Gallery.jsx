@@ -104,7 +104,7 @@ const Gallery = () => {
           setSelectedTags={setSelectedTags}
           sampleCategories={sampleCategories}
         />
-  
+
         <Sidebar 
           isOpen={isSidebarOpen} 
           toggleSidebar={toggleSidebar} 
