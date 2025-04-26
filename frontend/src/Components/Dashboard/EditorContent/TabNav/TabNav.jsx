@@ -1,7 +1,7 @@
 import styles from './TabNav.module.css';
 
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { dashBoardContext } from '../Dashboard';
+import { dashBoardContext } from '../../Dashboard';
 import { useContext } from 'react';
 
 //routing to the MyQueue when clicked tabNav learned from https://stackoverflow.com/questions/32706913/react-router-what-is-the-purpose-of-indexroute

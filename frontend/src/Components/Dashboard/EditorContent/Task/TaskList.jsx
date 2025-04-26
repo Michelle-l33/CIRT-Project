@@ -2,7 +2,7 @@ import styles from './Task.module.css';
 import { MdAddTask } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect, useContext } from 'react';
-import { dashBoardContext } from '../Dashboard';
+import { dashBoardContext } from '../../Dashboard';
 import { PiFinnTheHumanThin } from "react-icons/pi";
 
 

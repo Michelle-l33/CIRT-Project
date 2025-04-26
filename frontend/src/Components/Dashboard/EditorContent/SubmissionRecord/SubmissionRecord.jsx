@@ -7,7 +7,7 @@ import SubmissionParticipant from './SubmissonParticipant';
 
 import { SubmissionsProvider } from './SubmissionContext'
 import { useState, useContext } from 'react';
-import { dashBoardContext } from '../Dashboard';
+import { dashBoardContext } from '../../Dashboard';
 
 const SubmissionRecord = () => {
 

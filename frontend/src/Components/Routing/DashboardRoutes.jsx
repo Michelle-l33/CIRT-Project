@@ -5,15 +5,17 @@ import Dashboard from '../Dashboard/Dashboard';
 import MainContentAuthor from '../Dashboard/MainContentAuthor';
 import MainContentEditor from '../Dashboard/MainContentEditor';
 import MainContentReviewer from '../Dashboard/MainContentReviewer';
-import TaskPage from '../Dashboard/Task/TaskList';
-import TabNav from '../Dashboard/TabNav/TabNav';
-import MyQueue from '../Dashboard/TabNav/MyQueue';
-import AllActive from '../Dashboard/TabNav/AllActive';
-import Unassigned from '../Dashboard/TabNav/Unassigned';
-import Archives from '../Dashboard/TabNav/Archives';
-import SubmissionRecord from '../Dashboard/SubmissionRecord/SubmissionRecord';
+import MainContentAdmin from '../Dashboard/MainContentAdmin';
+import TaskPage from '../Dashboard/EditorContent/Task/TaskList';
+import TabNav from '../Dashboard/EditorContent/TabNav/TabNav';
+import MyQueue from '../Dashboard/EditorContent/TabNav/MyQueue';
+import AllActive from '../Dashboard/EditorContent/TabNav/AllActive';
+import Unassigned from '../Dashboard/EditorContent/TabNav/Unassigned';
+import Archives from '../Dashboard/EditorContent/TabNav/Archives';
+import SubmissionRecord from '../Dashboard/EditorContent/SubmissionRecord/SubmissionRecord';
 import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor';
 import Current from '../Dashboard/ReviewerAssignment/Current';
+import UserList from '../Dashboard/AdminContent/UserList';
 import UserTab from '../Dashboard/UserTab/UserTab';
 
 
@@ -33,8 +35,13 @@ const DashboardRoutes = () => {
                                         component={<MainContentReviewer />}/>}>
                         <Route index element={<Navigate to="Current" replace />}/>
                         <Route path = "Current" element={<Current />} />
-                        
                     </Route>
+                </Route>
+                
+                <Route path = "Admin" element={<Dashboard 
+                                      component={<MainContentAdmin />}/>}>
+                        <Route index element={<Navigate to="UserList" replace />}/>
+                        <Route path = "UserList" element={<UserList />} />
                 </Route>
                 
                 <Route element={<ProtectedRoutes role="Editor" />}>

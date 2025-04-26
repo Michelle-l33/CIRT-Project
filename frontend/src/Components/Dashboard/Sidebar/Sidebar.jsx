@@ -6,7 +6,6 @@ import { RiDashboardHorizontalLine } from "react-icons/ri";
 import { GrDocument } from "react-icons/gr";
 import { FaTasks } from "react-icons/fa";
 import { FaRegUser } from "react-icons/fa";
-import { MdOutlineSettings } from "react-icons/md";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 import { IoNewspaperOutline } from "react-icons/io5";
@@ -16,9 +15,9 @@ import { dashBoardContext } from '../Dashboard';
 import { useContext } from 'react';
 
 
-const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
+const Sidebar = () => {
     const {handleLogout} = useUser();
-    const {isClose} = useContext(dashBoardContext);
+    const {isClose, user} = useContext(dashBoardContext);
     const location = useLocation();
 
     const listOfEditorIcons = [
@@ -26,28 +25,25 @@ const Sidebar = ( {isEditor, isAuthor, isReviewer} ) => {
         {Name: "TabNav", iconComponent: RiDashboardHorizontalLine,url: "/Dashboard/Editor/TabNav"},
         {Name: "Document", iconComponent: GrDocument, url: "/Dashboard/Editor/DocumentTab"},
         {Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User"},
-        // {Name: "Setting", iconComponent: MdOutlineSettings, url: "#"},
     ]
 
     const listOfAuthorIcons = [
         { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Dashboard/Author" },
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
-        // { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     const listOfReviewerIcons = [
         { Name: "Current", iconComponent: IoNewspaperOutline, url: "/Dashboard/Reviewer/Current" },
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
-        // { Name: "Settings", iconComponent: MdOutlineSettings, url: "#" },
     ];
 
     let listOfIcon;
 
-    if (isAuthor) {
+    if (user.isAuthor) {
         listOfIcon = listOfAuthorIcons;
-    } else if (isEditor) {
+    } else if (user.isEditor) {
         listOfIcon = listOfEditorIcons;
-    } else if (isReviewer){
+    } else if (user.isReviewer){
         listOfIcon = listOfReviewerIcons;
     }
 
