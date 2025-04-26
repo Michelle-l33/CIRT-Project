@@ -1,0 +1,202 @@
+.adminContent .tabHeader {
+    display: flex;
+    background-color: var(--dark-grey);
+    color: var(--light);
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    position: relative;
+}
+
+.adminContent .tabHeader h3 {
+    margin-right: auto;
+    margin-left: 10px;
+}
+
+.adminContent .tabHeader .left {
+    display: flex;
+    align-items: center;
+    height: 36px;
+    gap: 15px;
+    margin-right: 10px;
+}
+
+.adminContent .tabHeader .left form{
+    max-width: 400px;
+}
+
+.adminContent .tabHeader .left .formInput {
+    display: flex;
+    align-items: center;
+    height: 36px;
+}
+
+.adminContent .tabHeader .left .formInput input{
+    flex-grow: 1;
+    padding: 0 16px;
+    height: 100%;
+    border: none;
+    background: var(--grey);
+    border-radius: 36px 0 0 36px;
+    outline: none;
+    width: 100%;
+    color: var(--dark);
+}
+
+.adminContent .tabHeader .left .formInput button{
+    width: 80px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary);
+    color: var(--light);
+    font-size: 18px;
+    border: none;
+    outline: none;
+    border-radius: 0 36px 36px 0;
+    cursor: pointer;
+}
+
+.adminContent .tabHeader button {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    border: none;
+    background: var(--light-grey);
+    color: var(--dark);
+    padding: 3px;
+    cursor: pointer;
+}
+
+.adminContent .tabHeader button:hover {
+    background: var(--grey);
+}
+
+.adminContent .tabHeader .addUserBtn svg {
+    height: 24px;
+    width: 24px;
+}
+
+.adminContent .tabHeader .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.adminContent .tabHeader .pagination button svg {
+    height: 24px;
+    width: 24px;
+}
+
+.adminContent .addUser .userFormContainer {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 80%;
+    min-height: 60vh;
+    color: var(--dark);
+    padding: 10px;
+    margin: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.adminContent .addUser .userFormContainer.show {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background-color: var(--light);
+    z-index: 2;
+    border-radius: 5px;
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%);
+}
+
+.adminContent .addUser h4 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: var(--dark);
+  }
+
+.adminContent .addUser .userFormContainer .userForm {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.adminContent .addUser .userFormContainer .inputContainer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.adminContent .addUser .inputContainer label {
+    width: 100px;
+    margin-right: 1rem;
+    font-weight: 500;
+    color: var(--dark);
+}
+
+.adminContent .addUser .inputContainer input,
+.adminContent .addUser .userForm select {
+  flex: 1;
+  padding: 0.5rem;
+  border: 1px solid var(--transparent-light);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.adminContent .addUser .inputContainer input {
+    min-width: 100px;
+    width: auto;
+}
+
+.adminContent .addUser .inputContainer input:focus {
+    outline: none;
+    border: 1px solid var(--primary);
+    box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
+}
+
+.adminContent .addUser .userForm button[type="submit"] {
+    margin-top: 1rem;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .adminContent .addUser .userForm button[type="submit"]:hover {
+    opacity: 0.8;
+  }
+  
+  .adminContent .addUser .closeBtn {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    height: 24px;
+    width: 24px;
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--dark-grey);
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .adminContent .addUser .closeBtn:hover {
+    color: var(--dark);
+  }
