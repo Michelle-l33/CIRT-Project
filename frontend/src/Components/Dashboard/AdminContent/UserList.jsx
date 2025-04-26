@@ -25,9 +25,20 @@ const UserList = () => {
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [filteredList, setFilteredList] = useState(listOfUsers);
+
     const handleSearchChange = (event) => {
-        setSearch(event.target.value);
+        const value = event.target.value;
+        setSearch(value);
+    
+        const filteredResults = listOfUsers.filter(user =>
+            user.name.toLowerCase().includes(value.toLowerCase()) ||
+            user.email.toLowerCase().includes(value.toLowerCase())
+        );
+    
+        setFilteredList(filteredResults);
     };
+
     return (
         <div className= {styles.adminContent}>
             <div className = {styles.tabHeader}>
@@ -66,9 +77,13 @@ const UserList = () => {
                 </ul>
 
                 <ul className={styles.userList}>
-                    {
-                        listOfUsers.map((oneUser) => (<User key={oneUser._id} user = {oneUser}/>))
-                    }
+
+                    {filteredList.length > 0 ? (
+                        filteredList.map((oneUser) => (
+                            (<User key={oneUser._id} user = {oneUser}/>)
+                        ))) : (
+                        <span>No Submission Found</span>
+                    )}
                 </ul>
             </section>
     </div>
