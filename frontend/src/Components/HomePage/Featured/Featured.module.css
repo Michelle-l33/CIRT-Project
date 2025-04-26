@@ -1,13 +1,15 @@
 /* Featured.module.css */
 .container{
     padding: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
 .featuredContainer {
     display: flex;
     overflow-x: auto;
     gap:16px;
-    padding: 20px ;
+    padding: 10px ;
+    padding-bottom: 5px;
     background-color: #f9f9f9;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -26,12 +28,36 @@
   }
   
   h2 {
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin-bottom: 1.5rem;
     color: #000000;
     text-align: center;
-
   }
+
+.header:before {
+    width: 28px;
+    height: 5px;
+    display: block;
+    content: "";
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    margin-left: -14px;
+    background-color: var(--primary);
+}
+
+  .header:after {
+    width: 100px;
+    height: 1px;
+    display: block;
+    content: "";
+    position: relative;
+    margin-top: 25px;
+    left: 50%;
+    bottom: 17px;
+    margin-left: -50px;
+    background-color: var(--primary);
+}
 
   
   .posterCard {
