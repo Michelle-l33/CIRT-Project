@@ -256,7 +256,7 @@
 }
 
 .adminContent .user .editBtn:hover {
-    color: var(--dark);
+    color: var(--orange);
 }
 
 .adminContent .userList .userFormContainer {
