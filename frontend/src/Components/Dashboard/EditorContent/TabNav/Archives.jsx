@@ -14,8 +14,8 @@ const Archives = () => {
 
     const optionList = [
         {
-            name: "View in Detail",
-            function: (id) => navigate(`/submission/${id}`) // Pass submission ID
+            name: "To Database",
+            function: () => navigate("/Gallery") // Pass submission ID
         }
     ];
 

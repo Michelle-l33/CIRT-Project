@@ -40,11 +40,6 @@ const NavBar = ({isLoggedIn}) => {
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
 
-
-
-            {/* <div className = {styles.navRight}>
-                <Link to="/Dashboard" className={`${location.pathname === '/Login' ? styles.hidden : ""}`}> My Account </Link>
-            </div> */}
         </nav>
     );
 };
