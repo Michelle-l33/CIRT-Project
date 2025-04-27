@@ -56,6 +56,18 @@ const EditUserForm = ({ user, onClose }) => {
                     />
                 </div>
 
+                <div className={styles.inputContainer}>
+                    <label htmlFor="editPassword">Password:</label>
+                    <input
+                        type="password"
+                        id="editPassword"
+                        name="password"
+                        placeholder="Enter new password"
+                        maxLength={50}
+                        required
+                    />
+                </div>
+
                 <button type="submit">Save Changes</button>
             </form>
 

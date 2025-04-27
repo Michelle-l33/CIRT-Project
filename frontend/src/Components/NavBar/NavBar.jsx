@@ -3,13 +3,11 @@ import styles from './NavBar.module.css';
 import PropTypes from 'prop-types';
 
 import { Link } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
-const NavBar = ({isLoggedIn}) => {
+const NavBar = () => {
     //javascript funcs go here
     const[menuOpen,setMenuOpen] = useState(false);
-    const location = useLocation();
 
     return( // html goes in the return()
         <nav className={styles.navBar} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

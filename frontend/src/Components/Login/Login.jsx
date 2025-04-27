@@ -154,7 +154,7 @@ const LoginPage = () => {
     return (
         <div>
             <header>
-                <NavBar isLoggedIn={false} />
+                <NavBar />
             </header>
             {alertMessage && (
                 <div className={styles.alert}>

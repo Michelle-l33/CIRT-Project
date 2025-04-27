@@ -1,4 +1,4 @@
-/* this part is for the header */
+/* this part is for the USER TAB */
 .adminContent .tabHeader {
     display: flex;
     background-color: var(--dark-grey);
@@ -103,7 +103,7 @@
     width: 80%;
     min-height: 60vh;
     color: var(--dark);
-    padding: 10px;
+    padding: 20px;
     margin: 0;
     transform: translateY(-10px);
     transition: all 0.3s ease;
@@ -114,46 +114,63 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    background-color: var(--light);
+    background-color: var(--grey);
     z-index: 2;
     border-radius: 5px;
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%);
+    border: 1px solid var(--dark);
 }
 
-.adminContent .userFormContainer h4 {
+.adminContent .userFormContainer h4,
+.adminContent .fellowFormContainer h4 {
     margin-bottom: 1rem;
     font-size: 1.5rem;
     color: var(--dark);
   }
 
-.adminContent .userFormContainer .userForm {
+.adminContent .userForm {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-.adminContent .userFormContainer .inputContainer {
+.adminContent .inputContainer {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
+    gap: 10px;
 }
 
 .adminContent .inputContainer label {
-    width: 100px;
-    margin-right: 1rem;
+    width: 120px;
     font-weight: 500;
+    font-size: 0.95rem;
     color: var(--dark);
 }
 
 .adminContent .inputContainer input,
 .adminContent .userForm select {
-  flex: 1;
-  padding: 0.5rem;
-  border: 1px solid var(--transparent-light);
-  border-radius: 8px;
-  font-size: 1rem;
+    flex: 1;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--transparent-light);
+    border-radius: 8px;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.adminContent .inputContainer textarea {
+    flex: 1;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.95rem;
+    border: 1px solid var(--transparent-light);
+    border-radius: 8px;
+    resize: vertical; 
+    min-height: 100px;
+    background-color: var(--light);
+    color: var(--dark);
 }
 
 .adminContent .inputContainer input {
@@ -161,14 +178,40 @@
     width: auto;
 }
 
-.adminContent .inputContainer input:focus {
+.adminContent .inputContainer input:focus,
+.adminContent .inputContainer textarea:focus {
     outline: none;
     border: 1px solid var(--primary);
     box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
 }
 
-.adminContent .userForm button[type="submit"] {
-    margin-top: 1rem;
+.adminContent .inputContainer input[type="file"] {
+    border: 1px solid var(--transparent-light);
+    border-radius: 8px;
+    padding: 0 0.5rem;
+    font-size: 1rem;
+    background-color: var(--light);
+    cursor: pointer;
+  }
+  
+.adminContent .inputContainer input[type="file"]::file-selector-button {
+    background-color: var(--primary);
+    color: var(--black);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+.adminContent .inputContainer input[type="file"]::file-selector-button:hover {
+    background-color: var(--primary);
+    color: var(--light);
+  }
+
+.adminContent button[type="submit"] {
     background-color: var(--primary);
     color: var(--light);
     border: none;
@@ -179,8 +222,8 @@
     transition: background-color 0.3s ease;
   }
 
-.adminContent .userForm button[type="submit"]:hover {
-    opacity: 0.8;
+.adminContent button[type="submit"]:hover {
+    background-color: var(--light-primary);
 }
 
 .adminContent .closeBtn {
@@ -263,24 +306,63 @@
     top: 30%;
 }
 
+
+/* this part is for the FellowTab */
+
+.fellowFormContainer {
+    position: fixed;
+    top: calc(56px + 10px);
+    left: 50%;
+    transform: translateX(-40%); 
+    background-color: var(--grey);
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, var(--transparent-dark));
+    border: 1px solid var(--dark);
+    z-index: 10;
+    width: calc(90% - 230px);
+    max-width: calc(100% - 230px);
+    display: none;
+}
+  
+.fellowFormContainer.show {
+    display: block;
+}
+  
+.fellowForm {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+  
+
 @media (max-width: 768px) {
+    /* User Tab */
+
+    .adminContent .tabHeader h3 {
+        font-size: 1.25rem;
+        margin-left: 0;
+    }
+
     .adminContent .userFormContainer {
-        top: 10%;  
-        width: 90%;  
+        top: 20%;
+        width: calc(100vw - 62px);
         left: 50%;
-        transform: translateX(-50%); 
+        transform: translateX(-50%);
+        overflow-y: auto;
+        max-height: 90vh;
     }
 
     .adminContent .inputContainer input,
-    .adminContent .userForm select {
+    .adminContent .userForm select,
+    .adminContent .inputContainer textarea {
         width: 100%;
-        padding: 12px; 
-        font-size: 1.1rem;
+        padding: 1rem;
+        font-size: 1rem;
     }
 
-    .adminContent .userForm button[type="submit"] {
-        padding: 12px;
-        font-size: 1.1rem; 
+    .adminContent .userFormContainer h4 {
+        font-size: 1.2rem;
     }
 
     .adminContent .closeBtn {
@@ -288,12 +370,34 @@
         right: 10px;
     }
 
-    .adminContent .tabHeader h3 {
-        font-size: 1.5rem; 
+    .adminContent .userList {
+        padding: 0;
+        margin-top: 10px;
+        max-height: 60vh;
     }
 
-    .adminContent .userList {
-        padding: 10px;
-        margin-top: 10px;
+    .adminContent .userListHeader {
+        font-size: 1rem;
+    }
+
+    /* Fellow Tab */
+    .fellowFormContainer {
+        top: 10%;
+        min-width: 300px;
+        width: calc(100vw - 60px);
+        padding: 5px;
+        overflow-y: auto;
+        max-height: 90vh;
+        overflow-x: auto;
+    }
+
+    .fellowFormContainer.show {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .fellowForm {
+        gap: 15px;
     }
 }
