@@ -166,7 +166,7 @@ router.get("/publications", async (req, res) => {
     try {
       const posters = await Submission.find({ isPoster: true })
         .sort({ createdAt: -1 }) // Use your custom date field
-        .limit(5); // Show the latest 5 posters
+        .limit(6); // Show the latest 5 posters
   
       res.json(posters);
     } catch (error) {

@@ -10,7 +10,7 @@ const nodemailer = require('nodemailer');
 // Register User
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, isPublic, isAuthor, isEditor, isReviewer } = req.body;
+    const { name, email, password, isAdmin, isAuthor, isEditor, isReviewer } = req.body;
 
     const lowerEmail = email.toLowerCase();
 
@@ -22,7 +22,7 @@ router.post("/register", async (req, res) => {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUser = new User({ name, email: lowerEmail, password: hashedPassword, isPublic, isAuthor, isEditor, isReviewer });
+    const newUser = new User({ name, email: lowerEmail, password: hashedPassword, isAdmin, isAuthor, isEditor, isReviewer });
     await newUser.save();
 
     res.status(201).json({ message: "User registered successfully!" });
