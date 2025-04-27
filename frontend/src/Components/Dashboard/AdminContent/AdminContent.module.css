@@ -179,7 +179,9 @@
 }
 
 .adminContent .inputContainer input:focus,
-.adminContent .inputContainer textarea:focus {
+.adminContent .inputContainer textarea:focus,
+.fellowProfileContainer input:focus,
+.fellowProfileContainer textarea:focus {
     outline: none;
     border: 1px solid var(--primary);
     box-shadow: 0px 0px 5px 4px rgba(234, 61, 64, 0.2);
@@ -271,7 +273,8 @@
     overflow-y: scroll;
 }
 
-.adminContent .userListHeader {
+.adminContent .userListHeader,
+.adminContent .fellowListHeader {
     background-color: inherit;
     margin: 2px 10px;
     padding: 10px;
@@ -280,7 +283,8 @@
     color: var(--orange);
 }
 
-.adminContent .user {
+.adminContent .user
+.adminContent .fellow {
     align-items: center;
     padding: 0.75rem 1rem;
     background-color: var(--light);
@@ -306,8 +310,17 @@
     top: 30%;
 }
 
-
 /* this part is for the FellowTab */
+.fellowBigContainer {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap-reverse;
+}
+
+.fellowBigContainer .adminContent {
+    flex-grow: 1;
+}
 
 .fellowFormContainer {
     position: fixed;
@@ -317,7 +330,7 @@
     background-color: var(--grey);
     padding: 2rem;
     border-radius: 20px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, var(--transparent-dark));
+    box-shadow: 0 0 15px var(--transparent-dark);
     border: 1px solid var(--dark);
     z-index: 10;
     width: calc(90% - 230px);
@@ -334,7 +347,133 @@
     flex-direction: column;
     gap: 20px;
 }
-  
+
+.adminContent .fellowListHeader,
+.adminContent .fellowList .fellow {
+    display: grid;
+    grid-template-columns: 1fr 5fr 4fr;
+    border-radius: 0;
+    color: var(--dark);
+    gap: 5px;
+    transition: all 0.5s ease;
+    max-height: 200px;
+    overflow-y: scroll;
+    align-items: center;
+    margin: 0;
+    border-bottom: 1px solid var(--dark-grey);
+}
+
+.adminContent .fellowList .fellow {
+    padding: 5px;
+    transition: all 0.3s ease;
+}
+
+.adminContent .fellowList:first-child {
+    border-top: 1px solid var(--dark-grey);
+}
+
+.adminContent .fellowList .fellow:hover {
+    border: 1px solid var(--dark-grey);
+    box-shadow: 0 4px 8px var(--transparent-dark);
+    transform: scale(102%); 
+    cursor: pointer;
+}
+
+.adminContent .fellowList .fellow .profile {
+    width: 36px;
+    height: 36px;
+    object-fit: cover;
+    border-radius: 50%;
+    align-self: flex-end;
+}
+
+
+/* this part is for the FellowProfile */
+
+.fellowProfileContainer {
+    display: flex;
+    flex-direction: column;
+    color: var(--dark);
+    flex: 3;
+    min-width: 230px;
+    max-height: 80vh;
+    overflow-y: auto;
+    gap: 5px;
+    max-width: 600px;
+    padding: 5px 0;
+}
+
+.profileImg {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.profileImg .editButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: inherit;
+    color: var(--dark);
+    border: none;
+}
+
+.profileImg .editButton svg {
+    width: 16px;
+    height: 16px;
+}
+
+.profileImg .editButton:hover {
+    color: var(--primary);
+}
+
+.profileImg img{
+    max-width: 150px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.fellowProfileContainer h2 {
+    text-align: center;
+}
+
+.fellowProfileContainer .title {
+    color: var(--primary);
+    font-weight: 500;
+}
+
+.fellowProfileContainer p a {
+    margin-left: 5px;
+    color: var(--blue);
+    border-bottom: 1px solid var(--blue);
+}
+
+.fellowProfileContainer input,
+.fellowProfileContainer textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px 10px;
+    font-size: 14px;
+    border: 1px solid var(--dark-grey);
+    border-radius: 5px;
+    background-color: var(--light);
+    color: var(--dark);
+}
+
+.saveButton {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background-color: var(--primary);
+    color: var(--light);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.saveButton:hover {
+    opacity: 0.8;
+}
 
 @media (max-width: 768px) {
     /* User Tab */

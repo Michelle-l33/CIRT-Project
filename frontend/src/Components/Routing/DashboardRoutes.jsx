@@ -17,7 +17,7 @@ import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor
 import Current from '../Dashboard/ReviewerAssignment/Current';
 import UserList from '../Dashboard/AdminContent/UserList';
 import UserTab from '../Dashboard/UserTab/UserTab';
-import FellowTab from '../Dashboard/AdminContent/Fellowship';
+import FellowTab from '../Dashboard/AdminContent/FellowTab';
 
 
 const DashboardRoutes = () => {

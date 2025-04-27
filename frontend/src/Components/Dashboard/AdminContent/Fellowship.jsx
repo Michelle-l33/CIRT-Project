@@ -5,22 +5,36 @@ import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { useState } from "react";
 
-const FellowTab = () => {
+import { useSearchParams } from "react-router-dom";
+
+const Fellowship = () => {
 
     const listOfFellows = [ {
         _id: "123",
+        img: "https://avatarfiles.alphacoders.com/280/280087.png",
         name: "Bloom",
-        email: "winxClub@disney.com"
+        year: "2004",
+        bio: "Bloom Griffin is an accomplished researcher and thought leader with over two decades of experience in the field of environmental science and sustainable development. Having graduated with a degree in Environmental Engineering from Stanford University, Joshua's career spans various projects, including leading international collaborations to combat climate change and working on innovative technologies to promote clean energy. He has published numerous papers on climate policy, sustainability practices, and renewable energy solutions, many of which have been cited in high-impact journals worldwide. Joshua is passionate about advancing interdisciplinary collaborations, and his research has shaped public policy, influencing decisions on sustainable urban development, carbon emissions reduction, and ecosystem conservation.",
+        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        fellowship: "The ZOO"
     }, 
     {   
         _id: "456",
+        img: "https://avatarfiles.alphacoders.com/246/246567.png",
         name: "Stella",
-        email: "winxClub2@disney.com"
+        year: "2005",
+        bio: "Stelliaer lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
+        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        fellowship: "The ZoO"
     },
     {   
         _id: "789",
+        img: "https://avatarfiles.alphacoders.com/322/322831.jpg",
         name: "Musa",
-        email: "winxClub3@disney.com"
+        year: "2006",
+        bio: "Musicdc lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
+        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        fellowship: "The ZOo"
     }, 
 ]
 
@@ -33,9 +47,9 @@ const FellowTab = () => {
         const value = event.target.value;
         setSearch(value);
     
-        const filteredResults = listOfFellows.filter(user =>
-            user.name.toLowerCase().includes(value.toLowerCase()) ||
-            user.email.toLowerCase().includes(value.toLowerCase())
+        const filteredResults = listOfFellows.filter(fellow =>
+            fellow.name.toLowerCase().includes(value.toLowerCase()) ||
+            fellow.year.toLowerCase().includes(value.toLowerCase())
         );
     
         setFilteredList(filteredResults);
@@ -70,11 +84,33 @@ const FellowTab = () => {
                         </div>
                     )}
             </div>
+
+            <section>
+                
+                <ul className={styles.fellowListHeader}>
+                    <li>&#9733;</li>
+                    <li>Name</li>
+                    <li>Year</li>
+                </ul>
+
+                <ul className={styles.fellowList}>
+
+                    {filteredList.length > 0 ? (
+                        filteredList.map((oneFellow) => (
+                            // the code for Fellow is down below
+                            <li key={oneFellow._id}>
+                                <Fellow fellow = {oneFellow}/>
+                            </li>
+                        ))) : (
+                        <span>No Submission Found</span>
+                    )}
+                </ul>
+            </section>
         </div>
     )
 }
 
-export default FellowTab;
+export default Fellowship;
 
 const AddFellowBtn = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -127,7 +163,7 @@ const AddFellowForm = ( {onClose} ) => {
                         name="bio"
                         placeholder="Short biography..."
                         rows="4"
-                        maxLength={500}
+                        maxLength={300}
                         required
                     />
                 </div>
@@ -149,7 +185,7 @@ const AddFellowForm = ( {onClose} ) => {
                         name="fellowshipTopic"
                         placeholder="Research topic and who worked with them..."
                         rows="3"
-                        maxLength={500}
+                        maxLength={300}
                         required
                     />
                 </div>
@@ -160,5 +196,18 @@ const AddFellowForm = ( {onClose} ) => {
 
             <button className={styles.closeBtn} onClick={onClose}>&#215;</button>
         </>
+    );
+}
+
+const Fellow = ( {fellow} ) => {
+
+    const [ searchParams, setSearchParams ] = useSearchParams();
+
+    return (
+        <div className={styles.fellow} onClick={() =>  setSearchParams({ fellowId: fellow._id })}>
+            <img className={styles.profile} src = {fellow.img} alt="profilePic" />
+            <p>{fellow.name}</p>
+            <p>{fellow.year}</p>
+        </div>
     );
 }

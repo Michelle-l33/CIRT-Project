@@ -12,8 +12,6 @@ const User = ({key, user}) => {
                 <button className = {styles.editBtn} onClick={() => setIsEditing(true)}><FaEdit/></button>
             </li>
 
-
-
             {isEditing && (
                 <div className={`${styles.userFormContainer} ${styles.show}`}>
                     <div className={styles.userFormWrapper}>
