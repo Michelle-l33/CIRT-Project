@@ -12,8 +12,6 @@ const User = ({key, user}) => {
                 <button className = {styles.editBtn} onClick={() => setIsEditing(true)}><FaEdit/></button>
             </li>
 
-
-
             {isEditing && (
                 <div className={`${styles.userFormContainer} ${styles.show}`}>
                     <div className={styles.userFormWrapper}>
@@ -51,6 +49,18 @@ const EditUserForm = ({ user, onClose }) => {
                         name="email"
                         defaultValue={user.email}
                         placeholder="you@example.com"
+                        maxLength={50}
+                        required
+                    />
+                </div>
+
+                <div className={styles.inputContainer}>
+                    <label htmlFor="editPassword">Password:</label>
+                    <input
+                        type="password"
+                        id="editPassword"
+                        name="password"
+                        placeholder="Enter new password"
                         maxLength={50}
                         required
                     />

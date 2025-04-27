@@ -66,7 +66,7 @@ const homePage = () => {
   return (
     <div>
       <header>
-        <NavBar isLoggedIn={false} />
+        <NavBar />
         
       </header>
 

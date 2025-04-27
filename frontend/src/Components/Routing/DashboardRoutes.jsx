@@ -17,6 +17,7 @@ import SubmissionAuthorPage from '../Dashboard/SubmissionAuthor/SubmissionAuthor
 import Current from '../Dashboard/ReviewerAssignment/Current';
 import UserList from '../Dashboard/AdminContent/UserList';
 import UserTab from '../Dashboard/UserTab/UserTab';
+import FellowTab from '../Dashboard/AdminContent/FellowTab';
 
 
 const DashboardRoutes = () => {
@@ -42,6 +43,7 @@ const DashboardRoutes = () => {
                                       component={<MainContentAdmin />}/>}>
                         <Route index element={<Navigate to="UserList" replace />}/>
                         <Route path = "UserList" element={<UserList />} />
+                        <Route path = "Fellowship" element={<FellowTab />}/>
                 </Route>
                 
                 <Route element={<ProtectedRoutes role="Editor" />}>
