@@ -396,7 +396,7 @@
     color: var(--dark);
     flex: 3;
     min-width: 230px;
-    max-height: 80vh;
+    max-height: calc(100vh - 180px);
     overflow-y: auto;
     gap: 5px;
     max-width: 600px;

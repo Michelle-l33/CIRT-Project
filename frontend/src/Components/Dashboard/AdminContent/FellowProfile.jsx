@@ -1,6 +1,6 @@
 import styles from "./AdminContent.module.css";
 import { FaEdit } from "react-icons/fa";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const FellowProfile = () => {
@@ -40,6 +40,11 @@ const FellowProfile = () => {
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedFellow, setEditedFellow] = useState(fellow);
+
+    useEffect(() => {
+        setEditedFellow(fellow);
+        setIsEditMode(false); 
+    }, [fellowId]);
 
     if (!fellow) {
         return;
