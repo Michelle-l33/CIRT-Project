@@ -36,24 +36,24 @@ const FellowProfile = () => {
 
     const [searchParams] = useSearchParams();   
     const fellowId = searchParams.get("fellowId");
-    const fellow = listOfFellows.find(f => f._id === fellowId);
 
     const [isEditMode, setIsEditMode] = useState(false);
-    const [editedFellow, setEditedFellow] = useState(fellow);
+    const [editedFellow, setEditedFellow] = useState(null);
 
     useEffect(() => {
-        setEditedFellow(fellow);
-        setIsEditMode(false); 
+        const foundFellow = listOfFellows.find(f => f._id === fellowId);
+        setEditedFellow(foundFellow);
+        setIsEditMode(false);
     }, [fellowId]);
 
-    if (!fellow) {
-        return;
+    if (!editedFellow) {
+        return null;
     }
 
     return (
         <section className={styles.fellowProfileContainer}>
                 <div className={styles.profileImg}>
-                    <img src={fellow.img} alt={fellow.name} />
+                    <img src={editedFellow.img} alt="Picture" />
                     <button 
                             className={styles.editButton}
                             onClick={() => setIsEditMode(!isEditMode)}

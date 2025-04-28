@@ -46,7 +46,7 @@ const Fellowship = () => {
     const handleSearchChange = (event) => {
         const value = event.target.value;
         setSearch(value);
-    
+
         const filteredResults = listOfFellows.filter(fellow =>
             fellow.name.toLowerCase().includes(value.toLowerCase()) ||
             fellow.year.toLowerCase().includes(value.toLowerCase())

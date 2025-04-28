@@ -273,6 +273,10 @@
     overflow-y: scroll;
 }
 
+.adminContent .userList .user {
+    border-bottom: 1px solid var(--dark);
+}
+
 .adminContent .userListHeader,
 .adminContent .fellowListHeader {
     background-color: inherit;
