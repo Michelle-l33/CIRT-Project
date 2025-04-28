@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom'; // Import Link for navigation
 import NavBar from '../NavBar/NavBar';
-import DropDownBar from '../DropDownBar/DropDownBar';
+// import DropDownBar from './DropDownBar/DropDownBar';
 import SearchBar from './SearchBar/SearchBar';
 import FAQ from './FAQ/FAQ';
 import Footer from './Footer/Footer';
