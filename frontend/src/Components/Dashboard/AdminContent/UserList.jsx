@@ -243,7 +243,10 @@ const AddUserForm = ({ onClose }) => {
                             name="password"
                             placeholder="Password"
                             maxLength={25}
-                            onChange={(e)=>{setPassword(e.target.value), validatePassword(e.target.value)}}
+                            onChange={(e)=>{
+                                setPassword(e.target.value);
+                                validatePassword(e.target.value);
+                            }}
                             required
                         />
                     </div>
