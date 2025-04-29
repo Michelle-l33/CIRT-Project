@@ -7,7 +7,7 @@ const PaperCard = ({ paper }) => {
   return (
     <article className={styles.paperItem}>
       <div className={styles.paperLeft}>
-        <input type="checkbox" className={styles.paperCheckbox} />
+        {/* <input type="checkbox" className={styles.paperCheckbox} /> */}
         <div className={styles.paperMeta}>
           <span className={styles.paperLabel}>JOURNAL ARTICLE</span>
           <h3 className={styles.paperTitle}>{paper.title}</h3>
