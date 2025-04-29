@@ -105,7 +105,7 @@
     color: var(--dark);
     padding: 20px;
     margin: 0;
-    transform: translateY(-10px);
+    /* transform: translateY(-20px); */
     transition: all 0.3s ease;
     z-index: 4;
 }
@@ -113,7 +113,7 @@
 .userFormContainer.show {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
     background-color: var(--grey);
     z-index: 2;
     border-radius: 5px;
@@ -275,7 +275,7 @@
 
 .adminContent .userList .user {
     border-bottom: 1px solid var(--dark);
-    padding: 5px 0px;
+    padding: 5px;
 }
 
 .adminContent .userListHeader,
