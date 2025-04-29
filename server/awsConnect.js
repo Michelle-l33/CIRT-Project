@@ -25,10 +25,16 @@ const upload = multer({
       cb(null, `uploads/${Date.now()}-${file.originalname}`);
     },
     contentDisposition: 'inline', // Set the Content-Disposition header to inline
-    contentType: function (req, file, cb) {
-      cb(null, 'application/pdf');  // Force the Content-Type to 'application/pdf'
-    },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
   }),
+  fileFilter: function (req, file, cb) {
+    const allowedTypes = ['application/pdf', 'image/jpeg', 'image/png', 'image/gif'];
+    if (allowedTypes.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Only PDFs and images are allowed"), false);
+    }
+  },
 });
 
 module.exports = {upload, s3Client};
