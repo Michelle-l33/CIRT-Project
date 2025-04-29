@@ -6,22 +6,10 @@ import { GrNext } from "react-icons/gr";
 
 import User from "./User";
 
-import { useState } from "react";
+import { useState,useEffect } from "react";
 
 const UserList = () => {
-
-    const listOfUsers = [ {
-            _id: "123",
-            name: "Anna",
-            email: "fronzen@disney.com"
-        }, 
-        {   
-            _id: "456",
-            name: "Elsa",
-            email: "fronzen2@disney.com"
-        }, 
-    ]
-
+    const[listOfUsers,setListOfUsers] = useState([]);
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -38,6 +26,24 @@ const UserList = () => {
     
         setFilteredList(filteredResults);
     };
+
+    useEffect(()=>{
+        const fetchUsers = async()=> {
+            try{
+                const response = await fetch('https://cirt-project-server.vercel.app/user/',{
+                    method: "GET",
+                })
+                if(!response.ok){
+                    throw new Error ("Failed to fetch users");
+                }
+                const data = response.json();
+                setListOfUsers(data);
+            } catch (error){
+                console.error("Error fetching users:", error);
+              }
+        }
+        fetchUsers();
+    },[])
 
     return (
         <div className= {styles.adminContent}>
@@ -105,7 +111,7 @@ const AddUserBtn = () => {
         </div>
     )
 }
-
+ 
 const AddUserForm = ({ onClose }) => {
     return (
         <>
