@@ -2,6 +2,9 @@ import styles from "./AdminContent.module.css";
 import { FaEdit } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { MdExpandMore } from "react-icons/md";
+import { MdExpandLess } from "react-icons/md";
+
 
 const FellowProfile = () => {
     const listOfFellows = [ {
@@ -39,6 +42,8 @@ const FellowProfile = () => {
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedFellow, setEditedFellow] = useState(null);
+    const [isBioExpanded, setIsBioExpanded] = useState(false);
+
 
     useEffect(() => {
         const foundFellow = listOfFellows.find(f => f._id === fellowId);
@@ -101,7 +106,20 @@ const FellowProfile = () => {
                     <>
                         <h2>{editedFellow.name}</h2>
                         <p><span className={styles.title}>Year:</span> {editedFellow.year}</p>
-                        <p><span className={styles.title}>Bio:</span> {editedFellow.bio}</p>
+                        <div>
+                            <p className={isBioExpanded ? styles.textExpand : styles.bioClip}>
+                            <span className={styles.title}>Bio:</span> {editedFellow.bio}
+                            </p>
+
+                            {editedFellow.bio && ( 
+                            <button
+                                className={styles.bioButton}
+                                onClick={() => setIsBioExpanded(!isBioExpanded)}
+                            >
+                                {isBioExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                            </button>
+                            )}
+                        </div>
                         <p><span className={styles.title}>Fellowship:</span> {editedFellow.fellowship}</p>
                         <p><span className={styles.title}>Published Work:</span> 
                             <a href={editedFellow.published} target="_blank" rel="noopener noreferrer">View</a>

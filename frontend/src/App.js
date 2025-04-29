@@ -12,25 +12,13 @@ import ResetPassword from './Components/Login/ResetPassword';
 import ArticleView from './Components/ArticleView/ArticleView';
 import Gallery from './Components/Gallery/Gallery';
 import Papers from './Components/Papers/Papers';
-// import { dashBoardContext } from './Components/Dashboard/Dashboard';
 import ArticleViewPage from './Components/ArticleView/ArticleView';
 import SearchResults from './Components/Gallery/SearchResults/SearchResults';
 import AboutUs from './Components/AboutUs/AboutUs';
-
+import FellowPage from './Components/FellowPage/FellowPage';
 
 function App() {
-  // // Define the context value
-  // const [isChecked, setChecked] = useState(false);
-  // const handleToggle = () => {
-  //   setChecked((prev) => !prev);
-  // };
 
-  // const contextValue = {
-  //   isChecked,
-  //   handleToggle,
-  //   isClose: false, // You can update this dynamically if needed
-  //   user: null, // You can update this dynamically if needed
-  // }; 
   return (
     <>
       <UserProvider>
@@ -50,6 +38,7 @@ function App() {
             </Route>
             <Route path="Gallery/submission/:id" element={<ArticleViewPage />}></Route>
             <Route path="/AboutUs" element={<AboutUs />} />
+            <Route path="/Fellowship" element={<FellowPage />} />
           </Routes>
         </Router>
       </UserProvider>

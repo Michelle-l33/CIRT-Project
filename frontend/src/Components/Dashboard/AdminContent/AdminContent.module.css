@@ -275,6 +275,7 @@
 
 .adminContent .userList .user {
     border-bottom: 1px solid var(--dark);
+    padding: 5px 0px;
 }
 
 .adminContent .userListHeader,
@@ -301,13 +302,13 @@
     background: none;
     border: none;
     cursor: pointer;
-    color: var(--primary);
+    color: var(--orange);
     font-size: 1.2rem;
     transition: color 0.3s;
 }
 
 .adminContent .user .editBtn:hover {
-    color: var(--orange);
+    color: var(--primary);
 }
 
 .adminContent .userList .userFormContainer {
@@ -323,7 +324,7 @@
 }
 
 .fellowBigContainer .adminContent {
-    flex-grow: 1;
+    flex-grow: 2;
 }
 
 .fellowFormContainer {
@@ -398,13 +399,15 @@
     display: flex;
     flex-direction: column;
     color: var(--dark);
-    flex: 3;
-    min-width: 230px;
+    flex: 1;
+    min-width: 350px;
     max-height: calc(100vh - 180px);
     overflow-y: auto;
     gap: 5px;
-    max-width: 600px;
-    padding: 5px 0;
+    padding: 20px 5px;
+    border-radius: 5px;
+    border: 1px solid var(--dark-grey);
+    background-color: inherit;
 }
 
 .profileImg {
@@ -477,6 +480,38 @@
 
 .saveButton:hover {
     opacity: 0.8;
+}
+
+.fellowProfileContainer .bioClip {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Number of lines you want to display */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.fellowProfileContainer .textExpand {
+    white-space: normal;
+
+}
+
+.fellowProfileContainer .bioButton {
+    border: none;
+    color: inherit;
+    background-color: inherit;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+.fellowProfileContainer .bioButton svg {
+    width: 1.2em;
+    height: 1.2em;
 }
 
 @media (max-width: 768px) {
