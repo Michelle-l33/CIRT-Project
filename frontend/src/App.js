@@ -11,7 +11,7 @@ import ForgotPassword from './Components/Login/ForgotPassword';
 import ResetPassword from './Components/Login/ResetPassword';
 import ArticleView from './Components/ArticleView/ArticleView';
 import Gallery from './Components/Gallery/Gallery';
-import Papers from './Components/Papers/Papers';
+import Papers from './Components/Gallery/Papers/Papers';
 import ArticleViewPage from './Components/ArticleView/ArticleView';
 import SearchResults from './Components/Gallery/SearchResults/SearchResults';
 import AboutUs from './Components/AboutUs/AboutUs';

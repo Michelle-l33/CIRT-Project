@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Papers.module.css';
 import { useSearchParams } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
-import Sidebar from '../Gallery/Sidebar/Sidebar';
-import TopNav from '../Gallery/TopNav/TopNav';
+import Sidebar from '../Sidebar/Sidebar';
+import TopNav from '../TopNav/TopNav';
 
 const Papers = () => {
 
