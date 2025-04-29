@@ -14,7 +14,7 @@ const MainContentAdmin = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Admin Dashboard</h1>                
+                    <h1>Dashboard Admin</h1>                
                 </div>
 
                 <div className={styles.content}>

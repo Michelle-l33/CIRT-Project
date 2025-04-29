@@ -1,0 +1,156 @@
+.fellowPageBigContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.25rem;
+    padding: 1rem;
+    position: relative;
+}
+
+.fellowGridItem {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    transition: all 0.5s ease;
+}
+
+.fellowGridItem.isActive {
+    z-index: 10;
+}
+
+.fellowContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.fellowPortrait {
+    position: relative;
+    width: 100%;
+    background: #f0f0f0;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    border: none;
+    aspect-ratio: 2/3;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fellowPortrait img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.fellowPortrait .portraitContent {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+}
+
+.fellowPortrait:hover .portraitContent {
+    opacity: 1;
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+.fellowGridItem.isActive .fellowContainer {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    flex-direction: row; 
+    width: 90vw;
+    transform: translateX(-50%);
+    transition: transform 0.3s ease-in-out;
+}
+
+.fellowGridItem.isActive .fellowPortrait {
+    width: 25vw; 
+}
+
+.fellowGridItem.isActive .expandedContentContainer {
+    width: 65vw;
+    height: 80vh; 
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 1;
+}
+
+.expandedContent {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr; 
+    gap: 1rem; 
+    width: 100%;
+    padding: 1rem;
+}
+
+.employeeColName,
+.employeeColBio,
+.employeeColLink {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.employeeColName p,
+.employeeColBio,
+.employeeColLink a {
+    margin: 0;
+}
+
+.expandedContent .portraitName {
+    font-size: 1.5rem; 
+    font-weight: bold;
+    color: #333;
+}
+
+.expandedContent .portraitFellowship {
+    font-size: 1.1rem; 
+    font-style: italic; 
+    color: #555; 
+}
+
+.expandedContent .portraitYear {
+    font-size: 1rem;
+    color: #777; 
+}
+
+.expandedContent .employeeColLink a {
+    font-size: 1rem;
+    color: #0077b6;
+    text-decoration: none;
+}
+
+.expandedContent .employeeColLink a:hover {
+    text-decoration: underline;
+}
+
+.expandedContent .closeBtn {
+    background: none; 
+    border: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    align-self: flex-end;
+    transition: color 0.3s ease;
+}
+
+.expandedContent .closeBtn:hover {
+    color: #ff0000; /* Red color when hovered */
+}
