@@ -7,8 +7,7 @@ import { useUser } from "../Login/UserContext";
 const ProtectedRoutes = ({ role }) => {
     const {user} = useUser();
 
-    if (!user.isEditor && !user.isAuthor && !user.isReviewer) { 
-        console.log(user)
+    if (!user.isEditor && !user.isAuthor && !user.isReviewer && !user.isAdmin) { 
         return <Navigate to="/Login" replace />;
     }
 
@@ -21,6 +20,9 @@ const ProtectedRoutes = ({ role }) => {
             break;
         case "Reviewer":
             if (!user.isReviewer) return <Navigate to="/" replace />;
+            break;
+        case "Admin":
+            if (!user.isAdmin) return <Navigate to="AboutUs" replace />;
             break;
         default:
             return <Navigate to="/" replace />;
