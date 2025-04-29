@@ -8,7 +8,7 @@ import { IoMenu } from 'react-icons/io5';
 import PaperCard from './PosterCard/PaperCard';
 
 const Gallery = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get("q") || "";
   const [searchQuery, setSearchQuery] = useState(query);
   const [posters, setPosters] = useState([]);
@@ -17,7 +17,8 @@ const Gallery = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [isSidebarOpen, setIsSidebarOpen] = useState(window.innerWidth > 768);
   const [selectedTags, setSelectedTags] = useState([]);
-  const [isPosterTab, setIsPosterTab] = useState(true);
+  const initialTab = searchParams.get("isPosterTab") === "false" ? false : true;
+  const [isPosterTab, setIsPosterTab] = useState(initialTab);
   const [loading, setLoading] = useState(true);
 
   const toggleSidebar = () => {

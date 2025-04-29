@@ -8,15 +8,17 @@ const SearchBar = () => {
 
     const [ query, setQuery ] = useState("");
     const [ tab, setTab ] = useState("articles");
+    const [isPosterTab, setIsPosterTab] = useState(true);
     const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
 
         if (tab === "posters"){
-            navigate(`/Gallery?q=${query}`);
+            setIsPosterTab(true);
+            navigate(`/Gallery?q=${query}&isPosterTab=${isPosterTab}`);
         } else if (tab === "articles") {
-            navigate(`/Papers?q=${query}`);
+            navigate(`/Gallery?q=${query}&isPosterTab=${!isPosterTab}`);
         } else {
             navigate("/")
         }
