@@ -10,7 +10,6 @@
     scrollbar-width: none;
     transition: all 0.3s ease;
     padding: 0;
-    
 }
 
 .sideBar::-webkit-scrollbar {
@@ -23,17 +22,6 @@
     overflow-y: auto;
 }
 
-.sideBar.close .sideMenu li span {
-    display: none;
-}
-
-.sideBar.close .sideMenu li a {
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    padding: 12px 0;
-}
-
 .linkContent {
     display: flex;
     align-items: center;
@@ -44,8 +32,7 @@
 .toggleButton {
   position: absolute;
   top: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 1rem;
   background: none;
   border: none;
   color: var(--dark);
@@ -54,31 +41,19 @@
   align-items: center;
   justify-content: center;
   z-index: 1001;
+  padding: 0;
+  margin: 0;
 }
 
-.sideBar .logo {
-    font-size: 24px;
-    font-weight: 700;
-    height: 56px;
-    display: flex;
-    align-items: center;
-    color: var(--primary);
-    z-index: 500;
-    padding-bottom: 20px;
-    padding-left: 20px;
-    box-sizing: content-box;
+.toggleButton svg {
+    width: 24px;
+    height: 24px;
 }
 
-.sideBar .logo .logoName span {
-    color: var(--dark);
-}
-
-.sideBar .logo svg {
-    min-width: 60px;
-    display: flex;
-    justify-content: center;
-    font-size: 2.2rem;
-    color: var(--primary);
+.sideBar.close .toggleButton {
+    right: 0;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .sideBar .sideMenu {
@@ -91,6 +66,7 @@
 .sideBar .sideMenu li {
     height: 48px;
     background: transparent;
+    margin: 0;
     margin-left: 6px;
     border-radius: 48px 0 0 48px;
     padding: 4px;
@@ -100,7 +76,6 @@
     background: var(--light);
     position: relative;
     border-radius: 48px 0 0 48px;
-    padding: 4px;
 }
 
 .sideBar .sideMenu li.active::before {
@@ -127,10 +102,6 @@
     z-index: -1;
 }
 
-.sideBar .sideMenu li button{
-    border:none;
-}
-
 .sideBar .sideMenu li a, .sideBar .sideMenu li button {
     width: 100%;
     height: 100%;
@@ -144,7 +115,8 @@
     overflow-x: hidden;
     transition: all 0.3s ease;
     text-decoration: none;
-    padding-left: 10px;
+    border:none;
+    cursor: pointer;
 }
 
 .sideBar .sideMenu li a:hover,.sideBar .sideMenu li button:hover {
@@ -155,31 +127,16 @@
     color: var(--success);
 }
 
-.sideBar .sideMenu li a svg {
-  font-size: 1.6rem;
-  display: block;
-  margin: 0 auto;
-}
-
-.sideBar .sideMenu li button.logout {
-    width: 100%;
-    height: 100%;
-    background: var(--light);
-    display: flex;
-    align-items: center;
-    border-radius: 48px;
-    font-size: 16px;
-    color: var(--danger);
-    white-space: nowrap;
-    overflow-x: hidden;
+.sideBar.close .sideMenu li a, .sideBar.close .sideMenu li button {
+    width: calc(48px - (4px * 2));
     transition: all 0.3s ease;
-    border: none;
-    cursor: pointer;
-    padding-left: 10px;
 }
 
-.sideBar .sideMenu li button.logout:hover {
-    color: var(--light-danger);
+.sideBar .sideMenu li a svg, .sideBar .sideMenu li button svg {
+    min-width: calc(60px - ((4px + 6px) * 2));
+    display: flex;
+    font-size: 1.6rem;
+    justify-content: center;
 }
 
 
