@@ -14,6 +14,8 @@ const UserList = () => {
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [filteredList, setFilteredList] = useState(listOfUsers);
+    const [loading, setLoading] = useState(false);
+
 
     const handleSearchChange = (event) => {
         const value = event.target.value;
@@ -30,20 +32,27 @@ const UserList = () => {
     useEffect(()=>{
         const fetchUsers = async()=> {
             try{
+                setLoading(true);
                 const response = await fetch('https://cirt-project-server.vercel.app/user/',{
                     method: "GET",
                 })
                 if(!response.ok){
                     throw new Error ("Failed to fetch users");
                 }
-                const data = response.json();
+                const data = await response.json();
                 setListOfUsers(data);
+                setFilteredList(data);
+                console.log(data);
             } catch (error){
                 console.error("Error fetching users:", error);
-              }
+            } finally {
+                setLoading(false);
+            }
         }
         fetchUsers();
     },[])
+
+    
 
     return (
         <div className= {styles.adminContent}>
@@ -84,10 +93,13 @@ const UserList = () => {
 
                 <ul className={styles.userList}>
 
-                    {filteredList.length > 0 ? (
+                    {loading ? (
+                        <span>Loading users...</span> 
+                    ) : filteredList.length > 0 ? (
                         filteredList.map((oneUser) => (
-                            (<User key={oneUser._id} user = {oneUser}/>)
-                        ))) : (
+                            <User key={oneUser._id} user={oneUser} />
+                        ))
+                    ) : (
                         <span>No Submission Found</span>
                     )}
                 </ul>
@@ -113,58 +125,168 @@ const AddUserBtn = () => {
 }
  
 const AddUserForm = ({ onClose }) => {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [isPublic, setIsPublic] = useState(false);
+    const [isAuthor, setIsAuthor] = useState(true);
+    const [isEditor, setIsEditor] = useState(false);
+    const [isReviewer, setIsReviewer] = useState(false);
+    const handleAccountType = (e) => {
+        const type = e.target.value;
+        // Reset all role states
+        setIsAuthor(false);
+        setIsEditor(false);
+        setIsReviewer(false);
+        setIsPublic(false);
+
+        // Set the selected role
+        if (type === "author") setIsAuthor(true);
+        else if (type === "editor") setIsEditor(true);
+        else if (type === "reviewer") setIsReviewer(true);
+        else if (type === "public") setIsPublic(true);
+    };
+
+    const handleRegisterSubmit = async (e) => {
+        e.preventDefault();
+
+        // Check if all password requirements are met
+        const allRequirementsMet = Object.values(passwordRequirements).every(requirement => requirement === true);
+        if (!allRequirementsMet) {
+            window.alert("Please ensure your password meets all requirements.");
+            return;
+        }
+
+        const capitalizedName = capitalizeName(name);
+        const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer };
+
+        try {
+            const response = await fetch("https://cirt-project-server.vercel.app/user/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(userData),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                window.alert("User registered successfully!");
+                window.location.reload();
+            } else {
+                window.alert(data.error || "Something went wrong!");
+                console.log(data.error);
+            }
+        } catch (error) {
+            window.alert("Error: " + error.message);
+        }
+    };
+    const capitalizeName = (name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    };
+    const [passwordRequirements, setPasswordRequirements] = useState({
+        minLength: false,
+        hasUppercase: false,
+        hasLowercase: false,
+        hasNumber: false,
+        hasSpecialChar: false,
+    });
+
+    // Function to validate password and update requirements
+    const validatePassword = (password) => {
+        setPasswordRequirements({
+            minLength: password.length >= 8,
+            hasUppercase: /[A-Z]/.test(password),
+            hasLowercase: /[a-z]/.test(password),
+            hasNumber: /[0-9]/.test(password),
+            hasSpecialChar: /[!@#$%^&*(),.?":{}|<>]/.test(password),
+        });
+    };
+
+
     return (
         <>
-            <form className={styles.userForm}>
-                <div className={styles.inputContainer}>
-                    <label htmlFor="username">Username:</label>
-                    <input
-                        type="text"
-                        id="username"
-                        name="username"
-                        placeholder="Username"
-                        maxLength={50}
-                        required
-                    />
+            <form className={styles.userForm} onSubmit={handleRegisterSubmit}>
+                <div className={styles.inputDiv}>
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="name">Name:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            name="name"
+                            placeholder="Name"
+                            maxLength={50}
+                            onChange={(e)=>setName(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="email">Email:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="you@example.com"
+                            maxLength={50}
+                            onChange={(e)=>setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="text"
+                            id="password"
+                            name="password"
+                            placeholder="Password"
+                            maxLength={25}
+                            onChange={(e)=>{setPassword(e.target.value), validatePassword(e.target.value)}}
+                            required
+                        />
+                    </div>
+
+                    <div className={styles.inputContainer}>
+                        <label htmlFor="accountType">Account Type:</label>
+                        <select
+                            name="accountType"
+                            id="accountType"
+                            required
+                            onChange={handleAccountType}
+                        >
+                            <option value="author">Author</option>
+                            <option value="editor">Editor</option>
+                            <option value="reviewer">Reviewer</option>
+                            <option value="admin">Admin</option>
+                        </select>
+                    </div>
+                </div>
+                <div className={styles.requirements}>
+                    <div className={styles.passwordRequirements}>
+                            <p style={{ fontSize: "0.85rem" }}>Password Requirements:</p>
+                            <ul style={{ fontSize: "0.8rem", marginLeft: "1rem" }}>
+                                <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
+                                    At least 8 characters long
+                                </li>
+                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
+                                    At least one uppercase letter
+                                </li>
+                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
+                                    At least one lowercase letter
+                                </li>
+                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
+                                    At least one number
+                                </li>
+                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
+                                    At least one special character
+                                </li>
+                            </ul>
+                        </div>
                 </div>
 
-                <div className={styles.inputContainer}>
-                    <label htmlFor="email">Email:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="you@example.com"
-                        maxLength={50}
-                        required
-                    />
-                </div>
-
-                <div className={styles.inputContainer}>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="text"
-                        id="password"
-                        name="password"
-                        placeholder="Password"
-                        maxLength={25}
-                        required
-                    />
-                </div>
-
-                <div className={styles.inputContainer}>
-                    <label htmlFor="accountType">Account Type:</label>
-                    <select
-                        name="accountType"
-                        id="accountType"
-                        required
-                    >
-                        <option value="author">Author</option>
-                        <option value="editor">Editor</option>
-                        <option value="reviewer">Reviewer</option>
-                        <option value="admin">Admin</option>
-                    </select>
-                </div>
+            
 
                 <button type="submit">Submit</button>
             </form>
