@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { GiDiceTwentyFacesTwenty } from 'react-icons/gi';
-import { RiLogoutCircleLine } from 'react-icons/ri';
 import { IoMenu } from 'react-icons/io5';
 import {
   FaImages,      // Icon for "All Posters"
@@ -10,9 +8,11 @@ import {
   FaInfoCircle   // Icon for "About Us"
 } from 'react-icons/fa';
 import styles from './Sidebar.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, toggleSidebar,onSelectTab,isPosterTab }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   const isActive = (path) => {
     return location.pathname.includes(path);
@@ -22,7 +22,7 @@ const Sidebar = ({ isOpen, toggleSidebar,onSelectTab,isPosterTab }) => {
     <div className={`${styles.sideBar} ${isOpen ? '' : styles.close}`}>
       <div className={styles.topSection}>
         <button onClick={toggleSidebar} className={styles.toggleButton}>
-          <IoMenu size={24} />
+          <IoMenu />
         </button>
       </div>
       <ul className={styles.sideMenu}>
@@ -43,20 +43,20 @@ const Sidebar = ({ isOpen, toggleSidebar,onSelectTab,isPosterTab }) => {
           </button>
         </li>
         <li className={isActive('/Dashboard') ? styles.active : ''}>
-          <Link to="/Dashboard">
+          <button onClick = { () => navigate("/Dashboard")} className={styles.linkBtn}>
             <div className={styles.linkContent}>
               <FaEdit />
               <span>Submit Research</span>
             </div>
-          </Link>
+          </button>
         </li>
         <li className={isActive('/AboutUs') ? styles.active : ''}>
-          <Link to="/AboutUs">
+          <button onClick = { () => navigate("/AboutUs")} className={styles.linkBtn}>
             <div className={styles.linkContent}>
               <FaInfoCircle />
               <span>About Us</span>
             </div>
-          </Link>
+          </button>
         </li>
       </ul>
     </div>

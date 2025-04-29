@@ -73,9 +73,12 @@
   text-decoration: none;
   background-color: #000000;
   border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
-
-
 
 /* hamburger icon */
 .hamburger {
@@ -105,6 +108,12 @@
   border: none;
   margin: 0.4rem 0;
   text-align: left;
+}
+
+.dropdownMenu button:hover {
+  text-decoration: underline;
+  text-decoration-color: red;
+  text-underline-offset: 5px;
 }
 
 .dropdownMenu a {

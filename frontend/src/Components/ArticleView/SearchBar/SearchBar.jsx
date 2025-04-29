@@ -16,9 +16,9 @@ const SearchBar = () => {
 
         if (tab === "posters"){
             setIsPosterTab(true);
-            navigate(`/Gallery?q=${query}&isPosterTab=${isPosterTab}`);
+            navigate(`/Gallery?q=${query}&isPosterTab=${isPosterTab}`, { replace: false });
         } else if (tab === "articles") {
-            navigate(`/Gallery?q=${query}&isPosterTab=${!isPosterTab}`);
+            navigate(`/Gallery?q=${query}&isPosterTab=${!isPosterTab}`, { replace: false });
         } else {
             navigate("/")
         }
