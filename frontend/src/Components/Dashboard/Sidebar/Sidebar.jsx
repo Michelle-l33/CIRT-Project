@@ -9,6 +9,8 @@ import { FaRegUser } from "react-icons/fa";
 import { RiLogoutCircleLine } from "react-icons/ri";
 import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 import { IoNewspaperOutline } from "react-icons/io5";
+import { FaUsersGear } from "react-icons/fa6";
+import { FaUserGraduate } from "react-icons/fa";
 
 
 import { dashBoardContext } from '../Dashboard';
@@ -37,6 +39,12 @@ const Sidebar = () => {
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
     ];
 
+    const listOfAdminIcons = [
+        { Name: "Users", iconComponent: FaUsersGear, url: "/Dashboard/Admin/UserList" },
+        { Name: "Fellows", iconComponent: FaUserGraduate, url: "/Dashboard/Admin/Fellowship" },
+        { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
+    ];
+
     let listOfIcon;
 
     if (user.isAuthor) {
@@ -45,6 +53,8 @@ const Sidebar = () => {
         listOfIcon = listOfEditorIcons;
     } else if (user.isReviewer){
         listOfIcon = listOfReviewerIcons;
+    } else if (user.isAdmin){
+        listOfIcon = listOfAdminIcons;
     }
 
     const isLocation = (url) => {

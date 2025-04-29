@@ -324,6 +324,7 @@
 }
 
 .fellowBigContainer .adminContent {
+    margin-bottom: 2em;
     flex-grow: 2;
 }
 

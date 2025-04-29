@@ -39,11 +39,13 @@ const DashboardRoutes = () => {
                     </Route>
                 </Route>
                 
-                <Route path = "Admin" element={<Dashboard 
-                                      component={<MainContentAdmin />}/>}>
-                        <Route index element={<Navigate to="UserList" replace />}/>
-                        <Route path = "UserList" element={<UserList />} />
-                        <Route path = "Fellowship" element={<FellowTab />}/>
+                <Route element={<ProtectedRoutes role="Admin" />}>
+                    <Route path = "Admin" element={<Dashboard 
+                                        component={<MainContentAdmin />}/>}>
+                            <Route index element={<Navigate to="UserList" replace />}/>
+                            <Route path = "UserList" element={<UserList />} />
+                            <Route path = "Fellowship" element={<FellowTab />}/>
+                    </Route>
                 </Route>
                 
                 <Route element={<ProtectedRoutes role="Editor" />}>
