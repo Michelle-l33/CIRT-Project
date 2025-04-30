@@ -417,6 +417,51 @@
     position: relative;
 }
 
+.profileImg .profilePic {
+    position: relative;
+    width: clamp(150px, 10vw, 360px);
+    height: clamp(150px, 10vw, 360px);
+    border-radius: 50%;
+    overflow: visible;
+    margin-bottom: 15px;
+}
+
+.profileImg .editProfilePic {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
+    background-color: var(--light-warning);
+    color: var(--warning);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.profileImg .editProfilePic:hover {
+    background-color: var(--warning);
+    color: var(--light);
+    transform: scale(1.1);
+}
+
+.profileImg .editProfilePic + input {
+    display: none;
+}
+
+.profileImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
 .profileImg .editButton {
     position: absolute;
     top: 0;
@@ -424,6 +469,7 @@
     background-color: inherit;
     color: var(--dark);
     border: none;
+    cursor: pointer;
 }
 
 .profileImg .editButton svg {
@@ -435,11 +481,6 @@
     color: var(--primary);
 }
 
-.profileImg img{
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-}
 
 .fellowProfileContainer h2 {
     text-align: center;
