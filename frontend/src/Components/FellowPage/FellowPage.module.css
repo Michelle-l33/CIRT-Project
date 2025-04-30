@@ -1,24 +1,27 @@
 .fellowPage {
     --bg-color: #eef4f8;
     background-color: var(--bg-color);
+    height: 100vh;
 }
 
 .fellowPage h1 {
-    font-size: 56px;      
+    font-size: clamp(32px, 5vw, 56px);
     font-weight: 700;    
     background-color: var(--bg-color);
     color: black;
-    padding: 20px;           
-    margin-bottom: 30px;  
+    padding-top: clamp(100px, 12vw, 300px);
+    padding-bottom: clamp(56px, 8vw, 128px);           
     line-height: 1;   
-    letter-spacing: 1px;  
+    letter-spacing: 2px;  
     text-align: center; 
 }
 
 .fellowPageBigContainer {
     display: grid;
     grid-template-columns: repeat(auto-fill, 320px);
-    gap: 2em;
+    justify-content: center;
+    column-gap: 2em;
+    row-gap: 1em;
     padding: 2em;
     position: relative;
     background-color: var(--bg-color);
@@ -71,21 +74,20 @@
 }
 
 .fellowPortrait .portraitContent {
-    padding: 1rem;
     background-color: var(--bg-color);
+    padding: 1em;
     color: black;
 }
 
 .fellowPortrait .portraitName {
-    font-size: 1rem;
+    font-size: 1.5em;
     font-weight: 600;
     line-height: 1.5;
-    margin-bottom: 5px;
     text-transform: capitalize;
 }
 
 .fellowPortrait .portraitFellowship {
-    font-size: 1.4rem;
+    font-size: 1.2em;
     font-weight: 400;
 }
 
