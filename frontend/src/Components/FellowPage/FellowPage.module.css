@@ -1,12 +1,13 @@
 .fellowPage {
-    background-color: azure;
+    --bg-color: #eef4f8;
+    background-color: var(--bg-color);
 }
 
 .fellowPage h1 {
-    font-size: 80px;      
-    font-weight: 700;
-    background-color: #660708;         
-    color: white;
+    font-size: 56px;      
+    font-weight: 700;    
+    background-color: var(--bg-color);
+    color: black;
     padding: 20px;           
     margin-bottom: 30px;  
     line-height: 1;   
@@ -20,7 +21,7 @@
     gap: 2em;
     padding: 2em;
     position: relative;
-    background-color: azure;
+    background-color: var(--bg-color);
 }
 
 .fellowGridItem {
@@ -29,10 +30,6 @@
     align-items: center;
     flex-direction: column;
     transition: all 0.5s ease;
-}
-
-.fellowGridItem.isActive {
-    z-index: 10;
 }
 
 .fellowContainer {
@@ -54,7 +51,7 @@
 }
 
 .fellowPortrait[aria-disabled="true"] {
-    opacity: 0.6;
+    opacity: 0.5;
     pointer-events: none;
 }
 
@@ -75,7 +72,7 @@
 
 .fellowPortrait .portraitContent {
     padding: 1rem;
-    background-color: azure;
+    background-color: var(--bg-color);
     color: black;
 }
 

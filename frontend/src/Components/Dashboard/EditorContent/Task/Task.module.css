@@ -28,7 +28,7 @@
 .taskContent .right .editorList {
     display: grid;
     row-gap: 10px;
-    max-height: 60vh;
+    max-height: calc(100% - 111px - 15px);
     overflow-y: scroll;
 }
 

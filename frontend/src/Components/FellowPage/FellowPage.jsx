@@ -64,6 +64,7 @@ const FellowPage = () => {
     const handleClickOutside = useCallback((event) => {
         const isClickInsidePopup = event.target.closest(`.${styles.expandedContentContainer}`);
         const isClickOutsidePopup = event.target.closest(`.${styles.fellowPage}`);
+
       
         if (!isClickInsidePopup && isClickOutsidePopup) {
           setActiveFellow(null);
@@ -84,14 +85,14 @@ const FellowPage = () => {
         </header>
 
         <main className = {styles.fellowPage}>
-            <h1>Our Fellows</h1>
+            <h1>Meet Our Brilliant Fellows</h1>
 
             <section>
                     <div className={styles.fellowPageBigContainer}>
                         {listOfFellows.map((fellow) => (
                         <div
                             key={fellow._id}
-                            className={`${styles.fellowGridItem} ${activeFellow?._id === fellow._id ? styles.isActive : ""}`}>
+                            className={styles.fellowGridItem}>
                             <div className={styles.fellow}>
                                 <div className={styles.fellowContainer}>
                                     <button className={styles.fellowPortrait}
