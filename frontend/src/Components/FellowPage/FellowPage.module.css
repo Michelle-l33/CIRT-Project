@@ -1,9 +1,25 @@
+.fellowPage {
+    background-color: azure;
+}
+
+.fellowPage h1 {
+    font-size: 2.25rem;      
+    font-weight: 700;
+    background-color: #660708;         
+    color: white;
+    padding: 20px;           
+    margin-bottom: 30px;     
+    letter-spacing: 1px;  
+    text-align: center; 
+}
+
 .fellowPageBigContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.25rem;
-    padding: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2em;
+    padding: 2em;
     position: relative;
+    background-color: azure;
 }
 
 .fellowGridItem {
@@ -28,129 +44,166 @@
 .fellowPortrait {
     position: relative;
     width: 100%;
-    background: #f0f0f0;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 0;
     border: none;
-    aspect-ratio: 2/3;
     transition: transform 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+}
+
+.fellowPortrait[aria-disabled="true"] {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+.fellowPortrait:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
 }
 
 .fellowPortrait img {
     display: block;
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease-in-out;
 }
 
 .fellowPortrait .portraitContent {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     padding: 1rem;
-    background-color: rgba(0, 0, 0, 0.6);
-    color: white;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+    background-color: azure;
+    color: black;
 }
 
-.fellowPortrait:hover .portraitContent {
-    opacity: 1;
-    visibility: visible;
-    transition-delay: 0s;
+.fellowPortrait .portraitName {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: capitalize;
 }
 
-.fellowGridItem.isActive .fellowContainer {
-    position: absolute;
-    left: 50%;
+.fellowPortrait .portraitFellowship {
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+/* Expanded content container */
+.expandedContentContainer {
+    position: fixed;
     top: 0;
-    flex-direction: row; 
-    width: 90vw;
-    transform: translateX(-50%);
-    transition: transform 0.3s ease-in-out;
-}
-
-.fellowGridItem.isActive .fellowPortrait {
-    width: 25vw; 
-}
-
-.fellowGridItem.isActive .expandedContentContainer {
-    width: 65vw;
-    height: 80vh; 
-    background-color: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
+    right: -80%;
+    width: 80vw;
+    height: 100vh;
+    background-color: white;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
+    transition: right 0.5s ease, opacity 0.3s ease;
+    z-index: 999;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    opacity: 0;
     overflow-y: auto;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    gap: 0;
+}
+
+.expandedContentContainer.open {
+    right: 0;
     opacity: 1;
+    pointer-events: auto;
+}
+
+.expandedContentContainer img {
+    width: 100%;
+    aspect-ratio: 9/4;
+    object-fit: cover;
 }
 
 .expandedContent {
-    display: grid;
-    grid-template-columns: 1fr 3fr 1fr; 
-    gap: 1rem; 
-    width: 100%;
-    padding: 1rem;
-}
-
-.employeeColName,
-.employeeColBio,
-.employeeColLink {
+    padding-left: 25%;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    margin-top: 20px;
+    padding-bottom: 20px;
+    flex-grow: 1;
 }
 
-.employeeColName p,
-.employeeColBio,
-.employeeColLink a {
-    margin: 0;
+.expandedContentContainer .closeBtnContainer {
+    min-height: 70px; 
+    width: 100%;
+    background-color: white;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
 }
 
-.expandedContent .portraitName {
-    font-size: 1.5rem; 
-    font-weight: bold;
-    color: #333;
-}
-
-.expandedContent .portraitFellowship {
-    font-size: 1.1rem; 
-    font-style: italic; 
-    color: #555; 
-}
-
-.expandedContent .portraitYear {
-    font-size: 1rem;
-    color: #777; 
-}
-
-.expandedContent .employeeColLink a {
-    font-size: 1rem;
-    color: #0077b6;
-    text-decoration: none;
-}
-
-.expandedContent .employeeColLink a:hover {
-    text-decoration: underline;
-}
-
-.expandedContent .closeBtn {
-    background: none; 
+.expandedContentContainer .closeBtn {
+    background-color: transparent;
+    color: black;
+    font-size: 30px;
     border: none;
-    font-size: 1.5rem;
-    color: #333;
     cursor: pointer;
-    align-self: flex-end;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 }
 
-.expandedContent .closeBtn:hover {
-    color: #ff0000; /* Red color when hovered */
+.expandedContentContainer .closeBtn:hover {
+    opacity: 0.5;
+}
+
+
+.employeeColName {
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.portraitName {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    letter-spacing: 0.5px;
+}
+
+.portraitFellowship {
+    font-size: 2.5rem;
+    font-weight: 500;
+    color: #444;
+}
+
+.portraitYear {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #666;
+    letter-spacing: 0.4px;
+}
+
+.employeeColBio {
+    margin-top: 70px;
+    font-size: 1.05rem;
+    color: #333;
+    line-height: 1.6;
+    letter-spacing: 0.3px;
+    padding: 12px 0;
+}
+
+.employeeColLink {
+    margin-top: 70px;
+}
+
+.employeeColLink a {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    letter-spacing: 0.6px;
+}
+
+.employeeColLink a:hover {
+    text-decoration: underline;
+    color: black;
 }

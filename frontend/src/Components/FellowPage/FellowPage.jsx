@@ -60,6 +60,7 @@ const listOfFellows = [ {
 
 const FellowPage = () => {
     const [activeFellow, setActiveFellow] = useState(null);
+    const selectedFellow = listOfFellows.find(f => f._id === activeFellow);
 
     return (
         <>
@@ -67,7 +68,7 @@ const FellowPage = () => {
             <NavBar/>
         </header>
 
-        <main>
+        <main className = {styles.fellowPage}>
             <h1>Our Fellows</h1>
 
             <section>
@@ -75,48 +76,54 @@ const FellowPage = () => {
                         {listOfFellows.map((fellow) => (
                         <div
                             key={fellow._id}
-                            className={`${styles.fellowGridItem} ${activeFellow === fellow._id ? styles.isActive : ''}`}>
+                            className={`${styles.fellowGridItem} ${activeFellow === fellow._id ? styles.isActive : ""}`}>
                             <div className={styles.fellow}>
                             <div className={styles.fellowContainer}>
                                 <button className={styles.fellowPortrait}
-                                        onClick={() => setActiveFellow(activeFellow === fellow._id ? null : fellow._id)}>
+                                        onClick={() => setActiveFellow(activeFellow === fellow._id ? null : fellow._id)}
+                                        disabled={activeFellow !== null}
+                                        aria-disabled={activeFellow !== null} >
                                     <img
                                         src={fellow.img}
                                         alt={`${fellow.name} Profile Picture`}
                                     />
-                                    <div className={styles.portraitContent}>
+                                    <aside className={styles.portraitContent}>
                                         <p className={styles.portraitName}>{fellow.name}</p>
-                                        <p className={styles.portraitFellowship}>
-                                        {fellow.fellowship}
-                                        </p>
-                                    </div>
+                                        <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
+                                    </aside>
                                 </button>
 
-                                {activeFellow === fellow._id && (
-                                <div className={styles.expandedContentContainer}>
+                                {/* {activeFellow === fellow._id && ( */}
+                                <div className={`${styles.expandedContentContainer} ${activeFellow === fellow._id ? styles.open : ''}`}>
+                                    <div className={styles.closeBtnContainer}>
+                                        <button className={styles.closeBtn} onClick={() => setActiveFellow(null)}>&#215;</button>
+                                    </div>
+                                    <img
+                                        src={selectedFellow?.img}
+                                        alt={`${selectedFellow?.name} Profile Picture`}
+                                    />
                                     <div className={styles.expandedContent}>
                                         <div className={styles.employeeColName}>
-                                            <p className={styles.portraitName}>{fellow.name}</p>
-                                            <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
-                                            <p className={styles.portraitYear}>{fellow.year}</p>
+                                            <p className={styles.portraitName}>{selectedFellow?.name}</p>
+                                            <p className={styles.portraitFellowship}>{selectedFellow?.fellowship}</p>
                                         </div>
+                                        <p className={styles.portraitYear}>{selectedFellow?.year}</p>
 
-                                        <div className={styles.employeeColBio}>{fellow.bio}</div>
+                                        <div className={styles.employeeColBio}>{selectedFellow?.bio}</div>
 
                                         <div className={styles.employeeColLink}>
                                             <a
-                                            href={fellow.published}
+                                            href={selectedFellow?.published}
                                             target="_blank"
                                             rel="noopener noreferrer"
                                             >
                                             View Works
                                             </a>
 
-                                            <button className={styles.closeBtn} onClick={() => setActiveFellow(null)}>&#215;</button>
                                         </div>
                                     </div>
                                 </div>
-                                )}
+                                {/* )} */}
                             </div>
                             </div>
                         </div>
