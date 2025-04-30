@@ -1,25 +1,30 @@
 .fellowPage {
-    background-color: azure;
+    --bg-color: #eef4f8;
+    background-color: var(--bg-color);
+    height: 100vh;
 }
 
 .fellowPage h1 {
-    font-size: 2.25rem;      
-    font-weight: 700;
-    background-color: #660708;         
-    color: white;
-    padding: 20px;           
-    margin-bottom: 30px;     
-    letter-spacing: 1px;  
+    font-size: clamp(32px, 5vw, 56px);
+    font-weight: 700;    
+    background-color: var(--bg-color);
+    color: black;
+    padding-top: clamp(100px, 12vw, 300px);
+    padding-bottom: clamp(56px, 8vw, 128px);           
+    line-height: 1;   
+    letter-spacing: 2px;  
     text-align: center; 
 }
 
 .fellowPageBigContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2em;
+    grid-template-columns: repeat(auto-fill, 320px);
+    justify-content: center;
+    column-gap: 2em;
+    row-gap: 1em;
     padding: 2em;
     position: relative;
-    background-color: azure;
+    background-color: var(--bg-color);
 }
 
 .fellowGridItem {
@@ -28,10 +33,6 @@
     align-items: center;
     flex-direction: column;
     transition: all 0.5s ease;
-}
-
-.fellowGridItem.isActive {
-    z-index: 10;
 }
 
 .fellowContainer {
@@ -53,7 +54,7 @@
 }
 
 .fellowPortrait[aria-disabled="true"] {
-    opacity: 0.6;
+    opacity: 0.5;
     pointer-events: none;
 }
 
@@ -66,27 +67,27 @@
 .fellowPortrait img {
     display: block;
     width: 100%;
-    height: auto;
+    aspect-ratio: 4/5;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease-in-out;
 }
 
 .fellowPortrait .portraitContent {
-    padding: 1rem;
-    background-color: azure;
+    background-color: var(--bg-color);
+    padding: 1em;
     color: black;
 }
 
 .fellowPortrait .portraitName {
-    font-size: 1.4rem;
+    font-size: 1.5em;
     font-weight: 600;
-    margin-bottom: 10px;
+    line-height: 1.5;
     text-transform: capitalize;
 }
 
 .fellowPortrait .portraitFellowship {
-    font-size: 1rem;
+    font-size: 1.2em;
     font-weight: 400;
 }
 
@@ -182,7 +183,7 @@
     letter-spacing: 0.4px;
 }
 
-.employeeColBio {
+.employeeColBio p{
     margin-top: 70px;
     font-size: 1.05rem;
     color: #333;

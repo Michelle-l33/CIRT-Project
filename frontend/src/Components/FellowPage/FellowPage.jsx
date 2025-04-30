@@ -1,6 +1,6 @@
 import styles from "./FellowPage.module.css";
 import NavBar from "../NavBar/NavBar"
-import { useState } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 
 const listOfFellows = [ {
     _id: "123",
@@ -60,7 +60,23 @@ const listOfFellows = [ {
 
 const FellowPage = () => {
     const [activeFellow, setActiveFellow] = useState(null);
-    const selectedFellow = listOfFellows.find(f => f._id === activeFellow);
+
+    const handleClickOutside = useCallback((event) => {
+        const isClickInsidePopup = event.target.closest(`.${styles.expandedContentContainer}`);
+        const isClickOutsidePopup = event.target.closest(`.${styles.fellowPage}`);
+
+      
+        if (!isClickInsidePopup && isClickOutsidePopup) {
+          setActiveFellow(null);
+        }
+      }, []);
+
+      useEffect(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+          document.removeEventListener("mousedown", handleClickOutside);
+        };
+      }, [handleClickOutside]);
 
     return (
         <>
@@ -69,62 +85,32 @@ const FellowPage = () => {
         </header>
 
         <main className = {styles.fellowPage}>
-            <h1>Our Fellows</h1>
+            <h1>Meet Our Brilliant Fellows</h1>
 
             <section>
                     <div className={styles.fellowPageBigContainer}>
                         {listOfFellows.map((fellow) => (
                         <div
                             key={fellow._id}
-                            className={`${styles.fellowGridItem} ${activeFellow === fellow._id ? styles.isActive : ""}`}>
+                            className={styles.fellowGridItem}>
                             <div className={styles.fellow}>
-                            <div className={styles.fellowContainer}>
-                                <button className={styles.fellowPortrait}
-                                        onClick={() => setActiveFellow(activeFellow === fellow._id ? null : fellow._id)}
-                                        disabled={activeFellow !== null}
-                                        aria-disabled={activeFellow !== null} >
-                                    <img
-                                        src={fellow.img}
-                                        alt={`${fellow.name} Profile Picture`}
-                                    />
-                                    <aside className={styles.portraitContent}>
-                                        <p className={styles.portraitName}>{fellow.name}</p>
-                                        <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
-                                    </aside>
-                                </button>
+                                <div className={styles.fellowContainer}>
+                                    <button className={styles.fellowPortrait}
+                                            onClick={() => setActiveFellow(activeFellow?._id === fellow._id ? null : fellow)}
+                                            disabled={activeFellow !== null}
+                                            aria-disabled={activeFellow !== null} >
+                                        <img
+                                            src={fellow.img}
+                                            alt={`${fellow.name} Profile Picture`}
+                                        />
+                                        <aside className={styles.portraitContent}>
+                                            <p className={styles.portraitName}>{fellow.name}</p>
+                                            <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
+                                        </aside>
+                                    </button>
 
-                                {/* {activeFellow === fellow._id && ( */}
-                                <div className={`${styles.expandedContentContainer} ${activeFellow === fellow._id ? styles.open : ''}`}>
-                                    <div className={styles.closeBtnContainer}>
-                                        <button className={styles.closeBtn} onClick={() => setActiveFellow(null)}>&#215;</button>
-                                    </div>
-                                    <img
-                                        src={selectedFellow?.img}
-                                        alt={`${selectedFellow?.name} Profile Picture`}
-                                    />
-                                    <div className={styles.expandedContent}>
-                                        <div className={styles.employeeColName}>
-                                            <p className={styles.portraitName}>{selectedFellow?.name}</p>
-                                            <p className={styles.portraitFellowship}>{selectedFellow?.fellowship}</p>
-                                        </div>
-                                        <p className={styles.portraitYear}>{selectedFellow?.year}</p>
-
-                                        <div className={styles.employeeColBio}>{selectedFellow?.bio}</div>
-
-                                        <div className={styles.employeeColLink}>
-                                            <a
-                                            href={selectedFellow?.published}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            >
-                                            View Works
-                                            </a>
-
-                                        </div>
-                                    </div>
+                                    <ExpandedContent fellow={activeFellow} isOpen={!!activeFellow} onClose={() => setActiveFellow(null)}/>
                                 </div>
-                                {/* )} */}
-                            </div>
                             </div>
                         </div>
                         ))}
@@ -136,3 +122,40 @@ const FellowPage = () => {
 }
 
 export default FellowPage;
+
+const ExpandedContent = ({ fellow, isOpen, onClose }) => {
+
+    return (
+        <div className={`${styles.expandedContentContainer} ${isOpen ? styles.open : ""}`} onClick={onClose}>
+                {fellow && (
+                    <>
+                        <div className={styles.closeBtnContainer} onClick={(e) => e.stopPropagation()}>
+                            <button className={styles.closeBtn} onClick={onClose}>&#215;</button>
+                        </div>
+                
+                        <img src={fellow.img} alt={fellow.name} onClick={(e) => e.stopPropagation()}/>
+                
+                        <div className={styles.expandedContent} onClick={(e) => e.stopPropagation()}>
+                            <div className={styles.employeeColName}>
+                                <p className={styles.portraitName}>{fellow.name}</p>
+                                <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
+                            </div>
+
+                            <p className={styles.portraitYear}>{fellow.year}</p>
+                
+                            <div className={styles.employeeColBio}><p>{fellow.bio}</p></div>
+                    
+                            {fellow.published && (
+                                <div className={styles.employeeColLink}>
+                                    <a href={fellow.published} target="_blank" rel="noopener noreferrer">
+                                    View Profile
+                                    </a>
+                                </div>
+                                )}
+
+                        </div>
+                    </>
+                )}
+        </div>
+      );
+}
