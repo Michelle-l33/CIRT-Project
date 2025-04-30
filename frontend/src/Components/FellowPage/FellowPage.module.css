@@ -3,19 +3,20 @@
 }
 
 .fellowPage h1 {
-    font-size: 2.25rem;      
+    font-size: 80px;      
     font-weight: 700;
     background-color: #660708;         
     color: white;
     padding: 20px;           
-    margin-bottom: 30px;     
+    margin-bottom: 30px;  
+    line-height: 1;   
     letter-spacing: 1px;  
     text-align: center; 
 }
 
 .fellowPageBigContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, 320px);
     gap: 2em;
     padding: 2em;
     position: relative;
@@ -66,7 +67,7 @@
 .fellowPortrait img {
     display: block;
     width: 100%;
-    height: auto;
+    aspect-ratio: 4/5;
     object-fit: cover;
     object-position: center;
     transition: transform 0.3s ease-in-out;
@@ -79,14 +80,15 @@
 }
 
 .fellowPortrait .portraitName {
-    font-size: 1.4rem;
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 10px;
+    line-height: 1.5;
+    margin-bottom: 5px;
     text-transform: capitalize;
 }
 
 .fellowPortrait .portraitFellowship {
-    font-size: 1rem;
+    font-size: 1.4rem;
     font-weight: 400;
 }
 
@@ -182,7 +184,7 @@
     letter-spacing: 0.4px;
 }
 
-.employeeColBio {
+.employeeColBio p{
     margin-top: 70px;
     font-size: 1.05rem;
     color: #333;
