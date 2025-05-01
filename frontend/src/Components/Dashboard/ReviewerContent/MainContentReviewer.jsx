@@ -24,7 +24,7 @@ const MainContentReviewer = () => {
                             </li>
                             /
                             <li>
-                                <Link to="/Papers">Gallery</Link>
+                                <Link to="/Gallery">Gallery</Link>
                             </li>
                     </ul>                 
                 </div>
