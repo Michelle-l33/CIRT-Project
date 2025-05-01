@@ -9,7 +9,7 @@ const listOfFellows = [ {
     year: "2004",
     bio: "Bloom Griffin is an accomplished researcher and thought leader with over two decades of experience in the field of environmental science and sustainable development. Having graduated with a degree in Environmental Engineering from Stanford University, Joshua's career spans various projects, including leading international collaborations to combat climate change and working on innovative technologies to promote clean energy. He has published numerous papers on climate policy, sustainability practices, and renewable energy solutions, many of which have been cited in high-impact journals worldwide. Joshua is passionate about advancing interdisciplinary collaborations, and his research has shaped public policy, influencing decisions on sustainable urban development, carbon emissions reduction, and ecosystem conservation.",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The ZOO"
+    description: "The ZOO"
 },
 {   
     _id: "456",
@@ -18,7 +18,7 @@ const listOfFellows = [ {
     year: "2005",
     bio: "Stelliaer lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The ZoO"
+    description: "The ZoO"
 },
 {   
     _id: "789",
@@ -27,7 +27,7 @@ const listOfFellows = [ {
     year: "2006",
     bio: "Musicdc lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The ZOo"
+    description: "The ZOo"
 }, 
 {   
     _id: "246",
@@ -36,7 +36,7 @@ const listOfFellows = [ {
     year: "2006",
     bio: "Techna lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The ZOo0"
+    description: "The ZOo0"
 }, 
 {   
     _id: "357",
@@ -45,7 +45,7 @@ const listOfFellows = [ {
     year: "2002",
     bio: "Flora lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The Z0Oo"
+    description: "The Z0Oo"
 }, 
 {   
     _id: "101",
@@ -54,7 +54,7 @@ const listOfFellows = [ {
     year: "2007",
     bio: "Aisha lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
     published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    fellowship: "The Z0oO"
+    description: "The Z0oO"
 }, 
 ]   
 
@@ -105,7 +105,7 @@ const FellowPage = () => {
                                         />
                                         <aside className={styles.portraitContent}>
                                             <p className={styles.portraitName}>{fellow.name}</p>
-                                            <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
+                                            <p className={styles.portraitFellowship}>{fellow.description}</p>
                                         </aside>
                                     </button>
 
@@ -138,7 +138,7 @@ const ExpandedContent = ({ fellow, isOpen, onClose }) => {
                         <div className={styles.expandedContent} onClick={(e) => e.stopPropagation()}>
                             <div className={styles.employeeColName}>
                                 <p className={styles.portraitName}>{fellow.name}</p>
-                                <p className={styles.portraitFellowship}>{fellow.fellowship}</p>
+                                <p className={styles.portraitFellowship}>{fellow.description}</p>
                             </div>
 
                             <p className={styles.portraitYear}>{fellow.year}</p>

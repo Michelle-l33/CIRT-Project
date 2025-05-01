@@ -31,4 +31,24 @@ const upload = multer({
   }),
 });
 
-module.exports = {upload, s3Client};
+const uploadImage = multer({
+  storage: multerS3({
+    s3: s3Client,
+    bucket: process.env.AWS_BUCKET_NAME,
+    key: (req, file, cb) => {
+      cb(null, `images/${Date.now()}-${file.originalname}`);
+    },
+    contentType: multerS3.AUTO_CONTENT_TYPE,
+    contentDisposition: "inline",
+  }),
+  fileFilter: (req, file, cb) => {
+    const allowed = ["image/jpeg", "image/png", "image/webp"];
+    if (allowed.includes(file.mimetype)) {
+      cb(null, true);
+    } else {
+      cb(new Error("Invalid image type. Only JPEG, PNG, and WEBP are allowed."));
+    }
+  },
+});
+
+module.exports = {upload, s3Client, uploadImage};

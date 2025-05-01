@@ -129,18 +129,78 @@ const AddFellowBtn = () => {
 }
 
 const AddFellowForm = ( {onClose} ) => {
+    const [formData, setFormData] = useState({ //chat gpt here
+        img: null, // Store file object here
+        name: "",
+        bio: "",
+        published: "",
+        description: "",
+      });
+      const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+          ...prevData,
+          [name]: value,
+        }));
+      };
+      const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setFormData((prevData) => ({
+      ...prevData,
+      picture: file,
+    }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const { img, name, bio, published, description } = formData;
+
+    // Check if picture is provided
+    if (!img) {
+      alert("Please upload a picture.");
+      return;
+    }
+
+    const data = new FormData();
+    data.append("img", img);
+    data.append("name", name);
+    data.append("bio", bio);
+    data.append("published", published);
+    data.append("description", description);
+    
+
+    try {
+      // Send data to backend (adjust the URL to your actual backend route)
+      const response = await fetch("https://cirt-project-server.vercel.app/fellowship/upload-fellowship", {
+        method: "POST",
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      alert(response.data.message); // Show success message
+      onClose(); // Close the form after submission
+    } catch (error) {
+      console.error("Error uploading fellowship:", error);
+      alert("An error occurred while uploading the fellowship.");
+    }
+  };
+
     return (
         <>
             <form className={styles.fellowForm}>
  
                 <div className={styles.inputContainer}>
-                    <label htmlFor="picture">Picture:</label>
+                    <label htmlFor="img">Picture:</label>
                     <input
                         type="file"
-                        id="picture"
-                        name="picture"
+                        id="img"
+                        name="img"
                         accept="image/*"
                         required
+                        onChange={handleFileChange}
                     />
                 </div>
 
@@ -153,8 +213,10 @@ const AddFellowForm = ( {onClose} ) => {
                         placeholder="e.g. Princess Bloom (2004)"
                         maxLength={100}
                         required
+                        onChange={handleFileChange}
                     />
                 </div>
+                
 
                 <div className={styles.inputContainer}>
                     <label htmlFor="bio">Quick Bio:</label>
@@ -165,28 +227,31 @@ const AddFellowForm = ( {onClose} ) => {
                         rows="4"
                         maxLength={300}
                         required
+                        onChange={handleFileChange}
                     />
                 </div>
 
                 <div className={styles.inputContainer}>
-                    <label htmlFor="publishedWork">Published Work Link:</label>
+                    <label htmlFor="published">Published Work Link:</label>
                     <input
                         type="url"
-                        id="publishedWork"
-                        name="publishedWork"
+                        id="published"
+                        name="published"
                         placeholder="https://example.com"
+                        onChange={handleFileChange}
                     />
                 </div>
 
                 <div className={styles.inputContainer}>
-                    <label htmlFor="fellowshipTopic">Fellowship Topic and Collaborators:</label>
+                    <label htmlFor="description">Fellowship Topic and Collaborators:</label>
                     <textarea
-                        id="fellowshipTopic"
-                        name="fellowshipTopic"
+                        id="description"
+                        name="description"
                         placeholder="Research topic and who worked with them..."
                         rows="3"
                         maxLength={300}
                         required
+                        onChange={handleFileChange}
                     />
                 </div>
 
