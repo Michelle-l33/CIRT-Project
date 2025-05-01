@@ -108,7 +108,31 @@
     /* transform: translateY(-20px); */
     transition: all 0.3s ease;
     z-index: 4;
+    
 }
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap:2rem;
+}
+
+.inputDiv {
+    flex:1;
+}
+.requirements {
+    flex: 1;
+    max-width: 300px;
+}
+.submitButton {
+    display: block;
+    margin: 2rem auto 1rem auto; /* top, horizontal, bottom */
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 
 .userFormContainer.show {
     display: flex;
