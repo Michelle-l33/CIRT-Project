@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Fellowship = require("../models/Fellowship");
 const router = express.Router();
 const {uploadImage, s3Client} = require("../awsConnect");
-const { route } = require("./user");
+
 
 router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) => {
     try {
@@ -22,14 +22,13 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
         bio,
         published,
         description,
-        img: req.file.location, // S3 image URL
       });
   
       // Save to the database
       await newFellowship.save();
   
       // Respond with success message and image URL
-      res.status(201).json({ message: "Fellowship created!", imageUrl: req.file.location });
+      res.status(201).json({ message: "Fellowship created!"});
     } catch (err) {
       res.status(500).json({ error: err.message });
     }
@@ -37,8 +36,8 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
 
   router.get('/', async (req, res) => {
     try {
-      const fellowships = await Fellowship.find(); // Fetch all submissions from the database
-      res.json(fellowships); // Send the submissions as a response
+      const fellowship = await Fellowship.find(); // Fetch all submissions from the database
+      res.json(fellowship); // Send the submissions as a response
     } catch (error) {
       res.status(500).json({ error: 'Failed to fetch fellowships' });
     }

@@ -133,34 +133,19 @@ const AddFellowBtn = () => {
 }
 
 const AddFellowForm = ( {onClose} ) => {
-    const [formData, setFormData] = useState({ //chat gpt here
-        img: null, // Store file object here
-        name: "",
-        bio: "",
-        published: "",
-        description: "",
-      });
-      const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormData((prevData) => ({
-          ...prevData,
-          [name]: value,
-        }));
-      };
+    const [name, setName] = useState("");
+    const [bio, setBio] = useState("");
+    const [published, setPublished]=useState("");
+    const [description, setDescription]=useState("");
+    const [img, setImg] = useState(null);
+ 
       const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setFormData((prevData) => ({
-      ...prevData,
-      picture: file,
-    }));
-  };
+        setImg(e.target.files[0]);
+    };
 
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const { img, name, bio, published, description } = formData;
-
     // Check if picture is provided
     if (!img) {
       alert("Please upload a picture.");
@@ -179,13 +164,14 @@ const AddFellowForm = ( {onClose} ) => {
       // Send data to backend (adjust the URL to your actual backend route)
       const response = await fetch("https://cirt-project-server.vercel.app/fellowship/upload-fellowship", {
         method: "POST",
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
+        mode:"cors",
+        body:data,
       });
 
-      alert(response.data.message); // Show success message
-      onClose(); // Close the form after submission
+      const result = await response.json();
+
+      alert(result.message); // Show success message
+    //   onClose(); // Close the form after submission
     } catch (error) {
       console.error("Error uploading fellowship:", error);
       alert("An error occurred while uploading the fellowship.");
@@ -194,7 +180,7 @@ const AddFellowForm = ( {onClose} ) => {
 
     return (
         <>
-            <form className={styles.fellowForm}>
+            <form className={styles.fellowForm} onSubmit={handleSubmit}>
  
                 <div className={styles.inputContainer}>
                     <label htmlFor="img">Picture:</label>
@@ -217,7 +203,7 @@ const AddFellowForm = ( {onClose} ) => {
                         placeholder="e.g. Princess Bloom (2004)"
                         maxLength={100}
                         required
-                        onChange={handleFileChange}
+                        onChange={(e) => setName(e.target.value)}
                     />
                 </div>
                 
@@ -231,7 +217,7 @@ const AddFellowForm = ( {onClose} ) => {
                         rows="4"
                         maxLength={300}
                         required
-                        onChange={handleFileChange}
+                        onChange={(e) => setBio(e.target.value)}
                     />
                 </div>
 
@@ -242,7 +228,7 @@ const AddFellowForm = ( {onClose} ) => {
                         id="published"
                         name="published"
                         placeholder="https://example.com"
-                        onChange={handleFileChange}
+                        onChange={(e) => setPublished(e.target.value)}
                     />
                 </div>
 
@@ -255,7 +241,7 @@ const AddFellowForm = ( {onClose} ) => {
                         rows="3"
                         maxLength={300}
                         required
-                        onChange={handleFileChange}
+                        onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
 
