@@ -90,15 +90,15 @@ const TaskPage = () => {
                     <span>Gotta Catch Them All!</span>
                 </div>
 
-            <ul className={styles.editorList}>
-                {editors.map((editor, index) => (
-                        <li key={index} className={styles.editorItem}>
-                            <span className={styles.icon}><PiFinnTheHumanThin /></span>
-                            <span className={styles.name}>{editor.name}</span>
-                        </li>
-                    ))}
-            </ul>
-        </div>
+                <ul className={styles.editorList}>
+                    {editors.map((editor, index) => (
+                            <li key={index} className={styles.editorItem}>
+                                <span className={styles.icon}><PiFinnTheHumanThin /></span>
+                                <span className={styles.name}>{editor.name}</span>
+                            </li>
+                        ))}
+                </ul>
+            </div>
 
             <div className = {styles.left}>
 

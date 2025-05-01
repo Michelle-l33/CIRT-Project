@@ -2,7 +2,7 @@
     display: flex;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 10;
     background-color: black;
     align-items: center;
     /* -webkit-box-shadow: 4px 10px 5px 0 var(--primary);
@@ -11,7 +11,6 @@
     width: auto;
     height: 70px;
     padding: 0 15px;
-    font-family: 'Poppins', sans-serif;
 }
 
 .navLeft {

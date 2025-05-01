@@ -49,7 +49,7 @@ const UserTab = () => {
                 {isEditMode ? 
                     <form className={styles.emailChange} onSubmit={handleUpdateProfile}>
                         <div className={styles.inputRow}>
-                            <h4>Username:</h4>
+                            <h2>Username:</h2>
                             <input
                                 type='text'
                                 value={newName}
@@ -60,7 +60,7 @@ const UserTab = () => {
                             />
                         </div>
                         <div className={styles.inputRow}>
-                            <h4>Email:</h4>
+                            <h2>Email:</h2>
                             <input
                                 type='text'
                                 value={newEmail}
@@ -76,7 +76,7 @@ const UserTab = () => {
                 : 
                     <div>
                         <h2>Username: <span className={styles.userName}>{user.name}</span></h2>
-                        <h3>Email: <span>{user.email}</span></h3> 
+                        <h2>Email: <span>{user.email}</span></h2> 
                     </div>
                 }
 

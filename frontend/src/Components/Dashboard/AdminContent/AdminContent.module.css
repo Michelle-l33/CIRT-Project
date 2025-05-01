@@ -105,15 +105,39 @@
     color: var(--dark);
     padding: 20px;
     margin: 0;
-    transform: translateY(-10px);
+    /* transform: translateY(-20px); */
     transition: all 0.3s ease;
     z-index: 4;
+    
 }
+
+.row{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap:2rem;
+}
+
+.inputDiv {
+    flex:1;
+}
+.requirements {
+    flex: 1;
+    max-width: 300px;
+}
+.submitButton {
+    display: block;
+    margin: 2rem auto 1rem auto; /* top, horizontal, bottom */
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 
 .userFormContainer.show {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    /* height: 100%; */
     background-color: var(--grey);
     z-index: 2;
     border-radius: 5px;
@@ -275,7 +299,7 @@
 
 .adminContent .userList .user {
     border-bottom: 1px solid var(--dark);
-    padding: 5px 0px;
+    padding: 5px;
 }
 
 .adminContent .userListHeader,
@@ -417,6 +441,51 @@
     position: relative;
 }
 
+.profileImg .profilePic {
+    position: relative;
+    width: clamp(150px, 10vw, 360px);
+    height: clamp(150px, 10vw, 360px);
+    border-radius: 50%;
+    overflow: visible;
+    margin-bottom: 15px;
+}
+
+.profileImg .editProfilePic {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    height: 40px;
+    width: 40px;
+    background-color: var(--light-warning);
+    color: var(--warning);
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: background-color 0.25s ease, transform 0.2s ease;
+}
+
+.profileImg .editProfilePic:hover {
+    background-color: var(--warning);
+    color: var(--light);
+    transform: scale(1.1);
+}
+
+.profileImg .editProfilePic + input {
+    display: none;
+}
+
+.profileImg img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
 .profileImg .editButton {
     position: absolute;
     top: 0;
@@ -424,6 +493,7 @@
     background-color: inherit;
     color: var(--dark);
     border: none;
+    cursor: pointer;
 }
 
 .profileImg .editButton svg {
@@ -435,11 +505,6 @@
     color: var(--primary);
 }
 
-.profileImg img{
-    max-width: 150px;
-    border-radius: 50%;
-    margin-bottom: 15px;
-}
 
 .fellowProfileContainer h2 {
     text-align: center;

@@ -9,6 +9,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
+  gap: 10%;
   padding: 0 2rem;
   padding-right: 2rem;
   z-index: 1000;
@@ -29,12 +30,6 @@
 
 .sidebarCollapsed ~ .topNav .pageTitle {
   display: none;
-}
-
-.leftSection {
-  display: flex;
-  align-items: center;
-  margin-right: auto; 
 }
 
 .utampaLogo {
@@ -66,15 +61,17 @@
 
 .rightSection {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   gap: 1.5rem;
-  margin-left: auto; 
+  flex-grow: 1;
+  /* margin-left: auto;  */
 }
 
 .searchContainer {
   position: relative;
-  min-width: 280px;
+  flex-basis: 280px;
+  flex-grow: 1;
 }
 
 .searchInput {
@@ -99,48 +96,11 @@
   display: flex;
   justify-content: center;
 }
-
-@media (max-width: 1024px) {
-  .pageTitle {
-    font-size: 0.9rem;
-  }
-  
-  .searchContainer {
-    width: 200px;
-  }
-}
-
-@media (max-width: 768px) {
-  .topNav {
-    left: 0;
-    padding: 0 1rem;
-  }
-  .topNav.collapsed .welcomeMessage {
-    display: none;
-  }
-  
-  .pageTitle {
-    display: none;
-  }
-  
-  .searchContainer {
-    width: 150px;
-  }
-}
-
-@media (max-width: 576px) {
-  .searchContainer {
-    width: 120px;
-  }
-  
-  .rightSection {
-    gap: 1rem;
-  }
-}
+/* 
 .topNav.collapsed .searchInput {
   max-width: 600px;
   width: 100%;
-}
+} */
 
 .tagDropdown {
   width: 100%;
@@ -189,25 +149,24 @@
 }
 
 .centerSection {
-  flex: 1;
+  /* flex: 1; */
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
 .expandedTitle {
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   text-align: left;
-  padding-left: 1.5rem;
 }
-
 
 .navButtons{
   display:flex;
   gap:0.5rem;
   align-items: center;
-
+  justify-content: space-between;
+  flex-grow: 2;
 }
 .navButtons a {
   color: #fefefe;
@@ -222,9 +181,7 @@
   text-decoration: underline;
   text-decoration-color: red;
   text-underline-offset: 4px;
-
 }
-
 
 .navButtons a span {
   position: relative;
@@ -237,7 +194,7 @@
   background-color: #000000;
   border: none;
   border-radius: 6px;
-  padding: 8px 16px;
+  /* padding: 8px 16px; */
   font-size: 0.9rem;
   transition: all 0.2s ease;
   cursor: pointer;
@@ -288,6 +245,44 @@
 
 .dropdownMenu.show {
   display: flex;
+}
+
+@media (max-width: 1024px) {
+  .pageTitle {
+    font-size: 0.9rem;
+  }
+  
+  .searchContainer {
+    width: 200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .topNav {
+    left: 0;
+    padding: 0 1rem;
+  }
+  .topNav.collapsed .welcomeMessage {
+    display: none;
+  }
+  
+  .pageTitle {
+    display: none;
+  }
+  
+  .searchContainer {
+    width: 150px;
+  }
+}
+
+@media (max-width: 576px) {
+  .searchContainer {
+    width: 120px;
+  }
+  
+  .rightSection {
+    gap: 1rem;
+  }
 }
 
 /* MOBILE RESPONSIVE BEHAVIOR */

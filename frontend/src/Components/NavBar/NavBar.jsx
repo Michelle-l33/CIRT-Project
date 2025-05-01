@@ -27,6 +27,7 @@ const NavBar = () => {
             <div className={`${styles.dropdownMenu} ${menuOpen ? styles.show : ''}`}>
                 <button><a href="/"><span>Home</span></a></button>
                 <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><Link to="/Fellowship"><span>Fellowship</span></Link></button>
                 <button><a href="/Gallery"><span>Database</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>
@@ -34,6 +35,7 @@ const NavBar = () => {
             <div className={styles.navButtons}>
                 <button><a href="/"><span>Home</span></a></button>
                 <button><a href="/AboutUs"><span>About Us</span></a></button>
+                <button><Link to="/Fellowship"><span>Fellowship</span></Link></button>
                 <button><a href="/Gallery"><span>Database</span></a></button>
                 <button><Link to="/Dashboard"><span>My Account</span></Link></button>
             </div>

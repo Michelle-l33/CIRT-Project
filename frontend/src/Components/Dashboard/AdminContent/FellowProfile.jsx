@@ -1,9 +1,10 @@
 import styles from "./AdminContent.module.css";
 import { FaEdit } from "react-icons/fa";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useSearchParams } from "react-router-dom";
 import { MdExpandMore } from "react-icons/md";
 import { MdExpandLess } from "react-icons/md";
+import { CiEdit } from "react-icons/ci";
 
 
 const FellowProfile = () => {
@@ -43,6 +44,7 @@ const FellowProfile = () => {
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedFellow, setEditedFellow] = useState(null);
     const [isBioExpanded, setIsBioExpanded] = useState(false);
+    const fileInputRef = useRef(null);
 
 
     useEffect(() => {
@@ -58,7 +60,19 @@ const FellowProfile = () => {
     return (
         <section className={styles.fellowProfileContainer}>
                 <div className={styles.profileImg}>
-                    <img src={editedFellow.img} alt="Picture" />
+                    <div className = {styles.profilePic}>
+                            <img src={editedFellow.img} alt="Picture" />
+                            {isEditMode && (<>
+                                <button className={styles.editProfilePic}
+                                        onClick={() => fileInputRef.current?.click()}>
+                                    <CiEdit /> 
+                                </button>
+                                <input
+                                ref={fileInputRef}
+                                type="file"
+                                accept="image/*"/></>)}
+                            
+                    </div>
                     <button 
                             className={styles.editButton}
                             onClick={() => setIsEditMode(!isEditMode)}

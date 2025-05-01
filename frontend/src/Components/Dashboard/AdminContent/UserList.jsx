@@ -208,90 +208,92 @@ const AddUserForm = ({ onClose }) => {
     return (
         <>
             <form className={styles.userForm} onSubmit={handleRegisterSubmit}>
-                <div className={styles.inputDiv}>
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="name">Name:</label>
-                        <input
-                            type="text"
-                            id="name"
-                            name="name"
-                            placeholder="Name"
-                            maxLength={50}
-                            onChange={(e)=>setName(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="email">Email:</label>
-                        <input
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="you@example.com"
-                            maxLength={50}
-                            onChange={(e)=>setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="password">Password:</label>
-                        <input
-                            type="text"
-                            id="password"
-                            name="password"
-                            placeholder="Password"
-                            maxLength={25}
-                            onChange={(e)=>{
-                                setPassword(e.target.value);
-                                validatePassword(e.target.value);
-                            }}
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.inputContainer}>
-                        <label htmlFor="accountType">Account Type:</label>
-                        <select
-                            name="accountType"
-                            id="accountType"
-                            required
-                            onChange={handleAccountType}
-                        >
-                            <option value="author">Author</option>
-                            <option value="editor">Editor</option>
-                            <option value="reviewer">Reviewer</option>
-                            <option value="admin">Admin</option>
-                        </select>
-                    </div>
-                </div>
-                <div className={styles.requirements}>
-                    <div className={styles.passwordRequirements}>
-                            <p style={{ fontSize: "0.85rem" }}>Password Requirements:</p>
-                            <ul style={{ fontSize: "0.8rem", marginLeft: "1rem" }}>
-                                <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
-                                    At least 8 characters long
-                                </li>
-                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
-                                    At least one uppercase letter
-                                </li>
-                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
-                                    At least one lowercase letter
-                                </li>
-                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
-                                    At least one number
-                                </li>
-                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
-                                    At least one special character
-                                </li>
-                            </ul>
+                <div className={styles.row}>
+                    <div className={styles.inputDiv}>
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="name">Name:</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                placeholder="Name"
+                                maxLength={50}
+                                onChange={(e)=>setName(e.target.value)}
+                                required
+                            />
                         </div>
+
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="email">Email:</label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="you@example.com"
+                                maxLength={50}
+                                onChange={(e)=>setEmail(e.target.value)}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="password">Password:</label>
+                            <input
+                                type="text"
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                maxLength={25}
+                                onChange={(e)=>{
+                                    setPassword(e.target.value);
+                                    validatePassword(e.target.value);
+                                }}
+                                required
+                            />
+                        </div>
+
+                        <div className={styles.inputContainer}>
+                            <label htmlFor="accountType">Account Type:</label>
+                            <select
+                                name="accountType"
+                                id="accountType"
+                                required
+                                onChange={handleAccountType}
+                            >
+                                <option value="author">Author</option>
+                                <option value="editor">Editor</option>
+                                <option value="reviewer">Reviewer</option>
+                                <option value="admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div className={styles.requirements}>
+                        <div className={styles.passwordRequirements}>
+                                <p style={{ fontSize: "0.85rem" }}>Password Requirements:</p>
+                                <ul style={{ fontSize: "0.8rem", marginLeft: "1rem" }}>
+                                    <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
+                                        At least 8 characters long
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
+                                        At least one uppercase letter
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
+                                        At least one lowercase letter
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
+                                        At least one number
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
+                                        At least one special character
+                                    </li>
+                                </ul>
+                            </div>
+                    </div>
                 </div>
 
             
 
-                <button type="submit">Submit</button>
+                <button type="submit" className={styles.submitButton}>Submit</button>
             </form>
 
             <button className={styles.closeBtn} onClick={onClose}>&#215;</button>

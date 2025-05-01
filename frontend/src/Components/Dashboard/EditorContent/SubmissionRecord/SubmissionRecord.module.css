@@ -146,7 +146,6 @@
     background-color: var(--transparent-light);
     clip-path: polygon(65% 0, 100% 50%, 65% 100%, 0 100%, 0 0);
     transition: clip-path 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 4px;
 }
 
 .filesContainer .listItem.active:hover::before {
@@ -244,7 +243,8 @@
 .commentContainer button {
     padding: 7px;
     cursor: pointer;
-    max-height: 75%;
+    max-height: 48px;
+    height: 75%;
 }
 
 .commentContainer button span {
@@ -510,7 +510,8 @@
     border: none;
     background: var(--grey);
     color: var(--dark);
-    max-height: 75%;
+    max-height: 48px;
+    height: 75%;
 }
 
 .participateContainer .header button:hover {
