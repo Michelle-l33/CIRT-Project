@@ -34,5 +34,14 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
       res.status(500).json({ error: err.message });
     }
   });
+
+  router.get('/', async (req, res) => {
+    try {
+      const fellowships = await Fellowship.find(); // Fetch all submissions from the database
+      res.json(fellowships); // Send the submissions as a response
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch fellowships' });
+    }
+  });
   
   module.exports = router;
