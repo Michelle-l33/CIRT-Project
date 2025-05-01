@@ -1,6 +1,6 @@
 import styles from "./FellowPage.module.css";
 import NavBar from "../NavBar/NavBar"
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const listOfFellows = [ {
     _id: "123",

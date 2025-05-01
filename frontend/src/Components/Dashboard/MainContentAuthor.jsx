@@ -105,9 +105,6 @@ const MainContentAuthor = () => {
         fetchPosters();
     },[user._id]);
 
-    const [commentList, setCommentList] = useState([]);
-    const [loading, setLoading]=useState(true);
-
 
     // const fetchComments = async () => {
 
@@ -129,45 +126,6 @@ const MainContentAuthor = () => {
     //         setLoading(false);
     //     }
     // };
-    useEffect(()=>{
-        const fetchComments = async () => {
-
-            try {
-                setLoading(true);
-                const currId = submissionList[currSub]._id;
-                console.log("Fetching for: ", currId);
-                //console.log("Fetching for: ", currSub._id);
-                const response = await fetch(`https://cirt-project-server.vercel.app/comment/${currId}`,{
-                    method: "GET"
-                })
-                if (!response.ok) {
-                    throw new Error("Failed to fetch comments");
-                }
-        
-                const comments = await response.json();
-                setCommentList(comments);
-                console.log("Comments",commentList);
-            } catch (error) {
-                console.error("Error fetching comments:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchComments();
-    },[currSub, submissionList]);
-
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
-    const Comment = ({content, sender}) => {
-        return(
-            <>
-                <p>{content}</p>
-                <span>{`From: ${sender}`}</span>
-            </>
-        );
-    };
 
     const mainContentClass = `${styles.mainContent} ${isClose ? styles.close : ''}`;
     
@@ -236,22 +194,9 @@ const MainContentAuthor = () => {
                             <p>No submissions found.</p>
                         )}
                         </div>
-
-                        <div className={styles.comment}>
-                            <div className={styles.header}>
-                                <GrNotes />
-                                <h3>Comments</h3>
-                            </div>
-
-                            <ul className={styles.commentList}>
-                            {commentList.length >0 ?  (commentList.map((comment, idx) => 
-                                    <li key = {idx} className = {styles.listItem}>
-                                        {/* the code for Comment component is down below */}
-                                        <Comment content = {comment.comment} sender = {comment.role}/>
-                                    </li>
-                                )) : <span className = {styles.noComment}>No Comment: Abracadabra, abracadabra</span>}
-                            </ul>                                  
-                        </div>
+                        
+                        {/* The code for this is defined down below */}
+                        <CommentList submissionId={submissionList[currSub]?._id} />
                     </div>
                 </dashBoardAuthorContext.Provider>
             </main>
@@ -260,3 +205,67 @@ const MainContentAuthor = () => {
 };
 
 export default MainContentAuthor;
+
+
+const Comment = ({content, sender}) => {
+    return(
+        <>
+            <p>{content}</p>
+            <span>{`From: ${sender}`}</span>
+        </>
+    );
+};
+
+const CommentList = ({ submissionId }) => {
+    const [commentList, setCommentList] = useState([]);
+    const [loading, setLoading]=useState(true);
+
+    useEffect(()=>{
+        const fetchComments = async () => {
+
+            try {
+                setLoading(true);
+                const response = await fetch(`https://cirt-project-server.vercel.app/comment/${submissionId}`,{
+                    method: "GET"
+                })
+                if (!response.ok) {
+                    throw new Error("Failed to fetch comments");
+                }
+        
+                const comments = await response.json();
+                setCommentList(comments);
+                console.log("Comments",commentList);
+            } catch (error) {
+                console.error("Error fetching comments:", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+        fetchComments();
+    },[submissionId]);
+
+    return (
+        <div className={styles.comment}>
+            <div className={styles.header}>
+                <GrNotes />
+                <h3>Comments</h3>
+            </div>
+
+            <ul className={styles.commentList}>
+            {loading ? (
+                        <p>Loading comments...</p>
+                    ) : commentList.length > 0 ? (
+                        commentList.map((comment, idx) => (
+                            <li key={idx} className={styles.listItem}>
+                                <Comment content={comment.comment} sender={comment.role} />
+                            </li>
+                        ))
+                    ) : (
+                        <p className={styles.noComment}>
+                            No Comment: Abracadabra, abracadabra
+                        </p>
+                    )}
+            </ul>
+        </div>
+    );
+};
