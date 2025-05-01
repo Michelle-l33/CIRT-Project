@@ -1,6 +1,6 @@
 import styles from './MainContentAdmin.module.css';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { dashBoardContext } from './Dashboard';
 
@@ -14,7 +14,16 @@ const MainContentAdmin = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Admin Dashboard</h1>                
+                    <h1>Admin Dashboard</h1>
+                    <ul className={styles.smallStuff}>
+                            <li>
+                                <Link to="/">Homepage</Link> 
+                            </li>
+                            /
+                            <li>
+                                <Link to="/Papers">Gallery</Link>
+                            </li>
+                    </ul>                 
                 </div>
 
                 <div className={styles.content}>

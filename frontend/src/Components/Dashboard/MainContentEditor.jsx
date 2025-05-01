@@ -1,6 +1,6 @@
 import styles from './MainContentEditor.module.css';
 
-import { Outlet } from 'react-router-dom';
+import { Outlet, Link } from 'react-router-dom';
 
 import { useContext } from 'react';
 import { dashBoardContext } from './Dashboard';
@@ -18,7 +18,16 @@ const MainContentEditor = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Editor Dashboard</h1>                
+                    <h1>Editor Dashboard</h1>
+                    <ul className={styles.smallStuff}>
+                            <li>
+                                <Link to="/">Homepage</Link> 
+                            </li>
+                            /
+                            <li>
+                                <Link to="/Papers">Gallery</Link>
+                            </li>
+                    </ul>                
                 </div>
 
                 <div className={styles.content}>

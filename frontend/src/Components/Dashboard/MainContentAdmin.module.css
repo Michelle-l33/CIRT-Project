@@ -11,10 +11,27 @@
     max-height: calc(100vh - 56px);
 }
 
+.mainContent .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+}
+
 .mainContent .header h1 {
     font-size: 36px;
     font-weight: 600;
-    margin-bottom: 30px;
+    color: var(--dark);
+}
+
+.mainContent main .header .smallStuff {
+    display: flex;
+    grid-gap: 16px;
+    color: var(--dark);
+}
+
+.mainContent main .header .smallStuff * {
     color: var(--dark);
 }
 
@@ -23,3 +40,4 @@
     left: 60px;
     height: fit-content;
 }
+
