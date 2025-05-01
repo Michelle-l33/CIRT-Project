@@ -36,7 +36,7 @@ app.get("/", (req, res) => {
 app.use("/user", require("./routes/user"));
 app.use("/submission", require("./routes/submission"));
 app.use("/comment", require("./routes/comment"));
-app.use("/fellowship",require("./models/Fellowship"));
+app.use("/fellowship",require("./routes/fellowship"));
 
 // Start server
 app.listen(PORT, () => {
