@@ -52,8 +52,15 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button>
-                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
+                        {/* <button onClick = {() => handleUpdateStage("2")}>Send to a reviewer</button> */}
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to update the submission?")) {
+                            handleUpdateStage("2");
+                        }}}>Send to a reviewer</button>  
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to decline the submission?")) {
+                            handleUpdateStage("0");
+                        }}}>Decline submission</button>              
                     </div>
               </>}
                     
@@ -64,8 +71,15 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button onClick = {() => handleUpdateStage("3")}>Send to Author</button>
-                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>           
+                        {/* <button onClick = {() => handleUpdateStage("3")}>Send to Author</button> */}
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to update the submission?")) {
+                            handleUpdateStage("3");
+                        }}}>Send to Author</button>  
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to decline the submission?")) {
+                            handleUpdateStage("0");
+                        }}}>Decline submission</button>             
                     </div>
               </>}
 
@@ -77,8 +91,15 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>             
-                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>                 
+                        {/* <button onClick = {() => handleUpdateStage("4")}>Approve Submission</button>              */}
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to update the submission?")) {
+                            handleUpdateStage("4");
+                        }}}>Approve Submission</button>  
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to decline the submission?")) {
+                            handleUpdateStage("0");
+                        }}}>Decline submission</button>                 
                     </div>
               </>}
 
@@ -89,8 +110,15 @@ const SubmissionStatus = ( {currSubmission} ) => {
                     </div>
 
                     <div className = {styles.statusAction}>
-                        <button onClick={() => window.location.reload()}>Publish the Submission</button>
-                        <button onClick = {() => handleUpdateStage("0")}>Decline submission</button>            
+                        {/* <button onClick={() => window.location.reload()}>Publish the Submission</button> */}
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to update the submission?")) {
+                                window.location.reload();
+                        }}}>Approve Submission</button>  
+                        <button onClick={() => {
+                            if (window.confirm("Are you sure you want to decline the submission?")) {
+                            handleUpdateStage("0");
+                        }}}>Decline submission</button>              
                     </div>
               </>}
             
