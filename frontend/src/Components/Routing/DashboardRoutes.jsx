@@ -3,9 +3,9 @@ import ProtectedRoutes from './ProtectedRoutes';
 
 import Dashboard from '../Dashboard/Dashboard';
 import MainContentAuthor from '../Dashboard/AuthorContent/MainContentAuthor';
-import MainContentEditor from '../Dashboard/MainContentEditor';
-import MainContentReviewer from '../Dashboard/MainContentReviewer';
-import MainContentAdmin from '../Dashboard/MainContentAdmin';
+import MainContentEditor from '../Dashboard/EditorContent/MainContentEditor';
+import MainContentReviewer from '../Dashboard/ReviewerContent/MainContentReviewer';
+import MainContentAdmin from '../Dashboard/AdminContent/MainContentAdmin';
 import TaskPage from '../Dashboard/EditorContent/Task/TaskList';
 import TabNav from '../Dashboard/EditorContent/TabNav/TabNav';
 import MyQueue from '../Dashboard/EditorContent/TabNav/MyQueue';
