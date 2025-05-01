@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Fellowship = require("../models/fellowship");
+const Fellowship = require("../models/Fellowship");
 const router = express.Router();
 const {uploadImage, s3Client} = require("../awsConnect");
 const { route } = require("./user");
