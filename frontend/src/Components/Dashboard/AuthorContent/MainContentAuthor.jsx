@@ -13,9 +13,9 @@ import TrackBar from "./TrackBar/TrackBar";
 
 import SubmissionPage from './SubmissionAuthor/SubmissionAuthor';
 
-import { dashBoardContext } from './Dashboard';
+import { dashBoardContext } from '../Dashboard';
 import { useState, useContext, useEffect, createContext } from 'react';
-import { useUser } from '../Login/UserContext';
+import { useUser } from '../../Login/UserContext';
 
 
 
