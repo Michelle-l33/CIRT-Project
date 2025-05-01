@@ -95,6 +95,8 @@ const Unassigned = () => {
           ));
           
           setShowEditorDropdown(null);
+
+          window.location.reload();
         } catch (error) {
           console.error("Error assigning editor:", error.message);
         }
