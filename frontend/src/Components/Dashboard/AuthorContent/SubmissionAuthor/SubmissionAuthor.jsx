@@ -1,7 +1,7 @@
 
 import styles from './SubmissionAuthor.module.css';
 import { useState } from 'react';
-import {useUser} from '../../Login/UserContext';
+import {useUser} from '../../../Login/UserContext';
 import Cookies from 'js-cookie';
 import ChipInput from '../ChipInput/ChipInput';
 

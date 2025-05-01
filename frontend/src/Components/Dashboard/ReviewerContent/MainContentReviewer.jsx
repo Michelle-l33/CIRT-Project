@@ -1,10 +1,13 @@
-import styles from './MainContentAdmin.module.css';
+import styles from './MainContentReviewer.module.css';
 
-import { Outlet, Link } from 'react-router-dom';
 import { useContext } from 'react';
-import { dashBoardContext } from './Dashboard';
+import { dashBoardContext } from '../Dashboard';
+import { Outlet, Link } from 'react-router-dom';
 
-const MainContentAdmin = () => {
+//all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
+
+
+const MainContentReviewer = () => {
 
     const { isClose } = useContext(dashBoardContext);
 
@@ -14,20 +17,20 @@ const MainContentAdmin = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Admin Dashboard</h1>
+                    <h1>Reviewer Dashboard</h1>
                     <ul className={styles.smallStuff}>
                             <li>
                                 <Link to="/">Homepage</Link> 
                             </li>
                             /
                             <li>
-                                <Link to="/Papers">Gallery</Link>
+                                <Link to="/Gallery">Gallery</Link>
                             </li>
                     </ul>                 
                 </div>
 
                 <div className={styles.content}>
-                    <Outlet />
+                <Outlet />
                 </div>
                 
                 
@@ -36,4 +39,4 @@ const MainContentAdmin = () => {
     );
 };
 
-export default MainContentAdmin;
+export default MainContentReviewer;

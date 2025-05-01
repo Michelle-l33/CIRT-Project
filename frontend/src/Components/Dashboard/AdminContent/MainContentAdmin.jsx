@@ -1,14 +1,10 @@
-import styles from './MainContentEditor.module.css';
+import styles from './MainContentAdmin.module.css';
 
 import { Outlet, Link } from 'react-router-dom';
-
 import { useContext } from 'react';
-import { dashBoardContext } from './Dashboard';
+import { dashBoardContext } from '../Dashboard';
 
-//all the content decision is taken from https://docs.pkp.sfu.ca/learning-ojs/en/editorial-workflow.html
-
-
-const MainContentEditor = () => {
+const MainContentAdmin = () => {
 
     const { isClose } = useContext(dashBoardContext);
 
@@ -18,16 +14,16 @@ const MainContentEditor = () => {
             <main>
 
                 <div className = {styles.header}>
-                    <h1>Editor Dashboard</h1>
+                    <h1>Admin Dashboard</h1>
                     <ul className={styles.smallStuff}>
                             <li>
                                 <Link to="/">Homepage</Link> 
                             </li>
                             /
                             <li>
-                                <Link to="/Papers">Gallery</Link>
+                                <Link to="/Gallery">Gallery</Link>
                             </li>
-                    </ul>                
+                    </ul>                 
                 </div>
 
                 <div className={styles.content}>
@@ -40,4 +36,4 @@ const MainContentEditor = () => {
     );
 };
 
-export default MainContentEditor;
+export default MainContentAdmin;
