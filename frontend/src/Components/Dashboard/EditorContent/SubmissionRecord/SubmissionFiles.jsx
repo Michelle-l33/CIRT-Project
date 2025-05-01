@@ -61,7 +61,7 @@ const SubmissionFiles = ({setCurrSubmission}) => {
     const handleSubmissionChange = (submission) => {
         // navigate(`?submissionId=${submission._id}`);
         setCurrSubmission(submission);
-        setSearchParams({ submissionId: submission._id });
+        setSearchParams({ submissionId: submission._id }, { replace: true });
     }
     
     return(
