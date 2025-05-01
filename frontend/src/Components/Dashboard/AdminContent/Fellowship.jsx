@@ -139,7 +139,7 @@ const AddFellowForm = ( {onClose} ) => {
     const [description, setDescription]=useState("");
     const [img, setImg] = useState(null);
  
-      const handleFileChange = (e) => {
+    const handleFileChange = (e) => {
         setImg(e.target.files[0]);
     };
 
@@ -164,8 +164,8 @@ const AddFellowForm = ( {onClose} ) => {
       // Send data to backend (adjust the URL to your actual backend route)
       const response = await fetch("https://cirt-project-server.vercel.app/fellowship/upload-fellowship", {
         method: "POST",
-        mode:"cors",
         body:data,
+        mode:"cors",
       });
 
       const result = await response.json();

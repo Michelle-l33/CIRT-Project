@@ -4,6 +4,14 @@ const Fellowship = require("../models/Fellowship");
 const router = express.Router();
 const {uploadImage, s3Client} = require("../awsConnect");
 
+router.get('/', async (req, res) => {
+    try {
+      const fellowship = await Fellowship.find(); // Fetch all submissions from the database
+      res.json(fellowship); // Send the submissions as a response
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch fellowships' });
+    }
+  });
 
 router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) => {
     try {
@@ -34,13 +42,6 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
     }
   });
 
-  router.get('/', async (req, res) => {
-    try {
-      const fellowship = await Fellowship.find(); // Fetch all submissions from the database
-      res.json(fellowship); // Send the submissions as a response
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to fetch fellowships' });
-    }
-  });
+
   
   module.exports = router;
