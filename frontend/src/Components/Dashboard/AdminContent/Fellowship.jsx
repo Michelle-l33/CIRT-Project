@@ -5,6 +5,9 @@ import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
 import { useState } from "react";
 
+import { dashBoardContext } from "../Dashboard";
+import { useContext } from "react";
+
 import { useSearchParams } from "react-router-dom";
 
 const Fellowship = () => {
@@ -114,11 +117,12 @@ export default Fellowship;
 
 const AddFellowBtn = () => {
     const [isOpen, setIsOpen] = useState(false);
+    const { isClose } = useContext(dashBoardContext);
     return (
         <div className={styles.addUser}>
             <button className= {styles.addUserBtn} onClick={() => setIsOpen(true)}><AiOutlineUserAdd /></button>
 
-            <div className = {`${styles.fellowFormContainer} ${isOpen ? styles.show : ""}`}>
+            <div className = {`${styles.fellowFormContainer} ${isOpen ? styles.show : ""} ${isClose ? styles.close : ""}`}>
                 <h4>Add Fellow</h4>
                 
                 {/* the code for UserForm is defined down below */}

@@ -355,8 +355,8 @@
 .fellowFormContainer {
     position: fixed;
     top: calc(56px + 10px);
-    left: 50%;
-    transform: translateX(-40%); 
+    left: 0;
+    transform: translateX(235px);
     background-color: var(--grey);
     padding: 2rem;
     border-radius: 20px;
@@ -365,11 +365,18 @@
     z-index: 10;
     width: calc(90% - 230px);
     max-width: calc(100% - 230px);
+    max-height: calc(100vh - 56px);
+    overflow: auto;
     display: none;
+    transition: all 0.3ms ease;
 }
-  
 .fellowFormContainer.show {
     display: block;
+}
+
+.fellowFormContainer.close{
+    transform: translateX(65px);
+    width: calc(90% - 60px);
 }
   
 .fellowForm {
@@ -580,6 +587,7 @@
     height: 1.2em;
 }
 
+
 @media (max-width: 768px) {
     /* User Tab */
 
@@ -631,7 +639,7 @@
         width: calc(100vw - 60px);
         padding: 5px;
         overflow-y: auto;
-        max-height: 90vh;
+        max-height: 80vh;
         overflow-x: auto;
     }
 
