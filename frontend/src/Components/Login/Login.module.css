@@ -250,6 +250,9 @@ accounts > input:focus, select:focus {
     font-size: 0.9em;
     font-weight: 600;
     transition: all 0.2s ease-in;
+    background-color: #f1f1f1;
+    padding: 10px;
+    border-radius: 15px;
 }
 
 .passwordRequirements ul {
@@ -269,6 +272,7 @@ accounts > input:focus, select:focus {
     background-color: #ffffff;
     font-weight: 600;
     color: #000000;
+    padding: 5px;
 }
 
 
