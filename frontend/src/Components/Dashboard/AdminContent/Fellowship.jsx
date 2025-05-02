@@ -147,7 +147,6 @@ const AddFellowForm = ( {onClose} ) => {
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Check if picture is provided
     setLoading(true);
     if (!img) {
       alert("Please upload a picture.");
@@ -155,24 +154,22 @@ const AddFellowForm = ( {onClose} ) => {
       return;
     }
 
-    const FormData = new FormData();
-    FormData.append("img", img);
-    FormData.append("name", name);
-    FormData.append("bio", bio);
-    FormData.append("published", published);
-    FormData.append("description", description);
-    
+    const formData = new FormData();
+    formData.append("img", img);
+    formData.append("name", name);
+    formData.append("bio", bio);
+    formData.append("published", published);
+    formData.append("description", description);
 
     try {
-      // Send data to backend (adjust the URL to your actual backend route)
-      const response = await fetch("https://cirt-project-server.vercel.app/fellow/upload-fellowship", {
+        const response = await fetch("https://cirt-project-server.vercel.app/fellow/upload-fellowship", {
             method: "POST",
-            body: FormData,
+            body: formData, // Send form data
             credentials: 'include',
             mode: 'cors',
-      });
+        });
 
-      const data = await response.json();
+        const data = await response.json();
         if (response.ok) {
             window.alert("Uploaded successfully!");
             window.location.reload();
@@ -182,12 +179,13 @@ const AddFellowForm = ( {onClose} ) => {
         }
         onClose(); // Close the form after submission
     } catch (error) {
-      console.error("Error uploading fellowship:", error);
-      alert("An error occurred while uploading the fellowship.");
+        console.error("Error uploading fellowship:", error);
+        alert("An error occurred while uploading the fellowship.");
     } finally {
         setLoading(false);
     }
-  };
+};
+
 
     return (
         <>
