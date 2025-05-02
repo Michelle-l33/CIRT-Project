@@ -138,6 +138,7 @@ const AddFellowForm = ( {onClose} ) => {
     const [published, setPublished]=useState("");
     const [description, setDescription]=useState("");
     const [img, setImg] = useState(null);
+    const [loading, setLoading] = useState(false);
  
     const handleFileChange = (e) => {
         setImg(e.target.files[0]);
@@ -147,34 +148,44 @@ const AddFellowForm = ( {onClose} ) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // Check if picture is provided
+    setLoading(true);
     if (!img) {
       alert("Please upload a picture.");
+      setLoading(false);
       return;
     }
 
-    const data = new FormData();
-    data.append("img", img);
-    data.append("name", name);
-    data.append("bio", bio);
-    data.append("published", published);
-    data.append("description", description);
+    const FormData = new FormData();
+    FormData.append("img", img);
+    FormData.append("name", name);
+    FormData.append("bio", bio);
+    FormData.append("published", published);
+    FormData.append("description", description);
     
 
     try {
       // Send data to backend (adjust the URL to your actual backend route)
-      const response = await fetch("https://cirt-project-server.vercel.app/fellowship/upload-fellowship", {
-        method: "POST",
-        body:data,
-        mode:"cors",
+      const response = await fetch("https://cirt-project-server.vercel.app/fellow/upload-fellowship", {
+            method: "POST",
+            body: FormData,
+            credentials: 'include',
+            mode: 'cors',
       });
 
-      const result = await response.json();
-
-      alert(result.message); // Show success message
-    //   onClose(); // Close the form after submission
+      const data = await response.json();
+        if (response.ok) {
+            window.alert("Uploaded successfully!");
+            window.location.reload();
+        } else {
+            window.alert(data.error || "Something went wrong!");
+            console.log(data.error);
+        }
+        onClose(); // Close the form after submission
     } catch (error) {
       console.error("Error uploading fellowship:", error);
       alert("An error occurred while uploading the fellowship.");
+    } finally {
+        setLoading(false);
     }
   };
 
@@ -246,7 +257,9 @@ const AddFellowForm = ( {onClose} ) => {
                 </div>
 
                 {/* Submit Button */}
-                <button type="submit">Submit</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Uploading..." : "Submit"}
+                </button>
             </form>
 
             <button className={styles.closeBtn} onClick={onClose}>&#215;</button>
