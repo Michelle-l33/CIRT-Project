@@ -115,29 +115,34 @@ const FellowProfile = () => {
                             value={editedFellow.name}
                             onChange={(e) => setEditedFellow({...editedFellow, name: e.target.value})}
                             placeholder="Name"
+                            maxLength={50}
                         />
                         <input 
                             type="text" 
                             value={editedFellow.year}
                             onChange={(e) => setEditedFellow({...editedFellow, year: e.target.value})}
                             placeholder="Year"
+                            maxLength={4}
                         />
                         <textarea
                             value={editedFellow.bio}
                             onChange={(e) => setEditedFellow({...editedFellow, bio: e.target.value})}
                             placeholder="Bio"
+                            maxLength={500}
                         />
                         <input 
                             type="text" 
                             value={editedFellow.fellowship}
                             onChange={(e) => setEditedFellow({...editedFellow, fellowship: e.target.value})}
                             placeholder="Fellowship"
+                            maxLength={500}
                         />
                         <input 
                             type="text" 
                             value={editedFellow.published}
                             onChange={(e) => setEditedFellow({...editedFellow, published: e.target.value})}
                             placeholder="Published Link"
+                            maxLength={150}
                         />
 
                         <button className={styles.saveButton} onClick={handleSubmit}>

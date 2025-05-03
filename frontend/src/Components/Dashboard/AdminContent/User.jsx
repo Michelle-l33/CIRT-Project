@@ -4,6 +4,7 @@ import { useState } from "react";
 
 const User = ({key, user}) => {
     const [isEditing, setIsEditing] = useState(false);
+    
     return(
         <>
             <li key = {key} className={styles.user}>
@@ -25,9 +26,36 @@ const User = ({key, user}) => {
 }
 
 const EditUserForm = ({ user, onClose }) => {
+    const [ newName, setNewName] = useState("");
+    const [newEmail, setNewEmail] = useState("");
+
+    const handleUpdateProfile = async (e) =>{
+        e.preventDefault();
+        try{
+            const response = await fetch(`https://cirt-project-server.vercel.app/user/update-profile/${user._id}`,{
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    userID: user._id,
+                    newName: newName.charAt(0).toUpperCase()+newName.slice(1),     // can be empty string if unchanged
+                    newEmail: newEmail,   // can be empty string if unchanged
+                }),
+                mode: 'cors',
+            })
+            const data = await response.json();
+            console.log(data);
+            if (response.ok) {
+                alert("Profile updated!");
+                window.location.reload(); // or update state if you're managing it
+            }
+        } catch (error) {
+            window.alert("Error: " + error.message);
+        }
+        
+    }
     return (
         <>
-            <form className={styles.userForm}>
+            <form className={styles.userForm} onSubmit={handleUpdateProfile}>
                 <div className={styles.inputContainer}>
                     <label htmlFor="editUsername">Username:</label>
                     <input
@@ -38,6 +66,7 @@ const EditUserForm = ({ user, onClose }) => {
                         placeholder="Username"
                         maxLength={50}
                         required
+                        onChange={(e) => setNewName(e.target.value)}
                     />
                 </div>
 
@@ -51,18 +80,7 @@ const EditUserForm = ({ user, onClose }) => {
                         placeholder="you@example.com"
                         maxLength={50}
                         required
-                    />
-                </div>
-
-                <div className={styles.inputContainer}>
-                    <label htmlFor="editPassword">Password:</label>
-                    <input
-                        type="password"
-                        id="editPassword"
-                        name="password"
-                        placeholder="Enter new password"
-                        maxLength={50}
-                        required
+                        onChange={(e) => setNewEmail(e.target.value)}
                     />
                 </div>
 
