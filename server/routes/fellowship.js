@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) => {
     try {
       // Extract form fields
-      const { name, bio, published, description } = req.body;
+      const { name,year, bio, published, description } = req.body;
   
       // Ensure image upload success
       if (!req.file) {
@@ -27,6 +27,7 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
       const newFellowship = new Fellowship({
         img: req.file.location, // S3 image URL
         name,
+        year,
         bio,
         published,
         description,

@@ -3,7 +3,7 @@ import { BsSearchHeart } from "react-icons/bs";
 import { AiOutlineUserAdd } from "react-icons/ai";
 import { GrPrevious } from "react-icons/gr";
 import { GrNext } from "react-icons/gr";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { dashBoardContext } from "../Dashboard";
 import { useContext } from "react";
@@ -11,40 +11,35 @@ import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const Fellowship = () => {
-
-    const listOfFellows = [ {
-        _id: "123",
-        img: "https://avatarfiles.alphacoders.com/280/280087.png",
-        name: "Bloom",
-        year: "2004",
-        bio: "Bloom Griffin is an accomplished researcher and thought leader with over two decades of experience in the field of environmental science and sustainable development. Having graduated with a degree in Environmental Engineering from Stanford University, Joshua's career spans various projects, including leading international collaborations to combat climate change and working on innovative technologies to promote clean energy. He has published numerous papers on climate policy, sustainability practices, and renewable energy solutions, many of which have been cited in high-impact journals worldwide. Joshua is passionate about advancing interdisciplinary collaborations, and his research has shaped public policy, influencing decisions on sustainable urban development, carbon emissions reduction, and ecosystem conservation.",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZOO"
-    }, 
-    {   
-        _id: "456",
-        img: "https://avatarfiles.alphacoders.com/246/246567.png",
-        name: "Stella",
-        year: "2005",
-        bio: "Stelliaer lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZoO"
-    },
-    {   
-        _id: "789",
-        img: "https://avatarfiles.alphacoders.com/322/322831.jpg",
-        name: "Musa",
-        year: "2006",
-        bio: "Musicdc lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZOo"
-    }, 
-]
-
     const [search, setSearch] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [listOfFellows, setListOfFellows] = useState({});
     const [filteredList, setFilteredList] = useState(listOfFellows);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(()=>{
+        const fetchFellows = async()=> {
+            try{
+                setLoading(true);
+                const response = await fetch('https://cirt-project-server.vercel.app/fellow/',{
+                    method: "GET",
+                })
+                if(!response.ok){
+                    throw new Error ("Failed to fetch users");
+                }
+                const data = await response.json();
+                setListOfFellows(data);
+                setFilteredList(data);
+                console.log(data);
+            } catch (error){
+                console.error("Error fetching users:", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchFellows();
+    },[])
 
     const handleSearchChange = (event) => {
         const value = event.target.value;
@@ -97,14 +92,15 @@ const Fellowship = () => {
                 </ul>
 
                 <ul className={styles.fellowList}>
-
-                    {filteredList.length > 0 ? (
+                    {loading ? (
+                        <div className={styles.loading}>Loading fellows...</div> // Add loading class in CSS
+                    ) : filteredList.length > 0 ? (
                         filteredList.map((oneFellow) => (
-                            // the code for Fellow is down below
                             <li key={oneFellow._id}>
-                                <Fellow fellow = {oneFellow}/>
+                                <Fellow fellow={oneFellow} />
                             </li>
-                        ))) : (
+                        ))
+                    ) : (
                         <span>No Submission Found</span>
                     )}
                 </ul>
@@ -134,6 +130,7 @@ const AddFellowBtn = () => {
 
 const AddFellowForm = ( {onClose} ) => {
     const [name, setName] = useState("");
+    const [year, setYear] = useState("");
     const [bio, setBio] = useState("");
     const [published, setPublished]=useState("");
     const [description, setDescription]=useState("");
@@ -157,6 +154,7 @@ const AddFellowForm = ( {onClose} ) => {
     const formData = new FormData();
     formData.append("img", img);
     formData.append("name", name);
+    formData.append("year", year);
     formData.append("bio", bio);
     formData.append("published", published);
     formData.append("description", description);
@@ -204,15 +202,27 @@ const AddFellowForm = ( {onClose} ) => {
                 </div>
 
                 <div className={styles.inputContainer}>
-                    <label htmlFor="name">Name and Fellowship Year:</label>
+                    <label htmlFor="name">Name: </label>
                     <input
                         type="text"
                         id="name"
                         name="name"
-                        placeholder="e.g. Princess Bloom (2004)"
+                        placeholder="e.g. Princess Bloom "
                         maxLength={100}
                         required
                         onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+                <div className={styles.inputContainer}>
+                    <label htmlFor="year">Fellowship Year: </label>
+                    <input
+                        type="text"
+                        id="year"
+                        name="year"
+                        placeholder="e.g. 2020"
+                        maxLength={100}
+                        required
+                        onChange={(e) => setYear(e.target.value)}
                     />
                 </div>
                 

@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const fellowshipSchema = new mongoose.Schema({
     img: {type: String, required:true},
     name: {type: String, required:true},
+    year: {type:String, require:true},
     bio:{type: String, required:true},
     published: {type: String, required:true},
     description: {type: String, required:true},
