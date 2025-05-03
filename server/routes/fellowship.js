@@ -43,7 +43,7 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
     }
   });
 
-  router.put("/:id", upload.single("img"), async (req, res) => {
+  router.put("/:id", uploadImage.single("img"), async (req, res) => {
     try {
       const fellowId = req.params.id;
   
@@ -56,7 +56,8 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
       };
   
       if (req.file) {
-        updatedFields.img = `/uploads/fellows/${req.file.filename}`; // Save relative path
+        updatedFields.img = req.file.location; // S3 URL
+
       }
   
       const updatedFellow = await Fellowship.findByIdAndUpdate(
@@ -71,6 +72,7 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
       res.status(500).json({ error: "Failed to update fellow" });
     }
   });
+
 
 
   
