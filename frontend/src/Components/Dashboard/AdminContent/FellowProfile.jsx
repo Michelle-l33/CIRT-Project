@@ -8,43 +8,33 @@ import { CiEdit } from "react-icons/ci";
 
 
 const FellowProfile = () => {
-    const listOfFellows = [ {
-        _id: "123",
-        img: "https://avatarfiles.alphacoders.com/280/280087.png",
-        name: "Bloom",
-        year: "2004",
-        bio: "Bloom Griffin is an accomplished researcher and thought leader with over two decades of experience in the field of environmental science and sustainable development. Having graduated with a degree in Environmental Engineering from Stanford University, Joshua's career spans various projects, including leading international collaborations to combat climate change and working on innovative technologies to promote clean energy. He has published numerous papers on climate policy, sustainability practices, and renewable energy solutions, many of which have been cited in high-impact journals worldwide. Joshua is passionate about advancing interdisciplinary collaborations, and his research has shaped public policy, influencing decisions on sustainable urban development, carbon emissions reduction, and ecosystem conservation.",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZOO"
-    },
-    {   
-        _id: "456",
-        img: "https://avatarfiles.alphacoders.com/246/246567.png",
-        name: "Stella",
-        year: "2005",
-        bio: "Stelliaer lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZoO"
-    },
-    {   
-        _id: "789",
-        img: "https://avatarfiles.alphacoders.com/322/322831.jpg",
-        name: "Musa",
-        year: "2006",
-        bio: "Musicdc lordnfhd dbdah adbasdbas dbashdsa ahdfbdsfsf bdabdd adbasdbasd dbasdba dabdashdbad abdashd",
-        published: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-        fellowship: "The ZOo"
-    }, 
-]   
-
-
-    const [searchParams] = useSearchParams();   
+    const [searchParams] = useSearchParams(); 
+    const [listOfFellows,setListOfFellows] = useState([]);  
     const fellowId = searchParams.get("fellowId");
-
+    const [loading, setLoading] = useState(false);
     const [isEditMode, setIsEditMode] = useState(false);
     const [editedFellow, setEditedFellow] = useState(null);
     const [isBioExpanded, setIsBioExpanded] = useState(false);
     const fileInputRef = useRef(null);
+    useEffect(()=>{
+        const fetchFellows = async()=> {
+            try{
+
+                const response = await fetch('https://cirt-project-server.vercel.app/fellow/',{
+                    method: "GET",
+                })
+                if(!response.ok){
+                    throw new Error ("Failed to fetch users");
+                }
+                const data = await response.json();
+                setListOfFellows(data);
+                console.log(data);
+            } catch (error){
+                console.error("Error fetching users:", error);
+            }
+        }
+        fetchFellows();
+    },[])
 
 
     useEffect(() => {
@@ -56,6 +46,40 @@ const FellowProfile = () => {
     if (!editedFellow) {
         return null;
     }
+    const handleSubmit = async () => {
+        try {
+          const formData = new FormData();
+          formData.append("name", editedFellow.name);
+          formData.append("year", editedFellow.year);
+          formData.append("bio", editedFellow.bio);
+          formData.append("fellowship", editedFellow.fellowship);
+          formData.append("published", editedFellow.published);
+      
+          // Add image file if selected
+          if (fileInputRef.current?.files[0]) {
+            formData.append("img", fileInputRef.current.files[0]);
+          }
+      
+          const response = await fetch(
+            `https://cirt-project-server.vercel.app/fellow/${editedFellow._id}`,
+            {
+              method: "PUT",
+              body: formData,
+            }
+          );
+      
+          if (!response.ok) {
+            throw new Error("Failed to update fellow");
+          }
+      
+          const updatedData = await response.json();
+          setEditedFellow(updatedData);
+          setIsEditMode(false);
+        } catch (err) {
+          console.error("Error updating fellow:", err);
+        }
+      };
+      
 
     return (
         <section className={styles.fellowProfileContainer}>
@@ -112,7 +136,7 @@ const FellowProfile = () => {
                         placeholder="Published Link"
                     />
 
-                    <button className={styles.saveButton} onClick={() => setIsEditMode(false)}>
+                    <button className={styles.saveButton} onClick={handleSubmit}>
                         Save Changes
                     </button>
                     </>
