@@ -53,6 +53,7 @@ const FellowPage = () => {
         <header>
             <NavBar/>
         </header>
+        
 
         <main className = {styles.fellowPage}>
             <h1>Meet Our Brilliant Fellows</h1>

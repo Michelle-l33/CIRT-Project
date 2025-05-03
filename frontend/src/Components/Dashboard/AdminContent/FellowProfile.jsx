@@ -75,6 +75,8 @@ const FellowProfile = () => {
           const updatedData = await response.json();
           setEditedFellow(updatedData);
           setIsEditMode(false);
+          window.location.reload();
+          
         } catch (err) {
           console.error("Error updating fellow:", err);
         }
@@ -82,89 +84,92 @@ const FellowProfile = () => {
       
 
     return (
-        <section className={styles.fellowProfileContainer}>
-                <div className={styles.profileImg}>
-                    <div className = {styles.profilePic}>
-                            <img src={editedFellow.img} alt="Picture" />
-                            {isEditMode && (<>
-                                <button className={styles.editProfilePic}
-                                        onClick={() => fileInputRef.current?.click()}>
-                                    <CiEdit /> 
-                                </button>
-                                <input
-                                ref={fileInputRef}
-                                type="file"
-                                accept="image/*"/></>)}
-                            
-                    </div>
-                    <button 
-                            className={styles.editButton}
-                            onClick={() => setIsEditMode(!isEditMode)}
-                            >
-                            {isEditMode ? "Cancel" : <FaEdit/>}
-                    </button>
-                </div>
-                {isEditMode ? (
-                    <>
-                    <input 
-                        type="text" 
-                        value={editedFellow.name}
-                        onChange={(e) => setEditedFellow({...editedFellow, name: e.target.value})}
-                        placeholder="Name"
-                    />
-                    <input 
-                        type="text" 
-                        value={editedFellow.year}
-                        onChange={(e) => setEditedFellow({...editedFellow, year: e.target.value})}
-                        placeholder="Year"
-                    />
-                    <textarea
-                        value={editedFellow.bio}
-                        onChange={(e) => setEditedFellow({...editedFellow, bio: e.target.value})}
-                        placeholder="Bio"
-                    />
-                    <input 
-                        type="text" 
-                        value={editedFellow.fellowship}
-                        onChange={(e) => setEditedFellow({...editedFellow, fellowship: e.target.value})}
-                        placeholder="Fellowship"
-                    />
-                    <input 
-                        type="text" 
-                        value={editedFellow.published}
-                        onChange={(e) => setEditedFellow({...editedFellow, published: e.target.value})}
-                        placeholder="Published Link"
-                    />
-
-                    <button className={styles.saveButton} onClick={handleSubmit}>
-                        Save Changes
-                    </button>
-                    </>
-                ) : (
-                    <>
-                        <h2>{editedFellow.name}</h2>
-                        <p><span className={styles.title}>Year:</span> {editedFellow.year}</p>
-                        <div>
-                            <p className={isBioExpanded ? styles.textExpand : styles.bioClip}>
-                            <span className={styles.title}>Bio:</span> {editedFellow.bio}
-                            </p>
-
-                            {editedFellow.bio && ( 
-                            <button
-                                className={styles.bioButton}
-                                onClick={() => setIsBioExpanded(!isBioExpanded)}
-                            >
-                                {isBioExpanded ? <MdExpandLess /> : <MdExpandMore />}
-                            </button>
-                            )}
+        <>
+        
+            <section className={styles.fellowProfileContainer}>
+                    <div className={styles.profileImg}>
+                        <div className = {styles.profilePic}>
+                                <img src={editedFellow.img} alt="Picture" />
+                                {isEditMode && (<>
+                                    <button className={styles.editProfilePic}
+                                            onClick={() => fileInputRef.current?.click()}>
+                                        <CiEdit /> 
+                                    </button>
+                                    <input
+                                    ref={fileInputRef}
+                                    type="file"
+                                    accept="image/*"/></>)}
+                                
                         </div>
-                        <p><span className={styles.title}>Fellowship:</span> {editedFellow.fellowship}</p>
-                        <p><span className={styles.title}>Published Work:</span> 
-                            <a href={editedFellow.published} target="_blank" rel="noopener noreferrer">View</a>
-                        </p>
-                    </>
-                )}
-        </section>
+                        <button 
+                                className={styles.editButton}
+                                onClick={() => setIsEditMode(!isEditMode)}
+                                >
+                                {isEditMode ? "Cancel" : <FaEdit/>}
+                        </button>
+                    </div>
+                    {isEditMode ? (
+                        <>
+                        <input 
+                            type="text" 
+                            value={editedFellow.name}
+                            onChange={(e) => setEditedFellow({...editedFellow, name: e.target.value})}
+                            placeholder="Name"
+                        />
+                        <input 
+                            type="text" 
+                            value={editedFellow.year}
+                            onChange={(e) => setEditedFellow({...editedFellow, year: e.target.value})}
+                            placeholder="Year"
+                        />
+                        <textarea
+                            value={editedFellow.bio}
+                            onChange={(e) => setEditedFellow({...editedFellow, bio: e.target.value})}
+                            placeholder="Bio"
+                        />
+                        <input 
+                            type="text" 
+                            value={editedFellow.fellowship}
+                            onChange={(e) => setEditedFellow({...editedFellow, fellowship: e.target.value})}
+                            placeholder="Fellowship"
+                        />
+                        <input 
+                            type="text" 
+                            value={editedFellow.published}
+                            onChange={(e) => setEditedFellow({...editedFellow, published: e.target.value})}
+                            placeholder="Published Link"
+                        />
+
+                        <button className={styles.saveButton} onClick={handleSubmit}>
+                            Save Changes
+                        </button>
+                        </>
+                    ) : (
+                        <>
+                            <h2>{editedFellow.name}</h2>
+                            <p><span className={styles.title}>Year:</span> {editedFellow.year}</p>
+                            <div>
+                                <p className={isBioExpanded ? styles.textExpand : styles.bioClip}>
+                                <span className={styles.title}>Bio:</span> {editedFellow.bio}
+                                </p>
+
+                                {editedFellow.bio && ( 
+                                <button
+                                    className={styles.bioButton}
+                                    onClick={() => setIsBioExpanded(!isBioExpanded)}
+                                >
+                                    {isBioExpanded ? <MdExpandLess /> : <MdExpandMore />}
+                                </button>
+                                )}
+                            </div>
+                            <p><span className={styles.title}>Fellowship:</span> {editedFellow.fellowship}</p>
+                            <p><span className={styles.title}>Published Work:</span> 
+                                <a href={editedFellow.published} target="_blank" rel="noopener noreferrer">View</a>
+                            </p>
+                        </>
+                    )}
+            </section>
+        </>
     )
 }
 
