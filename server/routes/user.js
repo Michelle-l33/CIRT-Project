@@ -16,51 +16,50 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Then modify your register route:
+// Update the register route
 router.post("/register", async (req, res) => {
   try {
-    // ... existing code ...
+    const { name, email, password, isAdmin, isAuthor, isEditor, isReviewer } = req.body;
+    const lowerEmail = email.toLowerCase();
+
+    const existingUser = await User.findOne({ email: lowerEmail });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email is already registered." });
+    }
+
+    // Generate verification token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationExpires = Date.now() + 3600000; // 1 hour
+
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
-      // ... existing fields ...
+      name,
+      email: lowerEmail,
+      password: hashedPassword,
+      isAdmin,
+      isAuthor,
+      isEditor,
+      isReviewer,
       emailVerificationToken: verificationToken,
       emailVerificationExpires: verificationExpires
     });
 
     await newUser.save();
 
-    // Add this email sending logic
+    // Send verification email
     const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
-    const mailOptions = {
+    await transporter.sendMail({
       to: lowerEmail,
       from: process.env.EMAIL_USER,
       subject: 'Verify Your Email',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Email Verification Required</h2>
-          <p>Please click the button below to verify your email address:</p>
-          <a href="${verificationUrl}" 
-             style="display: inline-block; 
-                    padding: 12px 24px; 
-                    background-color: #2563eb; 
-                    color: white; 
-                    text-decoration: none; 
-                    border-radius: 4px;
-                    margin: 20px 0;">
-            Verify Email
-          </a>
-          <p>If you didn't create this account, you can safely ignore this email.</p>
-        </div>
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
-
-    res.status(201).json({ 
-      message: "User registered successfully! Please check your email to verify your account."
+      html: `Click this link to verify: <a href="${verificationUrl}">${verificationUrl}</a>`
     });
+
+    res.status(201).json({ message: "Registration successful! Check your email." });
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Registration error:", error);
+    res.status(500).json({ error: "Server error during registration" });
   }
 });
 
@@ -228,6 +227,7 @@ router.post('/update-profile/:id', async (req, res) => {
   }
 });
 
+// Add email verification route
 router.get('/verify-email', async (req, res) => {
   try {
     const { token } = req.query;
@@ -237,12 +237,7 @@ router.get('/verify-email', async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).send(`
-        <div style="text-align: center; padding: 40px;">
-          <h2 style="color: #dc2626;">Invalid or expired verification link</h2>
-          <p>Please request a new verification email.</p>
-        </div>
-      `);
+      return res.status(400).json({ error: "Invalid or expired token" });
     }
 
     user.isEmailVerified = true;
@@ -250,24 +245,10 @@ router.get('/verify-email', async (req, res) => {
     user.emailVerificationExpires = undefined;
     await user.save();
 
-    res.send(`
-      <div style="text-align: center; padding: 40px;">
-        <h2 style="color: #16a34a;">Email Verified Successfully!</h2>
-        <p>You can now login to your account.</p>
-        <a href="https://cirt-project.vercel.app/login" 
-           style="display: inline-block; 
-                  margin-top: 20px;
-                  padding: 12px 24px; 
-                  background-color: #2563eb; 
-                  color: white; 
-                  text-decoration: none; 
-                  border-radius: 4px;">
-          Go to Login
-        </a>
-      </div>
-    `);
+    res.status(200).json({ message: "Email verified successfully!" });
   } catch (error) {
-    res.status(500).send('Error verifying email');
+    console.error("Verification error:", error);
+    res.status(500).json({ error: "Server error during verification" });
   }
 });
 

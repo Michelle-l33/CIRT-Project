@@ -72,14 +72,11 @@ const LoginPage = () => {
                 }, 3000);
                 window.location.href = "/Dashboard";
             } else {
-                if (data.message === 'Email not verified. Please check your email for verification link.') {
-                    setShowResendVerification(true);
-                    setResendEmail(loginEmail);
-                    window.alert("Please verify your email before logging in.");
+                if (data.error === 'Email not verified') {
+                    window.alert("Please verify your email first. Check your inbox.");
                 } else {
-                    window.alert("Invalid Credentials. Please Try Again!");
+                    window.alert(data.error || "Login failed. Please try again.");
                 }
-                console.log(data.error);
             }
         } catch (error) {
             window.alert("Error!!!");
@@ -94,7 +91,7 @@ const LoginPage = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email: resendEmail })
             });
-            
+
             const data = await response.json();
             if (response.ok) {
                 window.alert('Verification email resent! Check your inbox.');
@@ -134,8 +131,9 @@ const LoginPage = () => {
 
             const data = await response.json();
 
+            // In handleRegisterSubmit, update the success message
             if (response.ok) {
-                window.alert("User registered successfully! Please check your email to verify your account.");
+                window.alert("Registration successful! Please check your email to verify your account.");
                 window.location.reload();
             } else {
                 window.alert(data.error || "Something went wrong!");
@@ -161,10 +159,10 @@ const LoginPage = () => {
 
     const togglePasswordVisibilityRegister = () => {
         setShowPasswordRegister(!showPasswordRegister);
-      };
-    
+    };
+
     const togglePasswordVisibilityLogin = () => {
-    setShowPasswordLogin(!showPasswordLogin);
+        setShowPasswordLogin(!showPasswordLogin);
     };
 
     const toggleFormVisibility = () => {
@@ -185,155 +183,155 @@ const LoginPage = () => {
             <div className={styles.accounts}>
                 {formVisibility && (
                     <div className={styles.login}>
-                    <h2>Login</h2>
-                    <form onSubmit={handleLoginSubmit}>
-                        <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
-                        <div className={styles.emailContainer}>
-                            <input type="text" id="login-email" name="email" placeholder="Email" 
-                                onChange={(e) => setLoginEmail(e.target.value)} 
-                                maxLength={50} 
-                                required />
-                        </div>
-                        
-                        <label htmlFor="login-password">Enter your Password:</label>
-                        <div className={styles.passwordContainer}>
-                            <input
-                                type={showPasswordLogin ? "text" : "password"}
-                                id="login-password"
-                                name="password"
-                                placeholder="Password"
-                                onChange={(e) => setLoginPass(e.target.value)}
-                                maxLength={25}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className={styles.togglePasswordButton}
-                                onClick={togglePasswordVisibilityLogin}
-                                aria-label={showPasswordLogin ? "Hide password" : "Show password"}
-                            >
-                                {showPasswordLogin ? <PiEyeBold size={20}/> : <PiEyeClosedBold size={20}/>}
-                            </button>
-                        </div>
-                    
-                        <button id="loginButton" type="submit">Log In</button>
+                        <h2>Login</h2>
+                        <form onSubmit={handleLoginSubmit}>
+                            <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
+                            <div className={styles.emailContainer}>
+                                <input type="text" id="login-email" name="email" placeholder="Email"
+                                    onChange={(e) => setLoginEmail(e.target.value)}
+                                    maxLength={50}
+                                    required />
+                            </div>
 
-                        <p className={styles.forgotPassword}>
-                            <a href="/forgot-password">Forgot Password?</a>
-                        </p>
-
-                        {showResendVerification && (
-                            <div className={styles.verificationNotice}>
-                                <p>Didn't receive the verification email?</p>
+                            <label htmlFor="login-password">Enter your Password:</label>
+                            <div className={styles.passwordContainer}>
                                 <input
-                                    type="email"
-                                    placeholder="Enter your email"
-                                    value={resendEmail}
-                                    onChange={(e) => setResendEmail(e.target.value)}
-                                    className={styles.resendInput}
+                                    type={showPasswordLogin ? "text" : "password"}
+                                    id="login-password"
+                                    name="password"
+                                    placeholder="Password"
+                                    onChange={(e) => setLoginPass(e.target.value)}
+                                    maxLength={25}
+                                    required
                                 />
-                                <button 
-                                    onClick={handleResendVerification}
-                                    className={styles.resendButton}
+                                <button
+                                    type="button"
+                                    className={styles.togglePasswordButton}
+                                    onClick={togglePasswordVisibilityLogin}
+                                    aria-label={showPasswordLogin ? "Hide password" : "Show password"}
                                 >
-                                    Resend Verification Email
+                                    {showPasswordLogin ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
                                 </button>
                             </div>
-                        )}
-                        
-                    </form>
-                    <p>
-                            Don't have an account? 
+
+                            <button id="loginButton" type="submit">Log In</button>
+
+                            <p className={styles.forgotPassword}>
+                                <a href="/forgot-password">Forgot Password?</a>
+                            </p>
+
+                            {showResendVerification && (
+                                <div className={styles.verificationNotice}>
+                                    <p>Didn't receive the verification email?</p>
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        value={resendEmail}
+                                        onChange={(e) => setResendEmail(e.target.value)}
+                                        className={styles.resendInput}
+                                    />
+                                    <button
+                                        onClick={handleResendVerification}
+                                        className={styles.resendButton}
+                                    >
+                                        Resend Verification Email
+                                    </button>
+                                </div>
+                            )}
+
+                        </form>
+                        <p>
+                            Don't have an account?
                             <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
                                 Create Account
                             </button>
                         </p>
-                </div>
+                    </div>
                 )}
-                
+
                 {!formVisibility && (
                     <div className={styles.register}>
-                    <h2>Register</h2>
-                    <form onSubmit={handleRegisterSubmit}>
-                        <label htmlFor="register-username">Enter your Username:</label>
-                        <div className={styles.emailContainer}>
-                            <input
-                                type="text"
-                                id="register-username"
-                                name="username"
-                                placeholder="Username"
-                                onChange={(e) => setName(e.target.value)}
-                                maxLength={50}
-                                required
-                            />
-                        </div>
-                        <label htmlFor="register-email">Enter your Email:</label>
-                        <div className={styles.emailContainer}>
-                            <input
-                                type="email"
-                                id="register-email"
-                                name="email"
-                                placeholder="you@example.com"
-                                onChange={(e) => setEmail(e.target.value)}
-                                maxLength={50}
-                                required
-                            />
-                        </div>
+                        <h2>Register</h2>
+                        <form onSubmit={handleRegisterSubmit}>
+                            <label htmlFor="register-username">Enter your Username:</label>
+                            <div className={styles.emailContainer}>
+                                <input
+                                    type="text"
+                                    id="register-username"
+                                    name="username"
+                                    placeholder="Username"
+                                    onChange={(e) => setName(e.target.value)}
+                                    maxLength={50}
+                                    required
+                                />
+                            </div>
+                            <label htmlFor="register-email">Enter your Email:</label>
+                            <div className={styles.emailContainer}>
+                                <input
+                                    type="email"
+                                    id="register-email"
+                                    name="email"
+                                    placeholder="you@example.com"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    maxLength={50}
+                                    required
+                                />
+                            </div>
 
-                        <label htmlFor="register-password">Enter your Password:</label>
-                        <div className={styles.passwordContainer}>
-                            <input
-                                type={showPasswordRegister ? "text" : "password"}
-                                id="register-password"
-                                name="password"
-                                placeholder="Password"
-                                maxLength={25}
-                                onChange={(e) => {
-                                    setPassword(e.target.value);
-                                    validatePassword(e.target.value);
-                                }}
-                                required
-                            />
-                            <button
-                                type="button"
-                                className={styles.togglePasswordButton}
-                                onClick={togglePasswordVisibilityRegister}
-                                aria-label={showPasswordRegister ? "Hide password" : "Show password"}
-                            >
-                                {showPasswordRegister ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
-                            </button>
-                        </div>
+                            <label htmlFor="register-password">Enter your Password:</label>
+                            <div className={styles.passwordContainer}>
+                                <input
+                                    type={showPasswordRegister ? "text" : "password"}
+                                    id="register-password"
+                                    name="password"
+                                    placeholder="Password"
+                                    maxLength={25}
+                                    onChange={(e) => {
+                                        setPassword(e.target.value);
+                                        validatePassword(e.target.value);
+                                    }}
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className={styles.togglePasswordButton}
+                                    onClick={togglePasswordVisibilityRegister}
+                                    aria-label={showPasswordRegister ? "Hide password" : "Show password"}
+                                >
+                                    {showPasswordRegister ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
+                                </button>
+                            </div>
 
-                        <div className={styles.passwordRequirements}>
-                            <p>Password Requirements:</p>
-                            <ul>
-                                <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
-                                    At least 8 characters long
-                                </li>
-                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
-                                    At least one uppercase letter
-                                </li>
-                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
-                                    At least one lowercase letter
-                                </li>
-                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
-                                    At least one number
-                                </li>
-                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
-                                    At least one special character
-                                </li>
-                            </ul>
-                        </div>
+                            <div className={styles.passwordRequirements}>
+                                <p>Password Requirements:</p>
+                                <ul>
+                                    <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
+                                        At least 8 characters long
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
+                                        At least one uppercase letter
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
+                                        At least one lowercase letter
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
+                                        At least one number
+                                    </li>
+                                    <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
+                                        At least one special character
+                                    </li>
+                                </ul>
+                            </div>
 
-                        <button id="registerButton" type="submit">Create Account</button>
-                    </form>
-                    <p>
-                            Already have an account? 
+                            <button id="registerButton" type="submit">Create Account</button>
+                        </form>
+                        <p>
+                            Already have an account?
                             <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
                                 Login
                             </button>
                         </p>
-                </div>
+                    </div>
                 )}
             </div>
 
