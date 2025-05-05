@@ -10,7 +10,10 @@ const userSchema = new mongoose.Schema({
   isEditor: { type: Boolean, default: false },
   isReviewer: { type: Boolean, default: false },
   resetPasswordToken: String,
-  resetPasswordExpires: Date
+  resetPasswordExpires: Date,
+  isEmailVerified: { type: Boolean, default: false },
+  emailVerificationToken: String,
+  emailVerificationExpires: Date
 });
 
 // Create a model

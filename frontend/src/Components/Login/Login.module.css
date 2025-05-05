@@ -301,3 +301,35 @@ accounts > input:focus, select:focus {
   .forgotPassword a:hover {
     text-decoration: underline;
   }
+
+.verificationNotice {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ffd700;
+    background-color: #fff9e6;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.resendInput {
+    margin: 10px 0;
+    padding: 8px;
+    width: 80%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.resendButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+.resendButton:hover {
+    background-color: #0056b3;
+}

@@ -4,28 +4,61 @@ const User = require("../models/User");
 const router = express.Router();
 const crypto = require('node:crypto');
 const nodemailer = require('nodemailer');
+const { v4: uuidv4 } = require('uuid');
 
 
+// Add this transporter configuration at the TOP of the file
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  }
+});
 
-// Register User
+// Then modify your register route:
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, isAdmin, isAuthor, isEditor, isReviewer } = req.body;
+    // ... existing code ...
 
-    const lowerEmail = email.toLowerCase();
+    const newUser = new User({
+      // ... existing fields ...
+      emailVerificationToken: verificationToken,
+      emailVerificationExpires: verificationExpires
+    });
 
-    const existingUser = await User.findOne({ email: lowerEmail });
-    if (existingUser) {
-      return res.status(400).json({ error: "Email is already registered." });
-    }
-
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({ name, email: lowerEmail, password: hashedPassword, isAdmin, isAuthor, isEditor, isReviewer });
     await newUser.save();
 
-    res.status(201).json({ message: "User registered successfully!" });
+    // Add this email sending logic
+    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
+    const mailOptions = {
+      to: lowerEmail,
+      from: process.env.EMAIL_USER,
+      subject: 'Verify Your Email',
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+          <h2 style="color: #2563eb;">Email Verification Required</h2>
+          <p>Please click the button below to verify your email address:</p>
+          <a href="${verificationUrl}" 
+             style="display: inline-block; 
+                    padding: 12px 24px; 
+                    background-color: #2563eb; 
+                    color: white; 
+                    text-decoration: none; 
+                    border-radius: 4px;
+                    margin: 20px 0;">
+            Verify Email
+          </a>
+          <p>If you didn't create this account, you can safely ignore this email.</p>
+        </div>
+      `
+    };
+
+    await transporter.sendMail(mailOptions);
+
+    res.status(201).json({ 
+      message: "User registered successfully! Please check your email to verify your account."
+    });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
@@ -44,6 +77,13 @@ router.post('/login', async (req, res) => {
     // console.log(user.password)
     // console.log(password)
     //check if pass matches
+
+    if (!user.isEmailVerified) {
+      return res.status(403).json({ 
+        message: 'Email not verified. Please check your email for verification link.'
+      });
+    }
+    
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -158,34 +198,115 @@ router.post('/reset-password', async (req, res) => {
   }
 });
 
-router.post('/update-profile/:id', async(req,res) =>{
-try{
-  const userID = req.params.id;
-  const {newName, newEmail} = req.body;
-  const user = await User.findById(userID);
-  if (!user) {
-    return res.status(404).json({ error: "User not found." });
-  }
-
-  // If new email is provided and different from current
-  if (newEmail && newEmail.toLowerCase() !== user.email) {
-    const lowerEmail = newEmail.toLowerCase();
-    const existingUser = await User.findOne({ email: lowerEmail });
-    if (existingUser && existingUser._id.toString() !== userID) {
-      return res.status(400).json({ error: "Email is already in use." });
+router.post('/update-profile/:id', async (req, res) => {
+  try {
+    const userID = req.params.id;
+    const { newName, newEmail } = req.body;
+    const user = await User.findById(userID);
+    if (!user) {
+      return res.status(404).json({ error: "User not found." });
     }
-    user.email = lowerEmail;
-  }
+
+    // If new email is provided and different from current
+    if (newEmail && newEmail.toLowerCase() !== user.email) {
+      const lowerEmail = newEmail.toLowerCase();
+      const existingUser = await User.findOne({ email: lowerEmail });
+      if (existingUser && existingUser._id.toString() !== userID) {
+        return res.status(400).json({ error: "Email is already in use." });
+      }
+      user.email = lowerEmail;
+    }
     if (newName && newName !== user.name) {
       user.name = newName;
     }
 
     await user.save();
     res.status(200).json({ message: "Profile updated successfully." });
-   
-}  catch (error) {
-  res.status(500).json({ error: error.message });
-}
+
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.get('/verify-email', async (req, res) => {
+  try {
+    const { token } = req.query;
+    const user = await User.findOne({
+      emailVerificationToken: token,
+      emailVerificationExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+      return res.status(400).send(`
+        <div style="text-align: center; padding: 40px;">
+          <h2 style="color: #dc2626;">Invalid or expired verification link</h2>
+          <p>Please request a new verification email.</p>
+        </div>
+      `);
+    }
+
+    user.isEmailVerified = true;
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpires = undefined;
+    await user.save();
+
+    res.send(`
+      <div style="text-align: center; padding: 40px;">
+        <h2 style="color: #16a34a;">Email Verified Successfully!</h2>
+        <p>You can now login to your account.</p>
+        <a href="https://cirt-project.vercel.app/login" 
+           style="display: inline-block; 
+                  margin-top: 20px;
+                  padding: 12px 24px; 
+                  background-color: #2563eb; 
+                  color: white; 
+                  text-decoration: none; 
+                  border-radius: 4px;">
+          Go to Login
+        </a>
+      </div>
+    `);
+  } catch (error) {
+    res.status(500).send('Error verifying email');
+  }
+});
+
+// Add resend verification email route
+router.post('/resend-verification', async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email: email.toLowerCase() });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    if (user.isEmailVerified) {
+      return res.status(400).json({ error: 'Email is already verified' });
+    }
+
+    // Generate new token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationExpires = Date.now() + 3600000;
+
+    user.emailVerificationToken = verificationToken;
+    user.emailVerificationExpires = verificationExpires;
+    await user.save();
+
+    // Send email
+    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
+    const mailOptions = {
+      to: email,
+      from: process.env.EMAIL_USER,
+      subject: 'Verify Your Email',
+      html: `<p>Click this link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a></p>`
+    };
+
+    await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: 'Verification email resent' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
 module.exports = router;

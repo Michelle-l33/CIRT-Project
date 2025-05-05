@@ -4,7 +4,9 @@ import React, { useState } from "react";
 import styles from './Login.module.css';
 import Cookies from 'js-cookie';
 import { useUser } from "./UserContext";
-import { PiEyeBold, PiEyeClosedBold } from "react-icons/pi";
+// Icons
+import { PiEyeBold } from "react-icons/pi";
+import { PiEyeClosedBold } from "react-icons/pi";
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
@@ -22,10 +24,10 @@ const LoginPage = () => {
     const [alertMessage, setAlertMessage] = useState('');
     const [showPasswordRegister, setShowPasswordRegister] = useState(false);
     const [showPasswordLogin, setShowPasswordLogin] = useState(false);
-    const [toggleCardVisibility, setToggleCardVisibility] = useState(false);
-    const [togglePassWordRequirementsVisibility, setTogglePassWordRequirementsVisibility] = useState(false);
-    const [showPasswordRequirements, setShowPasswordRequirements] = useState(false);
+    const [showResendVerification, setShowResendVerification] = useState(false);
+    const [resendEmail, setResendEmail] = useState("");
     const navigate = useNavigate();
+    const [formVisibility, setFormVisibility] = useState(true);
 
     const [passwordRequirements, setPasswordRequirements] = useState({
         minLength: false,
@@ -47,12 +49,15 @@ const LoginPage = () => {
 
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
+
         const userData = { email: loginEmail, password: loginPassword };
 
         try {
             const response = await fetch("https://cirt-project-server.vercel.app/user/login", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(userData),
                 mode: 'cors',
             });
@@ -62,10 +67,18 @@ const LoginPage = () => {
             if (response.ok) {
                 Cookies.set('userID', data._id, { expires: 7, path: '/' });
                 setAlertMessage("Login Successful!");
-                setTimeout(() => setAlertMessage(''), 3000);
+                setTimeout(() => {
+                    setAlertMessage('');
+                }, 3000);
                 window.location.href = "/Dashboard";
             } else {
-                window.alert("Invalid Credentials. Please Try Again!");
+                if (data.message === 'Email not verified. Please check your email for verification link.') {
+                    setShowResendVerification(true);
+                    setResendEmail(loginEmail);
+                    window.alert("Please verify your email before logging in.");
+                } else {
+                    window.alert("Invalid Credentials. Please Try Again!");
+                }
                 console.log(data.error);
             }
         } catch (error) {
@@ -74,31 +87,55 @@ const LoginPage = () => {
         }
     };
 
+    const handleResendVerification = async () => {
+        try {
+            const response = await fetch('https://cirt-project-server.vercel.app/user/resend-verification', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: resendEmail })
+            });
+            
+            const data = await response.json();
+            if (response.ok) {
+                window.alert('Verification email resent! Check your inbox.');
+                setShowResendVerification(false);
+            } else {
+                window.alert(data.error || 'Error resending verification email');
+            }
+        } catch (error) {
+            window.alert('Error resending verification email');
+        }
+    };
+
+    const capitalizeName = (name) => {
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    };
+
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
-        const allRequirementsMet = Object.values(passwordRequirements).every(req => req);
 
+        const allRequirementsMet = Object.values(passwordRequirements).every(requirement => requirement === true);
         if (!allRequirementsMet) {
             window.alert("Please ensure your password meets all requirements.");
             return;
         }
 
-        const userData = { 
-            name: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
-            email, password, isPublic, isAuthor, isEditor, isReviewer 
-        };
+        const capitalizedName = capitalizeName(name);
+        const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer };
 
         try {
             const response = await fetch("https://cirt-project-server.vercel.app/user/register", {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: {
+                    "Content-Type": "application/json",
+                },
                 body: JSON.stringify(userData),
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                window.alert("User registered successfully!");
+                window.alert("User registered successfully! Please check your email to verify your account.");
                 window.location.reload();
             } else {
                 window.alert(data.error || "Something went wrong!");
@@ -109,16 +146,29 @@ const LoginPage = () => {
         }
     };
 
+    const handleAccountType = (e) => {
+        const type = e.target.value;
+        setIsAuthor(false);
+        setIsEditor(false);
+        setIsReviewer(false);
+        setIsPublic(false);
+
+        if (type === "author") setIsAuthor(true);
+        else if (type === "editor") setIsEditor(true);
+        else if (type === "reviewer") setIsReviewer(true);
+        else if (type === "public") setIsPublic(true);
+    };
+
     const togglePasswordVisibilityRegister = () => {
         setShowPasswordRegister(!showPasswordRegister);
-    };
+      };
     
     const togglePasswordVisibilityLogin = () => {
-        setShowPasswordLogin(!showPasswordLogin);
+    setShowPasswordLogin(!showPasswordLogin);
     };
 
     const toggleFormVisibility = () => {
-        setToggleCardVisibility(prev => !prev);
+        setFormVisibility(prev => !prev);
     };
 
     return (
@@ -126,7 +176,6 @@ const LoginPage = () => {
             <header>
                 <NavBar />
             </header>
-
             {alertMessage && (
                 <div className={styles.alert}>
                     {alertMessage}
@@ -134,163 +183,158 @@ const LoginPage = () => {
             )}
 
             <div className={styles.accounts}>
-                <div className={styles.formWrapper}>
-
-                    {/* Login Form */}
-                    <div className={`${styles.login} ${toggleCardVisibility ? styles.hidden : ''}`}>
-                        <form onSubmit={handleLoginSubmit}>
-                            <label htmlFor="login-email">Enter your Email:</label>
-                            <div className={styles.emailContainer}>
-                                <input
-                                    type="text"
-                                    id="login-email"
-                                    name="email"
-                                    placeholder="Email"
-                                    onChange={(e) => setLoginEmail(e.target.value)}
-                                    maxLength={50}
-                                    required
-                                />
-                            </div>
-
-                            <label htmlFor="login-password">Enter your Password:</label>
-                            <div className={styles.passwordContainer}>
-                                <input
-                                    type={showPasswordLogin ? "text" : "password"}
-                                    id="login-password"
-                                    name="password"
-                                    placeholder="Password"
-                                    onChange={(e) => setLoginPass(e.target.value)}
-                                    maxLength={25}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className={styles.togglePasswordButton}
-                                    onClick={togglePasswordVisibilityLogin}
-                                >
-                                    {showPasswordLogin ? <PiEyeBold size={20}/> : <PiEyeClosedBold size={20}/>}
-                                </button>
-                            </div>
-
-                            <button type="submit">Log In</button>
-
-                            <p className={styles.forgotPassword}>
-                                <a href="/forgot-password">Forgot Password?</a>
-                            </p>
-                        </form>
-                    </div>
-
-                    {/* Register Form */}
-                    <div className={`${styles.register} ${!toggleCardVisibility ? styles.hidden : ''}`}>
-                        <form onSubmit={handleRegisterSubmit}>
-                            <label htmlFor="register-username">Enter your Username:</label>
-                            <div className={styles.emailContainer}>
-                                <input
-                                    type="text"
-                                    id="register-username"
-                                    name="username"
-                                    placeholder="Username"
-                                    onChange={(e) => setName(e.target.value)}
-                                    maxLength={50}
-                                    required
-                                />
-                            </div>
-
-                            <label htmlFor="register-email">Enter your Email:</label>
-                            <div className={styles.emailContainer}>
-                                <input
-                                    type="email"
-                                    id="register-email"
-                                    name="email"
-                                    placeholder="you@example.com"
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    maxLength={50}
-                                    required
-                                />
-                            </div>
-
-                            <label htmlFor="register-password">Enter your Password:</label>
-                            <div className={styles.passwordContainer}>
-                                <input
-                                    type={showPasswordRegister ? "text" : "password"}
-                                    id="register-password"
-                                    name="password"
-                                    placeholder="Password"
-                                    onChange={(e) => {
-                                        setPassword(e.target.value);
-                                        validatePassword(e.target.value);
-                                    }}
-                                    onFocus={() => setShowPasswordRequirements(true)}
-                                    onBlur={() => setShowPasswordRequirements(false)}
-                                    maxLength={25}
-                                    required
-                                />
-                                <button
-                                    type="button"
-                                    className={styles.togglePasswordButton}
-                                    onClick={togglePasswordVisibilityRegister}
-                                >
-                                    {showPasswordRegister ? <PiEyeBold size={20}/> : <PiEyeClosedBold size={20}/>}
-                                </button>
-                            </div>
-
-                            <button type="submit">Create Account</button>
-                        </form>
-                    </div>
-
-                    {/* Toggle Card */}
-                    <div className={`${styles.toggleCardContainer} ${toggleCardVisibility ? styles.active : ''}`}>
-                    {toggleCardVisibility ? (
-                        showPasswordRequirements ? (
-                        // Password Requirements List
-                        <div className={styles.passwordRequirements}>
-                            <h3>Password Requirements:</h3>
-                            <ul>
-                            <li style={{ color: passwordRequirements.minLength ? 'green' : '#c1121f' }}>
-                                At least 8 characters long
-                            </li>
-                            <li style={{ color: passwordRequirements.hasUppercase ? 'green' : '#c1121f' }}>
-                                At least one uppercase letter
-                            </li>
-                            <li style={{ color: passwordRequirements.hasLowercase ? 'green' : '#c1121f' }}>
-                                At least one lowercase letter
-                            </li>
-                            <li style={{ color: passwordRequirements.hasNumber ? 'green' : '#c1121f' }}>
-                                At least one number
-                            </li>
-                            <li style={{ color: passwordRequirements.hasSpecialChar ? 'green' : '#c1121f' }}>
-                                At least one special character
-                            </li>
-                            </ul>
+                {formVisibility && (
+                    <div className={styles.login}>
+                    <h2>Login</h2>
+                    <form onSubmit={handleLoginSubmit}>
+                        <label htmlFor="login-email" id="formComponent">Enter your Email:</label>
+                        <div className={styles.emailContainer}>
+                            <input type="text" id="login-email" name="email" placeholder="Email" 
+                                onChange={(e) => setLoginEmail(e.target.value)} 
+                                maxLength={50} 
+                                required />
                         </div>
-                        ) : (
-                        <div className={styles.toggleText}>
-                            <h1>Hey There!</h1>
-                            <p>Welcome to CIRT! Already have an account?</p>
+                        
+                        <label htmlFor="login-password">Enter your Password:</label>
+                        <div className={styles.passwordContainer}>
+                            <input
+                                type={showPasswordLogin ? "text" : "password"}
+                                id="login-password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={(e) => setLoginPass(e.target.value)}
+                                maxLength={25}
+                                required
+                            />
                             <button
-                            type="button"
-                            onClick={toggleFormVisibility}
-                            className={styles.toggleFormButton}
+                                type="button"
+                                className={styles.togglePasswordButton}
+                                onClick={togglePasswordVisibilityLogin}
+                                aria-label={showPasswordLogin ? "Hide password" : "Show password"}
                             >
-                            Log In
+                                {showPasswordLogin ? <PiEyeBold size={20}/> : <PiEyeClosedBold size={20}/>}
                             </button>
                         </div>
-                    )) : (
-                        <div className={styles.toggleText}>
-                        <h1>Welcome Back!</h1>
-                        <p>Don't have an account yet?</p>
-                        <button
-                            type="button"
-                            onClick={toggleFormVisibility}
-                            className={styles.toggleFormButton}
-                        >
-                            Register
-                        </button>
-                        </div>
-                    )}
-                    </div>
+                    
+                        <button id="loginButton" type="submit">Log In</button>
 
+                        <p className={styles.forgotPassword}>
+                            <a href="/forgot-password">Forgot Password?</a>
+                        </p>
+
+                        {showResendVerification && (
+                            <div className={styles.verificationNotice}>
+                                <p>Didn't receive the verification email?</p>
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={resendEmail}
+                                    onChange={(e) => setResendEmail(e.target.value)}
+                                    className={styles.resendInput}
+                                />
+                                <button 
+                                    onClick={handleResendVerification}
+                                    className={styles.resendButton}
+                                >
+                                    Resend Verification Email
+                                </button>
+                            </div>
+                        )}
+                        
+                    </form>
+                    <p>
+                            Don't have an account? 
+                            <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
+                                Create Account
+                            </button>
+                        </p>
                 </div>
+                )}
+                
+                {!formVisibility && (
+                    <div className={styles.register}>
+                    <h2>Register</h2>
+                    <form onSubmit={handleRegisterSubmit}>
+                        <label htmlFor="register-username">Enter your Username:</label>
+                        <div className={styles.emailContainer}>
+                            <input
+                                type="text"
+                                id="register-username"
+                                name="username"
+                                placeholder="Username"
+                                onChange={(e) => setName(e.target.value)}
+                                maxLength={50}
+                                required
+                            />
+                        </div>
+                        <label htmlFor="register-email">Enter your Email:</label>
+                        <div className={styles.emailContainer}>
+                            <input
+                                type="email"
+                                id="register-email"
+                                name="email"
+                                placeholder="you@example.com"
+                                onChange={(e) => setEmail(e.target.value)}
+                                maxLength={50}
+                                required
+                            />
+                        </div>
+
+                        <label htmlFor="register-password">Enter your Password:</label>
+                        <div className={styles.passwordContainer}>
+                            <input
+                                type={showPasswordRegister ? "text" : "password"}
+                                id="register-password"
+                                name="password"
+                                placeholder="Password"
+                                maxLength={25}
+                                onChange={(e) => {
+                                    setPassword(e.target.value);
+                                    validatePassword(e.target.value);
+                                }}
+                                required
+                            />
+                            <button
+                                type="button"
+                                className={styles.togglePasswordButton}
+                                onClick={togglePasswordVisibilityRegister}
+                                aria-label={showPasswordRegister ? "Hide password" : "Show password"}
+                            >
+                                {showPasswordRegister ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
+                            </button>
+                        </div>
+
+                        <div className={styles.passwordRequirements}>
+                            <p>Password Requirements:</p>
+                            <ul>
+                                <li style={{ color: passwordRequirements.minLength ? "green" : "#c1121f" }}>
+                                    At least 8 characters long
+                                </li>
+                                <li style={{ color: passwordRequirements.hasUppercase ? "green" : "#c1121f" }}>
+                                    At least one uppercase letter
+                                </li>
+                                <li style={{ color: passwordRequirements.hasLowercase ? "green" : "#c1121f" }}>
+                                    At least one lowercase letter
+                                </li>
+                                <li style={{ color: passwordRequirements.hasNumber ? "green" : "#c1121f" }}>
+                                    At least one number
+                                </li>
+                                <li style={{ color: passwordRequirements.hasSpecialChar ? "green" : "#c1121f" }}>
+                                    At least one special character
+                                </li>
+                            </ul>
+                        </div>
+
+                        <button id="registerButton" type="submit">Create Account</button>
+                    </form>
+                    <p>
+                            Already have an account? 
+                            <button type="button" onClick={toggleFormVisibility} className={styles.toggleFormButton}>
+                                Login
+                            </button>
+                        </p>
+                </div>
+                )}
             </div>
 
             <footer className={styles.footer}>
