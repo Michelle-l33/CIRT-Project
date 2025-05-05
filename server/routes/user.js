@@ -16,11 +16,16 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Update the register route
+// Register User (updated with proper error handling)
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password, isAdmin, isAuthor, isEditor, isReviewer } = req.body;
+    const { name, email, password } = req.body; // Only get essential fields
     const lowerEmail = email.toLowerCase();
+
+    // Validate required fields
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
 
     const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
@@ -33,33 +38,43 @@ router.post("/register", async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
+    // Create user with verification fields
     const newUser = new User({
       name,
       email: lowerEmail,
       password: hashedPassword,
-      isAdmin,
-      isAuthor,
-      isEditor,
-      isReviewer,
       emailVerificationToken: verificationToken,
       emailVerificationExpires: verificationExpires
     });
 
     await newUser.save();
 
-    // Send verification email
-    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
-    await transporter.sendMail({
-      to: lowerEmail,
-      from: process.env.EMAIL_USER,
-      subject: 'Verify Your Email',
-      html: `Click this link to verify: <a href="${verificationUrl}">${verificationUrl}</a>`
+    // Send verification email with error handling
+    try {
+      const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
+      await transporter.sendMail({
+        to: lowerEmail,
+        from: `Your App <${process.env.EMAIL_USER}>`,
+        subject: 'Verify Your Email',
+        html: `<p>Click to verify: <a href="${verificationUrl}">${verificationUrl}</a></p>`
+      });
+    } catch (emailError) {
+      console.error("Email send error:", emailError);
+      await User.deleteOne({ email: lowerEmail }); // Clean up user if email fails
+      return res.status(500).json({ error: "Failed to send verification email" });
+    }
+
+    res.status(201).json({ 
+      message: "Registration successful! Please check your email.",
+      verificationSent: true
     });
 
-    res.status(201).json({ message: "Registration successful! Check your email." });
   } catch (error) {
     console.error("Registration error:", error);
-    res.status(500).json({ error: "Server error during registration" });
+    res.status(500).json({ 
+      error: "Registration failed",
+      details: error.message 
+    });
   }
 });
 
