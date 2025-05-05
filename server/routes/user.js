@@ -16,51 +16,65 @@ const transporter = nodemailer.createTransport({
   }
 });
 
-// Then modify your register route:
+// Register User (updated with proper error handling)
 router.post("/register", async (req, res) => {
   try {
-    // ... existing code ...
+    const { name, email, password } = req.body; // Only get essential fields
+    const lowerEmail = email.toLowerCase();
 
+    // Validate required fields
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: "All fields are required" });
+    }
+
+    const existingUser = await User.findOne({ email: lowerEmail });
+    if (existingUser) {
+      return res.status(400).json({ error: "Email is already registered." });
+    }
+
+    // Generate verification token
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    const verificationExpires = Date.now() + 3600000; // 1 hour
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create user with verification fields
     const newUser = new User({
-      // ... existing fields ...
+      name,
+      email: lowerEmail,
+      password: hashedPassword,
       emailVerificationToken: verificationToken,
       emailVerificationExpires: verificationExpires
     });
 
     await newUser.save();
 
-    // Add this email sending logic
-    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
-    const mailOptions = {
-      to: lowerEmail,
-      from: process.env.EMAIL_USER,
-      subject: 'Verify Your Email',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #2563eb;">Email Verification Required</h2>
-          <p>Please click the button below to verify your email address:</p>
-          <a href="${verificationUrl}" 
-             style="display: inline-block; 
-                    padding: 12px 24px; 
-                    background-color: #2563eb; 
-                    color: white; 
-                    text-decoration: none; 
-                    border-radius: 4px;
-                    margin: 20px 0;">
-            Verify Email
-          </a>
-          <p>If you didn't create this account, you can safely ignore this email.</p>
-        </div>
-      `
-    };
-
-    await transporter.sendMail(mailOptions);
+    // Send verification email with error handling
+    try {
+      const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
+      await transporter.sendMail({
+        to: lowerEmail,
+        from: `Your App <${process.env.EMAIL_USER}>`,
+        subject: 'Verify Your Email',
+        html: `<p>Click to verify: <a href="${verificationUrl}">${verificationUrl}</a></p>`
+      });
+    } catch (emailError) {
+      console.error("Email send error:", emailError);
+      await User.deleteOne({ email: lowerEmail }); // Clean up user if email fails
+      return res.status(500).json({ error: "Failed to send verification email" });
+    }
 
     res.status(201).json({ 
-      message: "User registered successfully! Please check your email to verify your account."
+      message: "Registration successful! Please check your email.",
+      verificationSent: true
     });
+
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error("Registration error:", error);
+    res.status(500).json({ 
+      error: "Registration failed",
+      details: error.message 
+    });
   }
 });
 
@@ -228,6 +242,7 @@ router.post('/update-profile/:id', async (req, res) => {
   }
 });
 
+// Add email verification route
 router.get('/verify-email', async (req, res) => {
   try {
     const { token } = req.query;
@@ -237,12 +252,7 @@ router.get('/verify-email', async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).send(`
-        <div style="text-align: center; padding: 40px;">
-          <h2 style="color: #dc2626;">Invalid or expired verification link</h2>
-          <p>Please request a new verification email.</p>
-        </div>
-      `);
+      return res.status(400).json({ error: "Invalid or expired token" });
     }
 
     user.isEmailVerified = true;
@@ -250,24 +260,10 @@ router.get('/verify-email', async (req, res) => {
     user.emailVerificationExpires = undefined;
     await user.save();
 
-    res.send(`
-      <div style="text-align: center; padding: 40px;">
-        <h2 style="color: #16a34a;">Email Verified Successfully!</h2>
-        <p>You can now login to your account.</p>
-        <a href="https://cirt-project.vercel.app/login" 
-           style="display: inline-block; 
-                  margin-top: 20px;
-                  padding: 12px 24px; 
-                  background-color: #2563eb; 
-                  color: white; 
-                  text-decoration: none; 
-                  border-radius: 4px;">
-          Go to Login
-        </a>
-      </div>
-    `);
+    res.status(200).json({ message: "Email verified successfully!" });
   } catch (error) {
-    res.status(500).send('Error verifying email');
+    console.error("Verification error:", error);
+    res.status(500).json({ error: "Server error during verification" });
   }
 });
 
