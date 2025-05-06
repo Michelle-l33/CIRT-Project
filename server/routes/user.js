@@ -6,7 +6,21 @@ const crypto = require('node:crypto');
 const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 
-
+// Update your nodemailer configuration
+const transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASS
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  pool: true,
+  rateLimit: true, // Enable rate limiting
+  maxConnections: 1,
+  maxMessages: 5
+});
 
 // Register User
 router.post("/register", async (req, res) => {
@@ -223,7 +237,7 @@ router.get('/verify-email', async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).send('Invalid or expired verification token');
+      return res.redirect('/token-error');
     }
 
     user.isEmailVerified = true;
@@ -231,9 +245,9 @@ router.get('/verify-email', async (req, res) => {
     user.emailVerificationExpires = undefined;
     await user.save();
 
-    res.send('Email verified successfully! You can now login.');
+    res.redirect('/verify-success');
   } catch (error) {
-    res.status(500).send('Error verifying email');
+    res.redirect('/token-error');
   }
 });
 

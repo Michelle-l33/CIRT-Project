@@ -29,6 +29,7 @@ const LoginPage = () => {
     const [formVisibility, setFormVisibility] = useState(true);
     const [showResendVerification, setShowResendVerification] = useState(false);
     const [resendEmail, setResendEmail] = useState('');
+    const [isSending, setIsSending] = useState(false);
 
     // State for password requirements
     const [passwordRequirements, setPasswordRequirements] = useState({
@@ -88,12 +89,36 @@ const LoginPage = () => {
         }
     };
 
+    const handleResendVerification = async () => {
+        setIsSending(true);
+        try {
+            const response = await fetch('https://cirt-project-server.vercel.app/user/resend-verification', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: resendEmail })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                window.alert('Verification email resent! Check your inbox.');
+            } else {
+                window.alert(data.error || 'Error resending verification email');
+            }
+        } catch (error) {
+            window.alert('Error resending verification email');
+        } finally {
+            setIsSending(false);
+        }
+    };
+
+
     const capitalizeName = (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     };
 
     const handleRegisterSubmit = async (e) => {
         e.preventDefault();
+        setIsSending(true);
 
         // Check if all password requirements are met
         const allRequirementsMet = Object.values(passwordRequirements).every(requirement => requirement === true);
@@ -125,6 +150,8 @@ const LoginPage = () => {
             }
         } catch (error) {
             window.alert("Error: " + error.message);
+        } finally {
+            setIsSending(false);
         }
     };
 
@@ -199,6 +226,21 @@ const LoginPage = () => {
                                     {showPasswordLogin ? <PiEyeBold size={20} /> : <PiEyeClosedBold size={20} />}
                                 </button>
                             </div>
+
+                            {!user?.isEmailVerified && (
+                                <div className={styles.verificationNotice}>
+                                    <p>Haven't received the verification email?</p>
+                                    <input
+                                        type="email"
+                                        placeholder="Enter your email"
+                                        value={resendEmail}
+                                        onChange={(e) => setResendEmail(e.target.value)}
+                                    />
+                                    <button onClick={handleResendVerification}>
+                                        Resend Verification Email
+                                    </button>
+                                </div>
+                            )}
 
 
                             <button id="loginButton" type="submit">Log In</button>
@@ -310,7 +352,17 @@ const LoginPage = () => {
                                 </ul>
                             </div>
 
-                            <button id="registerButton" type="submit">Create Account</button>
+                            <button
+                                id="registerButton"
+                                type="submit"
+                                disabled={isSending}
+                            >
+                                {isSending ? (
+                                    <div className={styles.spinner}></div>
+                                ) : (
+                                    'Create Account'
+                                )}
+                            </button>
                         </form>
                         {/* Button to toggle to Login form */}
                         <p>
