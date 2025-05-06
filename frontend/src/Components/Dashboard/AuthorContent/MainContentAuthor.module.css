@@ -168,7 +168,7 @@
 
 .mainContent main .bottomData .commentList{
     width: 100%;
-    max-height: calc(50vh - 36px - 24px - 24px -24px);
+    max-height: calc(50vh - 36px - 24px - 24px - 24px);
     overflow-y: auto;
     border-radius: 10px;
     display: grid;

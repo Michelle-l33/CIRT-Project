@@ -18,7 +18,8 @@ import Current from '../Dashboard/ReviewerContent/Current';
 import UserList from '../Dashboard/AdminContent/UserList';
 import UserTab from '../Dashboard/UserTab/UserTab';
 import FellowTab from '../Dashboard/AdminContent/FellowTab';
-
+import Archive from '../Dashboard/AuthorContent/Archive/Archive';
+import Home from '../Dashboard/AuthorContent/Home/Home';
 
 const DashboardRoutes = () => {
     return (
@@ -27,8 +28,12 @@ const DashboardRoutes = () => {
 
                 <Route element={<ProtectedRoutes role="Author" />}>
                     <Route path="Author" element={
-                        <Dashboard component={<MainContentAuthor />} />
-                    } />
+                        <Dashboard component={<MainContentAuthor />} />}>
+                        
+                        <Route index element={<Navigate to = "Home" replace/>}/>
+                        <Route path = "Home" element={<Home />} />
+                        <Route path = "Archive" element={<Archive />} />
+                    </Route>
                 </Route>
 
                 <Route element={<ProtectedRoutes role="Reviewer" />}>

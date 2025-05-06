@@ -1,0 +1,71 @@
+.authorArchiveContainer {
+    display: flex;
+    justify-content: space-between;
+    margin: 36px 12px 0 12px;
+    flex-wrap: wrap;
+    color: var(--dark);
+    gap: 12px;
+  }
+  
+  .publishedContainer,
+  .deniedContainer {
+    flex: 1 1 45%;
+    margin-bottom: 20px;
+  }
+  
+  .authorArchiveContainer .header h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--dark-grey);
+    padding-bottom: 6px;
+    padding-left: 11px;
+  }
+  
+  .authorArchiveContainer .subList {
+    background-color: var(--light);
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-grey);
+    display: grid;
+    row-gap: 16px;
+    grid-auto-rows: auto;
+    max-height: 80vh;
+    overflow-y: auto;
+    color: var(--dark);
+  }
+  
+  .subList .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background-color: var(--grey);
+    color: var(--dark);
+    border-radius: 8px;
+    width: 100%;
+    gap: 16px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+    cursor: default;
+  }
+  
+  .subList .item:hover {
+    transform: translateY(-1px);
+  }
+  
+  .subList .emptyMessage {
+    font-style: italic;
+    color: var(--dark-grey);
+    padding: 10px;
+    text-align: center;
+  }
+  
+  @media (max-width: 768px) {
+    .publishedContainer,
+    .deniedContainer {
+      flex: 1 1 100%;
+    }
+  }
+  
