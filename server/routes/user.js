@@ -7,74 +7,46 @@ const nodemailer = require('nodemailer');
 const { v4: uuidv4 } = require('uuid');
 
 
-// Add this transporter configuration at the TOP of the file
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
 
-// Register User (updated with proper error handling)
+// Register User
 router.post("/register", async (req, res) => {
   try {
-    const { name, email, password } = req.body; // Only get essential fields
-    const lowerEmail = email.toLowerCase();
+    const { name, email, password, isAdmin, isAuthor, isEditor, isReviewer } = req.body;
 
-    // Validate required fields
-    if (!name || !email || !password) {
-      return res.status(400).json({ error: "All fields are required" });
-    }
+    const lowerEmail = email.toLowerCase();
 
     const existingUser = await User.findOne({ email: lowerEmail });
     if (existingUser) {
       return res.status(400).json({ error: "Email is already registered." });
     }
 
-    // Generate verification token
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
     const verificationToken = crypto.randomBytes(32).toString('hex');
     const verificationExpires = Date.now() + 3600000; // 1 hour
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create user with verification fields
-    const newUser = new User({
-      name,
-      email: lowerEmail,
-      password: hashedPassword,
-      emailVerificationToken: verificationToken,
-      emailVerificationExpires: verificationExpires
-    });
-
+    const newUser = new User({ name, email: lowerEmail, password: hashedPassword, isAdmin, isAuthor, isEditor, isReviewer, emailVerificationToken: verificationToken, emailVerificationExpires: verificationExpires });
     await newUser.save();
 
-    // Send verification email with error handling
-    try {
-      const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
-      await transporter.sendMail({
-        to: lowerEmail,
-        from: `Your App <${process.env.EMAIL_USER}>`,
-        subject: 'Verify Your Email',
-        html: `<p>Click to verify: <a href="${verificationUrl}">${verificationUrl}</a></p>`
-      });
-    } catch (emailError) {
-      console.error("Email send error:", emailError);
-      await User.deleteOne({ email: lowerEmail }); // Clean up user if email fails
-      return res.status(500).json({ error: "Failed to send verification email" });
-    }
+    // Send verification email
+    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
+    const mailOptions = {
+      to: lowerEmail,
+      from: process.env.EMAIL_USER,
+      subject: 'Verify Your Email',
+      html: `<p>Click this link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a></p>`
+    };
 
-    res.status(201).json({ 
-      message: "Registration successful! Please check your email.",
-      verificationSent: true
+    await transporter.sendMail(mailOptions);
+
+
+
+    res.status(201).json({
+      message: "User registered successfully! Please check your email to verify your account."
     });
-
   } catch (error) {
-    console.error("Registration error:", error);
-    res.status(500).json({ 
-      error: "Registration failed",
-      details: error.message 
-    });
+    res.status(400).json({ error: error.message });
   }
 });
 
@@ -91,13 +63,6 @@ router.post('/login', async (req, res) => {
     // console.log(user.password)
     // console.log(password)
     //check if pass matches
-
-    if (!user.isEmailVerified) {
-      return res.status(403).json({ 
-        message: 'Email not verified. Please check your email for verification link.'
-      });
-    }
-    
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -105,6 +70,12 @@ router.post('/login', async (req, res) => {
       res.status(401).json({ message: 'Incorrect password.' });
     } else {
       res.status(200).json(user);
+    }
+
+    if (!user.isEmailVerified) {
+      return res.status(403).json({ 
+        message: 'Email not verified. Please check your email for verification link.'
+      });
     }
 
   } catch (err) {
@@ -252,7 +223,7 @@ router.get('/verify-email', async (req, res) => {
     });
 
     if (!user) {
-      return res.status(400).json({ error: "Invalid or expired token" });
+      return res.status(400).send('Invalid or expired verification token');
     }
 
     user.isEmailVerified = true;
@@ -260,10 +231,9 @@ router.get('/verify-email', async (req, res) => {
     user.emailVerificationExpires = undefined;
     await user.save();
 
-    res.status(200).json({ message: "Email verified successfully!" });
+    res.send('Email verified successfully! You can now login.');
   } catch (error) {
-    console.error("Verification error:", error);
-    res.status(500).json({ error: "Server error during verification" });
+    res.status(500).send('Error verifying email');
   }
 });
 
