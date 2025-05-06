@@ -3,7 +3,7 @@ import styles from "./TrackBar.module.css";
 import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { FaRegArrowAltCircleRight, FaRegArrowAltCircleLeft } from "react-icons/fa";
 
-import { dashBoardAuthorContext } from "../MainContentAuthor";
+import { dashBoardAuthorContext } from "../Home/Home";
 import { useContext, useRef, useState } from "react";
 
 const steps = [

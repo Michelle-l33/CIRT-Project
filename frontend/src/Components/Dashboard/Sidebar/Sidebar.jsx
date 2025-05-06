@@ -11,6 +11,7 @@ import { GiDiceTwentyFacesTwenty } from "react-icons/gi";
 import { IoNewspaperOutline } from "react-icons/io5";
 import { FaUsersGear } from "react-icons/fa6";
 import { FaUserGraduate } from "react-icons/fa";
+import { RiArchiveDrawerLine } from "react-icons/ri";
 
 
 import { dashBoardContext } from '../Dashboard';
@@ -30,7 +31,8 @@ const Sidebar = () => {
     ]
 
     const listOfAuthorIcons = [
-        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Dashboard/Author" },
+        { Name: "Dashboard", iconComponent: RiDashboardHorizontalLine, url: "/Dashboard/Author/Home" },
+        { Name: "Archive", iconComponent: RiArchiveDrawerLine, url: "/Dashboard/Author/Archive" },
         { Name: "User", iconComponent: FaRegUser, url: "/Dashboard/User" },
     ];
 
