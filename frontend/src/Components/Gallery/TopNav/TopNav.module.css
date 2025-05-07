@@ -167,6 +167,7 @@
   align-items: center;
   justify-content: space-between;
   flex-grow: 2;
+  max-width: 35vw;
 }
 .navButtons a {
   color: #fefefe;
@@ -293,5 +294,11 @@
 
   .navButtons {
     display: none;
+  }
+}
+
+@media (max-width: 1020px) {
+  .navButtons a span{
+    font-size: 12px;
   }
 }

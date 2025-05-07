@@ -30,7 +30,7 @@ const SearchBar = () => {
             <div className={styles.tabOptions}>
                     <button 
                         type="button"
-                        className={`${styles.radioLabel} ${tab === "home" ? styles.active : ""}`}
+                        className={styles.radioLabel}
                         onClick={() => navigate("/")}
                     >
                         <BsFillHouseDoorFill size={29}/>

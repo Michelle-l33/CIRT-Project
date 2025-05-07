@@ -118,3 +118,23 @@
 .searchContainer .searchInput button svg {
     font-size: 1.5rem;
 }
+
+@media screen and (max-width: 789px) {
+    .searchContainer {
+        width: 100%;
+    }
+
+    .searchContainer .searchInput input {
+        font-size: 16px;
+    }
+
+    .searchContainer .searchInput button svg {
+        font-size: 16px;
+    }
+
+    .headerOptions .tabOptions .radioLabel {
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+    }
+}
