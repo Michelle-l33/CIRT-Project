@@ -168,3 +168,9 @@
 .trackingContainer .buttons .indicators .indicator.active {
     opacity: 1;
 }
+
+@media screen and (max-width: 512px) {
+    .trackingContainer .stepContainer .stepLabel{
+        display: none;
+    }
+}

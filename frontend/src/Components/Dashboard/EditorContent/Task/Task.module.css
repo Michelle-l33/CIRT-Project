@@ -226,15 +226,18 @@
 
 .taskContent .left .greeting .hello h3 {
     margin: 10px 0;
+    font-size: clamp(1em, 1.5vw, 1.2em);
 }
 
 .taskContent .left .greeting .hello p {
     margin: 5px 0;
+    font-size: clamp(1em, 1.5vw, 1.2em);
 }
 
 .taskContent .left .greeting .hello span {
     margin: 0;
     margin-top: 20px;
+    font-size: clamp(1em, 1.5vw, 1.2em);
 }
 
 .taskContent .left .dateIntro .calendar * {
@@ -358,5 +361,14 @@
     position: absolute;
     right: 0;
     top: 0;
+}
+
+@media (max-width: 768px) {
+    .taskContent .left .dateIntro {
+        justify-content: center;
+    }
+    .taskContent .left .dateIntro .greeting {
+        display: none;
+    }
 }
 
