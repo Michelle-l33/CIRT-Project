@@ -51,7 +51,7 @@ router.post("/upload-fellowship", uploadImage.single("img"), async (req, res) =>
         name: req.body.name,
         year: req.body.year,
         bio: req.body.bio,
-        fellowship: req.body.fellowship,
+        description: req.body.description,
         published: req.body.published,
       };
   

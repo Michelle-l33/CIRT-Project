@@ -52,7 +52,7 @@ const FellowProfile = () => {
           formData.append("name", editedFellow.name);
           formData.append("year", editedFellow.year);
           formData.append("bio", editedFellow.bio);
-          formData.append("fellowship", editedFellow.fellowship);
+          formData.append("description", editedFellow.description);
           formData.append("published", editedFellow.published);
       
           // Add image file if selected
@@ -132,9 +132,9 @@ const FellowProfile = () => {
                         />
                         <input 
                             type="text" 
-                            value={editedFellow.fellowship}
-                            onChange={(e) => setEditedFellow({...editedFellow, fellowship: e.target.value})}
-                            placeholder="Fellowship"
+                            value={editedFellow.description}
+                            onChange={(e) => setEditedFellow({...editedFellow, description: e.target.value})}
+                            placeholder="Fellowship Description"
                             maxLength={500}
                         />
                         <input 
@@ -167,7 +167,7 @@ const FellowProfile = () => {
                                 </button>
                                 )}
                             </div>
-                            <p><span className={styles.title}>Fellowship:</span> {editedFellow.fellowship}</p>
+                            <p><span className={styles.title}>Fellowship:</span> {editedFellow.description}</p>
                             <p><span className={styles.title}>Published Work:</span> 
                                 <a href={editedFellow.published} target="_blank" rel="noopener noreferrer">View</a>
                             </p>
