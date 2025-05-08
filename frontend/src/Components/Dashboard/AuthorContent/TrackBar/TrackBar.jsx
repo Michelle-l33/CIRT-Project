@@ -20,7 +20,7 @@ const steps = [
         step: 3,
     },
     {
-        label: "Final Review",
+        label: "Accepted",
         step: 4,
     }
 ]
@@ -85,7 +85,7 @@ const TrackBar = ({currentStep, title}) => {
     return (
         <div className = {styles.trackingContainer}>
             <h3>Your Progress</h3>
-            {currentStep === "3" && !submissionList[currSub]?.resubmitted&& (
+            {currentStep === "3" && (
                 <div className = {styles.reUpload}>
 
                     {documents[currSub] != null ? (
@@ -96,7 +96,6 @@ const TrackBar = ({currentStep, title}) => {
 
                     <input
                         type="file"
-                        accept="application/pdf"
                         onChange={handleFileChange}
                         ref={fileInputRef}
                     />

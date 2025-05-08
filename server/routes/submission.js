@@ -104,7 +104,7 @@ router.get("/publications", async (req, res) => {
 
       const searchFilter = {
         isArticle:true,
-        stage: { $nin: ["1","0","2","3","4"]},
+        stage: { $nin: ["1","0","2","3"]},
         $or: [
           { title: { $regex: query, $options: "i" } },
           { firstName: { $regex: query, $options: "i" } },
@@ -134,7 +134,7 @@ router.get("/publications", async (req, res) => {
 //get all unpublished articles
   router.get("/unpublished", async (req, res) => {
     try {
-      const articles = await Submission.find({isArticle:true, stage: { $nin: ["5", "0"] }}); // finds articles that are unpublished
+      const articles = await Submission.find({isArticle:true, stage: { $nin: ["4", "0"] }}); // finds articles that are unpublished
       console.log("Fetched Articles:", articles); // Debugging line
       res.json(articles);
     } catch (error) {
@@ -154,7 +154,7 @@ router.get("/publications", async (req, res) => {
 
   router.get("/archives", async (req, res) => {
     try {
-      const submissions = await Submission.find({isArticle:true, stage: ["5", "0"] }); // finds articles that are archived
+      const submissions = await Submission.find({isArticle:true, stage: ["4", "0"] }); // finds articles that are archived
       console.log("Unassigned Submissions:", submissions); // Verify what's being returned
       res.json(submissions);
     } catch (error) {
@@ -278,7 +278,7 @@ router.get("/myQueue/:editorID",async (req,res)=>{
       return res.status(400).json({ message: "Invalid editor ID" });
     }
 
-    const submission = await Submission.find({editorID, isArticle:true, stage: { $nin: ["5","0"] }});
+    const submission = await Submission.find({editorID, isArticle:true, stage: { $nin: ["4","0"] }});
 
     if (!submission) {
       return res.status(404).json({ message: "No Submissions Assigned To This Editor" });
@@ -434,30 +434,6 @@ router.get("/tasks/:editorID", async (req, res) => {
     const tasks = await Submission.find({editorID, isArticle:true, stage: "3", resubmitted:true}); // finds articles that are unpublished
     console.log("Fetched tasks:", tasks); // Debugging line
     res.json(tasks);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-//author's published submissions
-router.get("/published/:id", async (req, res) => {
-  try {
-    const {id} = req.params
-    const submission = await Submission.find({isArticle:true, stage: "5" }); // finds articles that are archived
-    console.log("Author's Published Submissions:", submission); // Verify what's being returned
-    res.json(submission);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
-
-//author's declined submissions
-router.get("/declined/:id", async (req, res) => {
-  try {
-    const {id} = req.params
-    const submission = await Submission.find({isArticle:true, stage: "0" }); // finds articles that are archived
-    console.log("Author's Declined Submissions:", submission); // Verify what's being returned
-    res.json(submission);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
