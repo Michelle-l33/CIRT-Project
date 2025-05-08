@@ -34,6 +34,11 @@ router.post("/register", async (req, res) => {
       return res.status(400).json({ error: "Email is already registered." });
     }
 
+    if (!name || !email || !password) {
+      return res.status(400).json({ error: "Name, email, and password are required." });
+    }
+
+
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -60,6 +65,7 @@ router.post("/register", async (req, res) => {
       message: "User registered successfully! Please check your email to verify your account."
     });
   } catch (error) {
+    console.error("Register Error:", error); // <-- Add this line
     res.status(400).json({ error: error.message });
   }
 });
@@ -87,7 +93,7 @@ router.post('/login', async (req, res) => {
     }
 
     if (!user.isEmailVerified) {
-      return res.status(403).json({ 
+      return res.status(403).json({
         message: 'Email not verified. Please check your email for verification link.'
       });
     }

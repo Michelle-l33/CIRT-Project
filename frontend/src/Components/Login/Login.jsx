@@ -89,29 +89,6 @@ const LoginPage = () => {
         }
     };
 
-    const handleResendVerification = async () => {
-        setIsSending(true);
-        try {
-            const response = await fetch('https://cirt-project-server.vercel.app/user/resend-verification', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: resendEmail })
-            });
-
-            const data = await response.json();
-            if (response.ok) {
-                window.alert('Verification email resent! Check your inbox.');
-            } else {
-                window.alert(data.error || 'Error resending verification email');
-            }
-        } catch (error) {
-            window.alert('Error resending verification email');
-        } finally {
-            setIsSending(false);
-        }
-    };
-
-
     const capitalizeName = (name) => {
         return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
     };
@@ -128,8 +105,8 @@ const LoginPage = () => {
         }
 
         const capitalizedName = capitalizeName(name);
-        const userData = { name: capitalizedName, email, password, isPublic, isAuthor, isEditor, isReviewer };
-
+        const userData = { name: capitalizedName, email, password, isAuthor, isEditor, isReviewer};
+        
         try {
             const response = await fetch("https://cirt-project-server.vercel.app/user/register", {
                 method: "POST",
