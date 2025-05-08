@@ -15,7 +15,7 @@ const PaperCard = ({ paper }) => {
             {paper.firstName} {paper.lastName}
           </p>
           <div className={styles.tags}>
-            {(paper.tags?.length ? paper.tags : ["Policy", "Mental Health"]).map((tag, index) => (
+            {paper.tags && paper.tags.length > 0 && paper.tags.map((tag, index) => (
               <span key={index} className={styles.tag}>{tag}</span>
             ))}
           </div>

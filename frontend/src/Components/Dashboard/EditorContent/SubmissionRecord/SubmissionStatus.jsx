@@ -86,7 +86,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                 {currentStep === "3" && <>
 
                     <div className = {styles.header}>
-                        <h3>Sent To Author</h3>
+                        <h3>Author Revision</h3>
                         <span className={styles.authorResubmit}>{loading ? "Loading..." : currSubmission.resubmitted ? "Resubmitted!": "Waiting"}</span>
                     </div>
 
@@ -95,7 +95,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to update the submission?")) {
                             handleUpdateStage("4");
-                        }}}>Approve Submission</button>  
+                        }}}>Recieved Revised Submission</button>  
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to decline the submission?")) {
                             handleUpdateStage("0");
@@ -113,8 +113,9 @@ const SubmissionStatus = ( {currSubmission} ) => {
                         {/* <button onClick={() => window.location.reload()}>Publish the Submission</button> */}
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to update the submission?")) {
+                                handleUpdateStage("5");
                                 window.location.reload();
-                        }}}>Approve Submission</button>  
+                        }}}>Publish Submission</button>  
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to decline the submission?")) {
                             handleUpdateStage("0");
