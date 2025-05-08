@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   isReviewer: { type: Boolean, default: false },
   resetPasswordToken: String,
   resetPasswordExpires: Date,
-  isEmailVerified: { type: Boolean, default: false },
+  isVerified: { type: Boolean, default: false, },
   emailVerificationToken: String,
   emailVerificationExpires: Date
 });

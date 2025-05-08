@@ -86,10 +86,9 @@ router.post('/login', async (req, res) => {
       res.status(200).json(user);
     }
 
-    if (!user.isEmailVerified) {
-      return res.status(403).json({
-        message: 'Email not verified. Please check your email for verification link.'
-      });
+    // Make sure user is verified
+    if (!user.isVerified) {
+      return res.status(403).json({ message: "Please verify your email first." });
     }
 
   } catch (err) {
@@ -237,7 +236,7 @@ router.get('/verify-email', async (req, res) => {
     });
 
     if (!user) {
-      return res.redirect('/token-error');
+      res.redirect('https://cirt-project.vercel.app/token-error');
     }
 
     user.isEmailVerified = true;
@@ -245,48 +244,11 @@ router.get('/verify-email', async (req, res) => {
     user.emailVerificationExpires = undefined;
     await user.save();
 
-    res.redirect('/verify-success');
+    res.redirect('https://cirt-project.vercel.app/verify-success');;
   } catch (error) {
-    res.redirect('/token-error');
+    res.redirect('https://cirt-project.vercel.app/token-error');
   }
 });
 
-// Add resend verification email route
-router.post('/resend-verification', async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await User.findOne({ email: email.toLowerCase() });
-
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
-    }
-
-    if (user.isEmailVerified) {
-      return res.status(400).json({ error: 'Email is already verified' });
-    }
-
-    // Generate new token
-    const verificationToken = crypto.randomBytes(32).toString('hex');
-    const verificationExpires = Date.now() + 3600000;
-
-    user.emailVerificationToken = verificationToken;
-    user.emailVerificationExpires = verificationExpires;
-    await user.save();
-
-    // Send email
-    const verificationUrl = `https://cirt-project.vercel.app/verify-email?token=${verificationToken}`;
-    const mailOptions = {
-      to: email,
-      from: process.env.EMAIL_USER,
-      subject: 'Verify Your Email',
-      html: `<p>Click this link to verify your email: <a href="${verificationUrl}">${verificationUrl}</a></p>`
-    };
-
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: 'Verification email resent' });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-});
 
 module.exports = router;
