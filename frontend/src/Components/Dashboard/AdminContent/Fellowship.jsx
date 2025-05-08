@@ -234,7 +234,7 @@ const AddFellowForm = ( {onClose} ) => {
                         name="bio"
                         placeholder="Short biography..."
                         rows="4"
-                        maxLength={300}
+                        maxLength={1000}
                         required
                         onChange={(e) => setBio(e.target.value)}
                     />
@@ -258,7 +258,7 @@ const AddFellowForm = ( {onClose} ) => {
                         name="description"
                         placeholder="Research topic and who worked with them..."
                         rows="3"
-                        maxLength={300}
+                        maxLength={500}
                         required
                         onChange={(e) => setDescription(e.target.value)}
                     />

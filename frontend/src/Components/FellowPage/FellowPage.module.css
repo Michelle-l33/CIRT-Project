@@ -82,6 +82,7 @@
     background-color: var(--bg-color);
     padding: 1em;
     color: black;
+    height: auto;
 }
 
 .fellowPortrait .portraitName {
@@ -89,11 +90,15 @@
     font-weight: 600;
     line-height: 1.5;
     text-transform: capitalize;
+    max-height: 75px;
+    overflow: auto;
 }
 
 .fellowPortrait .portraitFellowship {
     font-size: 1.2em;
     font-weight: 400;
+    max-height: 100px;
+    overflow: auto;
 }
 
 /* Expanded content container */
