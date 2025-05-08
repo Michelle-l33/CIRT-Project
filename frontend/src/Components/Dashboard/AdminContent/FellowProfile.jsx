@@ -81,6 +81,14 @@ const FellowProfile = () => {
           console.error("Error updating fellow:", err);
         }
       };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            setEditedFellow(prev => ({ ...prev, img: imageUrl }));
+        }
+    };
       
 
     return (
@@ -98,7 +106,9 @@ const FellowProfile = () => {
                                     <input
                                     ref={fileInputRef}
                                     type="file"
-                                    accept="image/*"/></>)}
+                                    accept="image/*"
+                                    onChange={handleImageChange}
+                                    /></>)}
                                 
                         </div>
                         <button 
@@ -128,7 +138,7 @@ const FellowProfile = () => {
                             value={editedFellow.bio}
                             onChange={(e) => setEditedFellow({...editedFellow, bio: e.target.value})}
                             placeholder="Bio"
-                            maxLength={500}
+                            maxLength={1000}
                         />
                         <input 
                             type="text" 
