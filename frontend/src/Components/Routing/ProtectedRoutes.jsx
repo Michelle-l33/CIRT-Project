@@ -22,7 +22,7 @@ const ProtectedRoutes = ({ role }) => {
             if (!user.isReviewer) return <Navigate to="/" replace />;
             break;
         case "Admin":
-            if (!user.isAdmin) return <Navigate to="AboutUs" replace />;
+            if (!user.isAdmin) return <Navigate to="/" replace />;
             break;
         default:
             return <Navigate to="/" replace />;

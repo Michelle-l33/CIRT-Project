@@ -95,7 +95,7 @@ const SubmissionStatus = ( {currSubmission} ) => {
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to update the submission?")) {
                             handleUpdateStage("4");
-                        }}}>Recieved Revised Submission</button>  
+                        }}}>Received Revised Submission</button>  
                         <button onClick={() => {
                             if (window.confirm("Are you sure you want to decline the submission?")) {
                             handleUpdateStage("0");

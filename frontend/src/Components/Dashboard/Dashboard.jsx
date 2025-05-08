@@ -18,9 +18,17 @@ const Dashboard = ({component}) => {
     const { user } = useUser();
 
     //this part is for changing dark and white theme
-    const [isChecked, setChecked] = useState(false);  
+
+    const getIsDarkTheme = () => {
+        const savedTheme = localStorage.getItem('cirtDarkMode');
+        return savedTheme === 'true';
+    }
+    const [isChecked, setChecked] = useState(getIsDarkTheme);  
     const handleToggle = () => {
-        setChecked((prev) => !prev);
+        setChecked((prev) => {
+            localStorage.setItem('cirtDarkMode', !prev);
+            return !prev;
+        });
     };
 
 

@@ -37,10 +37,9 @@
     cursor: pointer;
 }
 
-.userTabContainer .userRight .userBtn button:hover {
-    color: var(--orange);
-    background-color: var(--light-orange);
-    border-color: var(--orange);
+.userTabContainer .userRight .userBtn button:hover,
+.userTabContainer .userRight .userBtn a:hover {
+    opacity: 0.3;
 }
 
 .userTabContainer .userRight .userBtn button * {
