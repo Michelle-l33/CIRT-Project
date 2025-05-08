@@ -14,7 +14,7 @@ const submissionSchema = new mongoose.Schema({
   tags: {type:[String], default: []},
   stage: {
     type: String,
-    enum: ["1", "2", "3", "4", "0"], // Restrict values to valid stages 1 - new sub, 2 - sent to reviewer, 3 - sent to author, 4 - published, 0 - declined
+    enum: ["1", "2", "3", "4","5", "0"], // Restrict values to valid stages 1 - new sub, 2 - sent to reviewer, 3 - sent to author, 4 - published, 0 - declined
     default: "1",
   },
   reviewerID1: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
