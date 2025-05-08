@@ -227,22 +227,6 @@ const LoginPage = () => {
                                 </button>
                             </div>
 
-                            {!user?.isEmailVerified && (
-                                <div className={styles.verificationNotice}>
-                                    <p>Haven't received the verification email?</p>
-                                    <input
-                                        type="email"
-                                        placeholder="Enter your email"
-                                        value={resendEmail}
-                                        onChange={(e) => setResendEmail(e.target.value)}
-                                    />
-                                    <button onClick={handleResendVerification}>
-                                        Resend Verification Email
-                                    </button>
-                                </div>
-                            )}
-
-
                             <button id="loginButton" type="submit">Log In</button>
 
                             <p className={styles.forgotPassword}>
@@ -292,6 +276,7 @@ const LoginPage = () => {
                                     required
                                 />
                             </div>
+
                             {/* <label htmlFor="account-type">Account Type:</label>
                         <select
                             name="account_type"
