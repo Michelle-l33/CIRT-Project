@@ -11,16 +11,10 @@ const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
     user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
+    pass: process.env.EMAIL_PASS,
   },
-  tls: {
-    rejectUnauthorized: false
-  },
-  pool: true,
-  rateLimit: true, // Enable rate limiting
-  maxConnections: 1,
-  maxMessages: 5
 });
+
 
 // Register User
 router.post("/register", async (req, res) => {
