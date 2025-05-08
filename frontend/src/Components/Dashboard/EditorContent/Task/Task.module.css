@@ -3,6 +3,7 @@
     justify-content: space-between;
     flex-wrap: wrap-reverse;
     gap: 20px;
+    color: var(--dark);
 }
 
 .taskContent .right {
